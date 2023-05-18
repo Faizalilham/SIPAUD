@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "492768408068",
+    "project_id": "siap-aud",
+    "storage_bucket": "siap-aud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492768408068:android:3205414409b7df786c3b51",
+        "android_client_info": {
+          "package_name": "android.coding.ourapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492768408068-4k3her4tpvd91h6qc4ko3kpa7h25539v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.coding.ourapp",
+            "certificate_hash": "f9ae8d99b0f0de7ee47898c8dde2db998d197350"
+          }
+        },
+        {
+          "client_id": "492768408068-pum026ekfqfpc3drp8f5ju80euu4crfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXraxK9vP-oTADtS6VFQ3vb4vb6-pi28k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492768408068-6pltfsn64t04cb6uv3rd1d20ol0793g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

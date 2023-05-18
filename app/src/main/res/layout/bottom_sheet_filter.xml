@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/background_top_rounded"
+    android:layout_width="match_parent"
+    android:padding="@dimen/dp10"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/Tittle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        style="@style/AppTheme.TextTittle"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginStart="@dimen/dp10"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_alphabet"
+            style="@style/AppTheme.TextSubTittle"
+            app:buttonTint="@color/primary_color"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_news"
+            style="@style/AppTheme.TextSubTittle"
+            app:buttonTint="@color/primary_color"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_latest"
+            style="@style/AppTheme.TextSubTittle"
+            app:buttonTint="@color/primary_color"/>
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_favorite"
+            style="@style/AppTheme.TextSubTittle"
+            app:buttonTint="@color/primary_color"
+            />
+
+
+    </RadioGroup>
+
+
+</LinearLayout>

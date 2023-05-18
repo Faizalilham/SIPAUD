@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">SIAP-AUD</string>
+    <string name="tittle">Sistem Informasi Harian Perkembangan Anak Usia Dini</string>
+    <string name="card_tittle">Belajar Menghitung</string>
+    <string name="card_description">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
+    <string name="hint_search">Cari Dokumen</string>
+    <string name="filter">Filter berdasarkan :</string>
+    <string name="filter_alphabet">A - Z</string>
+    <string name="filter_news">Terbaru</string>
+    <string name="filter_latest">Terlama</string>
+    <string name="filter_favorite">Favorit</string>
+    <string name="hint_tittle">Masukkan judul . . .</string>
+    <string name="hint_description">Masukkan deskripsi narasi . . .</string>
+    <string name="hint_activity_achievement">Tuliskan capaian kegiatan . . .</string>
+    <string name="activity_achievement">Capaian kegiatan</string>
+    <string name="hint_feedback">Masukkan umpan balik . . .</string>
+    <string name="save">Simpan</string>
+    <string name="logout">Keluar</string>
+    <string name="translate">Pengaturan Bahasa</string>
+    <string name="info">Informasi Aplikasi</string>
+    <string name="add_student">Tambah Siswa</string>
+    <string name="date_detail">Dibuat pada 08 Juni 2023</string>
+    <string name="description_detail">Kirana mengambil benang wol warna jingga dan merah. Dia menarik benang wol panjang dan mengguntinya.</string>
+    <string name="student_detail">Siswa dalam kegiatan</string>
+    <string name="student_name">Alex</string>
+    <string name="add_student_activity">Tambahkan siswa pada kegiatan</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Gallery</string>
+    <string name="choose_image">Pilih gambar</string>
+    <string name="add_asesment">Tambah narasi</string>
+    <string name="update_asesment">Ubah narasi</string>
+    <string name="update_student">Ubah siswa</string>
+    <string name="profile">Profil</string>
+    <string name="student_bio">Biodata siswa</string>
+    <string name="student_identity">Daftar identitas siswa</string>
+    <string name="register">Daftar</string>
+    <string name="register_message">Buat akun baru untuk masuk</string>
+    <string name="have_account">Sudah punya akun?</string>
+    <string name="not_have_account">Belum punya akun?</string>
+    <string name="login">Masuk</string>
+    <string name="welcome">Selamat datang</string>
+    <string name="welcome_message">Ayo login dengan akun kamu</string>
+    <string name="here">disini</string>
+    <string name="wm">SIAP - AUD © 2023</string>
+    <string name="hint_email">Masukkan email . . .</string>
+    <string name="hint_password">Masukkan password . . .</string>
+    <string name="hint_school">Masukkan nama sekolah . . .</string>
+    <string name="hint_student">Masukkan nama siswa . . .</string>
+    <string name="hint_group">Masukkan kelompok siswa . . .</string>
+    <string name="skip">Lewati</string>
+    <string name="finish">Selesai</string>
+    <string name="tittle_first_onboarding">Nikmati Kemudahan Mencatat</string>
+    <string name="subtittle_first_onboarding">Tidak perlu lagi repot membawa catatan fisik Anda dapat dengan mudah mencatat kegiatan harian Anda hanya dengan beberapa ketukan jari.</string>
+    <string name="tittle_second_onboarding">Laporan Harian Lebih Menarik</string>
+    <string name="subtittle_second_onboarding">Buat laporan kegiatan harian yang menarik dan informatif dengan menyertakan deskripsi, gambar, dan informasi tambahan.</string>
+    <string name="tittle_third_onboarding">Bagikan Perjalanan Anda</string>
+    <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi narasi kegiatan Anda melalui media sosial atau langsung ke orang-orang terdekat.</string>
+    <string name="back">Kembali</string>
+
+
+
+
+
+</resources>

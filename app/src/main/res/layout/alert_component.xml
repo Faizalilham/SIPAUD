@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_rounded">
+
+
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        style="@style/AppTheme.TextTittle"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subTittle"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:gravity="center"
+        android:text="@string/tittle"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tittle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subTittle" >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color"
+            android:fontFamily="@font/poppins"
+            android:padding="@dimen/dp15"
+            android:textColor="@color/black"
+            android:text="@string/yes"
+            android:layout_marginEnd="@dimen/dp5"
+            android:layout_marginStart="@dimen/dp25"
+            app:cornerRadius="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp25"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/dp15"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/third_color"
+            android:fontFamily="@font/poppins"
+            android:padding="@dimen/dp15"
+            android:textColor="@color/black"
+            android:text="@string/no"
+            android:layout_marginEnd="@dimen/dp25"
+            android:layout_marginStart="@dimen/dp5"
+            app:cornerRadius="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp25"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/dp15"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
