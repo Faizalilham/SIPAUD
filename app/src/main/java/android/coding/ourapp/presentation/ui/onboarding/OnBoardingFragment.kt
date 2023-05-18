@@ -42,7 +42,8 @@ class OnBoardingFragment : Fragment() {
         )
 
         binding.viewPager.adapter = adapter
-        TabLayoutMediator(binding.pageIndicator, binding.viewPager) { _, _ -> }.attach()
+        binding.pageIndicator.attachTo(binding.viewPager)
+//        TabLayoutMediator(binding.pageIndicator, binding.viewPager) { _, _ -> }.attach()
     }
 
     override fun onDestroy() {
