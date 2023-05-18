@@ -65,6 +65,7 @@
                android:layout_marginStart="@dimen/dp5"
                app:startIconDrawable="@drawable/ic_student"
                app:endIconMode="clear_text"
+               app:hintEnabled="false"
                app:startIconTint="@color/primary_color"
                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -90,6 +91,7 @@
                app:startIconDrawable="@drawable/ic_company"
                app:endIconMode="password_toggle"
                app:startIconTint="@color/primary_color"
+               app:hintEnabled="false"
                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +114,7 @@
                android:layout_marginTop="@dimen/dp15"
                android:layout_marginEnd="@dimen/dp5"
                android:layout_marginStart="@dimen/dp5"
-
+               app:hintEnabled="false"
                app:startIconDrawable="@drawable/ic_group"
                app:endIconMode="clear_text"
                app:startIconTint="@color/primary_color"

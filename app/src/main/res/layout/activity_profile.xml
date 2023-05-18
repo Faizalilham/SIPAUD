@@ -145,7 +145,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardPengaturan"
+            android:id="@+id/card_translate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp30"
@@ -192,7 +192,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardDetailProfile"
+            android:id="@+id/card_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp30"
@@ -239,7 +239,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardKeluar"
+            android:id="@+id/card_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp30"

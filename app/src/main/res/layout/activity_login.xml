@@ -92,6 +92,7 @@
                     app:startIconDrawable="@drawable/ic_email"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
+                    app:hintEnabled="false"
                     app:startIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -116,6 +117,7 @@
                     android:layout_marginStart="@dimen/dp5"
                     app:startIconDrawable="@drawable/ic_password"
                     app:endIconMode="password_toggle"
+                    app:hintEnabled="false"
                     app:startIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
