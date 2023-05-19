@@ -9,7 +9,6 @@ import android.coding.ourapp.databinding.FragmentOnBoardingBinding
 import android.coding.ourapp.presentation.ui.onboarding.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
-
 class OnBoardingFragment : Fragment() {
 
 

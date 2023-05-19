@@ -4,6 +4,7 @@ import android.coding.ourapp.R
 import android.coding.ourapp.databinding.ActivityCreateUpdateAsesmentBinding
 import android.coding.ourapp.databinding.ImageBottomSheetBinding
 import android.coding.ourapp.utils.Utils
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,13 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.tvDate.text = Utils.getCurrentDate()
         bottomSheet()
+        moveToHome()
+    }
+
+    private fun moveToHome(){
+        binding.imageBack.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java).also{ finish() })
+        }
     }
 
     private fun bottomSheet(){

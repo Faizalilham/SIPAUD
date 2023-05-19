@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.ui
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.databinding.ActivityRegisterBinding
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         _binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         doRegister()
+        moveToLogin()
 
     }
 
@@ -39,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                     is Resource.Failure -> {
                         showLoading(false)
-                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, it.exception.localizedMessage?.toString(), Toast.LENGTH_SHORT).show()
                     }
 
                     is Resource.Success -> {
@@ -51,6 +53,12 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun moveToLogin(){
+        binding.tvLogin.setOnClickListener {
+            startActivity(Intent(this,LoginActivity::class.java).also{ finish() })
         }
     }
 
