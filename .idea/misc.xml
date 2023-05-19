@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/background_custom_rounded.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/background_dashed.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_register.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.124" />
@@ -17,7 +18,7 @@
         <entry key="app/src/main/res/layout-sw480dp/activity_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
-        <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16" />

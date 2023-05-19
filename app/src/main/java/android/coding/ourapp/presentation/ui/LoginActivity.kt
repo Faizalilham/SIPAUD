@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                 when(it){
                     is Resource.Failure -> {
                         showLoading(false)
-                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, it.exception.localizedMessage?.toString(), Toast.LENGTH_SHORT).show()
                     }
 
                     is Resource.Loading -> {
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
                     is Resource.Success -> {
                         showLoading(false)
-                        Toast.makeText(this, "${it.result.displayName}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Selamat datang ${it.result.displayName}", Toast.LENGTH_SHORT).show()
                         authViewModel.setToken()
                         startActivity(Intent(this,HomeActivity::class.java))
                     }

@@ -19,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         currentUser()
         doLogout()
+        moveToHome()
 
     }
 

@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         createCustomAnimation()
 
         binding.menuItem.setOnClickListener {
-            startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java))
+            startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{ finish() })
         }
 
         binding.menuItemStudent.setOnClickListener {

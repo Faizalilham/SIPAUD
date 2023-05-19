@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/main_color"
+    android:background="@color/main_color"
     tools:context=".presentation.ui.ProfileActivity">
 
     <LinearLayout
@@ -183,7 +183,7 @@
                 <ImageView
                     android:layout_width="@dimen/dp20"
                     android:layout_height="@dimen/dp20"
-                    android:src="@drawable/ic_next"
+                    android:src="@drawable/ic_nexts"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -230,7 +230,7 @@
                 <ImageView
                     android:layout_width="@dimen/dp20"
                     android:layout_height="@dimen/dp20"
-                    android:src="@drawable/ic_next"
+                    android:src="@drawable/ic_nexts"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -278,7 +278,7 @@
                 <ImageView
                     android:layout_width="@dimen/dp20"
                     android:layout_height="@dimen/dp20"
-                    android:src="@drawable/ic_next"
+                    android:src="@drawable/ic_nexts"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>

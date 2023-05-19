@@ -24,7 +24,7 @@ class SplashScreenFragment : Fragment() {
     private var _binding: FragmentSplashScreenBinding? = null
     private val binding get() = _binding!!
     private lateinit var onBoarding : OnBoardingViewModel
-    private val authViewModel by viewModels<AuthViewModel>()
+    private lateinit var authViewModel : AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +32,7 @@ class SplashScreenFragment : Fragment() {
     ): View {
         _binding = FragmentSplashScreenBinding.inflate(layoutInflater)
         onBoarding = ViewModelProvider(requireActivity())[OnBoardingViewModel::class.java]
+        authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
         return binding.root
     }
 
@@ -45,19 +46,20 @@ class SplashScreenFragment : Fragment() {
             if(it != null){
                 Handler().postDelayed({
                     if(it){
-                       authViewModel.getToken().observe(requireActivity()){ isLogin ->
-                           if(isLogin){
-                               startActivity(Intent(requireActivity(), HomeActivity::class.java).also {
-                                   requireActivity().finish()
-                               })
-                           }else{
-                               if (isAdded && activity != null) {
-                                   startActivity(Intent(requireActivity(),LoginActivity::class.java).also {
-                                       requireActivity().finish()
-                                   })
-                               }
-                           }
-                       }
+                        if (isAdded && activity != null) {
+                            authViewModel.getToken().observe(requireActivity()){ isLogin ->
+                                if(isLogin){
+                                    startActivity(Intent(requireActivity(), HomeActivity::class.java).also {
+                                        requireActivity().finish()
+                                    })
+                                }else{
+                                    startActivity(Intent(requireActivity(),LoginActivity::class.java).also {
+                                        requireActivity().finish()
+                                    })
+                                }
+                            }
+                        }
+
                     }else{
                         findNavController().navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
 //                        startActivity(Intent(activity, SplashScreen::class.java).also { activity?.finish() })
