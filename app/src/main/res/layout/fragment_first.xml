@@ -13,6 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="150dp"
         android:scaleType="centerCrop"
+        app:lottie_rawRes="@raw/lottie_1"
         app:lottie_loop="true"
         app:lottie_autoPlay="true"
         app:layout_constraintEnd_toEndOf="parent"

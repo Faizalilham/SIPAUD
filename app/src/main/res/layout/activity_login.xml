@@ -239,11 +239,11 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="150dp"
             android:scaleType="centerCrop"
-            app:lottie_rawRes="@raw/motion_loading"
+            app:lottie_rawRes="@raw/lottie_loading"
             app:lottie_loop="true"
             android:visibility="gone"
             app:lottie_autoPlay="true"
