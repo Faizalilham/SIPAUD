@@ -17,30 +17,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/gray"
-        android:orientation="horizontal"
-        android:layout_marginBottom="150dp"
-        android:gravity="center_vertical"
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="@color/secondary_grey"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="4dp"
+        android:layout_marginBottom="160dp"
+        android:layout_marginStart="@dimen/dp15"
+        app:dotsWidthFactor="2.5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:progressMode="true"
+        app:selectedDotColor="@color/primary_color" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/pageIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="30dp"
-            android:background="@color/gray"
 
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@color/gray"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginBottom="150dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
 
-    </RelativeLayout>
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/pageIndicator"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_margin="30dp"-->
+<!--            android:background="@color/gray"-->
+<!--            app:tabGravity="center"-->
+<!--            app:tabIndicatorHeight="0dp" />-->
+
+<!--    </RelativeLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

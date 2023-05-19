@@ -13,7 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="150dp"
         android:scaleType="centerCrop"
-        app:lottie_rawRes="@raw/loading"
+        app:lottie_rawRes="@raw/lottie_1"
         app:lottie_loop="true"
         app:lottie_autoPlay="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,16 +51,16 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/image_back"
+        android:id="@+id/next"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/background_rounded"
         android:backgroundTint="@color/primary_color"
         android:padding="@dimen/dp10"
         android:layout_marginEnd="@dimen/dp20"
-        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginBottom="150dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
