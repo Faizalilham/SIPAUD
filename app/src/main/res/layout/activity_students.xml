@@ -57,7 +57,7 @@
         android:layout_marginTop="@dimen/dp25" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnAdd"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary_color"
