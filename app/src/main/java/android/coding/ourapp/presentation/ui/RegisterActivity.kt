@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.ui
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.databinding.ActivityRegisterBinding
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
         doRegister()
         moveToLogin()
 

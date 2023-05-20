@@ -5,6 +5,7 @@ import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityCreateUpdateStudentBinding
 import android.coding.ourapp.di.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityCreateUpdateStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
 
         firebaseHelper = FirebaseHelper()
         val studentRepository = StudentRepository(firebaseHelper)
