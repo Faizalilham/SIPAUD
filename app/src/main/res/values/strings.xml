@@ -58,9 +58,8 @@
     <string name="tittle_third_onboarding">Bagikan Perjalanan Anda</string>
     <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi narasi kegiatan Anda melalui media sosial atau langsung ke orang-orang terdekat.</string>
     <string name="back">Kembali</string>
-
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

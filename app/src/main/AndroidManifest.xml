@@ -25,6 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".presentation.ui.ImageFragment"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.RegisterActivity"
             android:exported="false" />
