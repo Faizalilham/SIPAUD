@@ -27,7 +27,6 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViewModel()
-        btnSave()
 
         student = intent.getParcelableExtra(EXTRA_STUDENT)
         if (student != null) {
@@ -110,35 +109,6 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)
     }
 
-    private fun btnSave() {
-        binding.btnSave.setOnClickListener {
-            addData()
-        }
-    }
-
-    private fun addData() {
-        val etName = binding.etNameStudent.text.toString()
-        val etTk = binding.etSchoolName.text.toString()
-        val etKelompok = binding.etSchoolName.text.toString()
-
-        if (etName.isNotEmpty() && etTk.isNotEmpty() && etKelompok.isNotEmpty()) {
-            studentViewModel.addData(etName, etTk, etKelompok,
-                onComplete = {
-                    Toast.makeText(this, "Berhasil Tambah Data", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, StudentsActivity::class.java))
-                },
-                onFailure = { errorMessage ->
-                    Toast.makeText(
-                        this,
-                        "Gagal Tambah Data ${errorMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            )
-        } else {
-            Toast.makeText(this, "Isi Semua Form", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -147,7 +117,5 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_STUDENT = "extra_student"
-        const val ALERT_DIALOG_CLOSE = 10
-        const val ALERT_DIALOG_DELETE = 20
     }
 }
