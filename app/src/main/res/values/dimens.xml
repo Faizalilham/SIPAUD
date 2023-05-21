@@ -9,6 +9,7 @@
     <dimen name="dp3">3dp</dimen>
     <dimen name="dp23">23dp</dimen>
     <dimen name="dp8">8dp</dimen>
+    <dimen name="dp6">6dp</dimen>
 
     <dimen name="sp30">30sp</dimen>
     <dimen name="sp25">25sp</dimen>
