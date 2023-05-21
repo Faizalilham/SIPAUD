@@ -1,6 +1,7 @@
 package android.coding.ourapp.presentation.ui
 
 import android.coding.ourapp.databinding.ActivityProfileBinding
+import android.coding.ourapp.databinding.InformationBottomSheetBinding
 import android.coding.ourapp.databinding.LanguageBottomSheetBinding
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
 import android.coding.ourapp.utils.LanguageManager
@@ -25,7 +26,8 @@ class ProfileActivity : AppCompatActivity() {
         currentUser()
         doLogout()
         moveToHome()
-        bottomSheet()
+        bottomSheetLanguage()
+        bottomSheetInformation()
 
     }
 
@@ -60,7 +62,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
-    private fun bottomSheet(){
+    private fun bottomSheetLanguage(){
         binding.cardTranslate.setOnClickListener {
             val bottomSheet = BottomSheetDialog(this)
             val view = LanguageBottomSheetBinding.inflate(layoutInflater)
@@ -83,6 +85,18 @@ class ProfileActivity : AppCompatActivity() {
                 bottomSheet.dismiss()
             }
 
+        }
+    }
+    private fun bottomSheetInformation() {
+        binding.cardInfo.setOnClickListener {
+            val bottomSheet = BottomSheetDialog(this)
+            val view = InformationBottomSheetBinding.inflate(layoutInflater)
+            bottomSheet.apply {
+                view.apply {
+                    setContentView(root)
+                    show()
+                }
+            }
         }
     }
 }

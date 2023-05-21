@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Pilih Bahasa"
-        android:textSize="18sp"
+        android:text="@string/pilih_bahasa"
+        android:textSize="@dimen/sp18"
+        android:fontFamily="@font/poppins"
         android:textStyle="bold" />
 
     <Button
@@ -19,13 +20,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Bahasa Indonesia" />
+        android:fontFamily="@font/poppins"
+        android:text="@string/bahasa_indonesia" />
 
     <Button
         android:id="@+id/buttonEnglish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="English" />
+        android:fontFamily="@font/poppins"
+        android:text="@string/english" />
 
 </LinearLayout>

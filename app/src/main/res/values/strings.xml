@@ -60,6 +60,11 @@
     <string name="back">Kembali</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="info_app">SIAP - AUD adalah sebuah aplikasi untuk mendokumentasikan kegiatan siswa dengan membuat narasi kegiatan yang dilakukan, dan dapat dijadikan sebagai laporan kegiatan harian juga.</string>
+    <string name="tutup">Tutup</string>
+    <string name="pilih_bahasa">Pilih Bahasa</string>
+    <string name="bahasa_indonesia">Bahasa Indonesia</string>
+    <string name="english">English</string>
 
 
 </resources>

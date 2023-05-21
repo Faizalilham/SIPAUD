@@ -60,5 +60,10 @@
     <string name="subtittle_third_onboarding">Our application makes it easy for you to share your activity narrative via social media or directly to the people closest to you.</string>
     <string name="back">Back</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="info_app">SIAP - AUD is an application used to document student activities by creating narratives of their activities, which can also be used as daily activity reports.</string>
+    <string name="tutup">Close</string>
+    <string name="pilih_bahasa">Choose Language</string>
+    <string name="bahasa_indonesia">Bahasa Indonesia</string>
+    <string name="english">English</string>
 
 </resources>
