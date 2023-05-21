@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator
 import android.coding.ourapp.R
 import android.coding.ourapp.databinding.ActivityHomeBinding
 import android.coding.ourapp.databinding.BottomSheetFilterBinding
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.OvershootInterpolator
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
         bottomSheet()
         createCustomAnimation()
 
@@ -82,5 +84,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+    override fun onResume() {
+        super.onResume()
+        Utils.language(this)
     }
 }

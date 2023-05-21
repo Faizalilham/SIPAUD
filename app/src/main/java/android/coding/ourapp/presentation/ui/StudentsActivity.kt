@@ -8,6 +8,7 @@ import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
 import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,6 +29,7 @@ class StudentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityStudentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
 
         initViewModel()
         setRecyler()
@@ -77,13 +79,11 @@ class StudentsActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun btnMoveToAddPage(){
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

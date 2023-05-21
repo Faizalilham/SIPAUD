@@ -43,6 +43,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityCreateUpdateAsesmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
         binding.tvDate.text = Utils.getCurrentDate()
         moveToHome()
         openGallery()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.MultipleImageAdapter
 import android.coding.ourapp.utils.TAG
+import android.coding.ourapp.utils.Utils
 import android.coding.ourapp.utils.fragmentBody
 import android.coding.ourapp.utils.options
 import android.content.Intent
@@ -30,6 +31,7 @@ class ImageFragment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_image)
+        Utils.language(this)
         setupScreen()
         supportActionBar?.hide()
         showCameraFragment()
