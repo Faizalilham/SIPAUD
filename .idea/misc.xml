@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../.gradle/caches/transforms-3/0f9ee0da00208fe718f1b12e4544caa4/transformed/core-1.9.0/res/layout/custom_dialog.xml" value="0.67" />
         <entry key="app/src/main/res/drawable/background_custom_rounded.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_register.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_stroke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_top_rounded.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/card.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/card_selected_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_favorite_active.xml" value="0.124" />
@@ -18,7 +21,7 @@
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17" />
@@ -27,7 +30,7 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_students.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/alert_component.xml" value="0.164" />
         <entry key="app/src/main/res/layout/appbar_component.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/back_button_component.xml" value="0.5" />
         <entry key="app/src/main/res/layout/bottom_sheet_filter.xml" value="0.21" />
@@ -41,7 +44,7 @@
         <entry key="app/src/main/res/layout/image_bottom_sheet.xml" value="0.21" />
         <entry key="app/src/main/res/layout/list_item_achievement_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_narasi.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/list_item_student.xml" value="0.19069767441860466" />
+        <entry key="app/src/main/res/layout/list_item_student.xml" value="0.33" />
         <entry key="app/src/main/res/layout/menus_fragment.xml" value="0.11013513513513513" />
       </map>
     </option>

@@ -6,11 +6,17 @@ import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityCreateUpdateStudentBinding
 import android.coding.ourapp.helper.ViewModelFactory
+import android.coding.ourapp.presentation.ui.component.CustomAlertDialog
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 
 class CreateUpdateStudentActivity : AppCompatActivity() {
@@ -20,6 +26,7 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
     private lateinit var studentViewModel: StudentViewModel
     private var isEdit = false
     private var student: Student? = null
+    private var alertDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,69 +43,102 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         }
 
         val titlePage: String
-        val btntitle: String
+        val btnTitle: String
 
         if (isEdit) {
             titlePage = getString(R.string.update_student)
-            btntitle = getString(R.string.update_student)
+            btnTitle = getString(R.string.update_student)
             if (student != null) {
                 student?.let { student ->
-                    binding?.etNameStudent?.setText(student.nameStudent)
-                    binding?.etSchoolName?.setText(student.group)
-                    binding?.etGroup?.setText(student.group)
+                    binding.etNameStudent.setText(student.nameStudent)
+                    binding.etSchoolName.setText(student.company)
+                    binding.etGroup.setText(student.group)
                 }
             }
         } else {
             titlePage = getString(R.string.add_student)
-            btntitle = getString(R.string.add_student)
+            btnTitle = getString(R.string.add_student)
         }
 
-        binding?.tittle?.text = titlePage
-        binding?.btnSave?.text = btntitle
-        binding?.btnSave?.setOnClickListener {
-            val nameStudent = binding?.etNameStudent?.text.toString().trim()
-            val nameSchool = binding?.etSchoolName?.text.toString().trim()
-            val group = binding?.etGroup?.text.toString().trim()
+        binding.tittle.text = titlePage
+        binding.btnSave.text = btnTitle
+        binding.btnSave.setOnClickListener {
+            val nameStudent = binding.etNameStudent.text.toString().trim()
+            val nameSchool = binding.etSchoolName.text.toString().trim()
+            val group = binding.etGroup.text.toString().trim()
             when {
                 nameStudent.isEmpty() -> {
-                    binding?.etNameStudent?.error = getString(R.string.hint_student)
+                    binding.etNameStudent.error = getString(R.string.hint_student)
                 }
                 nameSchool.isEmpty() -> {
-                    binding?.etSchoolName?.error = getString(R.string.hint_school)
+                    binding.etSchoolName.error = getString(R.string.hint_school)
                 }
                 group.isEmpty() -> {
-                    binding?.etGroup?.error = getString(R.string.hint_group)
+                    binding.etGroup.error = getString(R.string.hint_group)
                 }
                 else -> {
-                    student.let { student ->
-                        student?.nameStudent = nameStudent
-                        student?.company = nameSchool
-                        student?.group = group
-                    }
+                    student?.nameStudent = nameStudent
+                    student?.company = nameSchool
+                    student?.group = group
+
                     if (isEdit) {
-                        studentViewModel.updateData(student as Student)
-                        Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT).show()
-                        finish()
+                        showConfirmationDialog()
                     } else {
                         studentViewModel.addData(
                             nameStudent, nameSchool, group,
                             onComplete = {
-                                Toast.makeText(this, "Berhasil Tambah Data", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Berhasil Tambah Data", Toast.LENGTH_SHORT)
+                                    .show()
                                 finish()
                             },
                             onFailure = { errorMessage ->
                                 Toast.makeText(
                                     this,
-                                    "Gagal Tambah Data ${errorMessage}",
+                                    "Gagal Tambah Data $errorMessage",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         )
                     }
-                    finish()
                 }
             }
         }
+    }
+
+    private fun showConfirmationDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+        val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
+        val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
+
+        titleTextView.text = "Konfirmasi"
+        messageTextView.text = "Apakah Anda yakin ingin melakukan perubahan data ini?"
+
+        val btnConfirm = dialogView.findViewById<Button>(R.id.btn_yes)
+        val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+
+        btnConfirm.setOnClickListener {
+            alertDialog.dismiss()
+            updateStudentData()
+        }
+
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
+
+    private fun updateStudentData() {
+        student?.let { student ->
+            student.nameStudent = binding.etNameStudent.text.toString().trim()
+            student.company = binding.etSchoolName.text.toString().trim()
+            student.group = binding.etGroup.text.toString().trim()
+        }
+        studentViewModel.updateData(student as Student)
+        Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     private fun initViewModel() {
@@ -109,10 +149,10 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        alertDialog?.dismiss()
     }
 
     companion object {
