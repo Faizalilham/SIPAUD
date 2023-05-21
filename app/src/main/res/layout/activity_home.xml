@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/dp15"
-    android:background="@color/main_color"
+    android:background="@color/backgroundColor"
     tools:context=".presentation.ui.HomeActivity">
 
     <TextView
@@ -33,13 +33,14 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_profile"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/danilla"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/form_search"
+        app:layout_constraintEnd_toEndOf="@+id/form_search"
+        app:layout_constraintTop_toTopOf="@+id/tittle" />
 
    <LinearLayout
        android:id="@+id/form_search"
@@ -91,30 +92,33 @@
    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/form_search"
-        />
+        tools:listitem="@layout/list_item_narasi" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fab:menu_backgroundColor="#ccffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
         fab:menu_animationDelayPerItem="50"
+        fab:menu_backgroundColor="#ccffffff"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_icon="@drawable/ic_menu"
         fab:menu_colorNormal="@color/primary_color"
         fab:menu_colorPressed="@color/white"
         fab:menu_colorRipple="@color/white"
         fab:menu_fab_hide_animation="@anim/rotate_close_anim"
         fab:menu_fab_show_animation="@anim/rotate_open_anim"
         fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/ic_menu"
         fab:menu_labels_cornerRadius="3dp"
         fab:menu_labels_ellipsize="none"
         fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
@@ -134,17 +138,16 @@
         fab:menu_shadowRadius="4dp"
         fab:menu_shadowXOffset="1dp"
         fab:menu_shadowYOffset="3dp"
-        fab:menu_showShadow="true"
-        >
+        fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item_student"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_student"
-            app:fab_size="normal"
             app:fabSize="normal"
             app:fab_colorNormal="@color/third_color"
+            app:fab_size="normal"
             fab:menu_colorPressed="@color/white"
             fab:menu_colorRipple="@color/white"
             fab:menu_fab_hide_animation="@anim/rotate_close_anim"
@@ -169,16 +172,16 @@
             fab:menu_shadowRadius="4dp"
             fab:menu_shadowXOffset="1dp"
             fab:menu_shadowYOffset="3dp"
-            fab:menu_showShadow="true"/>
+            fab:menu_showShadow="true" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_size="normal"
+            android:src="@drawable/fab_add"
             app:fabSize="normal"
             app:fab_colorNormal="@color/third_color"
-            android:src="@drawable/fab_add"
+            app:fab_size="normal"
             fab:menu_colorPressed="@color/white"
             fab:menu_colorRipple="@color/white"
             fab:menu_fab_hide_animation="@anim/rotate_close_anim"
@@ -203,7 +206,7 @@
             fab:menu_shadowRadius="4dp"
             fab:menu_shadowXOffset="1dp"
             fab:menu_shadowYOffset="3dp"
-            fab:menu_showShadow="true"/>
+            fab:menu_showShadow="true" />
 
     </com.github.clans.fab.FloatingActionMenu>
 
