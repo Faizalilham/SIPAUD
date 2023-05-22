@@ -116,8 +116,8 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
         val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
 
-        titleTextView.text = "Konfirmasi"
-        messageTextView.text = "Apakah Anda yakin ingin melakukan perubahan data ini?"
+        titleTextView.text = getString(R.string.alert_confirm)
+        messageTextView.text = getString(R.string.alert_update)
 
         val btnConfirm = dialogView.findViewById<Button>(R.id.btn_yes)
         val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
