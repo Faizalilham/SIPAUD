@@ -9,6 +9,7 @@ import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
 import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +35,7 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
         super.onCreate(savedInstanceState)
         _binding = ActivityStudentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
 
         initViewModel()
         setRecyclerView()
@@ -91,15 +93,21 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
             }
         }
     }
-
     private fun setupButtonActions() {
-        binding.btnAdd.setOnClickListener {
+       binding.btnAdd.setOnClickListener {
             startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
         }
-        binding.btnDeleteSelected.setOnClickListener {
+      binding.btnDeleteSelected.setOnClickListener {
             val selectedItems = studentAdapter.getSelectedItems()
             showAlertDelete(selectedItems)
         }
+
+    private fun deleteData(){
+        studentAdapter.setOnDeleteClickListener(object : StudentAdapter.OnDeleteClickListener {
+            override fun onDeleteClick(student: Student) {
+                studentViewModel.deleteData(student)
+            }
+        })
     }
 
     private fun showAlertDelete(selectedItems: Set<Int>) {
@@ -144,7 +152,6 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
     override fun onDeleteClick(student: Student) {
         studentViewModel.deleteData(student)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

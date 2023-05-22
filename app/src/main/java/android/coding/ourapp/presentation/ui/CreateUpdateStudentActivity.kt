@@ -9,6 +9,7 @@ import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.ui.component.CustomAlertDialog
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.content.Context
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,7 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityCreateUpdateStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
 
         initViewModel()
 
