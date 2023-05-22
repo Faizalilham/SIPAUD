@@ -65,6 +65,10 @@
     <string name="pilih_bahasa">Pilih Bahasa</string>
     <string name="bahasa_indonesia">Bahasa Indonesia</string>
     <string name="english">English</string>
+    <string name="alert_logout">Apakah Anda yakin ingin keluar dari akun</string>
+    <string name="alert_confirm">Konfirmasi</string>
+    <string name="alert_delete">Apakah Anda yakin ingin menghapus data yang dipilih ?</string>
+    <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
 
 
 </resources>

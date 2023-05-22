@@ -93,67 +93,63 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
             }
         }
     }
+
     private fun setupButtonActions() {
-       binding.btnAdd.setOnClickListener {
+        binding.btnAdd.setOnClickListener {
             startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
         }
-      binding.btnDeleteSelected.setOnClickListener {
+        binding.btnDeleteSelected.setOnClickListener {
             val selectedItems = studentAdapter.getSelectedItems()
             showAlertDelete(selectedItems)
         }
+    }
 
-    private fun deleteData(){
-        studentAdapter.setOnDeleteClickListener(object : StudentAdapter.OnDeleteClickListener {
-            override fun onDeleteClick(student: Student) {
+        private fun showAlertDelete(selectedItems: Set<Int>) {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+            val alertDialog = alertDialogBuilder.create()
+
+            val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
+            val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
+
+            titleTextView.text = getString(R.string.alert_confirm)
+            messageTextView.text = getString(R.string.alert_delete)
+
+            val btnYes = dialogView.findViewById<Button>(R.id.btn_yes)
+            val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+
+            btnYes.setOnClickListener {
+                deleteSelectedItems(selectedItems)
+                alertDialog.dismiss()
+            }
+            btnCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+            alertDialog.show()
+        }
+
+        private fun deleteSelectedItems(selectedItems: Set<Int>) {
+            val students = studentAdapter.getListStudent()
+            val studentsToDelete = selectedItems.mapNotNull { position ->
+                if (position >= 0 && position < students.size) {
+                    students[position]
+                } else {
+                    null
+                }
+            }
+            for (student in studentsToDelete) {
                 studentViewModel.deleteData(student)
             }
-        })
-    }
-
-    private fun showAlertDelete(selectedItems: Set<Int>) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
-        val alertDialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-        val alertDialog = alertDialogBuilder.create()
-
-        val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
-        val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
-
-        titleTextView.text = "Konfirmasi"
-        messageTextView.text = "Apakah Anda yakin ingin menghapus data yang dipilih ?"
-
-        val btnYes = dialogView.findViewById<Button>(R.id.btn_yes)
-        val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
-
-        btnYes.setOnClickListener {
-            deleteSelectedItems(selectedItems)
-            alertDialog.dismiss()
         }
-        btnCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
-    }
 
-    private fun deleteSelectedItems(selectedItems: Set<Int>) {
-        val students = studentAdapter.getListStudent()
-        val studentsToDelete = selectedItems.mapNotNull { position ->
-            if (position >= 0 && position < students.size) {
-                students[position]
-            } else {
-                null
-            }
-        }
-        for (student in studentsToDelete) {
+        override fun onDeleteClick(student: Student) {
             studentViewModel.deleteData(student)
         }
-    }
 
-    override fun onDeleteClick(student: Student) {
-        studentViewModel.deleteData(student)
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+        override fun onDestroy() {
+            super.onDestroy()
+            _binding = null
+        }
 }
+

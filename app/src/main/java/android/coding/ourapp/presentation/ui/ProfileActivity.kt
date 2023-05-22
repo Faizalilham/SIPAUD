@@ -1,5 +1,6 @@
 package android.coding.ourapp.presentation.ui
 
+import android.coding.ourapp.R
 import android.coding.ourapp.databinding.ActivityProfileBinding
 import android.coding.ourapp.databinding.InformationBottomSheetBinding
 import android.coding.ourapp.databinding.LanguageBottomSheetBinding
@@ -9,7 +10,11 @@ import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,11 +45,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun doLogout(){
         binding.cardLogout.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java).also{
-                authViewModel.deleteToken()
-                finish()
-            })
-            finish()
+            showAlertLogout()
         }
     }
 
@@ -73,13 +74,13 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
             view.buttonIndonesia.setOnClickListener {
-                val languageCode = "id" // Ganti dengan kode bahasa yang sesuai
+                val languageCode = "id"
                 LanguageManager.setLanguage(this, languageCode)
                 recreate()
                 bottomSheet.dismiss()
             }
             view.buttonEnglish.setOnClickListener {
-                val languageCode = "en" // Ganti dengan kode bahasa yang sesuai
+                val languageCode = "en"
                 LanguageManager.setLanguage(this, languageCode)
                 recreate()
                 bottomSheet.dismiss()
@@ -98,5 +99,33 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun showAlertLogout() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+        val alertDialog = alertDialogBuilder.create()
+
+        val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
+        val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
+
+        titleTextView.text = getString(R.string.alert_confirm)
+        messageTextView.text = getString(R.string.alert_logout)
+
+        val btnYes = dialogView.findViewById<Button>(R.id.btn_yes)
+        val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+
+        btnYes.setOnClickListener {
+            startActivity(Intent(this,LoginActivity::class.java).also{
+                authViewModel.deleteToken()
+                finish()
+            })
+            finish()
+            alertDialog.dismiss()
+        }
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
     }
 }
