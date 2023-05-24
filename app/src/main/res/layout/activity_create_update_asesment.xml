@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/main_color"
+    android:backgroundTint="@color/backgroundColor"
     tools:context=".presentation.ui.CreateUpdateAsesmentActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
         android:orientation="vertical">
 
         <LinearLayout
@@ -19,61 +21,63 @@
             android:padding="@dimen/dp15"
             android:layout_weight="2">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/sp12"
+                android:layout_marginRight="@dimen/sp12"
                 android:orientation="horizontal">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/image_back"
-                    android:layout_width="50dp"
-                    android:background="@drawable/background_rounded"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/black"
-                    android:padding="@dimen/dp10">
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_back"
-                        android:layout_marginStart="@dimen/dp10"
-                        app:layout_constraintTop_toTopOf="parent"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/image_back"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/background_rounded"
+                        android:backgroundTint="@color/black"
+                        android:padding="@dimen/dp8"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tittle"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp10"
+                            android:src="@drawable/ic_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tittle"
+                    style="@style/AppTheme.TextTittle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.TextTittle"
-                    android:textStyle="bold"
                     android:text="@string/add_asesment"
-                    android:layout_marginEnd="@dimen/dp15"
                     android:textAlignment="center"
-                    android:layout_marginTop="@dimen/dp10" />
-
-
-            </LinearLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="@dimen/dp25"
-                android:background="@drawable/background_dashed">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_image_sample"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,67 +136,34 @@
                 android:layout_height="150dp"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/dp25">
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_top_rounded"
-            android:layout_weight="1"
-            android:padding="@dimen/dp15">
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_height="wrap_content">
 
-
-                <EditText
-                    android:id="@+id/et_tittle"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_tittle"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:fontFamily="@font/poppins"
-                    android:imeOptions="actionNext"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:orientation="horizontal">
+                    android:layout_height="150dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/background_dashed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_date"/>
-
-                    <TextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/AppTheme.TextSubTittle"
-                        android:textColor="@color/primary_color"
-                        android:layout_marginStart="@dimen/dp8"
+                        android:src="@drawable/ic_image_sample"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/et_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_description"
-                    android:layout_marginTop="@dimen/dp15"
-                    android:imeOptions="actionNext"
-                    android:fontFamily="@font/poppins"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -229,34 +200,186 @@
                     android:id="@+id/et_students"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/add_student"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:imeOptions="actionNext"
-                    android:fontFamily="@font/poppins"/>
+                    android:layout_marginTop="@dimen/dp30"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image">
 
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:orientation="horizontal">
-
-                    <ImageView
+                    <ScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_achievement_black"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_top_rounded"
+                        android:padding="@dimen/dp15">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/activity_achievement"
-                        style="@style/AppTheme.TextSubTittle"
-                        android:layout_marginStart="@dimen/dp8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
+
+                            <EditText
+                                android:id="@+id/et_tittle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:fontFamily="@font/poppins"
+                                android:hint="@string/hint_tittle"
+                                android:imeOptions="actionNext" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp20"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_date" />
+
+                                <TextView
+                                    android:id="@+id/tv_date"
+                                    style="@style/AppTheme.TextSubTittle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp8"
+                                    android:textColor="@color/primary_color"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/et_description"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp15"
+                                android:fontFamily="@font/poppins"
+                                android:hint="@string/hint_description"
+                                android:imeOptions="actionNext" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp20"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dp25"
+                                    android:layout_height="@dimen/dp25"
+                                    android:src="@drawable/ic_students"
+                                    app:tint="@color/secondary_grey" />
+
+                                <TextView
+                                    style="@style/AppTheme.TextSubTittle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp8"
+                                    android:layout_marginTop="@dimen/dp3"
+                                    android:text="@string/add_student_activity"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/et_students"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:fontFamily="@font/poppins"
+                                android:hint="@string/add_student"
+                                android:imeOptions="actionNext" />
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp20"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_achievement_black" />
+
+                                <TextView
+                                    style="@style/AppTheme.TextSubTittle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp8"
+                                    android:text="@string/activity_achievement"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_achievement_activity"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/list_item_achievement_activity" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/iAchievement"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp5"
+                                android:layout_marginTop="@dimen/dp15"
+                                android:layout_marginEnd="@dimen/dp5"
+                                app:hintEnabled="false">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_achievement"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/background_stroke"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="@string/hint_activity_achievement"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <EditText
+                                android:id="@+id/et_feedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp15"
+                                android:fontFamily="@font/poppins"
+                                android:hint="@string/hint_description"
+                                android:imeOptions="actionDone" />
+
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_save"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp5"
+                                android:layout_marginTop="@dimen/dp25"
+                                android:layout_marginEnd="@dimen/dp5"
+                                android:layout_marginBottom="@dimen/dp15"
+                                android:backgroundTint="@color/primary_color"
+                                android:fontFamily="@font/poppins"
+                                android:padding="@dimen/dp15"
+                                android:text="@string/save"
+                                android:textAllCaps="false"
+                                app:cornerRadius="@dimen/dp20" />
+
+
+                        </LinearLayout>
+
+                    </ScrollView>
                 </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_achievement_activity"
@@ -284,8 +407,6 @@
                         android:imeOptions="actionDone"
                         android:background="@drawable/background_stroke"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <EditText
                     android:id="@+id/et_feedback"
                     android:layout_width="match_parent"
@@ -296,25 +417,10 @@
                     android:imeOptions="actionDone"/>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_save"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary_color"
-                    android:fontFamily="@font/poppins"
-                    android:padding="@dimen/dp15"
-                    android:text="@string/save"
-                    android:layout_marginEnd="@dimen/dp5"
-                    android:layout_marginStart="@dimen/dp5"
-                    app:cornerRadius="@dimen/dp20"
-                    android:layout_marginTop="@dimen/dp25"
-                    android:textAllCaps="false"
-                    android:layout_marginBottom="@dimen/dp15" />
+        </LinearLayout>
 
 
-            </LinearLayout>
 
-        </ScrollView>
     </LinearLayout>
 
     <RelativeLayout

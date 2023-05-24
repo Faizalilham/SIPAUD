@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.ui
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.databinding.ActivityLoginBinding
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.language(this)
         doLogin()
         moveToRegister()
 

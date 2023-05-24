@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/pilih_bahasa"
+        android:textSize="@dimen/sp18"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonIndonesia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/bahasa_indonesia" />
+
+    <Button
+        android:id="@+id/buttonEnglish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/english" />
+
+</LinearLayout>
