@@ -9,10 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#4F81C7</color>
     <color name="secondary_color">#64C4ED</color>
+    <color name="backgroundColor">#F5F5F5</color>
     <color name="main_color">#FCFAFA</color>
     <color name="third_color">#F0D78C</color>
     <color name="gray">#F3F3F3</color>
     <color name="red">#FF0000</color>
+    <color name="lt_gray">#4FDFDFDF</color>
     <color name="secondary_grey">#C7C7C7</color>
     <color name="gray_shimmer">#DDDDDD</color>
 

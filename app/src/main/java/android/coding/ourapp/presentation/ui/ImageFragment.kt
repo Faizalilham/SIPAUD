@@ -20,6 +20,7 @@ class ImageFragment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_image)
+        Utils.language(this)
         setupScreen()
         supportActionBar?.hide()
         showCameraFragment()

@@ -1,0 +1,1 @@
+package android.coding.ourapp.data.datasource.modelimport android.os.Parcelableimport com.google.firebase.database.IgnoreExtraPropertiesimport kotlinx.parcelize.Parcelize@Parcelize@IgnoreExtraPropertiesdata class Student(    var id: String? = null,    var nameStudent: String? = null,    var company: String? = null,    var group: String? = null) : Parcelable

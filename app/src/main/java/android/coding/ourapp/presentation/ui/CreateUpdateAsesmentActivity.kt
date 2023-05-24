@@ -52,6 +52,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         _binding = ActivityCreateUpdateAsesmentBinding.inflate(layoutInflater)
         searchableSpinnerFrom = SearchableSpinner(this)
         setContentView(binding.root)
+        Utils.language(this)
         binding.tvDate.text = Utils.getCurrentDate()
         moveToHome()
         imeOptions()

@@ -139,4 +139,8 @@ class HomeActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
+    override fun onResume() {
+        super.onResume()
+        Utils.language(this)
+    }
 }
