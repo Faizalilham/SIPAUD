@@ -144,4 +144,11 @@ class AssessmentRepositoryImpl @Inject constructor(
 
         }
     }
+
+    override fun searchAssessment(
+        assessmentRequest: AssessmentRequest,
+        query: String
+    ): LiveData<Resource<AssessmentRequest>> {
+        TODO("Not yet implemented")
+    }
 }

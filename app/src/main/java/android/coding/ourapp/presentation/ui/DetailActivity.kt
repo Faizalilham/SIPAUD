@@ -39,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
         _binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getIntentData()
+        binding.imageBack.setOnClickListener { finish() }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

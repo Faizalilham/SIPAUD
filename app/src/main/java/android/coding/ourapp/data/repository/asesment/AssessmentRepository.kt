@@ -28,4 +28,6 @@ interface AssessmentRepository {
         isFavorite : Boolean,
     ): Resource<String>
 
+    fun searchAssessment(assessmentRequest: AssessmentRequest,query : String):LiveData<Resource<AssessmentRequest>>
+
 }
