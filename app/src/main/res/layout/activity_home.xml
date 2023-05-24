@@ -33,8 +33,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_profile"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:src="@drawable/danilla"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
@@ -92,7 +92,7 @@
    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/rv_assessment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp20"
@@ -144,12 +144,11 @@
             android:id="@+id/menu_item_student"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_student"
+            android:src="@drawable/ic_student_black"
+            app:fab_size="normal"
             app:fabSize="normal"
             app:fab_colorNormal="@color/third_color"
-            app:fab_size="normal"
-            fab:menu_colorPressed="@color/white"
-            fab:menu_colorRipple="@color/white"
+            fab:menu_colorPressed="@android:color/white"
             fab:menu_fab_hide_animation="@anim/rotate_close_anim"
             fab:menu_fab_show_animation="@anim/rotate_open_anim"
             fab:menu_fab_size="normal"
@@ -181,9 +180,7 @@
             android:src="@drawable/fab_add"
             app:fabSize="normal"
             app:fab_colorNormal="@color/third_color"
-            app:fab_size="normal"
-            fab:menu_colorPressed="@color/white"
-            fab:menu_colorRipple="@color/white"
+            android:src="@drawable/ic_add"
             fab:menu_fab_hide_animation="@anim/rotate_close_anim"
             fab:menu_fab_show_animation="@anim/rotate_open_anim"
             fab:menu_fab_size="normal"
@@ -209,6 +206,7 @@
             fab:menu_showShadow="true" />
 
     </com.github.clans.fab.FloatingActionMenu>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

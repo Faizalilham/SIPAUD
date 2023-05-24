@@ -4,5 +4,5 @@
 
     <external-path
         name="images"
-        path="Android/data/android.coding.ourapp/files/Pictures/"/>
+        path="Android/media/android.coding.ourapp/files/Pictures/"/>
 </paths>
