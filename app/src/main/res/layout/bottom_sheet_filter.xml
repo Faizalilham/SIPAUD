@@ -19,15 +19,9 @@
         />
 
     <RadioGroup
+        android:id="@+id/rgFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/filter_alphabet"
-            style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
 
         <RadioButton
             android:id="@+id/rb_news"

@@ -15,25 +15,31 @@ import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewMod
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.EditorInfo
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.database.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private var _binding : ActivityHomeBinding? = null
+    private var _binding: ActivityHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var assessmentAdapter : AssessmentAdapter
+    private lateinit var assessmentAdapter: AssessmentAdapter
     private val assessmentViewModel by viewModels<AssessmentViewModel>()
+    private var isFilterByNewest = false
+    private var isFilterByOldest = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,30 +53,31 @@ class HomeActivity : AppCompatActivity() {
         binding.swipeRefreshLayout.setOnRefreshListener { getAllAssessment() }
 
         binding.menuItem.setOnClickListener {
-            startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{ finish() })
+            startActivity(Intent(this, CreateUpdateAsesmentActivity::class.java).also { finish() })
         }
 
         binding.menuItemStudent.setOnClickListener {
-            startActivity(Intent(this,StudentsActivity::class.java))
+            startActivity(Intent(this, StudentsActivity::class.java))
         }
 
         binding.imageProfile.setOnClickListener {
-            startActivity(Intent(this,ProfileActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
 
     }
 
-    private fun getAllAssessment(){
-        assessmentViewModel.getAssessment.observe(this){
-            when(it){
+    private fun getAllAssessment() {
+        assessmentViewModel.getAssessment.observe(this) {
+            when (it) {
                 is Resource.Success -> {
-                   if(it.result.assessment != null){
-                       binding.swipeRefreshLayout.isRefreshing = false
-                       binding.empty.visibility = View.GONE
-                       binding.rvAssessment.visibility = View.VISIBLE
-                       setupRecycler(it.result.assessment)
-                       bottomSheet(it.result.assessment)
-                   }
+                    if (it.result.assessment != null) {
+                        binding.swipeRefreshLayout.isRefreshing = false
+                        binding.empty.visibility = View.GONE
+                        binding.rvAssessment.visibility = View.VISIBLE
+                        setupRecycler(it.result.assessment)
+                        applyFilter(it.result.assessment)
+                        bottomSheet(it.result.assessment)
+                    }
                 }
 
                 is Resource.Loading -> {
@@ -88,43 +95,53 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun searchAssessment(){
+    private fun searchAssessment() {
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 var result = false
-                if(binding.etSearch.text.toString().isNotBlank()){
-                    assessmentViewModel.searchAssessment(binding.etSearch.text.toString()).observe(this){
-                        when(it){
-                            is Resource.Success -> {
-                                if(it.result.assessment != null){
-                                    result = true
-                                    if(it.result.assessment.size == 0 && result){
-                                        binding.empty.visibility = View.VISIBLE
-                                        binding.rvAssessment.visibility = View.GONE
-                                    }else{
-                                        binding.empty.visibility = View.GONE
-                                        binding.rvAssessment.visibility = View.VISIBLE
-                                        setupRecycler(it.result.assessment)
+                if (binding.etSearch.text.toString().isNotBlank()) {
+                    assessmentViewModel.searchAssessment(binding.etSearch.text.toString())
+                        .observe(this) {
+                            when (it) {
+                                is Resource.Success -> {
+                                    if (it.result.assessment != null) {
+                                        result = true
+                                        if (it.result.assessment.size == 0 && result) {
+                                            binding.empty.visibility = View.VISIBLE
+                                            applyFilter(it.result.assessment)
+                                            binding.rvAssessment.visibility = View.GONE
+                                        } else {
+                                            binding.empty.visibility = View.GONE
+                                            binding.rvAssessment.visibility = View.VISIBLE
+                                            setupRecycler(it.result.assessment)
+                                        }
                                     }
                                 }
-                            }
 
-                            is Resource.Loading -> {
-                               if(result)  setupRecycler(arrayListOf())
-                            }
+                                is Resource.Loading -> {
+                                    if (result) setupRecycler(arrayListOf())
+                                }
 
-                            is Resource.Failure -> {
-                                Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
-                            }
+                                is Resource.Failure -> {
+                                    Toast.makeText(
+                                        this,
+                                        it.exception.message.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
 
-                            else -> {
-                                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                                else -> {
+                                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
-                    }
 
-                }else{
-                    Toast.makeText(this, resources.getString(R.string.warning_form), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        resources.getString(R.string.warning_form),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 true
             } else {
@@ -134,17 +151,17 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun setupRecycler(data : ArrayList<AssessmentRequest>){
+    private fun setupRecycler(data: ArrayList<AssessmentRequest>) {
         assessmentAdapter = AssessmentAdapter(data)
         assessmentAdapter.updateData(data)
         assessmentAdapter.setItemClickListener { assessment ->
-            startActivity(Intent(this,DetailActivity::class.java).also{
-                it.putExtra("id",assessment.id)
+            startActivity(Intent(this, DetailActivity::class.java).also {
+                it.putExtra("id", assessment.id)
             })
         }
         binding.rvAssessment.apply {
             adapter = assessmentAdapter
-            layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         }
     }
 
@@ -171,14 +188,36 @@ class HomeActivity : AppCompatActivity() {
         binding.fabMenu.iconToggleAnimatorSet = set
     }
 
-    private fun bottomSheet(data : ArrayList<AssessmentRequest>){
+    private fun bottomSheet(data: ArrayList<AssessmentRequest>) {
         binding.btnFilter.setOnClickListener {
             val bottomSheet = BottomSheetDialog(this)
             val view = BottomSheetFilterBinding.inflate(layoutInflater)
             bottomSheet.apply {
                 view.apply {
-                    if(rbFavorite.isChecked){
-                        setupRecycler(Utils.filter(data,3))
+                    val radioGroup = view.rgFilter
+                    radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                        val selectedRadioButton = findViewById<RadioButton>(checkedId)
+                        when (selectedRadioButton?.id) {
+                            R.id.rb_favorite -> {
+                                setupRecycler(Utils.filter(data, 3))
+                            }
+                            R.id.rb_news -> {
+                                isFilterByNewest = true
+                                isFilterByOldest = false
+                                applyFilter(data)
+                            }
+                            R.id.rb_last -> {
+                                isFilterByNewest = false
+                                isFilterByOldest = true
+                                applyFilter(data)
+                            }
+                            else -> {
+                                isFilterByNewest = false
+                                isFilterByOldest = false
+                                setupRecycler(data)
+                            }
+                        }
+                        bottomSheet.dismiss()
                     }
                     setContentView(root)
                     show()
@@ -186,14 +225,24 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+    private fun applyFilter(data: List<AssessmentRequest>) {
+        val filteredData = when {
+            isFilterByNewest -> data.sortedByDescending { it.date }
+            isFilterByOldest -> data.sortedBy { it.date }
+            else -> data
+        }
+        setupRecycler(ArrayList(filteredData))
+    }
 
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
     override fun onResume() {
         super.onResume()
         Utils.language(this)
     }
+
 }
