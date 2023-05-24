@@ -3,16 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../.gradle/caches/transforms-3/0f9ee0da00208fe718f1b12e4544caa4/transformed/core-1.9.0/res/layout/custom_dialog.xml" value="0.67" />
         <entry key="app/src/main/res/drawable/background_custom_rounded.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/background_dashed.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_register.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_stroke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_top_rounded.xml" value="0.124" />
-        <entry key="app/src/main/res/drawable/card.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/card_selected_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1785" />
+        <entry key="app/src/main/res/drawable/ic_close.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_favorite_active.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_favorite_inactive.xml" value="0.124" />
@@ -26,17 +25,18 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_students.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/alert_component.xml" value="0.164" />
+        <entry key="app/src/main/res/layout/activity_students.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />
         <entry key="app/src/main/res/layout/appbar_component.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/back_button_component.xml" value="0.5" />
         <entry key="app/src/main/res/layout/bottom_sheet_filter.xml" value="0.21" />
         <entry key="app/src/main/res/layout/bottom_sheet_share.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_bottom_component.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.11013513513513513" />
+        <entry key="app/src/main/res/layout/fragment_image.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_on_boarding.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.11013513513513513" />
@@ -47,7 +47,7 @@
         <entry key="app/src/main/res/layout/list_item_image.xml" value="0.10945945945945947" />
         <entry key="app/src/main/res/layout/list_item_narasi.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_student.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/list_item_students_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_students_activity.xml" value="0.5" />
         <entry key="app/src/main/res/layout/menus_fragment.xml" value="0.11013513513513513" />
       </map>
     </option>

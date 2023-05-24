@@ -16,9 +16,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="@dimen/dp15"
             android:layout_weight="2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/sp12"
                 android:layout_marginRight="@dimen/sp12"
+                android:layout_marginTop="@dimen/sp12"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -65,7 +65,6 @@
 
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/tittle"
                     style="@style/AppTheme.TextTittle"
@@ -85,7 +84,7 @@
                 android:id="@+id/linear_image"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp15"
                 android:visibility="gone"
                 android:orientation="horizontal">
 
@@ -125,30 +124,18 @@
                     android:layout_margin="@dimen/dp5"
                     android:layout_weight="1"/>
 
-
-
             </LinearLayout>
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/container2"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/dp25">
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp15">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/dp10"
                     android:background="@drawable/background_dashed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -165,261 +152,184 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp25"
-                        android:layout_height="@dimen/dp25"
-                        app:tint="@color/secondary_grey"
-                        android:src="@drawable/ic_students"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_student_activity"
-                        style="@style/AppTheme.TextSubTittle"
-                        android:layout_marginStart="@dimen/dp8"
-                        android:layout_marginTop="@dimen/dp3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_students"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/list_item_students_activity"/>
-
-                <EditText
-                    android:id="@+id/et_students"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp30"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image">
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/background_top_rounded"
-                        android:padding="@dimen/dp15">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-
-                            <EditText
-                                android:id="@+id/et_tittle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp10"
-                                android:fontFamily="@font/poppins"
-                                android:hint="@string/hint_tittle"
-                                android:imeOptions="actionNext" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp20"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_date" />
-
-                                <TextView
-                                    android:id="@+id/tv_date"
-                                    style="@style/AppTheme.TextSubTittle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/dp8"
-                                    android:textColor="@color/primary_color"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </LinearLayout>
-
-                            <EditText
-                                android:id="@+id/et_description"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp15"
-                                android:fontFamily="@font/poppins"
-                                android:hint="@string/hint_description"
-                                android:imeOptions="actionNext" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp20"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="@dimen/dp25"
-                                    android:layout_height="@dimen/dp25"
-                                    android:src="@drawable/ic_students"
-                                    app:tint="@color/secondary_grey" />
-
-                                <TextView
-                                    style="@style/AppTheme.TextSubTittle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/dp8"
-                                    android:layout_marginTop="@dimen/dp3"
-                                    android:text="@string/add_student_activity"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </LinearLayout>
-
-                            <EditText
-                                android:id="@+id/et_students"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp10"
-                                android:fontFamily="@font/poppins"
-                                android:hint="@string/add_student"
-                                android:imeOptions="actionNext" />
-
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp20"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_achievement_black" />
-
-                                <TextView
-                                    style="@style/AppTheme.TextSubTittle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/dp8"
-                                    android:text="@string/activity_achievement"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </LinearLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rv_achievement_activity"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                tools:listitem="@layout/list_item_achievement_activity" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/iAchievement"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp5"
-                                android:layout_marginTop="@dimen/dp15"
-                                android:layout_marginEnd="@dimen/dp5"
-                                app:hintEnabled="false">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/et_achievement"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/background_stroke"
-                                    android:fontFamily="@font/poppins"
-                                    android:hint="@string/hint_activity_achievement"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <EditText
-                                android:id="@+id/et_feedback"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp15"
-                                android:fontFamily="@font/poppins"
-                                android:hint="@string/hint_description"
-                                android:imeOptions="actionDone" />
-
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_save"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp5"
-                                android:layout_marginTop="@dimen/dp25"
-                                android:layout_marginEnd="@dimen/dp5"
-                                android:layout_marginBottom="@dimen/dp15"
-                                android:backgroundTint="@color/primary_color"
-                                android:fontFamily="@font/poppins"
-                                android:padding="@dimen/dp15"
-                                android:text="@string/save"
-                                android:textAllCaps="false"
-                                app:cornerRadius="@dimen/dp20" />
-
-
-                        </LinearLayout>
-
-                    </ScrollView>
-                </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background_top_rounded"
+                android:padding="@dimen/dp15">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_achievement_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/list_item_achievement_activity"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/iAchievement"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp15"
-                    android:layout_marginEnd="@dimen/dp5"
-                    android:layout_marginStart="@dimen/dp5"
-                    app:hintEnabled="false"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_achievement"
+                    <EditText
+                        android:id="@+id/et_tittle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_activity_achievement"
-                        android:inputType="text"
+                        android:layout_marginTop="@dimen/dp10"
                         android:fontFamily="@font/poppins"
-                        android:imeOptions="actionDone"
-                        android:background="@drawable/background_stroke"/>
+                        android:hint="@string/hint_tittle"
+                        android:imeOptions="actionNext" />
 
-                <EditText
-                    android:id="@+id/et_feedback"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_feedback"
-                    android:layout_marginTop="@dimen/dp15"
-                    android:fontFamily="@font/poppins"
-                    android:imeOptions="actionDone"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_date" />
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            style="@style/AppTheme.TextSubTittle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:textColor="@color/primary_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/hint_description"
+                        android:imeOptions="actionNext" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp25"
+                            android:layout_height="@dimen/dp25"
+                            android:src="@drawable/ic_students"
+                            app:tint="@color/secondary_grey" />
+
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:layout_marginTop="@dimen/dp3"
+                            android:text="@string/add_student_activity"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_students"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/list_item_students_activity" />
+
+                    <EditText
+                        android:id="@+id/et_students"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/add_student"
+                        android:imeOptions="actionNext" />
 
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_achievement_black" />
+
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp8"
+                            android:text="@string/activity_achievement"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_achievement_activity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/list_item_achievement_activity" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/iAchievement"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp5"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:layout_marginEnd="@dimen/dp5"
+                        app:hintEnabled="false">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_achievement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_stroke"
+                            android:fontFamily="@font/poppins"
+                            android:hint="@string/hint_activity_achievement"
+                            android:imeOptions="actionDone"
+                            android:inputType="text" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <EditText
+                        android:id="@+id/et_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/hint_description"
+                        android:imeOptions="actionDone" />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp5"
+                        android:layout_marginTop="@dimen/dp25"
+                        android:layout_marginEnd="@dimen/dp5"
+                        android:layout_marginBottom="@dimen/dp15"
+                        android:backgroundTint="@color/primary_color"
+                        android:fontFamily="@font/poppins"
+                        android:padding="@dimen/dp15"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
+                        app:cornerRadius="@dimen/dp20" />
+
+
+                </LinearLayout>
+
+            </ScrollView>
         </LinearLayout>
-
-
 
     </LinearLayout>
 
@@ -453,7 +363,6 @@
             />
 
     </RelativeLayout>
-
 
 
 </FrameLayout>

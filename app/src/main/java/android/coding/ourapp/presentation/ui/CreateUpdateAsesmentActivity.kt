@@ -284,9 +284,16 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     }
 
     private fun moveToHome(){
-        binding.imageBack.setOnClickListener {
-            startActivity(Intent(this,HomeActivity::class.java).also{ finish() })
+        if(i != null && ids != null){
+            binding.imageBack.setOnClickListener {
+                startActivity(Intent(this,HomeActivity::class.java).also{ finish() })
+            }
+        }else{
+            binding.imageBack.setOnClickListener {
+                startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{ finish() })
+            }
         }
+
     }
 
     private fun openGallery(id : String?){

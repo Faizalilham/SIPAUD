@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             style="@style/AppTheme.TextTittle"
             android:textStyle="bold"
-            android:background="@color/gray"
+            android:background="@color/gray_shimmer"
             android:layout_margin="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             style="@style/AppTheme.TextSubTittle"
             android:maxLines="2"
-            android:background="@color/gray"
+            android:background="@color/gray_shimmer"
             android:layout_margin="@dimen/dp10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_tittle" />
@@ -51,7 +51,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="@dimen/dp10"
-            android:background="@color/gray"
+            android:background="@color/gray_shimmer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_subTittle" />
