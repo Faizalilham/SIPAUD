@@ -7,22 +7,23 @@
 
     <TextView
         android:id="@+id/tv_achievement_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_have_account"
         style="@style/AppTheme.TextSubTittle"
-        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp10"
-        android:textAlignment="textEnd"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="@string/not_have_account"
+        app:layout_constraintEnd_toStartOf="@+id/image_delete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_closes"
         android:layout_marginEnd="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

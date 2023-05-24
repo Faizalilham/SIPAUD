@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SIAP-AUD</string>
-    <string name="tittle">Sistem Informasi Harian Perkembangan Anak Usia Dini</string>
+    <string name="tittle">Sistem Informasi Asesmen Harian Perkembangan Anak Usia Dini</string>
     <string name="card_tittle">Belajar Menghitung</string>
     <string name="card_description">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
     <string name="hint_search">Cari Dokumen</string>
@@ -13,6 +13,7 @@
     <string name="hint_description">Masukkan deskripsi narasi . . .</string>
     <string name="hint_activity_achievement">Tuliskan capaian kegiatan . . .</string>
     <string name="activity_achievement">Capaian kegiatan</string>
+    <string name="feedback">Umpan Balik</string>
     <string name="hint_feedback">Masukkan umpan balik . . .</string>
     <string name="save">Simpan</string>
     <string name="logout">Keluar</string>
@@ -58,8 +59,11 @@
     <string name="tittle_third_onboarding">Bagikan Perjalanan Anda</string>
     <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi narasi kegiatan Anda melalui media sosial atau langsung ke orang-orang terdekat.</string>
     <string name="back">Kembali</string>
+    <string name="warning_form">Semua kolom wajib diisi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_tittle">Peringatan !!</string>
+    <string name="alert_subtile_delete">Narasi akan dihapus secara permanen, apakah anda yakin ingin menghapus narasi ini? </string>
     <string name="info_app">SIAP - AUD adalah sebuah aplikasi untuk mendokumentasikan kegiatan siswa dengan membuat narasi kegiatan yang dilakukan, dan dapat dijadikan sebagai laporan kegiatan harian juga.</string>
     <string name="tutup">Tutup</string>
     <string name="pilih_bahasa">Pilih Bahasa</string>
@@ -70,6 +74,7 @@
     <string name="alert_delete">Apakah Anda yakin ingin menghapus data yang dipilih ?</string>
     <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
     <string name="alert_delete_1">Apakah Anda yakin ingin menghapus data ini?</string>
+    <string name="not_found">Data tidak tersedia</string>
 
 
 </resources>

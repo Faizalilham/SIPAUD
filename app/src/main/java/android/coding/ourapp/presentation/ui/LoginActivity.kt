@@ -25,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
         doLogin()
         moveToRegister()
 
-
     }
 
     private fun doLogin(){
@@ -50,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Selamat datang ${it.result.displayName}", Toast.LENGTH_SHORT).show()
                         authViewModel.setToken()
                         startActivity(Intent(this,HomeActivity::class.java))
+                        finish()
                     }
 
                     else -> {
@@ -63,7 +63,6 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun moveToRegister(){
-
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this,RegisterActivity::class.java))
         }

@@ -16,6 +16,7 @@
     <color name="red">#FF0000</color>
     <color name="lt_gray">#4FDFDFDF</color>
     <color name="secondary_grey">#C7C7C7</color>
+    <color name="gray_shimmer">#DDDDDD</color>
 
 
 </resources>
