@@ -6,27 +6,129 @@ import android.coding.ourapp.data.datasource.model.AssessmentResponse
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class AssessmentRepositoryImpl @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ):AssessmentRepository {
 
-    override suspend fun getAssessment(): Resource<AssessmentResponse> {
-        TODO("Not yet implemented")
+    override  fun getAssessment(): LiveData<Resource<AssessmentResponse>> {
+        val assessmentLiveData = MutableLiveData<Resource<AssessmentResponse>>()
+        assessmentLiveData.value = Resource.Loading
+        try {
+           firebaseDatabase.getReference("assessment").addValueEventListener(object : ValueEventListener{
+               override fun onDataChange(snapshot: DataSnapshot) {
+                   val result = arrayListOf<AssessmentRequest>()
+
+                   if(snapshot.exists()){
+                       for(data in snapshot.children){
+                           val item = data.getValue(AssessmentRequest::class.java)
+                           result.add(item!!)
+                       }
+                   }
+                   assessmentLiveData.value = Resource.Success(AssessmentResponse(result,null))
+               }
+
+               override fun onCancelled(error: DatabaseError) {
+                   assessmentLiveData.value = Resource.Failure(error.toException())
+               }
+           })
+
+           return assessmentLiveData
+       }catch (e: Exception){
+           Log.d("GET ASSESSMENT","${e.message}")
+           e.printStackTrace()
+           assessmentLiveData.value = Resource.Failure(e)
+           return assessmentLiveData
+       }
     }
 
-    override suspend fun createAssessment(assessmentRequest: AssessmentRequest):Resource<String> {
+    override fun getByIdAssessment(id: String): LiveData<Resource<AssessmentRequest>> {
+        val assessmentLiveData = MutableLiveData<Resource<AssessmentRequest>>()
+        assessmentLiveData.value = Resource.Loading
+        try{
+            firebaseDatabase.reference.child("assessment").child(id).addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val item = snapshot.getValue(AssessmentRequest::class.java)
+                    assessmentLiveData.value= Resource.Success(item!!)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    assessmentLiveData.value = Resource.Failure(error.toException())
+                }
+
+            })
+        return assessmentLiveData
+        }catch (e : Exception){
+            Log.d("GET ASSESSMENT","${e.message}")
+            e.printStackTrace()
+            assessmentLiveData.value = Resource.Failure(e)
+            return assessmentLiveData
+        }
+    }
+
+    override fun deleteAssessment(id: String) : Resource<String>{
+        return try {
+            firebaseDatabase.reference.child("assessment").child(id).removeValue { error, _ ->
+                if(error == null){
+                   Resource.Success("")
+                }else{
+                    Resource.Failure(error.toException())
+                }
+            }
+             return Resource.Success("")
+        }catch (e : Exception){
+            Log.d("GET ASSESSMENT","${e.message}")
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun updateAssessment(
+        assessmentRequest: AssessmentRequest
+    ): Resource<String> {
+        return try{
+            firebaseDatabase.reference.child("assessment").child(assessmentRequest.id.toString())
+                .setValue(assessmentRequest)
+                .addOnSuccessListener {
+                    Log.d("UPDATE ASSESSMENT","SUCCESS")
+                }
+                .addOnFailureListener {
+                    Resource.Failure(it)
+                }
+            return Resource.Success("Success update data")
+        }catch (e : Exception){
+            Log.d("CREATE ASSESSMENT","${e.message}")
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+
+    }
+
+    override suspend fun createAssessment(
+        tittle : String,
+        description : String,
+        date : String,
+        images : ArrayList<String>,
+        students : ArrayList<String>,
+        achievementActivity : ArrayList<String>,
+        feedback : String,
+        isFavorite : Boolean,
+    ):Resource<String> {
         var resultFix = ""
         var resultErr : Exception = Exception()
 
         return try{
+            val id = firebaseDatabase.reference.push().key.toString()
             firebaseDatabase.getReference("assessment")
-                .child(firebaseDatabase.reference.push().key.toString()).setValue(assessmentRequest)
+                .child(id).setValue(AssessmentRequest(
+                    tittle, description, date, students,images,achievementActivity, feedback, isFavorite,id
+                ))
                 .addOnSuccessListener {
-                   resultFix = "Success add data"
+                    resultFix = "Success add data"
                     Log.d("FIX POST",resultFix)
                 }
                 .addOnFailureListener {
@@ -34,7 +136,7 @@ class AssessmentRepositoryImpl @Inject constructor(
                     Resource.Failure(it)
                     Log.d("BAD POST","${resultErr.message}")
                 }
-            return if(resultFix != "") Resource.Success(resultFix) else  Resource.Failure(resultErr)
+            return if(resultFix != "")  Resource.Failure(resultErr) else  Resource.Success(resultFix)
         }catch (e : Exception){
             Log.d("CREATE ASSESSMENT","${e.message}")
             e.printStackTrace()

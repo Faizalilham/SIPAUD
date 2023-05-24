@@ -77,6 +77,55 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/linear_image"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="@dimen/dp20"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="20dip"
+                    app:riv_border_width="2dip"
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/dp5"
+                    app:riv_border_color="#333333"
+                    android:layout_weight="1"/>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="20dip"
+                    app:riv_border_width="2dip"
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/dp5"
+                    app:riv_border_color="#333333"
+                    android:layout_weight="1"/>
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="20dip"
+                    app:riv_border_width="2dip"
+                    android:visibility="gone"
+                    app:riv_border_color="#333333"
+                    android:layout_margin="@dimen/dp5"
+                    android:layout_weight="1"/>
+
+
+
+            </LinearLayout>
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container2"
                 android:layout_width="match_parent"
@@ -170,6 +219,12 @@
 
                 </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_students"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/list_item_students_activity"/>
+
                 <EditText
                     android:id="@+id/et_students"
                     android:layout_width="match_parent"
@@ -206,7 +261,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_achievement_activity"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     tools:listitem="@layout/list_item_achievement_activity"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -226,7 +281,7 @@
                         android:hint="@string/hint_activity_achievement"
                         android:inputType="text"
                         android:fontFamily="@font/poppins"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:background="@drawable/background_stroke"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -235,7 +290,7 @@
                     android:id="@+id/et_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_description"
+                    android:hint="@string/hint_feedback"
                     android:layout_marginTop="@dimen/dp15"
                     android:fontFamily="@font/poppins"
                     android:imeOptions="actionDone"/>

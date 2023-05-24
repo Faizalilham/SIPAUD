@@ -1,48 +1,39 @@
 package android.coding.ourapp.adapter
 
-import android.net.Uri
+import android.coding.ourapp.R
+import android.content.Context
+import android.graphics.Bitmap
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import io.ak1.pix.utility.WIDTH
+import androidx.viewpager.widget.PagerAdapter
 
-class MultipleImageAdapter : RecyclerView.Adapter<MultipleImageAdapter.ViewHolder>() {
-    val list = ArrayList<Uri>()
-    val options: RequestOptions =
-        RequestOptions().override(350).transform(CenterCrop(), RoundedCorners(40))
+class ImageSliderAdapter(private val context: Context, private val bitmaps: List<Bitmap>) :
+    PagerAdapter() {
 
-    inner class ViewHolder(private val imageView: ImageView) :
-        RecyclerView.ViewHolder(imageView) {
-        fun bind() {
-            imageView.apply {
-                Glide.with(imageView.context).asBitmap()
-                    .load(list[adapterPosition])
-                    .apply(options)
-                    .into(this)
-            }
-        }
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val inflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val itemView = inflater.inflate(R.layout.list_item_image, container, false)
+
+        val imageView = itemView.findViewById<ImageView>(R.id.imageView)
+        imageView.setImageBitmap(bitmaps[position])
+
+        container.addView(itemView)
+
+        return itemView
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(ImageView(parent.context).apply {
-            scaleType = ImageView.ScaleType.CENTER_CROP
-            layoutParams = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(10, 10, 10, 10)
-                val size = (WIDTH / 3) - 20
-                height = size
-                width = size
-            }
-        })
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+        container.removeView(obj as View)
+    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind()
+    override fun getCount(): Int {
+        return bitmaps.size
+    }
 
-    override fun getItemCount() = list.size
+    override fun isViewFromObject(view: View, obj: Any): Boolean {
+        return view == obj
+    }
 }

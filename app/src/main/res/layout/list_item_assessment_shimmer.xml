@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.facebook.shimmer.ShimmerFrameLayout
+    android:id="@+id/shimmer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="175dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/dp10"
-    app:cardElevation="@dimen/dp15"
-    android:id="@+id/card"
-    app:cardCornerRadius="@dimen/dp15"
-    >
+   >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,10 +15,10 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card_image"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:visibility="gone"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/dp15"
+            android:background="#ddd"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -28,9 +27,9 @@
             android:id="@+id/card_tittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/card_tittle"
-            style="@style/AppTheme.TextSubTittle"
+            style="@style/AppTheme.TextTittle"
             android:textStyle="bold"
+            android:background="@color/gray"
             android:layout_margin="@dimen/dp10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +39,9 @@
             android:id="@+id/card_subTittle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="@string/card_description"
             style="@style/AppTheme.TextSubTittle"
             android:maxLines="2"
+            android:background="@color/gray"
             android:layout_margin="@dimen/dp10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_tittle" />
@@ -52,12 +51,12 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="@dimen/dp10"
+            android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_subTittle" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.facebook.shimmer.ShimmerFrameLayout>

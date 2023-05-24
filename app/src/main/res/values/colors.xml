@@ -14,6 +14,7 @@
     <color name="gray">#F3F3F3</color>
     <color name="red">#FF0000</color>
     <color name="secondary_grey">#C7C7C7</color>
+    <color name="gray_shimmer">#DDDDDD</color>
 
 
 </resources>

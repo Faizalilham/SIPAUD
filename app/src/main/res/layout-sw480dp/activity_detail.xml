@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_back"
             android:layout_width="50dp"
@@ -32,30 +37,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="fitEnd"
-                android:layout_weight="0.7"
-                android:src="@drawable/danilla" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/background_top_rounded"
-                android:layout_weight="1.7">
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,6 +99,7 @@
                         android:src="@drawable/ic_date"/>
 
                     <TextView
+                        android:id="@+id/tv_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/date_detail"
@@ -199,7 +181,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/activity_achievement"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"
@@ -239,7 +221,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/feedback"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"
