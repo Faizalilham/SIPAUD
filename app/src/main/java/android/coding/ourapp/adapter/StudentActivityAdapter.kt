@@ -22,7 +22,7 @@ class StudentActivityAdapter (
         holder.binding.apply {
             tvStudentActivity.text = data[position]
             imageDelete.setOnClickListener {
-                listener.onDelete(position)
+                listener.onDelete(position,data[position])
             }
         }
     }
@@ -30,6 +30,6 @@ class StudentActivityAdapter (
     override fun getItemCount(): Int = data.size
 
     interface OnClick{
-        fun onDelete(data : Int)
+        fun onDelete(data : Int,student : String)
     }
 }

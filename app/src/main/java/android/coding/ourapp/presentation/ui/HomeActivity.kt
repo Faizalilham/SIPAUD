@@ -16,7 +16,9 @@ import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.OvershootInterpolator
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +42,9 @@ class HomeActivity : AppCompatActivity() {
         bottomSheet(arrayListOf())
         createCustomAnimation()
         getAllAssessment()
+        searchAssessment()
+
+        binding.swipeRefreshLayout.setOnRefreshListener { getAllAssessment() }
 
         binding.menuItem.setOnClickListener {
             startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{ finish() })
@@ -60,6 +65,9 @@ class HomeActivity : AppCompatActivity() {
             when(it){
                 is Resource.Success -> {
                    if(it.result.assessment != null){
+                       binding.swipeRefreshLayout.isRefreshing = false
+                       binding.empty.visibility = View.GONE
+                       binding.rvAssessment.visibility = View.VISIBLE
                        setupRecycler(it.result.assessment)
                        bottomSheet(it.result.assessment)
                    }
@@ -78,8 +86,53 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
+
+    private fun searchAssessment(){
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                var result = false
+                if(binding.etSearch.text.toString().isNotBlank()){
+                    assessmentViewModel.searchAssessment(binding.etSearch.text.toString()).observe(this){
+                        when(it){
+                            is Resource.Success -> {
+                                if(it.result.assessment != null){
+                                    result = true
+                                    if(it.result.assessment.size == 0 && result){
+                                        binding.empty.visibility = View.VISIBLE
+                                        binding.rvAssessment.visibility = View.GONE
+                                    }else{
+                                        binding.empty.visibility = View.GONE
+                                        binding.rvAssessment.visibility = View.VISIBLE
+                                        setupRecycler(it.result.assessment)
+                                    }
+                                }
+                            }
+
+                            is Resource.Loading -> {
+                               if(result)  setupRecycler(arrayListOf())
+                            }
+
+                            is Resource.Failure -> {
+                                Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                            }
+
+                            else -> {
+                                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                }else{
+                    Toast.makeText(this, resources.getString(R.string.warning_form), Toast.LENGTH_SHORT).show()
+                }
+                true
+            } else {
+                false
+            }
+        }
+    }
+
 
     private fun setupRecycler(data : ArrayList<AssessmentRequest>){
         assessmentAdapter = AssessmentAdapter(data)

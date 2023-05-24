@@ -336,6 +336,14 @@ object Utils {
 //
 //        document.close()
 //    }
+
+    fun userMatchesSearch(assessmentRequest: AssessmentRequest, searchQuery: String): Boolean {
+        val lowercaseQuery = searchQuery.toLowerCase()
+        val nameMatches = assessmentRequest.tittle?.toLowerCase()?.contains(lowercaseQuery)
+        val emailMatches = assessmentRequest.description?.toLowerCase()?.contains(lowercaseQuery)
+        return nameMatches == true|| emailMatches == true
+    }
+
     fun language(context: Context){
         val languageCode = LanguageManager.loadLanguagePreference(context)
         LanguageManager.setLanguage(context, languageCode)

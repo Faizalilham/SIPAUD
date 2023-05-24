@@ -73,6 +73,7 @@
     <string name="alert_confirm">Konfirmasi</string>
     <string name="alert_delete">Apakah Anda yakin ingin menghapus data yang dipilih ?</string>
     <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
+    <string name="not_found">Data tidak tersedia</string>
 
 
 </resources>
