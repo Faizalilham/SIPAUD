@@ -61,6 +61,7 @@
            app:startIconDrawable="@drawable/ic_search"
            app:endIconMode="clear_text"
            android:layout_weight="1"
+           app:hintEnabled="false"
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
            <com.google.android.material.textfield.TextInputEditText
@@ -91,15 +92,23 @@
 
    </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_assessment"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/form_search"
-        tools:listitem="@layout/list_item_narasi" />
+        app:layout_constraintTop_toBottomOf="@id/form_search">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_assessment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_item_narasi" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_menu"
@@ -205,6 +214,19 @@
             fab:menu_showShadow="true" />
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_found"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_marginBottom="250dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

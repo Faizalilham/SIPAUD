@@ -5,9 +5,13 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.adapter.StudentActivityAdapter
 import android.coding.ourapp.data.Resource
+import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
+import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityCreateUpdateAsesmentBinding
+import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
+import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.graphics.Bitmap
@@ -21,6 +25,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -35,10 +40,13 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private var _binding : ActivityCreateUpdateAsesmentBinding? = null
     private val binding get() = _binding!!
     private val assessmentViewModel by viewModels<AssessmentViewModel>()
+    private lateinit var studentViewModel: StudentViewModel
+    private lateinit var firebaseHelper: FirebaseHelper
     private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
     private lateinit var adapterStudentActivityAdapter: StudentActivityAdapter
     private val listAchievementActivity = arrayListOf<String>()
     private val listStudentActivity = arrayListOf<String>()
+    private val listStudentSelected = arrayListOf<String>()
     private val listImage = arrayListOf<String>()
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     var i : String? = null
@@ -54,7 +62,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         setContentView(binding.root)
         Utils.language(this)
         binding.tvDate.text = Utils.getCurrentDate()
-        moveToHome()
+        initViewModel()
         imeOptions()
         selectSpinner()
         getIntentDataImage()
@@ -64,7 +72,18 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         favorite = intent.getBooleanExtra("favorite",false)
         getIntentDataEdit(i)
         postUpdate(i)
+        getAllDataStudent()
+        moveToHome()
 
+
+    }
+
+    private fun initViewModel() {
+        firebaseHelper = FirebaseHelper()
+        val studentRepository = StudentRepository(firebaseHelper)
+        val viewModelFactory = ViewModelFactory(studentRepository)
+        studentViewModel =
+            ViewModelProvider(this, viewModelFactory)[StudentViewModel::class.java]
     }
 
     private fun getIntentDataImage(){
@@ -112,7 +131,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                         favorite = it.result.favorite
                         getIntentDataImage()
                     }
-
                     is Resource.Loading -> {}
 
                     is Resource.Failure -> {
@@ -122,7 +140,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                     else -> {
                         Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }
@@ -143,16 +160,36 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             showStudentsActivity(listStudentActivity)
             showActivityAchievement(listAchievementActivity)
             btnSave.setText(R.string.update_asesment)
+            tittle.setText(R.string.update_asesment)
         }
     }
 
+    private fun getAllDataStudent() {
+        studentViewModel.getData().observe(this) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    val students = result.result
+                    students.forEach {
+                        listStudentActivity.add(it.nameStudent.toString())
+                    }
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(this, "There is an error", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this, "There is an error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     private fun selectSpinner() {
         binding.apply {
             etStudents.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(listAchievementActivity.sorted().distinct())){ student ->
-                    listStudentActivity.add(student)
-                    showStudentsActivity(listStudentActivity)
+                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(listStudentActivity.sorted().distinct())){ student ->
+                    listStudentActivity.remove(student)
+                    listStudentSelected.add(student)
+                    showStudentsActivity(listStudentSelected)
                 }
             }
         }
@@ -167,7 +204,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
 
             }
         })
-
         binding.rvAchievementActivity.apply {
             adapter = adapterAchievementActivityAdapter
             layoutManager = LinearLayoutManager(this@CreateUpdateAsesmentActivity)
@@ -176,15 +212,14 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
 
     private fun showStudentsActivity(datas : ArrayList<String>){
         adapterStudentActivityAdapter = StudentActivityAdapter(datas,object : StudentActivityAdapter.OnClick{
-            override fun onDelete(data:Int) {
-                listStudentActivity.removeAt(data)
+            override fun onDelete(data:Int,student : String) {
+                listStudentSelected.removeAt(data)
+                listStudentActivity.add(student)
                 adapterStudentActivityAdapter.notifyItemRemoved(data)
-                adapterStudentActivityAdapter.notifyItemRangeChanged(data,listStudentActivity.size)
+                adapterStudentActivityAdapter.notifyItemRangeChanged(data,listStudentSelected.size)
 
             }
-
         })
-        binding.rvStudents.setHasFixedSize(true)
         binding.rvStudents.layoutManager =  GridLayoutManager(this,2)
         binding.rvStudents.adapter = adapterStudentActivityAdapter
     }
@@ -208,17 +243,14 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                     assessmentViewModel.message.observe(this){
                         when(it){
                             is Resource.Success -> {
-                                showLoading(false)
                                 Utils.showImageAssessment(false,null,null,binding,this)
                                 Toast.makeText(this, "Tambah narasi sukses", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this,HomeActivity::class.java))
                                 finish()
                             }
-                            is Resource.Loading -> {
-                                showLoading(true)
-                            }
+                            is Resource.Loading -> {}
+
                             is Resource.Failure -> {
-                                showLoading(false)
                                 Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
                             }
                             else -> {}
@@ -273,24 +305,15 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(isLoading : Boolean){
-        if(isLoading){
-            binding.loadingBg.visibility = View.VISIBLE
-            binding.loading.visibility = View.VISIBLE
-        }else{
-            binding.loadingBg.visibility = View.GONE
-            binding.loading.visibility = View.GONE
-        }
-    }
 
     private fun moveToHome(){
-        if(i != null && ids != null){
-            binding.imageBack.setOnClickListener {
+        if(i == null && ids == null){
+            binding.linearLayout4.setOnClickListener {
                 startActivity(Intent(this,HomeActivity::class.java).also{ finish() })
             }
         }else{
-            binding.imageBack.setOnClickListener {
-                startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{ finish() })
+            binding.linearLayout4.setOnClickListener {
+                startActivity(Intent(this,DetailActivity::class.java).also{ finish() })
             }
         }
 

@@ -3,6 +3,7 @@ package android.coding.ourapp.data.repository.asesment
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.AssessmentResponse
+import android.coding.ourapp.utils.Utils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -146,9 +147,40 @@ class AssessmentRepositoryImpl @Inject constructor(
     }
 
     override fun searchAssessment(
-        assessmentRequest: AssessmentRequest,
         query: String
-    ): LiveData<Resource<AssessmentRequest>> {
-        TODO("Not yet implemented")
+    ): LiveData<Resource<AssessmentResponse>> {
+        val assessmentSearchLiveData = MutableLiveData<Resource<AssessmentResponse>>()
+        assessmentSearchLiveData.value = Resource.Loading
+        try {
+            firebaseDatabase.getReference("assessment")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val result = arrayListOf<AssessmentRequest>()
+
+                        if (snapshot.exists()) {
+                            for (data in snapshot.children) {
+                                val item = data.getValue(AssessmentRequest::class.java)
+                                if (item != null && Utils.userMatchesSearch(item, query)) {
+                                    result.add(item)
+                                }
+
+                            }
+                        }
+                        assessmentSearchLiveData.value =
+                            Resource.Success(AssessmentResponse(result, null))
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        assessmentSearchLiveData.value = Resource.Failure(error.toException())
+                    }
+                })
+
+            return assessmentSearchLiveData
+        }catch (e : Exception){
+            Log.d("SEARCH ASSESSMENT","${e.message}")
+            e.printStackTrace()
+            assessmentSearchLiveData.value = Resource.Failure(e)
+            return assessmentSearchLiveData
+        }
     }
 }

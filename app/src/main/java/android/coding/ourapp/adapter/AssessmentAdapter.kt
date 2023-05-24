@@ -40,8 +40,12 @@ class AssessmentAdapter(
                     }else{
                         cardImage.visibility = View.GONE
                     }
-                    Log.d("CEK","${data[position].favorite}")
-                    if(data[position].favorite!!) favorite.setImageResource(R.drawable.ic_favorite_active) else favorite.setImageResource(R.drawable.ic_favorite_inactive)
+                    if(data[position].favorite!!){
+                        favorite.visibility = View.VISIBLE
+                        favorite.setImageResource(R.drawable.ic_favorite_active)
+                    }else{
+                        favorite.visibility = View.GONE
+                    }
 
                     card.setOnClickListener {
                         listenerOnClick?.invoke(data[position])
