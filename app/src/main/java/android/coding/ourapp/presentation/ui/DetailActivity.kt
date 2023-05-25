@@ -75,7 +75,7 @@ class DetailActivity : AppCompatActivity() {
             tvDescription.text = i.description
             tvFeedback.text = i.feedback
             val date ="Dibuat pada ${i.date}"
-            tvDate?.text = date
+            tvDate.text = date
             tvName.text = Utils.convertListToString(i.students)
             tvActivity.text = Utils.convertListToString(i.achievementActivity)
 
@@ -85,7 +85,7 @@ class DetailActivity : AppCompatActivity() {
             }
 
             val adapter = ImageSliderAdapter(this@DetailActivity,listImageBitmap)
-            image?.adapter = adapter
+            image.adapter = adapter
 
             val listImageUri = arrayListOf<Uri>()
             for(i in i.image){
@@ -96,6 +96,9 @@ class DetailActivity : AppCompatActivity() {
             }
 
             checkIsFavorite(i.favorite!!)
+            if(i.favorite == true){
+                Toast.makeText(this@DetailActivity, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
+            }
             updateAssessment(AssessmentRequest(i.tittle,i.description,Utils.getCurrentDate(),i.students,i.image,i.achievementActivity,i.feedback,!i.favorite,i.id))
             doDelete(i.id!!)
             updateDataToEdit(i.id,i.favorite)
@@ -123,7 +126,6 @@ class DetailActivity : AppCompatActivity() {
             when(it){
                 is Resource.Success -> {
                     Toast.makeText(this, "Hapus data berhasil", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,HomeActivity::class.java))
                     finish()
                 }
 
@@ -160,14 +162,15 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateAssessment(assessmentRequest: AssessmentRequest){
         binding.favorite?.setOnClickListener {
+
             assessmentViewModel.updateAssessment(assessmentRequest)
             assessmentViewModel.message.observe(this){
                 when(it){
                     is Resource.Success -> {
                         checkIsFavorite(assessmentRequest.favorite!!)
-                        Toast.makeText(this, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
                     }
 
                     is Resource.Loading -> {}
@@ -182,6 +185,7 @@ class DetailActivity : AppCompatActivity() {
 
                 }
             }
+            getIntentData()
         }
     }
 
