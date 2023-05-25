@@ -313,7 +313,10 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             }
         }else{
             binding.linearLayout4.setOnClickListener {
-                startActivity(Intent(this,DetailActivity::class.java).also{ finish() })
+                startActivity(Intent(this,DetailActivity::class.java).also{
+                    it.putExtra("id",i)
+                    finish()
+                })
             }
         }
 
