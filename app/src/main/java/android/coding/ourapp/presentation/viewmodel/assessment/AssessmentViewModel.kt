@@ -4,6 +4,7 @@ import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.AssessmentResponse
 import android.coding.ourapp.data.repository.asesment.AssessmentRepositoryImpl
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -70,7 +71,6 @@ class AssessmentViewModel @Inject constructor(
     fun searchAssessment(query : String):LiveData<Resource<AssessmentResponse>>{
         return assessmentRepositoryImpl.searchAssessment(query)
     }
-
 
 
 

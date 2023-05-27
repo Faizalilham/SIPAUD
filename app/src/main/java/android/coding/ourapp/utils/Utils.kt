@@ -6,6 +6,7 @@ import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.databinding.ActivityCreateUpdateAsesmentBinding
+import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,12 +17,17 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import com.bumptech.glide.Glide
 import com.leo.searchablespinner.SearchableSpinner
 import com.leo.searchablespinner.interfaces.OnItemSelectListener
@@ -48,6 +54,7 @@ import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.property.TextAlignment
 import com.itextpdf.layout.property.VerticalAlignment
 import com.itextpdf.layout.property.UnitValue
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 object Utils {
@@ -167,26 +174,23 @@ object Utils {
         shareIntent.type = "text/plain"
         shareIntent.type = "image/*"
         shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList)
-        if (images.size >= 3) {
-            shareIntent.putExtra(Intent.EXTRA_TEXT, text.trim())
-        }
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text.trim())
         shareIntent.`package` = "com.whatsapp"
         context.startActivity(shareIntent)
 
     }
 
      fun checkStoragePermission(
-        images: List<Bitmap>, text: String,activity : Activity,
-        context : Context) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission( context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        activity : Activity,
+        context : Context):Boolean {
+        return if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission( context,Manifest.permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE
             ), 104)
-        } else {
-           sendMultipleImagesAndText(images, text, context)
-        }
+            true
+        }else false
     }
 
     fun showImageAssessment(isShow : Boolean,imageBitmap:ArrayList<Bitmap>?,imageUri:ArrayList<Uri>?,binding : ActivityCreateUpdateAsesmentBinding,context : Context){
@@ -204,10 +208,13 @@ object Utils {
                 }else if(imageUri.size == 2){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
                     Glide.with(context).load(imageUri[1]).into(imageSecond)
                 }else{
                     imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.GONE
+                    imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
                 }
             }else if(isShow && imageBitmap != null){
@@ -262,6 +269,12 @@ object Utils {
     }
 
     fun exportToPdf(bitmaps: List<Bitmap>, texts: List<String>,context : Context) {
+        val directoryName = "Export Pdf"
+        val directory = File(context.filesDir, directoryName)
+        if (!directory.exists()) {
+            directory.mkdir()
+        }
+        Log.d("DIRECTORY","$directory")
         val outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val outputPath = File(outputDir, "${texts[0]}.pdf").path
         val pdfWriter = PdfWriter(outputPath)
@@ -281,7 +294,13 @@ object Utils {
             image.setHorizontalAlignment(HorizontalAlignment.CENTER)
             val cell = Cell()
             cell.setBorder(Border.NO_BORDER)
+            if (bitmaps.size == 1){
+                image.scaleToFit(260f, 160f)
+            }
             cell.add(image)
+            if(bitmaps.size == 1){
+                cell.setHorizontalAlignment(HorizontalAlignment.CENTER)
+            }
             table.addCell(cell)
         }
 
@@ -309,6 +328,26 @@ object Utils {
 
         document.close()
     }
+
+    fun unique(arr1 : ArrayList<String>,arr2 : ArrayList<String>):ArrayList<String>{
+        val uniqueArray = mutableListOf<String>()
+
+        for (element in arr1) {
+            if (!arr2.contains(element) && !uniqueArray.contains(element)) {
+                uniqueArray.add(element)
+            }
+        }
+
+        for (element in arr2) {
+            if (!arr1.contains(element) && !uniqueArray.contains(element)) {
+                uniqueArray.add(element)
+            }
+        }
+
+        return ArrayList(uniqueArray)
+    }
+
+    fun checkDataIsExist(){}
 
 
 //    fun exportToPdf(images: List<Bitmap>, texts: List<String>, outputPath: String) {
