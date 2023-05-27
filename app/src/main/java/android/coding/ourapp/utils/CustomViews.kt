@@ -16,6 +16,7 @@ val options = Options().apply{
     mode = Mode.Picture                                           //Option to select only pictures or videos or both
     flash = Flash.Auto                                          //Option to select flash type
     preSelectedUrls = ArrayList<Uri>()                          //Pre selected Image Urls
+
 }
 
 //fun fragmentBody(

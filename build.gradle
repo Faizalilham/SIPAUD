@@ -12,7 +12,7 @@ buildscript {
 
     ext.lifecycle_version = "2.2.0"
 
-    ext.activity_ktx_version = "1.1.0"
+    ext.activity_ktx_version = "1.4.0"
 
     ext.fragment_ktx_version = '1.2.5'
 

@@ -51,12 +51,12 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun moveToHome(){
         binding.imageBack.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 
     override fun onDestroy() {
@@ -116,10 +116,7 @@ class ProfileActivity : AppCompatActivity() {
         val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
 
         btnYes.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java).also{
-                authViewModel.deleteToken()
-                finish()
-            })
+            authViewModel.deleteToken()
             finish()
             alertDialog.dismiss()
         }

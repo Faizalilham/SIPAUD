@@ -1,5 +1,6 @@
 package android.coding.ourapp.presentation.ui
 
+import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.ImageSliderAdapter
 import android.coding.ourapp.data.Resource
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +34,7 @@ class DetailActivity : AppCompatActivity() {
     private var _binding : ActivityDetailBinding? = null
     private val binding get() = _binding!!
     private val assessmentViewModel by viewModels<AssessmentViewModel>()
+    var i : String? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +42,14 @@ class DetailActivity : AppCompatActivity() {
         _binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getIntentData()
-        binding.imageBack.setOnClickListener { finish() }
+        back()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getIntentData(){
-        val i = intent.getStringExtra("id")
+        i = intent.getStringExtra("id")
         if(i != null){
-            assessmentViewModel.getDataById(i).observe(this){
+            assessmentViewModel.getDataById(i!!).observe(this){
                 when(it){
                     is Resource.Success -> {
                         setupView(it.result)
@@ -70,7 +73,6 @@ class DetailActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupView(i : AssessmentRequest){
         binding.apply {
-
             tvTittle.text = i.tittle
             tvDescription.text = i.description
             tvFeedback.text = i.feedback
@@ -96,9 +98,6 @@ class DetailActivity : AppCompatActivity() {
             }
 
             checkIsFavorite(i.favorite!!)
-            if(i.favorite == true){
-                Toast.makeText(this@DetailActivity, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
-            }
             updateAssessment(AssessmentRequest(i.tittle,i.description,Utils.getCurrentDate(),i.students,i.image,i.achievementActivity,i.feedback,!i.favorite,i.id))
             doDelete(i.id!!)
             updateDataToEdit(i.id,i.favorite)
@@ -171,6 +170,9 @@ class DetailActivity : AppCompatActivity() {
                 when(it){
                     is Resource.Success -> {
                         checkIsFavorite(assessmentRequest.favorite!!)
+                        if(assessmentRequest.favorite == true){
+                            Toast.makeText(this@DetailActivity, "Berhasil ditambahkan ke favorite", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     is Resource.Loading -> {}
@@ -193,8 +195,10 @@ class DetailActivity : AppCompatActivity() {
         imageUris : ArrayList<Bitmap>, message : String
     ){
         binding.share?.setOnClickListener {
-            Utils.checkStoragePermission(imageUris,message,this,this)
-            Utils.sendMultipleImagesAndText(imageUris,message,this)
+           if(Utils.checkStoragePermission(this,this)){
+                Utils.sendMultipleImagesAndText(imageUris,message,this)
+            }
+
         }
     }
 
@@ -211,8 +215,11 @@ class DetailActivity : AppCompatActivity() {
 
     private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
         binding.export?.setOnClickListener {
-            Utils.exportToPdf(bitmaps,texts,this)
-            Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+           if(Utils.checkStoragePermission(this,this)){
+               Utils.exportToPdf(bitmaps,texts,this)
+               Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+           }
+
         }
     }
 
@@ -228,12 +235,25 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            i = data?.getStringExtra("id")
+
+        }
+    }
+
+    private fun back(){
+        binding.imageBack.setOnClickListener { finish() }
+    }
+
     private fun updateDataToEdit(id : String,favorite : Boolean){
+        val intent = Intent(this,CreateUpdateAsesmentActivity::class.java).also{
+            it.putExtra("id",id)
+            it.putExtra("favorite",favorite)
+        }
         binding.update?.setOnClickListener {
-            startActivity(Intent(this,CreateUpdateAsesmentActivity::class.java).also{
-                it.putExtra("id",id)
-                it.putExtra("favorite",favorite)
-            })
+            getResult.launch(intent)
         }
     }
 

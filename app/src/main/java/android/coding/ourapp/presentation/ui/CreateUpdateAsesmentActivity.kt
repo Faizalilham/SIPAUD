@@ -1,6 +1,8 @@
 package android.coding.ourapp.presentation.ui
 
 
+import android.Manifest
+import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.adapter.StudentActivityAdapter
@@ -14,15 +16,20 @@ import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewMod
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
@@ -48,9 +55,9 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private val listStudentActivity = arrayListOf<String>()
     private val listStudentSelected = arrayListOf<String>()
     private val listImage = arrayListOf<String>()
+    private val listImageBitmap = arrayListOf<Bitmap>()
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     var i : String? = null
-    var ids : String? = null
     var favorite : Boolean? = null
 
 
@@ -65,17 +72,13 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         initViewModel()
         imeOptions()
         selectSpinner()
-        getIntentDataImage()
         i = intent.getStringExtra("id")
-        ids = intent.getStringExtra("ids")
-        openGallery(i)
         favorite = intent.getBooleanExtra("favorite",false)
+        openGallery()
         getIntentDataEdit(i)
         postUpdate(i)
         getAllDataStudent()
         moveToHome()
-
-
     }
 
     private fun initViewModel() {
@@ -86,26 +89,14 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactory)[StudentViewModel::class.java]
     }
 
-    private fun getIntentDataImage(){
-        val uriList = intent.getSerializableExtra("list_uri")
-        if(uriList != null){
-            val uriArrayList =  intent.getSerializableExtra("list_uri") as ArrayList<Uri>
-            Utils.showImageAssessment(true,null,uriArrayList,binding,this)
-            for(i in uriArrayList){
-                listImage.add(Utils.uploadImage(i,this))
-            }
-        }
-    }
-
     private fun getIntentDataEdit(i : String?){
         if(i != null){
             assessmentViewModel.getDataById(i).observe(this){
                 when(it){
                     is Resource.Success -> {
                         setupViewUpdate(it.result,null)
-                        val listImageBitmap = arrayListOf<Bitmap>()
-                        for(i in it.result.image){
-                            listImageBitmap.add(Utils.convertStringToBitmap(i))
+                        for(image in it.result.image){
+                            listImageBitmap.add(Utils.convertStringToBitmap(image))
                         }
                         Utils.showImageAssessment(true,listImageBitmap,null,binding,this)
                         favorite = it.result.favorite
@@ -123,25 +114,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
 
                 }
             }
-        }else if(ids != null) {
-            assessmentViewModel.getDataById(ids!!).observe(this){
-                when(it){
-                    is Resource.Success -> {
-                        setupViewUpdate(it.result,ids)
-                        favorite = it.result.favorite
-                        getIntentDataImage()
-                    }
-                    is Resource.Loading -> {}
-
-                    is Resource.Failure -> {
-                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
-                    }
-
-                    else -> {
-                        Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
         }
     }
 
@@ -151,13 +123,13 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             etDescription.setText(assessmentRequest.description)
             etFeedback.setText(assessmentRequest.feedback)
             listAchievementActivity.addAll(assessmentRequest.achievementActivity)
-            listStudentActivity.addAll(assessmentRequest.students)
+            listStudentSelected.addAll(assessmentRequest.students)
             if(idx == null){
                 listImage.addAll(assessmentRequest.image)
             }else{
                 listImage.clear()
             }
-            showStudentsActivity(listStudentActivity)
+            showStudentsActivity(listStudentSelected)
             showActivityAchievement(listAchievementActivity)
             btnSave.setText(R.string.update_asesment)
             tittle.setText(R.string.update_asesment)
@@ -186,7 +158,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private fun selectSpinner() {
         binding.apply {
             etStudents.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(listStudentActivity.sorted().distinct())){ student ->
+                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(Utils.unique(listStudentActivity,listStudentSelected).sorted().distinct())){ student ->
                     listStudentActivity.remove(student)
                     listStudentSelected.add(student)
                     showStudentsActivity(listStudentSelected)
@@ -233,12 +205,12 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             val feedback = binding.etFeedback.text.toString().trim()
 
             if(Utils.createUpdateAssessmentCondition(
-                    tittle,description,date,listStudentActivity,listAchievementActivity,feedback
+                    tittle,description,date,listStudentSelected,listAchievementActivity,feedback
             )){
 
-                if(id == null  && ids == null){
+                if(id == null){
                     assessmentViewModel.createAssessment(
-                        tittle,description,date,listStudentActivity,listImage,listAchievementActivity,feedback,false
+                        tittle,description,date,listStudentSelected,listImage,listAchievementActivity,feedback,false
                     )
                     assessmentViewModel.message.observe(this){
                         when(it){
@@ -258,7 +230,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                     }
                 }else{
                     assessmentViewModel.updateAssessment(
-                        AssessmentRequest(tittle,description,date,listStudentActivity,listImage,listAchievementActivity,feedback,favorite,ids)
+                        AssessmentRequest(tittle,description,date,listStudentSelected,listImage,listAchievementActivity,feedback,favorite,id)
                     )
                     assessmentViewModel.message.observe(this){
                         when(it){
@@ -305,39 +277,68 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         }
     }
 
+    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            val uriList = data?.getParcelableArrayListExtra<Uri>("list_uri")
+            if(uriList != null){
+                listImage.clear()
+                Utils.showImageAssessment(true,null,uriList,binding,this)
+                for(i in uriList){
+                    listImage.add(Utils.uploadImage(i,this))
+                }
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun openGallery(){
+        val intent = Intent(this, ImageFragment::class.java)
+        binding.linearImage.setOnClickListener {
+            listImageBitmap.clear()
+            getResult.launch(intent)
+        }
+        binding.image.setOnClickListener {
+            getResult.launch(intent)
+        }
+    }
 
     private fun moveToHome(){
-        if(i == null && ids == null){
+        if(i == null){
             binding.linearLayout4.setOnClickListener {
-                startActivity(Intent(this,HomeActivity::class.java).also{ finish() })
-            }
-        }else{
-            binding.linearLayout4.setOnClickListener {
-                startActivity(Intent(this,DetailActivity::class.java).also{
-                    it.putExtra("id",i)
+                startActivity(Intent(this,HomeActivity::class.java).also{
                     finish()
                 })
             }
+        }else{
+            binding.linearLayout4.setOnClickListener {
+                finish()
+            }
+
         }
-
     }
 
-    private fun openGallery(id : String?){
-       if(id == null){
-           binding.image.setOnClickListener {
-               startActivity(Intent(this, ImageFragment::class.java))
-           }
-       }else{
-           binding.linearImage.setOnClickListener {
-               startActivity(Intent(this, ImageFragment::class.java).also{
-                   it.putExtra("id",id)
-               })
-           }
-       }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if(i == null){
+            binding.linearLayout4.setOnClickListener {
+                startActivity(Intent(this,HomeActivity::class.java).also{
+                    finish()
+                })
+            }
+        }else{
+            binding.linearLayout4.setOnClickListener {
+                finish()
+            }
+
+        }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
+
 }

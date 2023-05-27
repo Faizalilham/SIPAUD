@@ -330,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp15"
                 android:fontFamily="@font/poppins"
-                android:hint="@string/hint_description"
+                android:hint="@string/hint_feedback"
                 android:imeOptions="actionDone" />
 
 
