@@ -105,9 +105,6 @@ dependencies {
     //Testing
     testImplementation "io.mockk:mockk:$mock_version"
 
-    //FAB 
-    implementation "com.github.clans:fab:1.6.4"
-
     // Similar React Select
     implementation 'com.github.leoncydsilva:SearchableSpinner:1.0.1'
 
@@ -121,4 +118,7 @@ dependencies {
 
     //Swipe refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Expand layout
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
 }

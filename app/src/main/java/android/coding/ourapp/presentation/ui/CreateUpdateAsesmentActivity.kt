@@ -98,7 +98,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                         for(image in it.result.image){
                             listImageBitmap.add(Utils.convertStringToBitmap(image))
                         }
-                        Utils.showImageAssessment(true,listImageBitmap,null,binding,this)
+//                        Utils.showImageAssessment(true,listImageBitmap,null,binding,this)
                         favorite = it.result.favorite
                     }
 
@@ -130,7 +130,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                 listImage.clear()
             }
             showStudentsActivity(listStudentSelected)
-            showActivityAchievement(listAchievementActivity)
+//            showActivityAchievement(listAchievementActivity)
             btnSave.setText(R.string.update_asesment)
             tittle.setText(R.string.update_asesment)
         }
@@ -167,20 +167,20 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun showActivityAchievement(data : ArrayList<String>){
-        adapterAchievementActivityAdapter = AchievementActivityAdapter(data, object : AchievementActivityAdapter.OnClick{
-            override fun onDelete(data: Int) {
-                listAchievementActivity.removeAt(data)
-                binding.rvAchievementActivity.adapter?.notifyItemRemoved(data)
-                binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data,listAchievementActivity.size)
-
-            }
-        })
-        binding.rvAchievementActivity.apply {
-            adapter = adapterAchievementActivityAdapter
-            layoutManager = LinearLayoutManager(this@CreateUpdateAsesmentActivity)
-        }
-    }
+//    private fun showActivityAchievement(data : ArrayList<String>){
+//        adapterAchievementActivityAdapter = AchievementActivityAdapter(data, object : AchievementActivityAdapter.OnClick{
+//            override fun onDelete(data: Int) {
+//                listAchievementActivity.removeAt(data)
+//                binding.rvAchievementActivity.adapter?.notifyItemRemoved(data)
+//                binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data,listAchievementActivity.size)
+//
+//            }
+//        })
+//        binding.rvAchievementActivity.apply {
+//            adapter = adapterAchievementActivityAdapter
+//            layoutManager = LinearLayoutManager(this@CreateUpdateAsesmentActivity)
+//        }
+//    }
 
     private fun showStudentsActivity(datas : ArrayList<String>){
         adapterStudentActivityAdapter = StudentActivityAdapter(datas,object : StudentActivityAdapter.OnClick{
@@ -215,7 +215,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
                     assessmentViewModel.message.observe(this){
                         when(it){
                             is Resource.Success -> {
-                                Utils.showImageAssessment(false,null,null,binding,this)
+//                                Utils.showImageAssessment(false,null,null,binding,this)
                                 Toast.makeText(this, "Tambah narasi sukses", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this,HomeActivity::class.java))
                                 finish()
@@ -265,7 +265,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if(binding.etAchievement.text.toString().isNotBlank()){
                     listAchievementActivity.add(binding.etAchievement.text.toString())
-                    showActivityAchievement(listAchievementActivity)
+//                    showActivityAchievement(listAchievementActivity)
                     binding.etAchievement.text?.clear()
                 }else{
                     Toast.makeText(this, resources.getString(R.string.warning_form), Toast.LENGTH_SHORT).show()
@@ -283,7 +283,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
             val uriList = data?.getParcelableArrayListExtra<Uri>("list_uri")
             if(uriList != null){
                 listImage.clear()
-                Utils.showImageAssessment(true,null,uriList,binding,this)
+//                Utils.showImageAssessment(true,null,uriList,binding,this)
                 for(i in uriList){
                     listImage.add(Utils.uploadImage(i,this))
                 }

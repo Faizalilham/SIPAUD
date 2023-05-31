@@ -3,10 +3,11 @@ package android.coding.ourapp.utils
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
-import android.coding.ourapp.databinding.ActivityCreateUpdateAsesmentBinding
-import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
+import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
+import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,17 +18,14 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import com.bumptech.glide.Glide
 import com.leo.searchablespinner.SearchableSpinner
 import com.leo.searchablespinner.interfaces.OnItemSelectListener
@@ -54,10 +52,28 @@ import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.property.TextAlignment
 import com.itextpdf.layout.property.VerticalAlignment
 import com.itextpdf.layout.property.UnitValue
-import dagger.hilt.android.qualifiers.ApplicationContext
+import java.text.DateFormatSymbols
+import java.time.LocalDate
 
 
 object Utils {
+
+    fun datePicker(context : Context,e : TextView) {
+        val formatDate = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+        val now = Calendar.getInstance()
+        val year = now.get(Calendar.YEAR)
+        val month = now.get(Calendar.MONTH)
+        val day = now.get(Calendar.DAY_OF_MONTH)
+        val datePicker = DatePickerDialog(context,
+            DatePickerDialog.OnDateSetListener{ _, mYear, mMount, mDay ->
+                now.set(Calendar.YEAR,mYear)
+                now.set(Calendar.MONTH,mMount)
+                now.set(Calendar.DAY_OF_MONTH,mDay)
+                e.setText(formatDate.format(now.time))
+            },year,month,day
+        )
+        datePicker.show()
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCurrentDate():String{
@@ -86,6 +102,16 @@ object Utils {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 75, byteArrayOutputStream)
         val imageBytes = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
+
+
+    fun getMonthFromStringDate(dateString : String):String{
+        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale("id")) // Menggunakan bahasa Indonesia (id) untuk nama bulan
+        val date = LocalDate.parse(dateString, formatter)
+
+        val month = date.month // Mengambil bulan dari tanggal
+
+        return month.name
     }
 
     fun createUpdateAssessmentCondition(
@@ -193,11 +219,10 @@ object Utils {
         }else false
     }
 
-    fun showImageAssessment(isShow : Boolean,imageBitmap:ArrayList<Bitmap>?,imageUri:ArrayList<Uri>?,binding : ActivityCreateUpdateAsesmentBinding,context : Context){
+    fun showImageAssessment(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ListItemDailyReportBinding, context : Context){
         binding.apply {
             if(isShow && imageUri != null){
                 linearImage.visibility = View.VISIBLE
-                binding.image.visibility = View.GONE
                 if(imageUri.size == 3){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.VISIBLE
@@ -219,7 +244,6 @@ object Utils {
                 }
             }else if(isShow && imageBitmap != null){
                 linearImage.visibility = View.VISIBLE
-                binding.image.visibility = View.GONE
                 if(imageBitmap.size == 3){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.VISIBLE
@@ -238,7 +262,53 @@ object Utils {
                 }
             }else{
                 binding.linearImage.visibility = View.GONE
-                binding.image.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    fun showImageReport(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ActivityCreateUpdateReportBinding, context : Context){
+        binding.apply {
+            if(isShow && imageUri != null){
+                linearImage.visibility = View.VISIBLE
+                if(imageUri.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                    Glide.with(context).load(imageUri[2]).into(imageThird)
+                }else if(imageUri.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                }else{
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.GONE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                }
+            }else if(isShow && imageBitmap != null){
+                linearImage.visibility = View.VISIBLE
+                if(imageBitmap.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                    Glide.with(context).load(imageBitmap[2]).into(imageThird)
+                }else if(imageBitmap.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                }else{
+                    imageFirst.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                }
+            }else{
+                binding.linearImage.visibility = View.GONE
             }
         }
     }

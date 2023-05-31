@@ -20,13 +20,17 @@
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
+        <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.11013513513513513" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_list_item_report.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_report.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_students.xml" value="0.21" />
         <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />
@@ -35,6 +39,7 @@
         <entry key="app/src/main/res/layout/bottom_sheet_filter.xml" value="0.21" />
         <entry key="app/src/main/res/layout/bottom_sheet_share.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_bottom_component.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.10945945945945947" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_image.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_on_boarding.xml" value="0.11013513513513513" />
@@ -44,8 +49,10 @@
         <entry key="app/src/main/res/layout/image_bottom_sheet.xml" value="0.14" />
         <entry key="app/src/main/res/layout/list_item_achievement_activity.xml" value="0.21" />
         <entry key="app/src/main/res/layout/list_item_assessment_shimmer.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/list_item_daily_report.xml" value="0.17" />
         <entry key="app/src/main/res/layout/list_item_image.xml" value="0.10945945945945947" />
         <entry key="app/src/main/res/layout/list_item_narasi.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_item_report.xml" value="0.21" />
         <entry key="app/src/main/res/layout/list_item_student.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item_students_activity.xml" value="0.5" />
         <entry key="app/src/main/res/layout/menus_fragment.xml" value="0.11013513513513513" />

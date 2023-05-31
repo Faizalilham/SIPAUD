@@ -46,23 +46,14 @@ class HomeActivity : AppCompatActivity() {
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomSheet(arrayListOf())
-        createCustomAnimation()
-        getAllAssessment()
-        searchAssessment()
+//        getAllAssessment()
+//        searchAssessment()
 
         binding.swipeRefreshLayout.setOnRefreshListener { getAllAssessment() }
 
-        binding.menuItem.setOnClickListener {
-            startActivity(Intent(this, CreateUpdateAsesmentActivity::class.java).also { finish() })
-        }
+        binding.imageProfile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
 
-        binding.menuItemStudent.setOnClickListener {
-            startActivity(Intent(this, StudentsActivity::class.java))
-        }
-
-        binding.imageProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
+        binding.fabAddStudent.setOnClickListener {  startActivity(Intent(this, CreateUpdateReportActivity::class.java))}
 
     }
 
@@ -163,29 +154,6 @@ class HomeActivity : AppCompatActivity() {
             adapter = assessmentAdapter
             layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         }
-    }
-
-    private fun createCustomAnimation() {
-        val set = AnimatorSet()
-        val scaleOutX = ObjectAnimator.ofFloat(binding.fabMenu.menuIconView, "scaleX", 1.0f, 0.2f)
-        val scaleOutY = ObjectAnimator.ofFloat(binding.fabMenu.menuIconView, "scaleY", 1.0f, 0.2f)
-        val scaleInX = ObjectAnimator.ofFloat(binding.fabMenu.menuIconView, "scaleX", 0.2f, 1.0f)
-        val scaleInY = ObjectAnimator.ofFloat(binding.fabMenu.menuIconView, "scaleY", 0.2f, 1.0f)
-        scaleOutX.duration = 50
-        scaleOutY.duration = 50
-        scaleInX.duration = 150
-        scaleInY.duration = 150
-        scaleInX.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator) {
-                binding.fabMenu.menuIconView
-                    .setImageResource(if (binding.fabMenu.isOpened) R.drawable.ic_menu else R.drawable.ic_menu_open)
-//                if (binding.fabMenu.isOpened) binding.fabMenu.menuButtonColorNormal = R.color.primary_color else  binding.fabMenu.menuButtonColorNormal = R.color.black
-            }
-        })
-        set.play(scaleOutX).with(scaleOutY)
-        set.play(scaleInX).with(scaleInY).after(scaleOutX)
-        set.interpolator = OvershootInterpolator(2.0F)
-        binding.fabMenu.iconToggleAnimatorSet = set
     }
 
     private fun bottomSheet(data: ArrayList<AssessmentRequest>) {

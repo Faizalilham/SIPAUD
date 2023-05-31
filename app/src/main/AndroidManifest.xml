@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -22,7 +23,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurApp"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.ui.CreateUpdateReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.DetailReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.ReportActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.ImageFragment"
             android:exported="false" />
@@ -53,11 +68,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider

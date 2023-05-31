@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical"
     android:padding="@dimen/dp15"
-    tools:context=".presentation.ui.StudentsActivity">
+    tools:context=".presentation.ui.ReportActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/sp12"
-        android:layout_marginRight="@dimen/sp12"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout4"
@@ -31,7 +31,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/background_rounded"
                 android:backgroundTint="@color/black"
-                android:padding="@dimen/dp10"
+                android:padding="@dimen/dp8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tittle"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -52,64 +52,53 @@
 
         </LinearLayout>
 
-
         <TextView
-            android:id="@+id/tittle"
+            android:id="@+id/page_tittle"
             style="@style/AppTheme.TextTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/student_bio"
+            android:text="@string/add_asesment"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
-        <ImageView
-            android:id="@+id/btnDeleteSelected"
-            android:layout_width="@dimen/dp30"
-            android:layout_height="@dimen/dp30"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_delete"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
+        android:id="@+id/tittle"
         style="@style/AppTheme.TextSubTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp10"
-        android:layout_marginTop="@dimen/dp30"
-        android:text="@string/student_identity" />
+        android:text="@string/tittle"
+        android:layout_marginTop="@dimen/dp15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAdd"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp10"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_marginBottom="@dimen/dp10"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="@font/poppins"
-        android:padding="@dimen/dp10"
-        android:text="@string/add_student"
-        android:textAllCaps="false"
-        android:textSize="@dimen/sp16"
+        android:text="@string/app_name"
+        style="@style/AppTheme.TextTittle"
         android:textStyle="bold"
-        app:cornerRadius="@dimen/dp15"
-        app:icon="@drawable/ic_add" />
+        android:layout_marginTop="@dimen/dp10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tittle"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_students"
+        android:id="@+id/rv_month"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/list_item_student" />
+        android:layout_marginTop="@dimen/dp10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"/>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

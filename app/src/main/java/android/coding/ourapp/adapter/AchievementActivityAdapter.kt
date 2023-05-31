@@ -20,7 +20,7 @@ class AchievementActivityAdapter(
         holder.binding.apply {
             tvAchievementActivity.text = data[position]
             imageDelete.setOnClickListener {
-                listener.onDelete(position)
+                listener.onDelete(position,data[position])
             }
         }
     }
@@ -28,7 +28,7 @@ class AchievementActivityAdapter(
     override fun getItemCount(): Int = data.size
 
     interface OnClick{
-        fun onDelete(data : Int)
+        fun onDelete(data : Int,text : String)
     }
 
 }
