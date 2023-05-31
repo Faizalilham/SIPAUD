@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
+import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.content.Context
@@ -54,6 +55,7 @@ import com.itextpdf.layout.property.VerticalAlignment
 import com.itextpdf.layout.property.UnitValue
 import java.text.DateFormatSymbols
 import java.time.LocalDate
+import java.time.YearMonth
 
 
 object Utils {
@@ -106,10 +108,10 @@ object Utils {
 
 
     fun getMonthFromStringDate(dateString : String):String{
-        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale("id")) // Menggunakan bahasa Indonesia (id) untuk nama bulan
+        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale("id"))
         val date = LocalDate.parse(dateString, formatter)
 
-        val month = date.month // Mengambil bulan dari tanggal
+        val month = date.month
 
         return month.name
     }

@@ -121,4 +121,9 @@ dependencies {
 
     // Expand layout
     implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
+
+    //Swipe Reveal Layout
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+
+
 }

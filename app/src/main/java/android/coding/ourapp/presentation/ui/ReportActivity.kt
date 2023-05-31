@@ -31,17 +31,28 @@ class ReportActivity : AppCompatActivity() {
     }
 
     private fun getAllReport(){
-        reportViewModel.getAllReport.observe(this){
-            when (it) {
+        reportViewModel.getAllReport.observe(this){ its ->
+            when (its) {
                 is Resource.Success -> {
-                    var count = 0
+
+                    val listMonthString = mutableListOf<String>()
                     val listMonth = mutableListOf<Month>()
-                    if(it.result.isNotEmpty()){
-                        it.result.forEach { reportResult ->
-                            count++
-                            if(count <= listBackground.size){
-                                listMonth.add(Month(reportResult.id,reportResult.month,reportResult.report.size,listBackground[count-1]))
+                    if(its.result.isNotEmpty()){
+                        val a = its.result.filter { its -> its.studentName == "xxx" }
+                        a.forEach { reportResult ->
+                            reportResult.reports.forEach { its ->
+                                listMonthString.add(its.month)
                             }
+                        }
+
+                        if(listMonthString.distinct().size <= listBackground.size){
+                            val groupedData = listMonthString.groupBy { it }
+                            val countMap = groupedData.mapValues { it.value.size }
+
+                            countMap.forEach { (value, count) ->
+                                listMonth.add(Month(value,count,listBackground[count-1]))
+                            }
+
                         }
                     }
 
@@ -56,7 +67,7 @@ class ReportActivity : AppCompatActivity() {
                 }
 
                 is Resource.Failure -> {
-                    Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, its.exception.message.toString(), Toast.LENGTH_SHORT).show()
                 }
 
                 else -> {
@@ -68,13 +79,23 @@ class ReportActivity : AppCompatActivity() {
 
 
     private fun setupRecycler(data : MutableList<Month>){
-        adapterMonth = AdapterMonthReport(data,object : AdapterMonthReport.OnClick{
-            override fun onDetail(id: String) {
-               startActivity(Intent(this@ReportActivity,DetailReportActivity::class.java).also{
-                   it.putExtra("id",id)
-               })
+        val groupedMonths = mutableMapOf<String, Month>()
+        for (month in data) {
+            val existingMonth = groupedMonths[month.name]
+            if (existingMonth != null) {
+                val updatedMonth = existingMonth.copy(count = existingMonth.count + month.count)
+                groupedMonths[month.name] = updatedMonth
+            } else {
+                groupedMonths[month.name] = month
             }
-        })
+        }
+        val uniqueMonths = groupedMonths.values.toList()
+        adapterMonth = AdapterMonthReport(uniqueMonths.toMutableList())
+        adapterMonth.setItemClickListener { name ->
+            startActivity(Intent(this@ReportActivity,DetailReportActivity::class.java).also{
+                it.putExtra("month",name)
+            })
+        }
 
         binding.rvMonth.apply {
             adapter = adapterMonth

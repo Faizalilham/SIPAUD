@@ -4,6 +4,8 @@ import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.data.Resource
+import android.coding.ourapp.data.datasource.model.Month
+import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Utils
@@ -13,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -23,8 +26,10 @@ import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.FirebaseDatabase
 import com.leo.searchablespinner.SearchableSpinner
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -33,10 +38,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val binding get() = _binding!!
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
+
+    @Inject
+    lateinit var firebaseDatabase : FirebaseDatabase
+
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievement = arrayListOf<String>("Menulis","Menggambar")
     private val listImages = arrayListOf<String>()
     private val listImageBitmap = arrayListOf<Bitmap>()
+    private val listReport : MutableList<Report> = mutableListOf()
     private val reportViewModel by viewModels<ReportViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -50,6 +60,39 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         setupDropDown()
         createReport()
         openGallery()
+        getAllReport()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getAllReport(){
+        reportViewModel.getAllReport.observe(this){
+            when (it) {
+                is Resource.Success -> {
+                    var idParent = ""
+                    var idChild = ""
+                    it.result.forEach { result->
+                        idParent = result.id
+                        result.reports.forEach { reports->  idChild = reports.id}
+                        listReport.addAll(result.reports)
+                    }
+                    val isAdded = it.result.any { result ->
+                        result.studentName == "faizal"
+                    }
+                    if(isAdded) updateReport(idParent,listReport) else createReport()
+                }
+
+                is Resource.Loading -> {}
+
+                is Resource.Failure -> {
+                    Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {
+                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -109,23 +152,25 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createReport(){
        binding.apply {
            btnSave.setOnClickListener {
-               val tittle = "${tvWeek.text.toString()} ${tvReport.text.toString()}"
+               val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                val date = tvDate.text.toString().trim()
                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
-                   doCreateReport(tittle,date,listAchievementActivity,listImages)
+                   doCreateReport("faizal",tittle,date,listAchievementActivity,listImages)
                }
            }
        }
     }
 
     private fun doCreateReport(
+        studentName : String,
         tittle : String,date : String,
         indicator : MutableList<String>,images : MutableList<String>
     ){
-        reportViewModel.createReport(tittle,date, indicator, images)
+        reportViewModel.createReport(studentName,tittle,date, indicator, images)
         reportViewModel.message.observe(this){
             when(it){
                 is Resource.Success -> {
@@ -141,6 +186,58 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 else -> {}
             }
         }
+    }
+
+    private fun updateReport(idParent : String,listReport : MutableList<Report>){
+        binding.apply {
+            btnSave.setOnClickListener {
+                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
+                val date = tvDate.text.toString().trim()
+                val idChild =  firebaseDatabase.reference.push().key.toString()
+                listReport.add(
+                    Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
+                    indicator = listAchievementActivity, images = listImages
+                ))
+                doUpdateReport(
+                    idParent = idParent,
+                    listReport = listReport,
+                    indicator = mutableListOf(),
+                    images = mutableListOf(),
+                    date = "",
+                    idChild = "",
+                    tittle = ""
+                )
+            }
+        }
+    }
+
+    private fun doUpdateReport(
+        idParent : String,idChild: String,
+        tittle : String,date : String,
+        indicator : MutableList<String>,images : MutableList<String>,listReport : MutableList<Report>
+    ){
+
+        reportViewModel.updateReport(idParent,idChild, tittle, date, indicator, images, listReport)
+        reportViewModel.message.observe(this){
+            when(it){
+                is Resource.Success -> {
+                    if(listReport.isEmpty()){
+                        Toast.makeText(this, "Update laporan sukses", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
+                    }
+                    finish()
+                }
+                is Resource.Loading -> {}
+
+                is Resource.Failure -> {
+                    Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+
+
     }
 
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

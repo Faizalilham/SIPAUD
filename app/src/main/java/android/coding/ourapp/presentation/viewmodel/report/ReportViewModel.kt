@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.viewmodel.report
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentResponse
 import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.repository.report.ReportRepositoryImpl
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +26,7 @@ class ReportViewModel @Inject constructor(
     val message : LiveData<Resource<String>> = _message
 
     fun createReport(
+        nameStudent : String,
         tittle : String,
         date : String,
         indicator : MutableList<String>,
@@ -34,7 +36,26 @@ class ReportViewModel @Inject constructor(
         viewModelScope.launch {
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.createReport(
-                tittle,date,indicator,images
+                nameStudent,tittle,date,indicator,images
+            )
+            _message.value = result
+        }
+    }
+
+    fun updateReport(
+        idParent : String,
+        idChild : String,
+        tittle : String,
+        date : String,
+        indicator : MutableList<String>,
+        images : MutableList<String>,
+        listReport : MutableList<Report>
+
+        ){
+        viewModelScope.launch {
+            _message.value = Resource.Loading
+            val result = reportRepositoryImpl.updateReport(
+                idParent,idChild,tittle,date,indicator,images,listReport
             )
             _message.value = result
         }
@@ -43,5 +64,7 @@ class ReportViewModel @Inject constructor(
     fun getDataReportById(id : String):LiveData<Resource<DataReport>>{
         return reportRepositoryImpl.getReportById(id)
     }
+
+
 
 }
