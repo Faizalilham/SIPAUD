@@ -75,6 +75,25 @@
     <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
     <string name="alert_delete_1">Apakah Anda yakin ingin menghapus data ini?</string>
     <string name="not_found">Data tidak tersedia</string>
+    <string name="indicator_value">Indicator Penilaian</string>
+    <string name="add_indicator">Tambahkan Indicator</string>
+    <string name="week_1">Minggu ke 1</string>
+    <string name="report_1">Laporan ke 1</string>
+    <string name="create_report">pembuatan laporan</string>
+    <string name="name_student">Nama siswa :</string>
+    <string name="date">Tanggal</string>
+
+    <string-array name="week">
+        <item>Minggu ke 1</item>
+        <item>Minggu ke 2</item>
+        <item>Minggu ke 3</item>
+        <item>Minggu ke 4</item>
+    </string-array>
+
+    <string-array name="report">
+        <item>Laporan ke 1</item>
+        <item>Laporan ke 2</item>
+    </string-array>
 
 
 </resources>
