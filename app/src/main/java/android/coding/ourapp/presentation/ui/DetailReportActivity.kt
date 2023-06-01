@@ -1,13 +1,14 @@
 package android.coding.ourapp.presentation.ui
 
-import android.coding.ourapp.adapter.ReportAdapter
+import ReportAdapter
+import android.coding.ourapp.adapter.OnTouchHelper
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityDetailReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,14 +29,17 @@ class DetailReportActivity : AppCompatActivity() {
     }
 
     private fun getAllReport(){
-        val i = intent.getStringExtra("id")
+        val i = intent.getStringExtra("month")
+        Log.d("ID YGY","$i")
         if(i != null){
-            reportViewModel.getDataReportById(i).observe(this){
+            reportViewModel.getAllReport.observe(this){
                 when (it) {
                     is Resource.Success -> {
-                        if(it.result.report.isEmpty()){
-                            setupRecycler(it.result.report)
-                        }
+                       if(it.result.isNotEmpty()){
+                           val listReport = mutableListOf<Report>()
+                           it.result.forEach { its -> listReport.addAll(its.reports) }
+                           setupRecycler(listReport.filter { report -> report.month == i }.toMutableList())
+                       }
                     }
 
                     is Resource.Loading -> {
@@ -62,6 +66,8 @@ class DetailReportActivity : AppCompatActivity() {
             adapter = reportAdapter
             layoutManager = LinearLayoutManager(this@DetailReportActivity)
         }
+
+        OnTouchHelper(binding.rvReport).build()
     }
 
 

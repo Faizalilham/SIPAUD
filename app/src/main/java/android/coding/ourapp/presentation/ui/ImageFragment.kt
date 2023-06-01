@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.coding.ourapp.R
+import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel
 import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.utils.TAG
 import android.coding.ourapp.utils.options
@@ -17,6 +18,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.helpers.*
 
@@ -27,16 +29,23 @@ class ImageFragment : AppCompatActivity() {
     private val listUri : MutableList<Uri> = mutableListOf()
     private val listPath : MutableList<String> = mutableListOf()
     var i : String? = null
+    private lateinit var onBoarding : OnBoardingViewModel
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_image)
+        onBoarding = ViewModelProvider(this)[OnBoardingViewModel::class.java]
         setupScreen()
         supportActionBar?.hide()
         showCameraFragment()
         i = intent.getStringExtra("id")
-        checkPermission()
+        onBoarding.getBoardingKey().observe(this){
+            if(!it){
+                checkPermission()
+            }
+        }
+
     }
 
     private fun showCameraFragment() {

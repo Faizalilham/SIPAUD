@@ -3,6 +3,7 @@ package android.coding.ourapp.data.repository.report
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.utils.Utils
 import android.util.Log
@@ -77,22 +78,24 @@ class ReportRepositoryImpl @Inject constructor(
     }
 
     override fun createReport(
-        name: String,
+        studentName: String,
+        reportName: String,
         date: String,
         indicator: MutableList<String>,
         images: MutableList<String>
     ): Resource<String> {
         var resultFix = ""
         var resultErr : Exception = Exception()
+        val idChild =  firebaseDatabase.reference.push().key.toString()
         val dataReport = mutableListOf<Report>(
-            Report(name,date,indicator,images)
+            Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicator,images)
         )
 
         return try{
             val id = firebaseDatabase.reference.push().key.toString()
             firebaseDatabase.getReference("report")
                 .child(id).setValue(
-                    DataReport(month = Utils.getMonthFromStringDate(date), report = dataReport)
+                    DataReport(id=id,studentName=studentName,reports = dataReport)
                 )
                 .addOnSuccessListener {
                     resultFix = "Success add data"
@@ -109,6 +112,55 @@ class ReportRepositoryImpl @Inject constructor(
             e.printStackTrace()
             Resource.Failure(e)
 
+        }
+    }
+
+    override fun updateReport(
+        idParent : String,
+        idChild : String,
+        reportName: String,
+        date: String,
+        indicator: MutableList<String>,
+        images: MutableList<String>,
+        listReport : MutableList<Report>
+    ): Resource<String> {
+       return if(listReport.isEmpty()){
+           firebaseDatabase.reference.child("report").child(idParent).child("reports").child(idChild)
+               .setValue(Report(reportName = reportName, reportDate = date, month = Utils.getMonthFromStringDate(date), indicator = indicator,images = images))
+               .addOnSuccessListener {
+                   Log.d("UPDATE REPORT","SUCCESS")
+               }
+               .addOnFailureListener {
+                   Resource.Failure(it)
+               }
+           Resource.Success("Success update data")
+       }else{
+           firebaseDatabase.reference.child("report").child(idParent).child("reports")
+               .setValue(listReport)
+               .addOnSuccessListener {
+                   Log.d("UPDATE REPORT","SUCCESS")
+               }
+               .addOnFailureListener {
+                   Resource.Failure(it)
+               }
+           return Resource.Success("Success update data")
+       }
+    }
+
+    override fun deleteReport(idParent: String,idChild:String) : Resource<String>{
+        return try {
+            firebaseDatabase.reference.child("report").child(idParent).child("reports").child(idChild).removeValue { error, _ ->
+                if(error == null){
+                    Resource.Success("Success delete data")
+                }else{
+                    Resource.Failure(error.toException())
+                }
+            }
+            return Resource.Success("")
+        }catch (e : Exception){
+            Log.d("DELETE REPORT","${e.message}")
+            e.printStackTrace()
+            Resource.Failure(e)
         }
     }
 
