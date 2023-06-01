@@ -1,5 +1,7 @@
 package android.coding.ourapp.data.datasource.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
 data class DataReport(
@@ -9,6 +11,7 @@ data class DataReport(
     val narratives : MutableList<Narrative> = mutableListOf()
 )
 
+@Parcelize
 data class Report(
     val id : String = "",
     val reportName : String = "",
@@ -16,7 +19,7 @@ data class Report(
     val month : String = "",
     val indicator : MutableList<String> = mutableListOf(),
     val images : MutableList<String> = mutableListOf()
-)
+):Parcelable
 
 data class Narrative(
     val summary : String = "",

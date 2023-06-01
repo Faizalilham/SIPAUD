@@ -29,4 +29,9 @@ interface ReportRepository {
         listReport : MutableList<Report>
     ): Resource<String>
 
+    fun deleteReport(
+        idParent : String,
+        idChild : String,
+    ): Resource<String>
+
 }

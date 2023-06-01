@@ -65,6 +65,15 @@ class ReportViewModel @Inject constructor(
         return reportRepositoryImpl.getReportById(id)
     }
 
+    fun deleteAssessment(id : String,idChild : String){
+        viewModelScope.launch {
+            _message.value = Resource.Loading
+            val result = reportRepositoryImpl.deleteReport(id,idChild)
+            _message.value = result
+
+        }
+    }
+
 
 
 }

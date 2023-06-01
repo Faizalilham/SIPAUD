@@ -1,6 +1,7 @@
 package android.coding.ourapp.presentation.ui
 
-import android.coding.ourapp.adapter.ReportAdapter
+import ReportAdapter
+import android.coding.ourapp.adapter.OnTouchHelper
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityDetailReportBinding
@@ -8,7 +9,6 @@ import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,6 +66,8 @@ class DetailReportActivity : AppCompatActivity() {
             adapter = reportAdapter
             layoutManager = LinearLayoutManager(this@DetailReportActivity)
         }
+
+        OnTouchHelper(binding.rvReport).build()
     }
 
 

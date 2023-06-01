@@ -42,6 +42,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     @Inject
     lateinit var firebaseDatabase : FirebaseDatabase
 
+//    private var i : String? = null
+
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievement = arrayListOf<String>("Menulis","Menggambar")
     private val listImages = arrayListOf<String>()
@@ -61,7 +63,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         createReport()
         openGallery()
         getAllReport()
-
+//        i = intent.getStringExtra("idUpdate")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -70,11 +72,11 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             when (it) {
                 is Resource.Success -> {
                     var idParent = ""
-                    var idChild = ""
+//                    var idChild = ""
                     it.result.forEach { result->
                         idParent = result.id
-                        result.reports.forEach { reports->  idChild = reports.id}
                         listReport.addAll(result.reports)
+//                        result.reports.forEach { reports->  idChild = reports.id}
                     }
                     val isAdded = it.result.any { result ->
                         result.studentName == "faizal"
@@ -236,9 +238,25 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 else -> {}
             }
         }
-
-
     }
+
+//    private fun setupViewUpdate(i :String){
+//       reportViewModel.getDataReportById(i).observe(this){
+//           when(it){
+//               is Resource.Success -> {
+//                   binding.apply {
+//                       val reportName = i.reportName.split(",")
+//                       tvWeek.setText(reportName[0])
+//                       tvReport.setText(reportName[1])
+//                       tvDate.text = i.reportDate
+//                       listAchievement.addAll(i.indicator)
+//                       listImages.addAll(i.images)
+//                   }
+//               }
+//           }
+//       }
+//    }
+
 
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {

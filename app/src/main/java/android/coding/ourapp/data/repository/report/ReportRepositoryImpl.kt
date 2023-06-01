@@ -147,4 +147,21 @@ class ReportRepositoryImpl @Inject constructor(
        }
     }
 
+    override fun deleteReport(idParent: String,idChild:String) : Resource<String>{
+        return try {
+            firebaseDatabase.reference.child("report").child(idParent).child("reports").child(idChild).removeValue { error, _ ->
+                if(error == null){
+                    Resource.Success("Success delete data")
+                }else{
+                    Resource.Failure(error.toException())
+                }
+            }
+            return Resource.Success("")
+        }catch (e : Exception){
+            Log.d("DELETE REPORT","${e.message}")
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
 }
