@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_update"
+        android:title="Edit"
+        android:icon="@drawable/ic_update"
+        android:background="@color/third_color" />
+    <item
+        android:id="@+id/menu_delete"
+        android:title="Hapus"
+        android:icon="@drawable/ic_delete"
+        android:background="@color/third_color" />
+</menu>

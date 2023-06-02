@@ -6,6 +6,7 @@ import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Month
 import android.coding.ourapp.data.datasource.model.Report
+import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Utils
@@ -38,6 +39,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val binding get() = _binding!!
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
+    private var student: Student? = null
 
     @Inject
     lateinit var firebaseDatabase : FirebaseDatabase
@@ -63,7 +65,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         createReport()
         openGallery()
         getAllReport()
-//        i = intent.getStringExtra("idUpdate")
+
+        student = intent.getParcelableExtra(EXTRA_NAME)
+        binding.tvTittle.setText(student?.nameStudent)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -282,6 +286,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         binding.image.setOnClickListener {
             getResult.launch(intent)
         }
+    }
+
+    companion object{
+        const val EXTRA_NAME = "extra_name"
     }
 
     override fun onDestroy() {

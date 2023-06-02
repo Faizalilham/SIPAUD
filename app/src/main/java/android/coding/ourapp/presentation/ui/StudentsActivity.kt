@@ -40,7 +40,8 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
         initViewModel()
         setRecyclerView()
         getAllData()
-        setupButtonActions()
+        moveToAddStudent()
+        moveToProfile()
         binding.rvStudents.adapter = studentAdapter
     }
 
@@ -53,28 +54,39 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
     }
 
     private fun setRecyclerView() {
-        studentAdapter = StudentAdapter(this)
+        studentAdapter = StudentAdapter()
         studentAdapter.setOnDeleteClickListener(this)
         binding.rvStudents.setHasFixedSize(true)
-
         binding.rvStudents.layoutManager = LinearLayoutManager(this)
         binding.rvStudents.adapter = studentAdapter
 
-        studentAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-            override fun onChanged() {
-                super.onChanged()
-                toggleDeleteButtonVisibility()
-            }
-        })
+//        studentAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+//            override fun onChanged() {
+//                super.onChanged()
+//                toggleDeleteButtonVisibility()
+//            }
+//        })
     }
 
-    fun toggleDeleteButtonVisibility() {
-        if (this.selectedItems.isNotEmpty()) {
-            binding.btnDeleteSelected.visibility = View.VISIBLE
-        } else {
-            binding.btnDeleteSelected.visibility = View.INVISIBLE
+    private fun moveToAddStudent(){
+        binding.btnAddStudnet.setOnClickListener {
+            startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
         }
     }
+
+    private fun moveToProfile(){
+        binding.imageProfile.setOnClickListener{
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+    }
+
+//    fun toggleDeleteButtonVisibility() {
+//        if (this.selectedItems.isNotEmpty()) {
+//            binding.btnDeleteSelected.visibility = View.VISIBLE
+//        } else {
+//            binding.btnDeleteSelected.visibility = View.INVISIBLE
+//        }
+//    }
 
     private fun getAllData() {
         studentViewModel.getData().observe(this) { result ->
@@ -94,16 +106,6 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
         }
     }
 
-    private fun setupButtonActions() {
-        binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
-        }
-        binding.btnDeleteSelected.setOnClickListener {
-            val selectedItems = studentAdapter.getSelectedItems()
-            showAlertDelete(selectedItems)
-        }
-    }
-
         private fun showAlertDelete(selectedItems: Set<Int>) {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
             val alertDialogBuilder = AlertDialog.Builder(this)
@@ -119,29 +121,29 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
             val btnYes = dialogView.findViewById<Button>(R.id.btn_yes)
             val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
 
-            btnYes.setOnClickListener {
-                deleteSelectedItems(selectedItems)
-                alertDialog.dismiss()
-            }
+//            btnYes.setOnClickListener {
+//                deleteSelectedItems(selectedItems)
+//                alertDialog.dismiss()
+//            }
             btnCancel.setOnClickListener {
                 alertDialog.dismiss()
             }
             alertDialog.show()
         }
 
-        private fun deleteSelectedItems(selectedItems: Set<Int>) {
-            val students = studentAdapter.getListStudent()
-            val studentsToDelete = selectedItems.mapNotNull { position ->
-                if (position >= 0 && position < students.size) {
-                    students[position]
-                } else {
-                    null
-                }
-            }
-            for (student in studentsToDelete) {
-                studentViewModel.deleteData(student)
-            }
-        }
+//        private fun deleteSelectedItems(selectedItems: Set<Int>) {
+//            val students = studentAdapter.getListStudent()
+//            val studentsToDelete = selectedItems.mapNotNull { position ->
+//                if (position >= 0 && position < students.size) {
+//                    students[position]
+//                } else {
+//                    null
+//                }
+//            }
+//            for (student in studentsToDelete) {
+//                studentViewModel.deleteData(student)
+//            }
+//        }
 
         override fun onDeleteClick(student: Student) {
             studentViewModel.deleteData(student)

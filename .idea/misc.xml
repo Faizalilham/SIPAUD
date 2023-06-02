@@ -3,36 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/background_custom_rounded.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/background_custom_rounded.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_dashed.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_register.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_rounded.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_search.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_stroke.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/background_top_rounded.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/floating_button_bg.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/ic_favorite_active.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_favorite_inactive.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/ic_update.xml" value="0.119" />
         <entry key="app/src/main/res/layout-sw480dp/activity_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
-        <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17" />
-        <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.11013513513513513" />
+        <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_list_item_report.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/activity_report.xml" value="0.11013513513513513" />
+        <entry key="app/src/main/res/layout/activity_report.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_students.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_students.xml" value="0.33" />
         <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />
         <entry key="app/src/main/res/layout/appbar_component.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/back_button_component.xml" value="0.5" />
@@ -53,10 +56,11 @@
         <entry key="app/src/main/res/layout/list_item_image.xml" value="0.10945945945945947" />
         <entry key="app/src/main/res/layout/list_item_narasi.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item_report.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/list_item_student.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_item_student.xml" value="0.2" />
         <entry key="app/src/main/res/layout/list_item_students_activity.xml" value="0.5" />
         <entry key="app/src/main/res/layout/menus_fragment.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/on_swipe_layout.xml" value="0.1393758016246259" />
+        <entry key="app/src/main/res/menu/menu_dropdown.xml" value="0.175" />
       </map>
     </option>
   </component>
