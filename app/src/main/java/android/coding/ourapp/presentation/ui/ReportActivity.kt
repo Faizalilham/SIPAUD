@@ -103,6 +103,10 @@ class ReportActivity : AppCompatActivity() {
         }
     }
 
+    companion object{
+        const val EXTRA_DATA = "extra_data"
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

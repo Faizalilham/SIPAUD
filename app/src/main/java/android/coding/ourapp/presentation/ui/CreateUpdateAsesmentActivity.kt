@@ -1,7 +1,5 @@
 package android.coding.ourapp.presentation.ui
 
-
-import android.Manifest
 import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
@@ -16,28 +14,18 @@ import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewMod
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.util.Util
-import com.google.firebase.database.FirebaseDatabase
 import com.leo.searchablespinner.SearchableSpinner
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -333,7 +321,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
 
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

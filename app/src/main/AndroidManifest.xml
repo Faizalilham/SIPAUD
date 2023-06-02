@@ -30,7 +30,7 @@
             android:name=".presentation.ui.DetailReportActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.ReportActivity"
+            android:name=".presentation.ui.StudentsActivity"
             android:exported="true">
 
             <intent-filter>
@@ -53,7 +53,8 @@
             android:name=".presentation.ui.CreateUpdateStudentActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.StudentsActivity"
+            android:name=".presentation.ui.ReportActivity"
+
             android:exported="false" />
         <activity
             android:name=".presentation.ui.CreateUpdateAsesmentActivity"
