@@ -94,7 +94,7 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
                 is Resource.Success -> {
                     val students = result.result
                     studentAdapter.setListStudent(students)
-                    Toast.makeText(this, "Sukses Get", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Sukses Get", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
                     Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()

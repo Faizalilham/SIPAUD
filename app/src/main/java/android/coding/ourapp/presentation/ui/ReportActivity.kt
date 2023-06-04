@@ -6,10 +6,13 @@ import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Month
 import android.coding.ourapp.databinding.ActivityReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
+import android.coding.ourapp.utils.Key.Companion.ID_PARENT
+import android.coding.ourapp.utils.Key.Companion.MONTH
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,29 +24,35 @@ class ReportActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
-    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.background_dashed,R.drawable.background_dashed)
+    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.background_dashed,
+        R.drawable.background_dashed,R.drawable.background_dashed,R.drawable.background_dashed,R.drawable.background_dashed)
+    private var nameStudent : String? = null
+    private var idParent : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getAllReport()
+        back()
+        nameStudent = intent.getStringExtra(NAME_STUDENT)
     }
 
     private fun getAllReport(){
         reportViewModel.getAllReport.observe(this){ its ->
             when (its) {
                 is Resource.Success -> {
-
                     val listMonthString = mutableListOf<String>()
                     val listMonth = mutableListOf<Month>()
                     if(its.result.isNotEmpty()){
-                        val a = its.result.filter { its -> its.studentName == "xxx" }
+                        val a = its.result.filter { its -> its.studentName == nameStudent }
                         a.forEach { reportResult ->
+                            idParent = reportResult.id
                             reportResult.reports.forEach { its ->
                                 listMonthString.add(its.month)
                             }
                         }
+                        Log.d("CEK INTENT","\"$idParent $nameStudent \" $listMonthString")
 
                         if(listMonthString.distinct().size <= listBackground.size){
                             val groupedData = listMonthString.groupBy { it }
@@ -52,13 +61,18 @@ class ReportActivity : AppCompatActivity() {
                             countMap.forEach { (value, count) ->
                                 listMonth.add(Month(value,count,listBackground[count-1]))
                             }
-
                         }
                     }
 
                     Log.d("MONTH","$listMonth")
                     if(listMonth.isNotEmpty()){
+                        binding.tvNotFound.visibility = View.GONE
+                        binding.rvMonth.visibility = View.VISIBLE
                         setupRecycler(listMonth)
+
+                    }else{
+                        binding.rvMonth.visibility = View.GONE
+                        binding.tvNotFound.visibility = View.VISIBLE
                     }
                 }
 
@@ -93,7 +107,9 @@ class ReportActivity : AppCompatActivity() {
         adapterMonth = AdapterMonthReport(uniqueMonths.toMutableList())
         adapterMonth.setItemClickListener { name ->
             startActivity(Intent(this@ReportActivity,DetailReportActivity::class.java).also{
-                it.putExtra("month",name)
+                it.putExtra(MONTH,name)
+                it.putExtra(ID_PARENT,idParent)
+                it.putExtra(NAME_STUDENT,nameStudent)
             })
         }
 
@@ -104,8 +120,15 @@ class ReportActivity : AppCompatActivity() {
     }
 
     companion object{
-        const val EXTRA_DATA = "extra_data"
+        const val NAME_STUDENT = "name_student"
     }
+
+    private fun back(){
+        binding.imageBack.setOnClickListener {
+            finish()
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

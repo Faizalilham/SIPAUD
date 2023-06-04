@@ -9,6 +9,8 @@ import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
+import android.coding.ourapp.utils.Key.Companion.ID_CHILD
+import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.graphics.Bitmap
@@ -39,12 +41,13 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val binding get() = _binding!!
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
-    private var student: Student? = null
 
     @Inject
     lateinit var firebaseDatabase : FirebaseDatabase
 
-//    private var i : String? = null
+    private var nameStudent : String? = null
+    private var idParent : String? = null
+    private var idChild : String? = null
 
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievement = arrayListOf<String>("Menulis","Menggambar")
@@ -59,15 +62,24 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         _binding = ActivityCreateUpdateReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
         searchableSpinnerFrom = SearchableSpinner(this)
+
+        nameStudent = intent.getStringExtra(EXTRA_NAME)
+        idParent = intent.getStringExtra(ID_PARENT)
+        idChild = intent.getStringExtra(ID_CHILD)
+        binding.tvTittle.text = nameStudent
+        Log.d("CEK INTENT","\"$idParent $idChild $nameStudent \"")
         chooseDate()
         selectSpinner()
-        setupDropDown()
-        createReport()
         openGallery()
-        getAllReport()
+        back()
 
-        student = intent.getParcelableExtra(EXTRA_NAME)
-        binding.tvTittle.setText(student?.nameStudent)
+        if(idParent != null) {
+            updateReport()
+        }else{
+            getAllReport()
+            createReport()
+            setupDropDown()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -75,17 +87,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         reportViewModel.getAllReport.observe(this){
             when (it) {
                 is Resource.Success -> {
-                    var idParent = ""
-//                    var idChild = ""
+                    var id = ""
                     it.result.forEach { result->
-                        idParent = result.id
+                        id = result.id
                         listReport.addAll(result.reports)
-//                        result.reports.forEach { reports->  idChild = reports.id}
                     }
                     val isAdded = it.result.any { result ->
-                        result.studentName == "faizal"
+                        result.studentName == binding.tvTittle.text.toString()
                     }
-                    if(isAdded) updateReport(idParent,listReport) else createReport()
+                    if(isAdded) updateReport(id,listReport) else createReport()
                 }
 
                 is Resource.Loading -> {}
@@ -118,8 +128,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     override fun onItemClick(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         if (parent == binding.tvWeek) {
             binding.tvWeek.setText(parent.getItemAtPosition(position).toString())
+            Log.d("CEK 1","${binding.tvWeek.text.toString()}")
         } else if (parent == binding.tvReport) {
             binding.tvReport.setText(parent.getItemAtPosition(position).toString())
+            Log.d("CEK 2","${binding.tvWeek.text.toString()}")
         }
     }
 
@@ -165,7 +177,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                val date = tvDate.text.toString().trim()
                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
-                   doCreateReport("faizal",tittle,date,listAchievementActivity,listImages)
+                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,listAchievementActivity,listImages)
                }
            }
        }
@@ -181,7 +193,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             when(it){
                 is Resource.Success -> {
                     Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,HomeActivity::class.java))
                     finish()
                 }
                 is Resource.Loading -> {}
@@ -244,22 +255,57 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }
     }
 
-//    private fun setupViewUpdate(i :String){
-//       reportViewModel.getDataReportById(i).observe(this){
-//           when(it){
-//               is Resource.Success -> {
-//                   binding.apply {
-//                       val reportName = i.reportName.split(",")
-//                       tvWeek.setText(reportName[0])
-//                       tvReport.setText(reportName[1])
-//                       tvDate.text = i.reportDate
-//                       listAchievement.addAll(i.indicator)
-//                       listImages.addAll(i.images)
-//                   }
-//               }
-//           }
-//       }
-//    }
+    private fun updateReport(){
+        setupViewUpdate(idParent!!)
+        binding.btnSave.setOnClickListener {
+            val tittle = "${binding.tvWeek.text.toString()}, ${binding.tvReport.text.toString()}"
+            Log.d("CEK 3",tittle)
+            doUpdateReport(
+                idParent!!,
+                idChild!!,
+                tittle,
+                binding.tvDate.text.toString(),
+                listAchievementActivity,
+                listImages,
+                mutableListOf()
+            )
+        }
+    }
+
+    private fun setupViewUpdate(i :String){
+       reportViewModel.getDataReportById(i).observe(this){
+           when(it){
+               is Resource.Success -> {
+                   binding.apply {
+                       val dataDetail = it.result.reports.filter {  it.month == intent.getStringExtra("month") }
+                       dataDetail.forEach { report ->
+                           val reportNames = report.reportName.split(",")
+                           tvWeek.setText(reportNames[0])
+                           tvReport.setText(reportNames[1])
+                           setupDropDown()
+                           tvDate.text = report.reportDate
+                           listAchievement.removeAll(report.indicator)
+                           listAchievementActivity.addAll(report.indicator)
+                           showActivityAchievement(listAchievementActivity)
+                           listImages.addAll(report.images)
+                           for(i in report.images){
+                               listImageBitmap.add(Utils.convertStringToBitmap(i))
+                           }
+                           Utils.showImageReport(true,listImageBitmap,null,this,this@CreateUpdateReportActivity) }
+
+                   }
+               }
+               is Resource.Loading -> {}
+               is Resource.Failure -> {
+                   Log.d("ERROR","${it.exception}")
+               }
+               else -> {
+                   Log.d("ERROR","There is an error")
+               }
+
+           }
+       }
+    }
 
 
     private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -289,7 +335,13 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     }
 
     companion object{
-        const val EXTRA_NAME = "extra_name"
+        const val EXTRA_NAME = "name_student"
+    }
+
+    private fun back(){
+        binding.imageBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onDestroy() {

@@ -16,7 +16,9 @@ import java.util.*
 
 class ReportAdapter(
     private val context : Context,
-    private var data : MutableList<Report>): RecyclerView.Adapter<RecyclerViewHolder>() {
+    private var data : MutableList<Report>,
+    private val listener : OnClick
+): RecyclerView.Adapter<RecyclerViewHolder>() {
 
     fun updateData(newData: MutableList<Report>) {
         val diffCallback = ReportDiffCallback(data, newData)
@@ -28,32 +30,15 @@ class ReportAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val view = ListItemDailyReportBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return RecyclerViewHolder(view).also { viewHolder ->
-            viewHolder.foregroundKnobLayout.setOnClickListener {
-                val position = viewHolder.adapterPosition
-
-            }
+            viewHolder.foregroundKnobLayout.setOnClickListener {}
+//            viewHolder.btnDelete.setOnClickListener { listener.onDelete() }
+//            viewHolder.btnUpdate.setOnClickListener { listener.onUpdate() }
 
         }
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerViewHolder, position: Int) {
-        viewHolder.bind(data, position,context)
-    }
-
-    override fun getItemCount(): Int = data.size
-}
-
-class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView.ViewHolder(binding.root), OnTouchHelper.SwipeViewHolder {
-
-    override val foregroundKnobLayout: ViewGroup = binding.foregroundKnobLayout
-    override val backgroundLeftButtonLayout: ViewGroup = binding.swipeLayout.backgroundLeftButtonLayout
-    override val canRemoveOnSwipingFromRight: Boolean get() = true
-
-    val btnDelete: ImageButton = binding.swipeLayout.btnDelete
-    val btnUpdate: ImageButton = binding.swipeLayout.btnUpdate
-
-    fun bind(data : MutableList<Report>, position: Int,context : Context) {
-        binding.apply {
+        viewHolder.binding.apply {
             tvTittle.text = data[position].reportName
             tvDate.text = data[position].reportDate
             val listBitmap = mutableListOf<Bitmap>()
@@ -63,7 +48,7 @@ class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView
                 }
             }
             if(listBitmap.isNotEmpty()){
-                Utils.showImageAssessment(true, ArrayList(listBitmap),null,this,context)
+                Utils.showImageReportDetail(true, ArrayList(listBitmap),null,this,context)
             }
             tvActivity.text = Utils.convertListToString(data[position].indicator)
 
@@ -77,7 +62,26 @@ class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView
                 }
             }
         }
+        viewHolder.btnDelete.setOnClickListener{ listener.onDelete(data[position].id)}
+        viewHolder.btnUpdate.setOnClickListener{ listener.onUpdate(data[position].id)}
     }
+
+    override fun getItemCount(): Int = data.size
+
+    interface OnClick{
+        fun onDelete(id : String)
+        fun onUpdate(id : String)
+    }
+}
+
+class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView.ViewHolder(binding.root), OnTouchHelper.SwipeViewHolder {
+
+    override val foregroundKnobLayout: ViewGroup = binding.foregroundKnobLayout
+    override val backgroundLeftButtonLayout: ViewGroup = binding.swipeLayout.backgroundLeftButtonLayout
+    override val canRemoveOnSwipingFromRight: Boolean get() = true
+
+    val btnDelete: ImageButton = binding.swipeLayout.btnDelete
+    val btnUpdate: ImageButton = binding.swipeLayout.btnUpdate
 
 }
 
