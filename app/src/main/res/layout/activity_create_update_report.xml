@@ -191,7 +191,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp20"
                 android:orientation="horizontal">
@@ -210,11 +210,14 @@
                     android:id="@+id/tv_tittle"
                     style="@style/AppTheme.TextSubTittle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
                     android:layout_marginStart="@dimen/dp8"
                     android:layout_marginTop="@dimen/dp3"
-                    android:textStyle="bold"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="@string/name_student"
+                    android:textAlignment="textEnd"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

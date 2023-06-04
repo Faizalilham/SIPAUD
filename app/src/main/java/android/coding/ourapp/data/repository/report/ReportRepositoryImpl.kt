@@ -1,9 +1,7 @@
 package android.coding.ourapp.data.repository.report
 
 import android.coding.ourapp.data.Resource
-import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.DataReport
-import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.utils.Utils
 import android.util.Log
@@ -54,23 +52,27 @@ class ReportRepositoryImpl @Inject constructor(
     }
 
     override fun getReportById(id: String):LiveData<Resource<DataReport>> {
+        Log.d("ERROR","SAMPAI SINI")
         val assessmentLiveData = MutableLiveData<Resource<DataReport>>()
         assessmentLiveData.value = Resource.Loading
         try{
             firebaseDatabase.reference.child("report").child(id).addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val item = snapshot.getValue(DataReport::class.java)
+                    Log.d("ERROR","SAMPAI SINI 2")
+
                     assessmentLiveData.value= Resource.Success(item!!)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     assessmentLiveData.value = Resource.Failure(error.toException())
+                    Log.d("ERROR","${error.toException()}")
                 }
 
             })
             return assessmentLiveData
         }catch (e : Exception){
-            Log.d("GET REPORT","${e.message}")
+            Log.d("ERROR","${e.message}")
             e.printStackTrace()
             assessmentLiveData.value = Resource.Failure(e)
             return assessmentLiveData
@@ -125,14 +127,26 @@ class ReportRepositoryImpl @Inject constructor(
         listReport : MutableList<Report>
     ): Resource<String> {
        return if(listReport.isEmpty()){
-           firebaseDatabase.reference.child("report").child(idParent).child("reports").child(idChild)
-               .setValue(Report(reportName = reportName, reportDate = date, month = Utils.getMonthFromStringDate(date), indicator = indicator,images = images))
-               .addOnSuccessListener {
-                   Log.d("UPDATE REPORT","SUCCESS")
-               }
-               .addOnFailureListener {
-                   Resource.Failure(it)
-               }
+           Log.d("IDCHILD",idChild)
+           firebaseDatabase.reference.child("report").child(idParent).child("reports").orderByChild("id").equalTo(idChild).addListenerForSingleValueEvent(object : ValueEventListener{
+                   override fun onDataChange(snapshot: DataSnapshot) {
+                       if (snapshot.exists()) {
+                           for (snapshot in snapshot.children) {
+                               val childRef = snapshot.ref
+                               childRef.child("indicator").setValue(indicator)
+                               childRef.child("images").setValue(images)
+                               childRef.child("reportName").setValue(reportName)
+                               childRef.child("reportDate").setValue(date)
+                               childRef.child("month").setValue(Utils.getMonthFromStringDate(date))
+                           }
+                       }
+                   }
+                   override fun onCancelled(error: DatabaseError) {
+                       Log.d("ERROR","${error.toException()}")
+                   }
+
+               })
+
            Resource.Success("Success update data")
        }else{
            firebaseDatabase.reference.child("report").child(idParent).child("reports")
@@ -147,21 +161,37 @@ class ReportRepositoryImpl @Inject constructor(
        }
     }
 
-    override fun deleteReport(idParent: String,idChild:String) : Resource<String>{
+    override fun deleteReport(idParent: String,idChild:String) : Resource<String> {
         return try {
-            firebaseDatabase.reference.child("report").child(idParent).child("reports").child(idChild).removeValue { error, _ ->
-                if(error == null){
-                    Resource.Success("Success delete data")
-                }else{
-                    Resource.Failure(error.toException())
-                }
-            }
-            return Resource.Success("")
+            firebaseDatabase.reference.child("report").child(idParent).child("reports")
+                .orderByChild("id").equalTo(idChild)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            for (snapshot in snapshot.children) {
+                                snapshot.ref.removeValue()
+                                    .addOnSuccessListener { aVoid: Void? ->
+                                        println(
+                                            "Data berhasil dihapus"
+                                        )
+                                    }
+                                    .addOnFailureListener { e: java.lang.Exception -> println("Gagal menghapus data: " + e.message) }
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d("ERROR", "${error.toException()}")
+                    }
+
+                })
+            Resource.Success("Success delete data")
         }catch (e : Exception){
-            Log.d("DELETE REPORT","${e.message}")
+            Log.d("CREATE ASSESSMENT","${e.message}")
             e.printStackTrace()
             Resource.Failure(e)
         }
+
     }
 
 }

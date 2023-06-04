@@ -106,4 +106,18 @@
             />
     </ScrollView>
 
+    <TextView
+        android:id="@+id/tv_not_found"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/not_found"
+        android:layout_marginTop="@dimen/dp15"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,6 +57,13 @@ import java.text.DateFormatSymbols
 import java.time.LocalDate
 import java.time.YearMonth
 
+class Key{
+    companion object{
+        const val MONTH = "month"
+        const val ID_PARENT = "id_parent"
+        const val ID_CHILD = "id_child"
+    }
+}
 
 object Utils {
 
@@ -108,9 +115,8 @@ object Utils {
 
 
     fun getMonthFromStringDate(dateString : String):String{
-        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy", Locale("id"))
+        val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy", Locale("id"))
         val date = LocalDate.parse(dateString, formatter)
-
         val month = date.month
 
         return month.name
@@ -221,7 +227,7 @@ object Utils {
         }else false
     }
 
-    fun showImageAssessment(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ListItemDailyReportBinding, context : Context){
+    fun showImageReportDetail(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ListItemDailyReportBinding, context : Context){
         binding.apply {
             if(isShow && imageUri != null){
                 linearImage.visibility = View.VISIBLE
@@ -238,11 +244,13 @@ object Utils {
                     imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
                     Glide.with(context).load(imageUri[1]).into(imageSecond)
-                }else{
+                }else if(imageUri.size == 1){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.GONE
                     imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
                 }
             }else if(isShow && imageBitmap != null){
                 linearImage.visibility = View.VISIBLE
@@ -258,9 +266,11 @@ object Utils {
                     imageSecond.visibility = View.VISIBLE
                     Glide.with(context).load(imageBitmap[0]).into(imageFirst)
                     Glide.with(context).load(imageBitmap[1]).into(imageSecond)
-                }else{
+                }else if(imageBitmap.size == 1){
                     imageFirst.visibility = View.VISIBLE
                     Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
                 }
             }else{
                 binding.linearImage.visibility = View.GONE
@@ -285,11 +295,13 @@ object Utils {
                     imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
                     Glide.with(context).load(imageUri[1]).into(imageSecond)
-                }else{
+                }else if(imageUri.size == 1){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.GONE
                     imageThird.visibility = View.GONE
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
                 }
             }else if(isShow && imageBitmap != null){
                 linearImage.visibility = View.VISIBLE
@@ -305,9 +317,11 @@ object Utils {
                     imageSecond.visibility = View.VISIBLE
                     Glide.with(context).load(imageBitmap[0]).into(imageFirst)
                     Glide.with(context).load(imageBitmap[1]).into(imageSecond)
-                }else{
+                }else if(imageBitmap.size == 1){
                     imageFirst.visibility = View.VISIBLE
                     Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
                 }
             }else{
                 binding.linearImage.visibility = View.GONE

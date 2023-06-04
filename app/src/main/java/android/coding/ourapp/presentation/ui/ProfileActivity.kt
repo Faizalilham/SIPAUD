@@ -117,6 +117,8 @@ class ProfileActivity : AppCompatActivity() {
 
         btnYes.setOnClickListener {
             authViewModel.deleteToken()
+            startActivity(Intent(this,LoginActivity::class.java))
+            finish()
             finish()
             alertDialog.dismiss()
         }
