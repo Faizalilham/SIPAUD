@@ -1,15 +1,16 @@
 package android.coding.ourapp.adapter
 
 import android.coding.ourapp.data.datasource.model.Month
+import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemAssessmentShimmerBinding
 import android.coding.ourapp.databinding.ListItemReportBinding
+import android.coding.ourapp.presentation.ui.ReportMonthActivity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterMonthReport(
-    private val data : MutableList<Month>,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterMonthReport(private val data : MutableList<Month>, ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ITEM_ACTUAL = 0
     private val ITEM_SHIMMER = 1
 
@@ -17,6 +18,12 @@ class AdapterMonthReport(
 
     fun setItemClickListener(listener: (String) -> Unit) {
         listenerOnClick = listener
+    }
+
+    private var listenerOnClicked: ((String) -> Unit)? = null
+
+    fun setItemClickedListener(listener: (String) -> Unit) {
+        listenerOnClicked = listener
     }
 
     inner class MonthViewHolder(val binding : ListItemReportBinding):RecyclerView.ViewHolder(binding.root){
@@ -28,6 +35,9 @@ class AdapterMonthReport(
                card.setCardBackgroundColor(data[position].background)
                card.setOnClickListener {
                    listenerOnClick?.invoke(data[position].name)
+               }
+               monthReport.setOnClickListener {
+                   listenerOnClicked?.invoke(data[position].name)
                }
            }
         }
@@ -52,8 +62,6 @@ class AdapterMonthReport(
 
     }
 
-
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MonthViewHolder) {
             if(data.isNotEmpty()){
@@ -74,9 +82,4 @@ class AdapterMonthReport(
 
     override fun getItemCount(): Int  = if(data.isEmpty()) 12 else data.size
 
-
-
-    interface OnClick{
-        fun onDetail(name : String)
-    }
 }

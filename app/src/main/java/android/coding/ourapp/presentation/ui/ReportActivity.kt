@@ -4,7 +4,9 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AdapterMonthReport
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Month
+import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityReportBinding
+import android.coding.ourapp.presentation.ui.ReportMonthActivity.Companion.EXTRA_DATA
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
@@ -113,10 +115,18 @@ class ReportActivity : AppCompatActivity() {
             })
         }
 
+        adapterMonth.setItemClickedListener { name ->
+            startActivity(Intent(this@ReportActivity,ReportMonthActivity::class.java).also{
+                it.putExtra(EXTRA_DATA,nameStudent)
+                it.putExtra(MONTH, name)
+            })
+        }
+
         binding.rvMonth.apply {
             adapter = adapterMonth
             layoutManager = GridLayoutManager(this@ReportActivity,2)
         }
+
     }
 
     companion object{

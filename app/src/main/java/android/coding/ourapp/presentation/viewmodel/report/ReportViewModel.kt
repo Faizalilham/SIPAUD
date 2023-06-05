@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.viewmodel.report
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentResponse
 import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.repository.report.ReportRepositoryImpl
 import androidx.lifecycle.LiveData

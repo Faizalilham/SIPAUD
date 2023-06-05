@@ -5,6 +5,7 @@ import android.coding.ourapp.adapter.StudentAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
 import android.coding.ourapp.data.datasource.model.Student
+import android.coding.ourapp.data.repository.report_month.ReportMonthRepository
 import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
 import android.coding.ourapp.helper.ViewModelFactory
@@ -23,13 +24,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListener {
+class StudentsActivity : AppCompatActivity() {
     private var _binding: ActivityStudentsBinding? = null
     private val binding get() = _binding!!
     private lateinit var studentAdapter: StudentAdapter
     private lateinit var firebaseHelper: FirebaseHelper
     private lateinit var studentViewModel: StudentViewModel
-    val selectedItems = HashSet<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +47,7 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
 
     private fun initViewModel() {
         firebaseHelper = FirebaseHelper()
+        val monthRepository = ReportMonthRepository(firebaseHelper)
         val studentRepository = StudentRepository(firebaseHelper)
         val viewModelFactory = ViewModelFactory(studentRepository)
         studentViewModel =
@@ -54,18 +55,10 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
     }
 
     private fun setRecyclerView() {
-        studentAdapter = StudentAdapter()
-        studentAdapter.setOnDeleteClickListener(this)
+        studentAdapter = StudentAdapter(studentViewModel)
         binding.rvStudents.setHasFixedSize(true)
         binding.rvStudents.layoutManager = LinearLayoutManager(this)
         binding.rvStudents.adapter = studentAdapter
-
-//        studentAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-//            override fun onChanged() {
-//                super.onChanged()
-//                toggleDeleteButtonVisibility()
-//            }
-//        })
     }
 
     private fun moveToAddStudent(){
@@ -79,14 +72,6 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
             startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
-
-//    fun toggleDeleteButtonVisibility() {
-//        if (this.selectedItems.isNotEmpty()) {
-//            binding.btnDeleteSelected.visibility = View.VISIBLE
-//        } else {
-//            binding.btnDeleteSelected.visibility = View.INVISIBLE
-//        }
-//    }
 
     private fun getAllData() {
         studentViewModel.getData().observe(this) { result ->
@@ -145,9 +130,9 @@ class StudentsActivity : AppCompatActivity(), StudentAdapter.OnDeleteClickListen
 //            }
 //        }
 
-        override fun onDeleteClick(student: Student) {
-            studentViewModel.deleteData(student)
-        }
+//        override fun onDeleteClick(student: Student) {
+//            studentViewModel.deleteData(student)
+//        }
 
         override fun onDestroy() {
             super.onDestroy()
