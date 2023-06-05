@@ -2,6 +2,7 @@ package android.coding.ourapp.data.repository.report
 
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.utils.Utils
 import android.util.Log
@@ -160,6 +161,7 @@ class ReportRepositoryImpl @Inject constructor(
            return Resource.Success("Success update data")
        }
     }
+
 
     override fun deleteReport(idParent: String,idChild:String) : Resource<String> {
         return try {

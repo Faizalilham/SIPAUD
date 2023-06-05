@@ -24,6 +24,12 @@
         android:theme="@style/Theme.OurApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.AddReportMonthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.ReportMonthActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.CreateUpdateReportActivity"
             android:exported="false" />
         <activity
@@ -32,13 +38,11 @@
         <activity
             android:name=".presentation.ui.StudentsActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".presentation.ui.ImageFragment"
@@ -54,7 +58,6 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.ReportActivity"
-
             android:exported="false" />
         <activity
             android:name=".presentation.ui.CreateUpdateAsesmentActivity"
@@ -70,10 +73,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

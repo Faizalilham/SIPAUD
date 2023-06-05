@@ -1,6 +1,7 @@
 package android.coding.ourapp.presentation.ui
 
 import ReportAdapter
+import android.coding.ourapp.adapter.AdapterMonthReport
 import android.coding.ourapp.adapter.OnTouchHelper
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
@@ -25,6 +26,7 @@ class DetailReportActivity : AppCompatActivity() {
     private var _binding : ActivityDetailReportBinding? = null
     private val binding get() = _binding!!
     private lateinit var reportAdapter : ReportAdapter
+    private lateinit var adapterMonthReport: AdapterMonthReport
     private val reportViewModel by viewModels<ReportViewModel>()
    private var idParent : String? = null
    private var idChild : String? = null
