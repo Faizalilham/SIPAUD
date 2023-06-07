@@ -85,7 +85,7 @@ class ReportRepositoryImpl @Inject constructor(
         reportName: String,
         date: String,
         indicator: MutableList<String>,
-        images: MutableList<String>
+        images: MutableList<String>,
     ): Resource<String> {
         var resultFix = ""
         var resultErr : Exception = Exception()
@@ -93,12 +93,13 @@ class ReportRepositoryImpl @Inject constructor(
         val dataReport = mutableListOf<Report>(
             Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicator,images)
         )
+        val narrative = mutableListOf<Narrative>(Narrative())
 
         return try{
             val id = firebaseDatabase.reference.push().key.toString()
             firebaseDatabase.getReference("report")
                 .child(id).setValue(
-                    DataReport(id=id,studentName=studentName,reports = dataReport)
+                    DataReport(id=id,studentName=studentName,reports = dataReport, narratives = narrative)
                 )
                 .addOnSuccessListener {
                     resultFix = "Success add data"
@@ -125,10 +126,10 @@ class ReportRepositoryImpl @Inject constructor(
         date: String,
         indicator: MutableList<String>,
         images: MutableList<String>,
-        listReport : MutableList<Report>
+        listReport : MutableList<Report>,
+        listNarrative : MutableList<Narrative>
     ): Resource<String> {
-       return if(listReport.isEmpty()){
-           Log.d("IDCHILD",idChild)
+       return if(listReport.isEmpty() && listNarrative.isEmpty()){
            firebaseDatabase.reference.child("report").child(idParent).child("reports").orderByChild("id").equalTo(idChild).addListenerForSingleValueEvent(object : ValueEventListener{
                    override fun onDataChange(snapshot: DataSnapshot) {
                        if (snapshot.exists()) {
@@ -150,15 +151,28 @@ class ReportRepositoryImpl @Inject constructor(
 
            Resource.Success("Success update data")
        }else{
-           firebaseDatabase.reference.child("report").child(idParent).child("reports")
-               .setValue(listReport)
-               .addOnSuccessListener {
-                   Log.d("UPDATE REPORT","SUCCESS")
-               }
-               .addOnFailureListener {
-                   Resource.Failure(it)
-               }
-           return Resource.Success("Success update data")
+           return if(listNarrative.isNotEmpty()){
+               Log.d("CEK","SAMPAI SINI $idParent")
+               firebaseDatabase.reference.child("report").child(idParent).child("narratives")
+                   .setValue(listNarrative)
+                   .addOnSuccessListener {
+                       Log.d("UPDATE REPORT","SUCCESS")
+                   }
+                   .addOnFailureListener {
+                       Resource.Failure(it)
+                   }
+               Resource.Success("Success update data")
+           }else{
+               firebaseDatabase.reference.child("report").child(idParent).child("reports")
+                   .setValue(listReport)
+                   .addOnSuccessListener {
+                       Log.d("UPDATE REPORT","SUCCESS")
+                   }
+                   .addOnFailureListener {
+                       Resource.Failure(it)
+                   }
+               return Resource.Success("Success update data")
+           }
        }
     }
 
@@ -189,11 +203,23 @@ class ReportRepositoryImpl @Inject constructor(
                 })
             Resource.Success("Success delete data")
         }catch (e : Exception){
-            Log.d("CREATE ASSESSMENT","${e.message}")
+            Log.d("DELETE REPORT","${e.message}")
             e.printStackTrace()
             Resource.Failure(e)
         }
+    }
 
+    override fun deleteNarrative(idParent: String): Resource<String> {
+        return try {
+            val indexToRemove = 0
+            firebaseDatabase.reference.child("report").child(idParent).child("narratives")
+                .child(indexToRemove.toString()).removeValue()
+            Resource.Success("Success delete data")
+        }catch (e : Exception){
+            Log.d("DELETE REPORT","${e.message}")
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
     }
 
 }
