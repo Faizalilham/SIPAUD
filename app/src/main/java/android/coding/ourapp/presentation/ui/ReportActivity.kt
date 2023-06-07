@@ -119,6 +119,7 @@ class ReportActivity : AppCompatActivity() {
             startActivity(Intent(this@ReportActivity,ReportMonthActivity::class.java).also{
                 it.putExtra(EXTRA_DATA,nameStudent)
                 it.putExtra(MONTH, name)
+                it.putExtra(ID_PARENT, idParent)
             })
         }
 

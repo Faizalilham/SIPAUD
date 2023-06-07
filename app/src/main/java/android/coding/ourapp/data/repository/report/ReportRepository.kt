@@ -2,6 +2,7 @@ package android.coding.ourapp.data.repository.report
 
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import androidx.lifecycle.LiveData
 
@@ -26,12 +27,17 @@ interface ReportRepository {
         date : String,
         indicator : MutableList<String>,
         images : MutableList<String>,
-        listReport : MutableList<Report>
+        listReport : MutableList<Report>,
+        listNarrative : MutableList<Narrative>
     ): Resource<String>
 
     fun deleteReport(
         idParent : String,
         idChild : String,
+    ): Resource<String>
+
+    fun deleteNarrative(
+        idParent : String,
     ): Resource<String>
 
 }

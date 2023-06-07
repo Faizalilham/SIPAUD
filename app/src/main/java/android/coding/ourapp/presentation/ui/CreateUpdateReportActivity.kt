@@ -5,6 +5,7 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Month
+import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
@@ -222,7 +223,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                     images = mutableListOf(),
                     date = "",
                     idChild = "",
-                    tittle = ""
+                    tittle = "",
+                    listNarrative = mutableListOf()
                 )
             }
         }
@@ -231,10 +233,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private fun doUpdateReport(
         idParent : String,idChild: String,
         tittle : String,date : String,
-        indicator : MutableList<String>,images : MutableList<String>,listReport : MutableList<Report>
+        indicator : MutableList<String>,images : MutableList<String>,listReport : MutableList<Report>, listNarrative : MutableList<Narrative>
     ){
 
-        reportViewModel.updateReport(idParent,idChild, tittle, date, indicator, images, listReport)
+        reportViewModel.updateReport(idParent,idChild, tittle, date, indicator, images, listReport,listNarrative)
         reportViewModel.message.observe(this){
             when(it){
                 is Resource.Success -> {
@@ -267,6 +269,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 binding.tvDate.text.toString(),
                 listAchievementActivity,
                 listImages,
+                mutableListOf(),
                 mutableListOf()
             )
         }

@@ -50,13 +50,14 @@ class ReportViewModel @Inject constructor(
         date : String,
         indicator : MutableList<String>,
         images : MutableList<String>,
-        listReport : MutableList<Report>
+        listReport : MutableList<Report>,
+        listNarrative : MutableList<Narrative>
 
         ){
         viewModelScope.launch {
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.updateReport(
-                idParent,idChild,tittle,date,indicator,images,listReport
+                idParent,idChild,tittle,date,indicator,images,listReport,listNarrative
             )
             _message.value = result
         }
@@ -70,6 +71,15 @@ class ReportViewModel @Inject constructor(
         viewModelScope.launch {
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.deleteReport(id,idChild)
+            _message.value = result
+
+        }
+    }
+
+    fun deleteNarrative(id : String){
+        viewModelScope.launch {
+            _message.value = Resource.Loading
+            val result = reportRepositoryImpl.deleteNarrative(id)
             _message.value = result
 
         }
