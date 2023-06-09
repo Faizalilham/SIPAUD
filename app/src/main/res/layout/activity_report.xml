@@ -57,7 +57,7 @@
             style="@style/AppTheme.TextTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_asesment"
+            android:text="Laporan Bulanan"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -74,22 +74,23 @@
         style="@style/AppTheme.TextSubTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tittle"
         android:layout_marginTop="@dimen/dp15"
+        android:text="Daftar laporan perkembangan harian anak yang bernama"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
     <TextView
         android:id="@+id/tv_name"
+        style="@style/AppTheme.TextTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        style="@style/AppTheme.TextTittle"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/dp10"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/app_name"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/app_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tittle"/>
+        app:layout_constraintTop_toBottomOf="@id/tittle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_month"
@@ -97,7 +98,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp10"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tittle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
 

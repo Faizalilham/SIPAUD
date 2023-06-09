@@ -7,6 +7,7 @@ import android.coding.ourapp.data.datasource.model.Month
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityReportBinding
 import android.coding.ourapp.presentation.ui.ReportMonthActivity.Companion.EXTRA_DATA
+import android.coding.ourapp.presentation.ui.ReportMonthActivity.Companion.EXTRA_SUMMARY
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
@@ -26,10 +27,11 @@ class ReportActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
-    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.background_dashed,
-        R.drawable.background_dashed,R.drawable.background_dashed,R.drawable.background_dashed,R.drawable.background_dashed)
+    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.danilla,
+        R.drawable.danilla,R.drawable.danilla,R.drawable.danilla,R.drawable.danilla)
     private var nameStudent : String? = null
     private var idParent : String = ""
+    private var summary : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +57,6 @@ class ReportActivity : AppCompatActivity() {
                             }
                         }
                         Log.d("CEK INTENT","\"$idParent $nameStudent \" $listMonthString")
-
                         if(listMonthString.distinct().size <= listBackground.size){
                             val groupedData = listMonthString.groupBy { it }
                             val countMap = groupedData.mapValues { it.value.size }
@@ -93,7 +94,6 @@ class ReportActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupRecycler(data : MutableList<Month>){
         val groupedMonths = mutableMapOf<String, Month>()
         for (month in data) {
@@ -127,7 +127,6 @@ class ReportActivity : AppCompatActivity() {
             adapter = adapterMonth
             layoutManager = GridLayoutManager(this@ReportActivity,2)
         }
-
     }
 
     companion object{
@@ -139,7 +138,6 @@ class ReportActivity : AppCompatActivity() {
             finish()
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

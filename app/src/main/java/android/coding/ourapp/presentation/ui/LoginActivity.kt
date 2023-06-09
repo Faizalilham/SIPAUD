@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                         showLoading(false)
                         Toast.makeText(this, "Selamat datang ${it.result.displayName}", Toast.LENGTH_SHORT).show()
                         authViewModel.setToken()
-                        startActivity(Intent(this,HomeActivity::class.java))
+                        startActivity(Intent(this,StudentsActivity::class.java))
                         finish()
                     }
 

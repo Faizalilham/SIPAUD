@@ -23,14 +23,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailReportActivity : AppCompatActivity() {
-    private var _binding : ActivityDetailReportBinding? = null
+    private var _binding: ActivityDetailReportBinding? = null
     private val binding get() = _binding!!
-    private lateinit var reportAdapter : ReportAdapter
+    private lateinit var reportAdapter: ReportAdapter
     private lateinit var adapterMonthReport: AdapterMonthReport
     private val reportViewModel by viewModels<ReportViewModel>()
-   private var idParent : String? = null
-   private var idChild : String? = null
-   private var nameStudent : String? = null
+    private var idParent: String? = null
+    private var idChild: String? = null
+    private var nameStudent: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,37 +42,38 @@ class DetailReportActivity : AppCompatActivity() {
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         nameStudent = intent.getStringExtra(NAME_STUDENT)
-        Log.d("CEK INTENT","\"$idParent $idChild $nameStudent \"")
+        val month = intent.getStringExtra(MONTH)
+        binding.pageTittle.text = month
+        Log.d("CEK INTENT", "\"$idParent $idChild $nameStudent \"")
     }
 
 
-    private fun getAllReport(){
+    private fun getAllReport() {
         val i = intent.getStringExtra(MONTH)
-        if(i != null){
-            reportViewModel.getAllReport.observe(this){
+        if (i != null) {
+            reportViewModel.getAllReport.observe(this) {
                 when (it) {
                     is Resource.Success -> {
-                       if(it.result.isNotEmpty()){
-                           val listReport = mutableListOf<Report>()
+                        if (it.result.isNotEmpty()) {
+                            val listReport = mutableListOf<Report>()
+                            val dataReport = it.result.filter { dt ->
+                                dt.studentName == nameStudent
+                            }
+                            dataReport.forEach { its -> listReport.addAll(its.reports) }
+                            val data = listReport.filter { report ->
+                                report?.month == i
+                            }.toMutableList()
 
-                           val dataReport = it.result.filter { dt ->
-                               dt.studentName == nameStudent
-                           }
-                           dataReport.forEach { its -> listReport.addAll(its.reports) }
-                           val data = listReport.filter {
-                                   report -> report?.month == i }.toMutableList()
+                            if (data.isNotEmpty()) {
+                                binding.tvNotFound.visibility = View.GONE
+                                binding.rvReport.visibility = View.VISIBLE
+                                setupRecycler(data)
+                            } else {
+                                binding.rvReport.visibility = View.GONE
+                                binding.tvNotFound.visibility = View.VISIBLE
+                            }
 
-                           if(data.isNotEmpty()){
-                               binding.tvNotFound.visibility = View.GONE
-                               binding.rvReport.visibility = View.VISIBLE
-                               setupRecycler(data)
-
-                           }else{
-                               binding.rvReport.visibility = View.GONE
-                               binding.tvNotFound.visibility = View.VISIBLE
-                           }
-
-                       }
+                        }
                     }
 
                     is Resource.Loading -> {
@@ -79,7 +81,8 @@ class DetailReportActivity : AppCompatActivity() {
                     }
 
                     is Resource.Failure -> {
-                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     else -> {
@@ -90,38 +93,49 @@ class DetailReportActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecycler(data : MutableList<Report>){
-        reportAdapter = ReportAdapter(this, mutableListOf(),object : ReportAdapter.OnClick{
-            override fun onDelete(id : String) {
-                reportViewModel.deleteAssessment(idParent!!,id)
-                reportViewModel.message.observe(this@DetailReportActivity){
-                    when(it){
+    private fun setupRecycler(data: MutableList<Report>) {
+        reportAdapter = ReportAdapter(this, mutableListOf(), object : ReportAdapter.OnClick {
+            override fun onDelete(id: String) {
+                reportViewModel.deleteAssessment(idParent!!, id)
+                reportViewModel.message.observe(this@DetailReportActivity) {
+                    when (it) {
                         is Resource.Success -> {
-                            Toast.makeText(this@DetailReportActivity, "Hapus data berhasil", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@DetailReportActivity,
+                                "Hapus data berhasil",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             finish()
                         }
 
                         is Resource.Loading -> {}
 
                         is Resource.Failure -> {
-                            Toast.makeText(this@DetailReportActivity, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@DetailReportActivity,
+                                it.exception.message.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                         else -> {
                             Toast.makeText(this@DetailReportActivity, "", Toast.LENGTH_SHORT).show()
                         }
-
                     }
                 }
             }
 
-            override fun onUpdate(id : String) {
-                startActivity(Intent(this@DetailReportActivity,CreateUpdateReportActivity::class.java).also{
-                    it.putExtra(ID_PARENT,idParent)
-                    it.putExtra(ID_CHILD,id)
-                    it.putExtra(NAME_STUDENT,nameStudent)
-                    it.putExtra(MONTH,intent.getStringExtra(MONTH))
-                })
+            override fun onUpdate(id: String) {
+                startActivity(
+                    Intent(
+                        this@DetailReportActivity,
+                        CreateUpdateReportActivity::class.java
+                    ).also {
+                        it.putExtra(ID_PARENT, idParent)
+                        it.putExtra(ID_CHILD, id)
+                        it.putExtra(NAME_STUDENT, nameStudent)
+                        it.putExtra(MONTH, intent.getStringExtra(MONTH))
+                    })
             }
 
         })
@@ -135,12 +149,11 @@ class DetailReportActivity : AppCompatActivity() {
         OnTouchHelper(binding.rvReport).build()
     }
 
-    private fun back(){
+    private fun back() {
         binding.imageBack.setOnClickListener {
             finish()
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

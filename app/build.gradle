@@ -126,6 +126,9 @@ dependencies {
     //Swipe Reveal Layout
 //    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+    implementation 'com.caverock:androidsvg:1.4'
 
 
 }

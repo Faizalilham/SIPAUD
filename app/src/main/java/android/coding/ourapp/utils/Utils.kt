@@ -9,6 +9,7 @@ import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
+import android.coding.ourapp.databinding.ListItemMonthBinding
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -227,7 +228,59 @@ object Utils {
         }else false
     }
 
-    fun showImageReportDetail(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ListItemDailyReportBinding, context : Context){
+    fun showImageReportDetail(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemDailyReportBinding, context: Context){
+        binding.apply {
+            if(isShow && imageUri != null){
+                linearImage.visibility = View.VISIBLE
+                if(imageUri.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                    Glide.with(context).load(imageUri[2]).into(imageThird)
+                }else if(imageUri.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                }else if(imageUri.size == 1){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.GONE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
+                }
+            }else if(isShow && imageBitmap != null){
+                linearImage.visibility = View.VISIBLE
+                if(imageBitmap.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                    Glide.with(context).load(imageBitmap[2]).into(imageThird)
+                }else if(imageBitmap.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                }else if(imageBitmap.size == 1){
+                    imageFirst.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
+                }
+            }else{
+                binding.linearImage.visibility = View.GONE
+            }
+        }
+    }
+
+
+    fun showImageReportDetails(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemMonthBinding, context: Context){
         binding.apply {
             if(isShow && imageUri != null){
                 linearImage.visibility = View.VISIBLE
