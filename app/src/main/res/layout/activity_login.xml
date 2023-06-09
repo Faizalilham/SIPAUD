@@ -117,7 +117,7 @@
                     android:layout_marginStart="@dimen/dp5"
                     app:startIconDrawable="@drawable/ic_password"
                     app:endIconMode="password_toggle"
-                    app:hintEnabled="false"
+                    app:hintEnabled="true"
                     app:startIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 

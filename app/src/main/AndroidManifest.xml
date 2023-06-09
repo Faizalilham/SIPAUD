@@ -26,6 +26,9 @@
         <activity
             android:name=".presentation.ui.AddReportMonthActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".presentation.ui.StudentsActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".presentation.ui.ReportMonthActivity"
             android:exported="false" />

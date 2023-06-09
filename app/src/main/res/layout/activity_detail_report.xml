@@ -57,7 +57,7 @@
             style="@style/AppTheme.TextTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_asesment"
+            android:text="Nama Bulan"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -73,7 +73,7 @@
         style="@style/AppTheme.TextSubTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tittle"
+        android:text="Daftar laporan perkembangan harian anak yang bernama"
         android:layout_marginTop="@dimen/dp15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
