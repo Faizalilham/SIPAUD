@@ -9,6 +9,7 @@ import android.coding.ourapp.R
 import android.coding.ourapp.databinding.FragmentSplashScreenBinding
 import android.coding.ourapp.presentation.ui.HomeActivity
 import android.coding.ourapp.presentation.ui.LoginActivity
+import android.coding.ourapp.presentation.ui.StudentsActivity
 import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
 import android.content.Intent
@@ -49,7 +50,7 @@ class SplashScreenFragment : Fragment() {
                         if (isAdded && activity != null) {
                             authViewModel.getToken().observe(requireActivity()){ isLogin ->
                                 if(isLogin){
-                                    startActivity(Intent(requireActivity(), HomeActivity::class.java).also {
+                                    startActivity(Intent(requireActivity(), StudentsActivity::class.java).also {
                                         requireActivity().finish()
                                     })
                                 }else{

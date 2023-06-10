@@ -68,15 +68,16 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         binding.tvTittle.text = nameStudent
-        Log.d("CEK INTENT","\"$idParent $idChild $nameStudent \"")
         chooseDate()
         selectSpinner()
         openGallery()
         back()
 
-        if(idParent != null) {
+        if(idParent != null && idChild != null) {
+            Log.d("CEK INTENT","\"$idParent $idChild $nameStudent \"")
             updateReport()
         }else{
+            Log.d("CEK INTENT 2","\"$idParent $idChild $nameStudent \"")
             getAllReport()
             createReport()
             setupDropDown()
@@ -89,14 +90,19 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             when (it) {
                 is Resource.Success -> {
                     var id = ""
-                    it.result.forEach { result->
-                        id = result.id
+                    val dataByName = it.result.filter { result -> result.studentName == binding.tvTittle.text.toString() }
+                    dataByName.forEach { result ->
                         listReport.addAll(result.reports)
+                    }
+                    if(dataByName.isNotEmpty()){
+                        id  = dataByName[0].id
                     }
                     val isAdded = it.result.any { result ->
                         result.studentName == binding.tvTittle.text.toString()
                     }
+
                     if(isAdded) updateReport(id,listReport) else createReport()
+
                 }
 
                 is Resource.Loading -> {}
@@ -258,7 +264,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     }
 
     private fun updateReport(){
-        setupViewUpdate(idParent!!)
+        setupViewUpdate(idParent!!,idChild!!)
         binding.btnSave.setOnClickListener {
             val tittle = "${binding.tvWeek.text.toString()}, ${binding.tvReport.text.toString()}"
             Log.d("CEK 3",tittle)
@@ -275,13 +281,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }
     }
 
-    private fun setupViewUpdate(i :String){
+    private fun setupViewUpdate(i :String,idChild : String){
        reportViewModel.getDataReportById(i).observe(this){
            when(it){
                is Resource.Success -> {
                    binding.apply {
                        val dataDetail = it.result.reports.filter {  it.month == intent.getStringExtra("month") }
-                       dataDetail.forEach { report ->
+                       val dataDetailResult = dataDetail.filter { it.id == idChild }
+                       Log.d("DATA DETAIL UPDATE","$dataDetail")
+                       dataDetailResult.forEach { report ->
                            val reportNames = report.reportName.split(",")
                            tvWeek.setText(reportNames[0])
                            tvReport.setText(reportNames[1])
@@ -289,9 +297,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                            tvDate.text = report.reportDate
                            listAchievement.removeAll(report.indicator)
                            listAchievementActivity.addAll(report.indicator)
-                           showActivityAchievement(listAchievementActivity)
+                           showActivityAchievement(ArrayList(listAchievementActivity.distinct()))
                            listImages.addAll(report.images)
-                           for(i in report.images){
+                           for(i in listImages){
                                listImageBitmap.add(Utils.convertStringToBitmap(i))
                            }
                            Utils.showImageReport(true,listImageBitmap,null,this,this@CreateUpdateReportActivity) }

@@ -6,7 +6,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
-import android.coding.ourapp.data.datasource.model.DataReport
+import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.coding.ourapp.databinding.ListItemMonthBinding
@@ -23,6 +23,7 @@ import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -68,6 +69,7 @@ class Key{
 
 object Utils {
 
+    // FUNCTION FOR DATE PICKER CHOOSE
     fun datePicker(context : Context,e : TextView) {
         val formatDate = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
         val now = Calendar.getInstance()
@@ -85,6 +87,7 @@ object Utils {
         datePicker.show()
     }
 
+    // FUNCTION FOR GET CURRENT DATE
     @RequiresApi(Build.VERSION_CODES.O)
     fun getCurrentDate():String{
         val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy")
@@ -92,6 +95,7 @@ object Utils {
         return current.toString()
     }
 
+    // FUNCTION TO SHOW SPINNER DIALOG
     fun spinnerDialog(searchableSpinner : SearchableSpinner, et : EditText, arr : ArrayList<String>,data : (String) -> Unit){
         searchableSpinner.windowTitle = "Tambahkan siswa"
         searchableSpinner.onItemSelectListener = object : OnItemSelectListener {
@@ -105,6 +109,7 @@ object Utils {
         searchableSpinner.show()
     }
 
+    // FUNCTION FOR UPLOAD IMAGE TO FIREBASE WITH BASE64
     fun uploadImage(uri: Uri, context :Context): String {
         val inputStream = context.contentResolver.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -115,6 +120,7 @@ object Utils {
     }
 
 
+    // FUNCTION TO GET MONTH FROM STRING LIKE 00-MEI-2023
     fun getMonthFromStringDate(dateString : String):String{
         val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy", Locale("id"))
         val date = LocalDate.parse(dateString, formatter)
@@ -123,6 +129,7 @@ object Utils {
         return month.name
     }
 
+    // FUNCTION TO CHECK DATA IS NOT EMPTY
     fun createUpdateAssessmentCondition(
         tittle : String,
         description : String,
@@ -136,6 +143,10 @@ object Utils {
                 && feedback.isNotBlank())
     }
 
+    // FUNCTION TO SHOW STRING LIKE
+    // 1. String 1
+    // 2. String 2
+    // FROM LIST
     fun convertListToString(inputList: List<String>): String {
         val stringBuilder = StringBuilder()
         var count = 0
@@ -147,6 +158,7 @@ object Utils {
         return stringBuilder.toString()
     }
 
+    // FUNCTION TO CONVERT STRING FROM FIREBASE TO BITMAP, TO SHOW IMAGE IN ACTIVITY
     fun convertStringToBitmap(image : String):Bitmap{
         val decodedBytes = Base64.decode(image, Base64.DEFAULT)
         val options = BitmapFactory.Options()
@@ -160,6 +172,7 @@ object Utils {
     }
 
 
+    // FUNCTION TO SAVE IMAGE TO LOCAL STORAGE
     private fun saveImageToExternalStorage(bitmap: ArrayList<Bitmap>): ArrayList<Uri> {
         val path = Environment.getExternalStorageDirectory().toString()
         val file = File(path, "${UUID.randomUUID()}.jpeg")
@@ -179,6 +192,7 @@ object Utils {
         return list
     }
 
+    // FUNCTION TO GET URI FROM STRING FIREBASE
     fun base64ToUri(base64String: String): Uri? {
         try {
             val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
@@ -190,6 +204,7 @@ object Utils {
         return null
     }
 
+    // FUNCTION TO SEND MULTI IMAGE WITH TEXT INTO WHATSAPP
     fun sendMultipleImagesAndText(images: List<Bitmap>, text: String,context : Context) {
 
         val uriList = ArrayList<Uri>()
@@ -215,6 +230,7 @@ object Utils {
 
     }
 
+    // FUNCTION TO CHECK PERMISSION
      fun checkStoragePermission(
         activity : Activity,
         context : Context):Boolean {
@@ -228,6 +244,7 @@ object Utils {
         }else false
     }
 
+    // FUNCTION TO SHOW IMAGE WITH ANYTHING CONDITION IN REPORT DETAIL ACTIVITY
     fun showImageReportDetail(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemDailyReportBinding, context: Context){
         binding.apply {
             if(isShow && imageUri != null){
@@ -280,6 +297,7 @@ object Utils {
     }
 
 
+    // FUNCTION TO SHOW IMAGE WITH ANYTHING CONDITION IN REPORT DETAIL ACTIVITY
     fun showImageReportDetails(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemMonthBinding, context: Context){
         binding.apply {
             if(isShow && imageUri != null){
@@ -331,6 +349,7 @@ object Utils {
         }
     }
 
+    // FUNCTION TO SHOW IMAGE WITH ANYTHING CONDITION IN REPORT DETAIL ACTIVITY
     fun showImageReport(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ActivityCreateUpdateReportBinding, context : Context){
         binding.apply {
             if(isShow && imageUri != null){
@@ -407,6 +426,7 @@ object Utils {
         return resultFilter
     }
 
+    // FUNCTION TO EXPORT PDF TO LOCAL STORAGE
     fun exportToPdf(bitmaps: List<Bitmap>, texts: List<String>,context : Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
@@ -468,6 +488,7 @@ object Utils {
         document.close()
     }
 
+    // FUNCTION TO GET UNIQUE DATA FROM ARRAYLIST
     fun unique(arr1 : ArrayList<String>,arr2 : ArrayList<String>):ArrayList<String>{
         val uniqueArray = mutableListOf<String>()
 
@@ -515,16 +536,25 @@ object Utils {
 //        document.close()
 //    }
 
-    fun userMatchesSearch(assessmentRequest: AssessmentRequest, searchQuery: String): Boolean {
+    // FUNCTION TO SEARCH STUDENT
+    fun userMatchesSearch(student : Student, searchQuery: String): Boolean {
         val lowercaseQuery = searchQuery.toLowerCase()
-        val nameMatches = assessmentRequest.tittle?.toLowerCase()?.contains(lowercaseQuery)
-        val emailMatches = assessmentRequest.description?.toLowerCase()?.contains(lowercaseQuery)
+        val nameMatches = student.nameStudent?.toLowerCase()?.contains(lowercaseQuery)
+        val emailMatches = student.group?.toLowerCase()?.contains(lowercaseQuery)
         return nameMatches == true|| emailMatches == true
     }
 
+
+    // FUNCTION TO CHANGE LANGUAGE
     fun language(context: Context){
         val languageCode = LanguageManager.loadLanguagePreference(context)
         LanguageManager.setLanguage(context, languageCode)
+    }
+
+    // FUNCTION TO HIDE KEYBOARD
+    fun hideKeyboard(view: View) {
+        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
 object LanguageManager {

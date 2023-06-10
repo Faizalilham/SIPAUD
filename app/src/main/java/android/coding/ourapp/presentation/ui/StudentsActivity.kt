@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 class StudentsActivity : AppCompatActivity() {
     private var _binding: ActivityStudentsBinding? = null
@@ -38,20 +38,21 @@ class StudentsActivity : AppCompatActivity() {
         Utils.language(this)
 
         initViewModel()
-        setRecyclerView()
         getAllData()
         moveToAddStudent()
         moveToProfile()
+        search()
+        binding.swipeRefreshLayout.setOnRefreshListener { getAllData() }
+        setRecyclerView()
         binding.rvStudents.adapter = studentAdapter
     }
 
     private fun initViewModel() {
         firebaseHelper = FirebaseHelper()
-        val monthRepository = ReportMonthRepository(firebaseHelper)
         val studentRepository = StudentRepository(firebaseHelper)
         val viewModelFactory = ViewModelFactory(studentRepository)
         studentViewModel =
-            ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory)[StudentViewModel::class.java]
     }
 
     private fun setRecyclerView() {
@@ -78,15 +79,69 @@ class StudentsActivity : AppCompatActivity() {
             when (result) {
                 is Resource.Success -> {
                     val students = result.result
+                    binding.tvEmpty.visibility = View.GONE
+                    binding.rvStudents.visibility = View.VISIBLE
                     studentAdapter.setListStudent(students)
-//                    Toast.makeText(this, "Sukses Get", Toast.LENGTH_SHORT).show()
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "There is an error", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "There is an error", Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+    }
+
+    private fun search() {
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                var result = false
+                if (binding.etSearch.text.toString().isNotBlank()) {
+                    studentViewModel.searchData(binding.etSearch.text.toString())
+                        .observe(this) {
+                            when (it) {
+                                is Resource.Success -> {
+                                    if (it.result.isEmpty()) {
+                                        binding.tvEmpty.visibility = View.VISIBLE
+                                        binding.rvStudents.visibility = View.GONE
+                                    } else {
+                                        result = true
+                                        binding.tvEmpty.visibility = View.GONE
+                                        binding.rvStudents.visibility = View.VISIBLE
+                                        studentAdapter.setListStudent(it.result)
+                                    }
+                                }
+
+                                is Resource.Loading -> {
+                                    if (result) studentAdapter.setListStudent(arrayListOf())
+                                }
+
+                                is Resource.Failure -> {
+                                    Toast.makeText(
+                                        this,
+                                        it.exception.message.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                else -> {
+                                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+
+                } else {
+                    Toast.makeText(
+                        this,
+                        resources.getString(R.string.warning_form),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                true
+            } else {
+                false
             }
         }
     }

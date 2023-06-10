@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
+            Utils.hideKeyboard(binding.btnLogin)
 
             authViewModel.doLogin(email,password)
             authViewModel.login.observe(this){
