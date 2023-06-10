@@ -5,6 +5,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.coding.ourapp.R
 import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel
+import android.coding.ourapp.presentation.viewmodel.PermissionViewModel
 import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.utils.TAG
 import android.coding.ourapp.utils.options
@@ -29,18 +30,17 @@ class ImageFragment : AppCompatActivity() {
     private val listUri : MutableList<Uri> = mutableListOf()
     private val listPath : MutableList<String> = mutableListOf()
     var i : String? = null
-    private lateinit var onBoarding : OnBoardingViewModel
+    private val permission by viewModels<PermissionViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_image)
-        onBoarding = ViewModelProvider(this)[OnBoardingViewModel::class.java]
         setupScreen()
         supportActionBar?.hide()
         showCameraFragment()
         i = intent.getStringExtra("id")
-        onBoarding.getBoardingKey().observe(this){
+        permission.getPermissionKey().observe(this){
             if(!it){
                 checkPermission()
             }
@@ -84,17 +84,20 @@ class ImageFragment : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkPermission():Boolean{
         val permissionCheck = checkSelfPermission(Manifest.permission.CAMERA)
-        val permissionCheck2 = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
         val permissionCheck3 = checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-        return if (permissionCheck == PackageManager.PERMISSION_GRANTED &&
-            permissionCheck2 == PackageManager.PERMISSION_GRANTED &&
-            permissionCheck3 == PackageManager.PERMISSION_GRANTED) {
+        Log.d("PERMISSION","$permissionCheck $permissionCheck3" )
+        return if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             true
         } else {
-            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-            intent.data = Uri.parse("package:${applicationContext.packageName}")
-            startActivity(intent)
             requestLocationPermission()
+            permission.getPermissionKey().observe(this){
+                if(!it){
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    intent.data = Uri.parse("package:${applicationContext.packageName}")
+                    startActivity(intent)
+                }
+            }
+
             false
         }
     }
@@ -105,15 +108,13 @@ class ImageFragment : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.d("CUCUY","$grantResults")
         when (requestCode) {
             201 -> {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-                    permissions[0] == Manifest.permission.CAMERA &&
-                    grantResults[1] == PackageManager.PERMISSION_GRANTED &&
-                    permissions[1] == Manifest.permission.READ_EXTERNAL_STORAGE  &&
-                    grantResults[2] == PackageManager.PERMISSION_GRANTED &&
-                    permissions[2] == Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    permissions[0] == Manifest.permission.CAMERA
                 ) {
+                    permission.setPermissionKey(true)
                     Log.d("PERMISSION","AKSES DIIZINKAN")
                 } else {
                     Log.d("PERMISSION","AKSES DITOLAK")

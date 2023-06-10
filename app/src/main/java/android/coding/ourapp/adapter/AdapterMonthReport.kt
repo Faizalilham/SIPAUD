@@ -30,8 +30,10 @@ class AdapterMonthReport(private val data : MutableList<Month>, ) : RecyclerView
         fun bind(data : List<Month>, position : Int){
            binding.apply {
                tittle.text = data[position].name
-               val count = "${data[position].count.toString()} laporan telah dibuat"
-               subTittle.text = count
+               val count = "${data[position].count}"
+               val text =  "Laporan mingguan telah dibuat"
+               tvCount.text = count
+               subTittle.text = text
                card.setCardBackgroundColor(data[position].background)
                card.setOnClickListener {
                    listenerOnClick?.invoke(data[position].name)
