@@ -68,6 +68,10 @@ class AssessmentAdapter(
         data = newData
         diffResult.dispatchUpdatesTo(this)
     }
+    fun getData(): ArrayList<AssessmentRequest> {
+        return data
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
