@@ -4,10 +4,12 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.StudentAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
+import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.data.repository.report_month.ReportMonthRepository
 import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
+import android.coding.ourapp.databinding.BottomSheetFilterBinding
 import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
@@ -18,11 +20,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class StudentsActivity : AppCompatActivity() {
     private var _binding: ActivityStudentsBinding? = null
@@ -30,6 +34,9 @@ class StudentsActivity : AppCompatActivity() {
     private lateinit var studentAdapter: StudentAdapter
     private lateinit var firebaseHelper: FirebaseHelper
     private lateinit var studentViewModel: StudentViewModel
+    private var originalStudents: List<Student> = listOf()
+    private var isFilterByNameAscending = false
+    private var isFilterByNameDescending = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,7 @@ class StudentsActivity : AppCompatActivity() {
         moveToAddStudent()
         moveToProfile()
         search()
+        bottomSheet(arrayListOf())
         binding.swipeRefreshLayout.setOnRefreshListener { getAllData() }
         setRecyclerView()
         binding.rvStudents.adapter = studentAdapter
@@ -79,6 +87,7 @@ class StudentsActivity : AppCompatActivity() {
             when (result) {
                 is Resource.Success -> {
                     val students = result.result
+                    originalStudents = students
                     binding.tvEmpty.visibility = View.GONE
                     binding.rvStudents.visibility = View.VISIBLE
                     studentAdapter.setListStudent(students)
@@ -146,6 +155,7 @@ class StudentsActivity : AppCompatActivity() {
         }
     }
 
+
         private fun showAlertDelete(selectedItems: Set<Int>) {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
             val alertDialogBuilder = AlertDialog.Builder(this)
@@ -193,5 +203,59 @@ class StudentsActivity : AppCompatActivity() {
             super.onDestroy()
             _binding = null
         }
+    private fun bottomSheet(data: ArrayList<AssessmentRequest>) {
+        binding.btnFilter.setOnClickListener {
+            val bottomSheet = BottomSheetDialog(this)
+            val view = BottomSheetFilterBinding.inflate(layoutInflater)
+            bottomSheet.apply {
+                view.apply {
+                    val radioGroup = view.rgFilter
+                    radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                        val selectedRadioButton = findViewById<RadioButton>(checkedId)
+                        when (selectedRadioButton?.id) {
+                            R.id.rb_name_asc -> {
+                                isFilterByNameAscending = true
+                                isFilterByNameDescending = false
+                                applyFilter()
+                            }
+                            R.id.rb_name_desc -> {
+                                isFilterByNameAscending = false
+                                isFilterByNameDescending = true
+                                applyFilter()
+                            }
+                            else -> {
+                                isFilterByNameAscending = false
+                                isFilterByNameDescending = false
+                                setRecyclerView()
+                            }
+                        }
+                        bottomSheet.dismiss()
+                    }
+                    setContentView(root)
+                    show()
+                }
+            }
+        }
+    }
+
+//    private fun filterData() {
+//        val filteredStudents = when {
+//            isFilterByNewest -> originalStudents.sortedByDescending { it.nameStudent}
+//            isFilterByOldest -> originalStudents.sortedBy { it.date }
+//            else -> originalStudents
+//        }
+//        studentAdapter.setListStudent(filteredStudents)
+//    }
+
+    private fun applyFilter() {
+        val filteredData = when {
+            isFilterByNameAscending -> originalStudents.sortedBy { it.nameStudent }
+            isFilterByNameDescending -> originalStudents.sortedByDescending { it.nameStudent }
+            else -> originalStudents
+        }
+        studentAdapter.setListStudent(filteredData)
+    }
+
+
 }
 
