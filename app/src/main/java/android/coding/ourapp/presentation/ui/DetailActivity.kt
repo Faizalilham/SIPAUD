@@ -219,7 +219,6 @@ class DetailActivity : AppCompatActivity() {
                Utils.exportToPdf(bitmaps,texts,this)
                Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
            }
-
         }
     }
 

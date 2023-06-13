@@ -14,9 +14,6 @@ import android.coding.ourapp.utils.Key.Companion.MONTH
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -135,7 +132,15 @@ class ReportMonthActivity : AppCompatActivity() {
             adapter = monthAdapter
             layoutManager = LinearLayoutManager(this@ReportMonthActivity)
         }
+    }
 
+    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+        binding.btnAddReporttMonth?.setOnClickListener {
+            if(Utils.checkStoragePermission(this,this)){
+                Utils.exportToPdf(bitmaps,texts,this)
+                Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
             if(Utils.checkStoragePermission(this,this)){

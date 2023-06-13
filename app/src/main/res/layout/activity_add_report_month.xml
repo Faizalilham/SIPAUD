@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".presentation.ui.AddReportMonthActivity">
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -55,15 +56,17 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
     <TextView
+        style="@style/AppTheme.TextSubTittle"
         android:id="@+id/tv_namee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
-        android:text="Nama"
+        android:text="Nama :"
         app:layout_constraintStart_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toBottomOf="@+id/tittle" />
 
     <TextView
+        style="@style/AppTheme.TextSubTittle"
         android:id="@+id/tv_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_namee" />
 
     <TextView
+        style="@style/AppTheme.TextSubTittle"
         android:id="@+id/tv_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,6 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
     <TextView
+        style="@style/AppTheme.TextSubTittle"
         android:id="@+id/tv_detail_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,6 +132,7 @@
                     android:padding="8dp">
 
                     <TextView
+                        style="@style/AppTheme.TextSubTittle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -135,6 +141,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        style="@style/AppTheme.TextSubTittle"
                         android:id="@+id/tv_detail_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -142,7 +149,7 @@
                         android:layout_marginTop="@dimen/dp10"
                         android:layout_marginBottom="@dimen/dp10"
                         android:text="38"
-                        android:textSize="32sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
 
@@ -159,6 +166,7 @@
                     android:padding="8dp">
 
                     <TextView
+                        style="@style/AppTheme.TextSubTittle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -167,19 +175,20 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        style="@style/AppTheme.TextSubTittle"
                         android:id="@+id/tv_detail_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp10"
                         android:text="Berkembang"
-                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <TextView
+                style="@style/AppTheme.TextSubTittle"
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -192,7 +201,7 @@
             <EditText
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
@@ -227,8 +236,7 @@
         app:cornerRadius="@dimen/dp20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_desc" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
