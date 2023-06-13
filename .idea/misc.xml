@@ -21,21 +21,21 @@
         <entry key="app/src/main/res/drawable/ic_update.xml" value="0.119" />
         <entry key="app/src/main/res/layout-sw480dp/activity_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
-        <entry key="app/src/main/res/layout/activity_add_report_month.xml" value="0.11013513513513513" />
+        <entry key="app/src/main/res/layout/activity_add_report_month.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
         <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17" />
-        <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_list_item_report.xml" value="0.11013513513513513" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_report.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_report_month.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_report_month.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_students.xml" value="0.2" />
         <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />

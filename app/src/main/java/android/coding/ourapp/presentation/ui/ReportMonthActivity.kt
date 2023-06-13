@@ -10,7 +10,9 @@ import android.coding.ourapp.presentation.ui.AddReportMonthActivity.Companion.DA
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
+import android.coding.ourapp.utils.Utils
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -111,7 +113,15 @@ class ReportMonthActivity : AppCompatActivity() {
             adapter = monthAdapter
             layoutManager = LinearLayoutManager(this@ReportMonthActivity)
         }
+    }
 
+    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+        binding.btnAddReporttMonth?.setOnClickListener {
+            if(Utils.checkStoragePermission(this,this)){
+                Utils.exportToPdf(bitmaps,texts,this)
+                Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 
