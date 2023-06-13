@@ -1,6 +1,7 @@
 package android.coding.ourapp.presentation.ui
 
 
+import android.coding.ourapp.R
 import android.coding.ourapp.adapter.MonthAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Narrative
@@ -14,12 +15,16 @@ import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 @AndroidEntryPoint
 class ReportMonthActivity : AppCompatActivity() {
@@ -75,7 +80,21 @@ class ReportMonthActivity : AppCompatActivity() {
 
                         if (dataKu.isNotEmpty()) {
                             binding.tvDetailNarasi.text = dataKu[0].summary
-                            binding.btnAddReporttMonth.visibility = View.GONE
+                            binding.btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
+                            binding.btnAddReporttMonth.setOnClickListener {
+                                val datax = monthAdapter.getData()
+                                val listImageBitmap = arrayListOf<Bitmap>()
+                                val textList = arrayListOf<String>()
+
+                                for (item in datax) {
+                                    for(datas in item.images){
+                                        listImageBitmap.add(Utils.convertStringToBitmap(datas))
+                                    }
+                                    textList.addAll(listOf( "${item.month}","${item.reportDate}","${item.reportName}", "${item.indicator}"))
+                                }
+
+                                exportPdf(listImageBitmap, textList)
+                            }
                             setupRecycler(datak)
                         } else {
                             binding.emptyReport.visibility = View.VISIBLE
@@ -122,6 +141,12 @@ class ReportMonthActivity : AppCompatActivity() {
                 Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+            if(Utils.checkStoragePermission(this,this)){
+                Utils.exportToPdf(bitmaps,texts,this)
+                Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+            }
     }
 
 

@@ -84,6 +84,7 @@
     <string name="date">Tanggal</string>
     <string name="delete">Hapus</string>
     <string name="update">Ubah</string>
+    <string name="ekspor_pdf">Ekspor ke PDF</string>
 
     <string-array name="week">
         <item>Minggu ke 1</item>

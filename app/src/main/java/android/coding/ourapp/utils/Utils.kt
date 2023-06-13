@@ -427,22 +427,27 @@ object Utils {
     }
 
     // FUNCTION TO EXPORT PDF TO LOCAL STORAGE
-    fun exportToPdf(bitmaps: List<Bitmap>, texts: List<String>,context : Context) {
+    fun exportToPdf(bitmaps: List<Bitmap>, texts: List<String>, context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
         if (!directory.exists()) {
             directory.mkdir()
         }
-        Log.d("DIRECTORY","$directory")
+        Log.d("DIRECTORY", "$directory")
+
         val outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val outputPath = File(outputDir, "${texts[0]}.pdf").path
+        val outputPath = File(outputDir, "${texts[0]}_${System.currentTimeMillis()}.pdf").path
+        val outputFile = File(outputPath)
+        if (outputFile.exists()) {
+            outputFile.delete()
+        }
+
         val pdfWriter = PdfWriter(outputPath)
         val pdfDocument = PdfDocument(pdfWriter)
         val document = Document(pdfDocument)
 
         val table = Table(UnitValue.createPercentArray(bitmaps.size)).useAllAvailableWidth()
         table.setHorizontalAlignment(HorizontalAlignment.LEFT)
-
 
         for (bitmap in bitmaps) {
             val stream = ByteArrayOutputStream()
@@ -453,40 +458,33 @@ object Utils {
             image.setHorizontalAlignment(HorizontalAlignment.CENTER)
             val cell = Cell()
             cell.setBorder(Border.NO_BORDER)
-            if (bitmaps.size == 1){
+            if (bitmaps.size == 1) {
                 image.scaleToFit(260f, 160f)
             }
             cell.add(image)
-            if(bitmaps.size == 1){
+            if (bitmaps.size == 1) {
                 cell.setHorizontalAlignment(HorizontalAlignment.CENTER)
             }
             table.addCell(cell)
         }
 
-        var count = 0
         for (text in texts) {
-            count++
             val paragraph = Paragraph(text)
             paragraph.setFont(PdfFontFactory.createFont())
             paragraph.setFontSize(22f)
             paragraph.setTextAlignment(TextAlignment.CENTER)
-            if(count == 2){
-                paragraph.setTextAlignment(TextAlignment.RIGHT)
-
-            }
             paragraph.setVerticalAlignment(VerticalAlignment.MIDDLE)
             paragraph.setHorizontalAlignment(HorizontalAlignment.CENTER)
             paragraph.setMarginTop(20f)
             paragraph.setMarginBottom(20f)
-            document.add(paragraph)
-            if(count == 2){
-                document.add(table)
-            }
 
+            document.add(paragraph)
         }
 
+        document.add(table)
         document.close()
     }
+
 
     // FUNCTION TO GET UNIQUE DATA FROM ARRAYLIST
     fun unique(arr1 : ArrayList<String>,arr2 : ArrayList<String>):ArrayList<String>{
