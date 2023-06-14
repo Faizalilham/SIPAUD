@@ -35,7 +35,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/image_back"
                         android:layout_width="50dp"
@@ -143,7 +142,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/i_group"
             android:layout_width="match_parent"
@@ -186,11 +184,6 @@
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/dp15" />
 
-
-
-
     </LinearLayout>
-
-
 
 </LinearLayout>

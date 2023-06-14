@@ -87,7 +87,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/month_report"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="@dimen/dp8"
