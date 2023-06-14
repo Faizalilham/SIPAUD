@@ -100,6 +100,7 @@
             android:layout_marginStart="@dimen/dp5"
             app:startIconDrawable="@drawable/ic_student"
             app:endIconMode="clear_text"
+            app:hintEnabled="false"
             app:startIconTint="@color/primary_color"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -111,6 +112,7 @@
                 android:inputType="text"
                 android:fontFamily="@font/poppins"
                 android:imeOptions="actionNext"
+                app:hintEnabled="false"
                 android:background="@drawable/background_stroke"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +126,7 @@
             android:layout_marginStart="@dimen/dp5"
             app:startIconDrawable="@drawable/ic_company"
             app:endIconMode="clear_text"
+            app:hintEnabled="false"
             app:startIconTint="@color/primary_color"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -133,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_school"
                 android:inputType="text"
+                app:hintEnabled="false"
                 android:fontFamily="@font/poppins"
                 android:imeOptions="actionNext"
                 android:background="@drawable/background_stroke"/>
@@ -149,6 +153,7 @@
             android:layout_marginStart="@dimen/dp5"
             app:startIconDrawable="@drawable/ic_group"
             app:endIconMode="clear_text"
+            app:hintEnabled="false"
             app:startIconTint="@color/primary_color"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -160,6 +165,7 @@
                 android:inputType="text"
                 android:fontFamily="@font/poppins"
                 android:imeOptions="actionDone"
+                app:hintEnabled="false"
                 android:background="@drawable/background_stroke"
                 />
 

@@ -35,7 +35,7 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         _binding = ActivityCreateUpdateStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Utils.language(this)
-
+        back()
         initViewModel()
 
         student = intent.getParcelableExtra(EXTRA_STUDENT)
@@ -151,6 +151,13 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory(studentRepository)
         studentViewModel =
             ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)
+    }
+
+
+    private fun back() {
+        binding.imageBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onDestroy() {

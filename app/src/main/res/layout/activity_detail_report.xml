@@ -74,7 +74,7 @@
         style="@style/AppTheme.TextSubTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Daftar laporan perkembangan harian anak yang bernama"
+        android:text="Detail Laporan Perminggu Dari Siswa yang Bernama : "
         android:layout_marginTop="@dimen/dp15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
