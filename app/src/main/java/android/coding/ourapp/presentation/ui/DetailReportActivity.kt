@@ -44,6 +44,7 @@ class DetailReportActivity : AppCompatActivity() {
         nameStudent = intent.getStringExtra(NAME_STUDENT)
         val month = intent.getStringExtra(MONTH)
         binding.pageTittle.text = month
+        binding.tvName.text = nameStudent
         Log.d("CEK INTENT", "\"$idParent $idChild $nameStudent \"")
     }
 

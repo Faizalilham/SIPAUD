@@ -40,6 +40,7 @@ class ReportActivity : AppCompatActivity() {
         getAllReport()
         back()
         nameStudent = intent.getStringExtra(NAME_STUDENT)
+        binding.tvName.text = nameStudent
     }
 
     private fun getAllReport(){
