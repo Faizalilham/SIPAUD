@@ -1,6 +1,5 @@
 package android.coding.ourapp.presentation.ui
 
-
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.MonthAdapter
 import android.coding.ourapp.data.Resource
@@ -51,9 +50,13 @@ class ReportMonthActivity : AppCompatActivity() {
         binding.tvDetailNameStudent.text = nameStudent
         binding.tvDetailMonths.text = nameMonth
         moveToAdd()
-        getReport()
+        back()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getReport()
+    }
 
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
@@ -95,10 +98,18 @@ class ReportMonthActivity : AppCompatActivity() {
                                     }
                                     textList.addAll(listOf( "${item.month}","${item.reportDate}","${item.reportName}", "${item.indicator}"))
                                 }
-
                                 exportPdf(listImageBitmap, textList)
                             }
                             setupRecycler(datak)
+                            binding.emptyReport.visibility = View.GONE
+                            binding.tvDetailNarasi.visibility = View.VISIBLE
+                            binding.tvDetailMonths.visibility = View.VISIBLE
+                            binding.tvMonthg.visibility = View.VISIBLE
+                            binding.tvNameee.visibility = View.VISIBLE
+                            binding.tvDetailNameStudent.visibility = View.VISIBLE
+                            binding.tvDetailCategory.visibility = View.VISIBLE
+                            binding.leftBox.visibility = View.VISIBLE
+                            binding.leftBox1.visibility = View.VISIBLE
                         } else {
                             binding.emptyReport.visibility = View.VISIBLE
                             binding.tvDetailNarasi.visibility = View.GONE
@@ -112,7 +123,6 @@ class ReportMonthActivity : AppCompatActivity() {
                         }
                     }
                     is Resource.Loading -> {
-
                     }
                     is Resource.Failure -> {
                         Toast.makeText(
@@ -137,13 +147,13 @@ class ReportMonthActivity : AppCompatActivity() {
         }
 
     }
+
     private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
         if(Utils.checkStoragePermission(this,this)){
             Utils.exportToPdf(bitmaps,texts,this)
             Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun moveToAdd() {
         binding.btnAddReporttMonth.setOnClickListener {
@@ -152,6 +162,12 @@ class ReportMonthActivity : AppCompatActivity() {
                 it.putExtra(MONTH, nameMonth)
                 it.putExtra(ID_PARENT, idParent)
             })
+        }
+    }
+
+    private fun back(){
+        binding.imageBack.setOnClickListener {
+            finish()
         }
     }
 

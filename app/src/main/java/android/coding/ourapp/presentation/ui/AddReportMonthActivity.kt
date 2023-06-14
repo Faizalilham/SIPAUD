@@ -45,6 +45,7 @@ class AddReportMonthActivity : AppCompatActivity() {
 
         binding.tvDetailName.text = nameStudent
         binding.tvDetailMonth.text = nameMonth
+        back()
 
         if(idParent != null){
             binding.btnSaveReport.setOnClickListener { addNarrative(idParent!!) }
@@ -118,6 +119,12 @@ class AddReportMonthActivity : AppCompatActivity() {
                 }
                 else -> {}
             }
+        }
+    }
+
+    private fun back(){
+        binding.imageBack.setOnClickListener {
+            finish()
         }
     }
 
