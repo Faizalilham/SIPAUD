@@ -27,11 +27,11 @@ class ReportActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
-    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.danilla,
-        R.drawable.danilla,R.drawable.danilla,R.drawable.danilla,R.drawable.danilla)
+    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.januari,
+        R.drawable.januari,R.drawable.januari,R.drawable.januari,R.drawable.januari)
     private var nameStudent : String? = null
     private var idParent : String = ""
-    private var summary : String = ""
+    private var idStudent : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,9 @@ class ReportActivity : AppCompatActivity() {
         getAllReport()
         back()
         nameStudent = intent.getStringExtra(NAME_STUDENT)
+        idStudent = intent.getStringExtra(ID_STUDENT)
         binding.tvName.text = nameStudent
+        Log.d("CEK UYE","\"$idStudent \"")
     }
 
     private fun getAllReport(){
@@ -132,6 +134,7 @@ class ReportActivity : AppCompatActivity() {
 
     companion object{
         const val NAME_STUDENT = "name_student"
+        const val ID_STUDENT = "id_student"
     }
 
     private fun back(){

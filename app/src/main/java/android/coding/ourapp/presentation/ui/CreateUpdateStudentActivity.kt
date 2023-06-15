@@ -3,15 +3,11 @@ package android.coding.ourapp.presentation.ui
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
 import android.coding.ourapp.data.datasource.model.Student
-import android.coding.ourapp.data.repository.report_month.ReportMonthRepository
 import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityCreateUpdateStudentBinding
 import android.coding.ourapp.helper.ViewModelFactory
-import android.coding.ourapp.presentation.ui.component.CustomAlertDialog
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
-import android.content.Context
 import android.coding.ourapp.utils.Utils
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -147,7 +143,6 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
     private fun initViewModel() {
         firebaseHelper = FirebaseHelper()
         val studentRepository = StudentRepository(firebaseHelper)
-        val monthRepository= ReportMonthRepository(firebaseHelper)
         val viewModelFactory = ViewModelFactory(studentRepository)
         studentViewModel =
             ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)

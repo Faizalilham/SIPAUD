@@ -1,24 +1,15 @@
 package android.coding.ourapp.presentation.ui
 
 import android.coding.ourapp.data.Resource
-import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
-import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.data.datasource.model.Narrative
-import android.coding.ourapp.data.datasource.model.Student
-import android.coding.ourapp.data.repository.report_month.ReportMonthRepository
-import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityAddReportMonthBinding
-import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
-import android.coding.ourapp.presentation.viewmodel.report_month.ReportMonthViewModel
-import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
