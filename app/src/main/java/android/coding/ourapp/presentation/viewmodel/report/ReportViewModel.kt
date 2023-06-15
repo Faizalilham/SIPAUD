@@ -27,6 +27,7 @@ class ReportViewModel @Inject constructor(
     val message : LiveData<Resource<String>> = _message
 
     fun createReport(
+        idStudent : String,
         nameStudent : String,
         tittle : String,
         date : String,
@@ -37,6 +38,7 @@ class ReportViewModel @Inject constructor(
         viewModelScope.launch {
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.createReport(
+                idStudent,
                 nameStudent,tittle,date,indicator,images
             )
             _message.value = result

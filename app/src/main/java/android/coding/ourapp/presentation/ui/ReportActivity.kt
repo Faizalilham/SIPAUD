@@ -132,6 +132,7 @@ class ReportActivity : AppCompatActivity() {
 
     companion object{
         const val NAME_STUDENT = "name_student"
+        const val ID_STUDENT = "id_student"
     }
 
     private fun back(){
