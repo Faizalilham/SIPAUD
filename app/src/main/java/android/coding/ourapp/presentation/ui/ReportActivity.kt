@@ -28,9 +28,12 @@ class ReportActivity : AppCompatActivity() {
     private lateinit var adapterMonth : AdapterMonthReport
     private val listBackground : MutableList<Int> = mutableListOf(R.raw.bg_januari,
         R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei)
+
     private var nameStudent : String? = null
     private var idStudent : String? = null
     private var idParent : String = ""
+    private var idStudent : String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,7 @@ class ReportActivity : AppCompatActivity() {
         nameStudent = intent.getStringExtra(NAME_STUDENT)
         idStudent = intent.getStringExtra(ID_STUDENT)
         binding.tvName.text = nameStudent
+        Log.d("CEK UYE","\"$idStudent \"")
     }
 
     private fun getAllReport(){

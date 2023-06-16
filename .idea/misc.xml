@@ -25,7 +25,7 @@
         <entry key="app/src/main/res/layout/activity_add_report_month.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
-        <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.2" />
@@ -36,7 +36,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_report.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_report_month.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_report_month.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_students.xml" value="0.2" />
         <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />

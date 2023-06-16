@@ -1,5 +1,4 @@
 package android.coding.ourapp.presentation.ui
-
 import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
@@ -50,6 +49,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
+    private var idStudent : String? = null
 
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievement = arrayListOf<String>("Menulis","Menggambar")
@@ -69,6 +69,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idStudent = intent.getStringExtra(EXTRA_ID)
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
+        idStudent = intent.getStringExtra(EXTRA_ID_STUDENT)
         binding.tvTittle.text = nameStudent
         chooseDate()
         selectSpinner()
@@ -76,7 +77,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         back()
 
         if(idParent != null && idChild != null) {
-            Log.d("CEK INTENT","\"$idParent $idChild $nameStudent \"")
+            Log.d("CEK INTENT","\"$idParent $idChild $nameStudent $idStudent \"")
             updateReport()
         }else{
             Log.d("CEK INTENT 2","\"$idParent $idChild $nameStudent \"")

@@ -231,7 +231,7 @@ object Utils {
     }
 
     // FUNCTION TO CHECK PERMISSION
-     fun checkStoragePermission(
+    fun checkStoragePermission(
         activity : Activity,
         context : Context):Boolean {
         return if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -402,27 +402,27 @@ object Utils {
     }
 
     fun filter(data : ArrayList<AssessmentRequest>,typeFilter : Int):ArrayList<AssessmentRequest>{
-            val resultFilter = arrayListOf<AssessmentRequest>()
-            val dateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
-           when(typeFilter){
-               1 -> {
-                   data.sortedBy{
-                       dateFormat.parse(it.date.toString())
-                   }
-               }
-               2 -> {
-                   data.sortedByDescending{
-                       dateFormat.parse(it.date.toString())
-                   }
-               }
-               else -> {
-                   data.forEach {
-                       if(it.favorite == true) resultFilter.add(it)
-                   }
+        val resultFilter = arrayListOf<AssessmentRequest>()
+        val dateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+        when(typeFilter){
+            1 -> {
+                data.sortedBy{
+                    dateFormat.parse(it.date.toString())
+                }
+            }
+            2 -> {
+                data.sortedByDescending{
+                    dateFormat.parse(it.date.toString())
+                }
+            }
+            else -> {
+                data.forEach {
+                    if(it.favorite == true) resultFilter.add(it)
+                }
 
 
-               }
-           }
+            }
+        }
         return resultFilter
     }
 
