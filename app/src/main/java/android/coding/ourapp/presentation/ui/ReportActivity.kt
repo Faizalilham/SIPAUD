@@ -30,7 +30,6 @@ class ReportActivity : AppCompatActivity() {
         R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei)
 
     private var nameStudent : String? = null
-    private var idStudent : String? = null
     private var idParent : String = ""
     private var idStudent : String? = null
 
