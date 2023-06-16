@@ -5,12 +5,18 @@ import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemAssessmentShimmerBinding
 import android.coding.ourapp.databinding.ListItemReportBinding
 import android.coding.ourapp.presentation.ui.ReportMonthActivity
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.caverock.androidsvg.SVG
+import java.io.InputStream
 
-class AdapterMonthReport(private val data : MutableList<Month>, ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterMonthReport(private val data : MutableList<Month>, private val context : Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ITEM_ACTUAL = 0
     private val ITEM_SHIMMER = 1
 
@@ -27,14 +33,17 @@ class AdapterMonthReport(private val data : MutableList<Month>, ) : RecyclerView
     }
 
     inner class MonthViewHolder(val binding : ListItemReportBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(data : List<Month>, position : Int){
+        fun bind(data : List<Month>, position : Int,context : Context){
            binding.apply {
                tittle.text = data[position].name
                val count = "${data[position].count}"
                val text =  "Laporan mingguan telah dibuat"
                tvCount.text = count
                subTittle.text = text
-               card.setCardBackgroundColor(data[position].background)
+               val svgInputStream: InputStream = context.resources.openRawResource(data[position].background)
+               val svg: SVG = SVG.getFromInputStream(svgInputStream)
+               val drawable: Drawable = PictureDrawable(svg.renderToPicture())
+               card.background = drawable
                card.setOnClickListener {
                    listenerOnClick?.invoke(data[position].name)
                }
@@ -67,7 +76,7 @@ class AdapterMonthReport(private val data : MutableList<Month>, ) : RecyclerView
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MonthViewHolder) {
             if(data.isNotEmpty()){
-                holder.bind(data,position)
+                holder.bind(data,position,context)
             }
         } else if (holder is SViewHolder) {
             holder.startShimmerEffect()

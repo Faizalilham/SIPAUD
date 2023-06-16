@@ -4,10 +4,8 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AdapterMonthReport
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Month
-import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityReportBinding
 import android.coding.ourapp.presentation.ui.ReportMonthActivity.Companion.EXTRA_DATA
-import android.coding.ourapp.presentation.ui.ReportMonthActivity.Companion.EXTRA_SUMMARY
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
@@ -21,17 +19,18 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class ReportActivity : AppCompatActivity() {
     private var _binding : ActivityReportBinding? = null
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
-    private val listBackground : MutableList<Int> = mutableListOf(R.drawable.danilla,
-        R.drawable.danilla,R.drawable.danilla,R.drawable.danilla,R.drawable.danilla)
+    private val listBackground : MutableList<Int> = mutableListOf(R.raw.bg_januari,
+        R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei)
     private var nameStudent : String? = null
+    private var idStudent : String? = null
     private var idParent : String = ""
-    private var summary : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +39,7 @@ class ReportActivity : AppCompatActivity() {
         getAllReport()
         back()
         nameStudent = intent.getStringExtra(NAME_STUDENT)
+        idStudent = intent.getStringExtra(ID_STUDENT)
         binding.tvName.text = nameStudent
     }
 
@@ -50,7 +50,7 @@ class ReportActivity : AppCompatActivity() {
                     val listMonthString = mutableListOf<String>()
                     val listMonth = mutableListOf<Month>()
                     if(its.result.isNotEmpty()){
-                        val a = its.result.filter { its -> its.studentName == nameStudent }
+                        val a = its.result.filter { its -> its.idStudent == idStudent }
                         a.forEach { reportResult ->
                             idParent = reportResult.id
                             reportResult.reports.forEach { its ->
@@ -61,9 +61,10 @@ class ReportActivity : AppCompatActivity() {
                         if(listMonthString.distinct().size <= listBackground.size){
                             val groupedData = listMonthString.groupBy { it }
                             val countMap = groupedData.mapValues { it.value.size }
-
+                            var counts = 0
                             countMap.forEach { (value, count) ->
-                                listMonth.add(Month(value,count,listBackground[count-1]))
+                                listMonth.add(Month(value,count,listBackground[counts]))
+                                counts++
                             }
                         }
                     }
@@ -107,11 +108,12 @@ class ReportActivity : AppCompatActivity() {
             }
         }
         val uniqueMonths = groupedMonths.values.toList()
-        adapterMonth = AdapterMonthReport(uniqueMonths.toMutableList())
+        adapterMonth = AdapterMonthReport(uniqueMonths.toMutableList(),this)
         adapterMonth.setItemClickListener { name ->
             startActivity(Intent(this@ReportActivity,DetailReportActivity::class.java).also{
                 it.putExtra(MONTH,name)
                 it.putExtra(ID_PARENT,idParent)
+                it.putExtra(ID_STUDENT,idStudent)
                 it.putExtra(NAME_STUDENT,nameStudent)
             })
         }

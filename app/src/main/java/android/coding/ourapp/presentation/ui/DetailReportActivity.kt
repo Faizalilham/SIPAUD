@@ -6,6 +6,7 @@ import android.coding.ourapp.adapter.OnTouchHelper
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityDetailReportBinding
+import android.coding.ourapp.presentation.ui.ReportActivity.Companion.ID_STUDENT
 import android.coding.ourapp.presentation.ui.ReportActivity.Companion.NAME_STUDENT
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_CHILD
@@ -31,6 +32,7 @@ class DetailReportActivity : AppCompatActivity() {
     private var idParent: String? = null
     private var idChild: String? = null
     private var nameStudent: String? = null
+    private var idStudent: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class DetailReportActivity : AppCompatActivity() {
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         nameStudent = intent.getStringExtra(NAME_STUDENT)
+        idStudent = intent.getStringExtra(ID_STUDENT)
         val month = intent.getStringExtra(MONTH)
         binding.pageTittle.text = month
         binding.tvName.text = nameStudent
@@ -58,7 +61,7 @@ class DetailReportActivity : AppCompatActivity() {
                         if (it.result.isNotEmpty()) {
                             val listReport = mutableListOf<Report>()
                             val dataReport = it.result.filter { dt ->
-                                dt.studentName == nameStudent
+                                dt.idStudent == idStudent
                             }
                             dataReport.forEach { its -> listReport.addAll(its.reports) }
                             val data = listReport.filter { report ->

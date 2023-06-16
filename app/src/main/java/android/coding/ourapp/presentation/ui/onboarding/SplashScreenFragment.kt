@@ -65,7 +65,7 @@ class SplashScreenFragment : Fragment() {
                         findNavController().navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
 //                        startActivity(Intent(activity, SplashScreen::class.java).also { activity?.finish() })
                     }
-                },2000)
+                },2500)
             }
         }
     }

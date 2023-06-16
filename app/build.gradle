@@ -60,6 +60,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation  'io.ak1.pix:piximagepicker:1.6.3'
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
+    implementation 'com.caverock:androidsvg:1.4'
 
     // Dots Indicator
     implementation("com.tbuonomo:dotsindicator:4.3")

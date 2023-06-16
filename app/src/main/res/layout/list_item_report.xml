@@ -15,9 +15,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:background="@color/primary_color"
-            app:layout_constraintBottom_toTopOf="@+id/month_report"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -71,7 +70,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:maxLines="2"
                     android:text="@string/tittle"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
