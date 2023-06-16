@@ -1,1 +1,1 @@
-<!-- box_border_radius.xml --><shape xmlns:android="http://schemas.android.com/apk/res/android">    <solid android:color="@android:color/transparent" />    <stroke        android:color="@color/primary_color"        android:width="1dp" />    <corners android:radius="10dp" /></shape>
+<!-- box_border_radius.xml --><shape xmlns:android="http://schemas.android.com/apk/res/android">    <solid android:color="@android:color/transparent" />    <stroke        android:color="@color/primary_color"        android:width="2dp" />    <corners android:radius="10dp" /></shape>

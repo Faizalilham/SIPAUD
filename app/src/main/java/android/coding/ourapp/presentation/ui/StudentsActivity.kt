@@ -13,19 +13,17 @@ import android.coding.ourapp.helper.ViewModelFactory
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.RadioButton
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
+
 
 class StudentsActivity : AppCompatActivity() {
     private var _binding: ActivityStudentsBinding? = null
@@ -62,6 +60,15 @@ class StudentsActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactory)[StudentViewModel::class.java]
     }
 
+    private fun startShimmer() {
+        binding.loadingStudent.startShimmer()
+    }
+
+    private fun stopShimmer() {
+        binding.loadingStudent.stopShimmer()
+        binding.loadingStudent.visibility = View.GONE
+    }
+
     private fun setRecyclerView() {
         studentAdapter = StudentAdapter(studentViewModel)
         binding.rvStudents.setHasFixedSize(true)
@@ -69,14 +76,14 @@ class StudentsActivity : AppCompatActivity() {
         binding.rvStudents.adapter = studentAdapter
     }
 
-    private fun moveToAddStudent(){
+    private fun moveToAddStudent() {
         binding.btnAddStudnet.setOnClickListener {
             startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
         }
     }
 
-    private fun moveToProfile(){
-        binding.imageProfile.setOnClickListener{
+    private fun moveToProfile() {
+        binding.imageProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
@@ -87,10 +94,14 @@ class StudentsActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     val students = result.result
                     originalStudents = students
-                    binding.tvEmpty.visibility = View.GONE
+                    binding.ivNotResult.visibility = View.GONE
                     binding.rvStudents.visibility = View.VISIBLE
                     studentAdapter.setListStudent(students)
                     binding.swipeRefreshLayout.isRefreshing = false
+                    stopShimmer()
+                }
+                is Resource.Loading -> {
+                    startShimmer()
                 }
                 is Resource.Failure -> {
                     Toast.makeText(this, "There is an error", Toast.LENGTH_SHORT).show()
@@ -112,11 +123,11 @@ class StudentsActivity : AppCompatActivity() {
                             when (it) {
                                 is Resource.Success -> {
                                     if (it.result.isEmpty()) {
-                                        binding.tvEmpty.visibility = View.VISIBLE
+                                        binding.ivNotResult.visibility = View.VISIBLE
                                         binding.rvStudents.visibility = View.GONE
                                     } else {
                                         result = true
-                                        binding.tvEmpty.visibility = View.GONE
+                                        binding.ivNotResult.visibility = View.GONE
                                         binding.rvStudents.visibility = View.VISIBLE
                                         studentAdapter.setListStudent(it.result)
                                     }
@@ -133,7 +144,6 @@ class StudentsActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
-
                                 else -> {
                                     Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
                                 }
@@ -154,54 +164,11 @@ class StudentsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
-        private fun showAlertDelete(selectedItems: Set<Int>) {
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.alert_component, null)
-            val alertDialogBuilder = AlertDialog.Builder(this)
-                .setView(dialogView)
-            val alertDialog = alertDialogBuilder.create()
-
-            val titleTextView = dialogView.findViewById<TextView>(R.id.tv_tittle)
-            val messageTextView = dialogView.findViewById<TextView>(R.id.tv_subTittle)
-
-            titleTextView.text = getString(R.string.alert_confirm)
-            messageTextView.text = getString(R.string.alert_delete)
-
-            val btnYes = dialogView.findViewById<Button>(R.id.btn_yes)
-            val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
-
-//            btnYes.setOnClickListener {
-//                deleteSelectedItems(selectedItems)
-//                alertDialog.dismiss()
-//            }
-            btnCancel.setOnClickListener {
-                alertDialog.dismiss()
-            }
-            alertDialog.show()
-        }
-
-//        private fun deleteSelectedItems(selectedItems: Set<Int>) {
-//            val students = studentAdapter.getListStudent()
-//            val studentsToDelete = selectedItems.mapNotNull { position ->
-//                if (position >= 0 && position < students.size) {
-//                    students[position]
-//                } else {
-//                    null
-//                }
-//            }
-//            for (student in studentsToDelete) {
-//                studentViewModel.deleteData(student)
-//            }
-//        }
-
-//        override fun onDeleteClick(student: Student) {
-//            studentViewModel.deleteData(student)
-//        }
-
-        override fun onDestroy() {
-            super.onDestroy()
-            _binding = null
-        }
     private fun bottomSheet(data: ArrayList<AssessmentRequest>) {
         binding.btnFilter.setOnClickListener {
             val bottomSheet = BottomSheetDialog(this)
@@ -237,15 +204,6 @@ class StudentsActivity : AppCompatActivity() {
         }
     }
 
-//    private fun filterData() {
-//        val filteredStudents = when {
-//            isFilterByNewest -> originalStudents.sortedByDescending { it.nameStudent}
-//            isFilterByOldest -> originalStudents.sortedBy { it.date }
-//            else -> originalStudents
-//        }
-//        studentAdapter.setListStudent(filteredStudents)
-//    }
-
     private fun applyFilter() {
         val filteredData = when {
             isFilterByNameAscending -> originalStudents.sortedBy { it.nameStudent }
@@ -254,7 +212,5 @@ class StudentsActivity : AppCompatActivity() {
         }
         studentAdapter.setListStudent(filteredData)
     }
-
-
 }
 

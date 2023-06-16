@@ -48,7 +48,7 @@ class DetailReportActivity : AppCompatActivity() {
         val month = intent.getStringExtra(MONTH)
         binding.pageTittle.text = month
         binding.tvName.text = nameStudent
-        Log.d("CEK INTENT", "\"$idParent $idChild $nameStudent \"")
+        Log.d("CEK INTENT", "\"$idParent $idChild $nameStudent  $idStudent")
     }
 
 
@@ -141,7 +141,6 @@ class DetailReportActivity : AppCompatActivity() {
                         it.putExtra(MONTH, intent.getStringExtra(MONTH))
                     })
             }
-
         })
         reportAdapter.updateData(data)
 
