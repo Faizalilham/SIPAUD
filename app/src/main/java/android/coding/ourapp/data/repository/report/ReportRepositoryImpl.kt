@@ -81,6 +81,7 @@ class ReportRepositoryImpl @Inject constructor(
     }
 
     override fun createReport(
+        idStudent : String,
         studentName: String,
         reportName: String,
         date: String,
@@ -99,7 +100,7 @@ class ReportRepositoryImpl @Inject constructor(
             val id = firebaseDatabase.reference.push().key.toString()
             firebaseDatabase.getReference("report")
                 .child(id).setValue(
-                    DataReport(id=id,studentName=studentName,reports = dataReport, narratives = narrative)
+                    DataReport(id=id,idStudent=idStudent,studentName=studentName,reports = dataReport, narratives = narrative)
                 )
                 .addOnSuccessListener {
                     resultFix = "Success add data"

@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 data class DataReport(
     val id : String = "",
+    val idStudent : String = "",
     var studentName : String = "",
     var idStudent : String = "",
     var reports : MutableList<Report> = mutableListOf(),
