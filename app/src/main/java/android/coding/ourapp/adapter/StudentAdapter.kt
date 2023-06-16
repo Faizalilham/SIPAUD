@@ -1,4 +1,6 @@
+
 package android.coding.ourapp.adapter
+
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemStudentBinding
@@ -71,6 +73,7 @@ class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerV
                 btnHistoryReport.setOnClickListener {
                     val intent = Intent(it.context, ReportActivity::class.java)
                     intent.putExtra(NAME_STUDENT,student.nameStudent)
+                    intent.putExtra(ID_STUDENT,student.id)
                     it.context.startActivity(intent)
                 }
 
@@ -104,3 +107,4 @@ class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerV
 //        fun onDeleteClick(student: Student)
 //    }
 }
+

@@ -7,16 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.onboarding.SplashScreenFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_profile"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/danilla"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/ic_splash_screen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

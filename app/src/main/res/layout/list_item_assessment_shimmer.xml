@@ -15,7 +15,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card_image"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/dp15"
             android:background="#ddd"
@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/card_tittle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             style="@style/AppTheme.TextTittle"
             android:textStyle="bold"
             android:background="@color/gray_shimmer"
@@ -36,28 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_image" />
 
-        <TextView
-            android:id="@+id/card_subTittle"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.TextSubTittle"
-            android:maxLines="2"
-            android:background="@color/gray_shimmer"
-            android:layout_marginTop="@dimen/dp10"
-            android:layout_marginBottom="@dimen/dp10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_tittle" />
-
-        <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/dp10"
-            android:layout_marginBottom="@dimen/dp10"
-            android:background="@color/gray_shimmer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_subTittle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
