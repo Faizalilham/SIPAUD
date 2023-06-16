@@ -12,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-private val Context.permission: DataStore<Preferences> by preferencesDataStore(name = dataStoreName)
+private val Context.permission: DataStore<Preferences> by preferencesDataStore(name = "permission")
 class PermissionPreferences(@ApplicationContext private val context  : Context) {
     private val permissionKey = booleanPreferencesKey(Companion.permissionKey)
 

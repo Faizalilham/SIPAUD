@@ -47,6 +47,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     lateinit var firebaseDatabase : FirebaseDatabase
 
     private var nameStudent : String? = null
+    private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
 
@@ -65,6 +66,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         searchableSpinnerFrom = SearchableSpinner(this)
 
         nameStudent = intent.getStringExtra(EXTRA_NAME)
+        idStudent = intent.getStringExtra(EXTRA_ID)
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         binding.tvTittle.text = nameStudent
@@ -89,19 +91,21 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         reportViewModel.getAllReport.observe(this){
             when (it) {
                 is Resource.Success -> {
-                    var id = ""
-                    val dataByName = it.result.filter { result -> result.studentName == binding.tvTittle.text.toString() }
-                    dataByName.forEach { result ->
-                        listReport.addAll(result.reports)
-                    }
-                    if(dataByName.isNotEmpty()){
-                        id  = dataByName[0].id
-                    }
-                    val isAdded = it.result.any { result ->
-                        result.studentName == binding.tvTittle.text.toString()
-                    }
+                    if(idStudent != null){
+                        var id = ""
+                        val dataByName = it.result.filter { result -> result.studentName == idStudent }
+                        dataByName.forEach { result ->
+                            listReport.addAll(result.reports)
+                        }
+                        if(dataByName.isNotEmpty()){
+                            id  = dataByName[0].id
+                        }
+                        val isAdded = it.result.any { result ->
+                            result.studentName == idStudent
+                        }
 
-                    if(isAdded) updateReport(id,listReport) else createReport()
+                        if(isAdded) updateReport(id,listReport) else createReport()
+                    }
 
                 }
 
@@ -195,19 +199,21 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         tittle : String,date : String,
         indicator : MutableList<String>,images : MutableList<String>
     ){
-        reportViewModel.createReport(studentName,tittle,date, indicator, images)
-        reportViewModel.message.observe(this){
-            when(it){
-                is Resource.Success -> {
-                    Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                is Resource.Loading -> {}
+        if(idStudent != null){
+            reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicator, images)
+            reportViewModel.message.observe(this){
+                when(it){
+                    is Resource.Success -> {
+                        Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    is Resource.Loading -> {}
 
-                is Resource.Failure -> {
-                    Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                    is Resource.Failure -> {
+                        Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
                 }
-                else -> {}
             }
         }
     }
@@ -347,6 +353,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     companion object{
         const val EXTRA_NAME = "name_student"
+        const val EXTRA_ID = "id_student"
     }
 
     private fun back(){

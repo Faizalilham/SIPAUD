@@ -13,6 +13,7 @@ interface ReportRepository {
     fun getReportById(id : String):LiveData<Resource<DataReport>>
 
     fun createReport(
+        idStudent:String,
         studentName : String,
         reportName : String,
         date : String,
