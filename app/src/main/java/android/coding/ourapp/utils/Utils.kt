@@ -353,6 +353,7 @@ object Utils {
     fun showImageReport(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ActivityCreateUpdateReportBinding, context : Context){
         binding.apply {
             if(isShow && imageUri != null){
+                image.visibility = View.GONE
                 linearImage.visibility = View.VISIBLE
                 if(imageUri.size == 3){
                     imageFirst.visibility = View.VISIBLE
@@ -374,9 +375,11 @@ object Utils {
                     Glide.with(context).load(imageUri[0]).into(imageFirst)
                 }else{
                     linearImage.visibility = View.GONE
+                    image.visibility = View.VISIBLE
                 }
             }else if(isShow && imageBitmap != null){
                 linearImage.visibility = View.VISIBLE
+                image.visibility = View.GONE
                 if(imageBitmap.size == 3){
                     imageFirst.visibility = View.VISIBLE
                     imageSecond.visibility = View.VISIBLE
@@ -394,6 +397,7 @@ object Utils {
                     Glide.with(context).load(imageBitmap[0]).into(imageFirst)
                 }else{
                     linearImage.visibility = View.GONE
+                    image.visibility = View.VISIBLE
                 }
             }else{
                 binding.linearImage.visibility = View.GONE
