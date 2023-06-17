@@ -27,7 +27,7 @@ class ReportActivity : AppCompatActivity() {
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
     private val listBackground : MutableList<Int> = mutableListOf(R.raw.bg_januari,
-        R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei)
+        R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei,R.raw.bg_juni,R.raw.bg_juli,R.raw.bg_agustus,R.raw.bg_september, R.raw.bg_oktober)
 
     private var nameStudent : String? = null
     private var idParent : String = ""
@@ -74,13 +74,13 @@ class ReportActivity : AppCompatActivity() {
 
                     Log.d("MONTH","$listMonth")
                     if(listMonth.isNotEmpty()){
-                        binding.tvNotFound.visibility = View.GONE
+                        binding.ivNotData.visibility = View.GONE
                         binding.rvMonth.visibility = View.VISIBLE
                         setupRecycler(listMonth)
 
                     }else{
                         binding.rvMonth.visibility = View.GONE
-                        binding.tvNotFound.visibility = View.VISIBLE
+                        binding.ivNotData.visibility = View.VISIBLE
                     }
                 }
 
@@ -126,6 +126,7 @@ class ReportActivity : AppCompatActivity() {
                 it.putExtra(EXTRA_DATA,nameStudent)
                 it.putExtra(MONTH, name)
                 it.putExtra(ID_PARENT, idParent)
+                it.putExtra(ID_STUDENT, idStudent)
             })
         }
 

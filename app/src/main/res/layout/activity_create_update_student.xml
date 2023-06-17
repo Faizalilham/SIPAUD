@@ -180,6 +180,7 @@
             android:layout_marginEnd="@dimen/dp15"
             android:layout_marginStart="@dimen/dp15"
             app:cornerRadius="@dimen/dp20"
+            android:textStyle="bold"
             android:layout_marginTop="@dimen/dp25"
             android:textAllCaps="false"
             android:layout_marginBottom="@dimen/dp15" />

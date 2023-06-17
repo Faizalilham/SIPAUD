@@ -45,11 +45,11 @@
     <TextView
         android:id="@+id/tittle"
         style="@style/AppTheme.TextTittle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tambah Laporan"
         android:textAlignment="center"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
         android:text="Nama :"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/linearLayout4"
         app:layout_constraintTop_toBottomOf="@+id/tittle" />
 
@@ -82,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Laporan Untuk Bulan :"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tv_detail_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
@@ -195,6 +197,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:text="Laporan :"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
@@ -206,8 +209,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/box_border"
-                android:hint="Masukkan teks..."
+                android:hint="Masukkan Deskripsi Narasi . . ."
                 android:padding="10dp"
+                style="@style/AppTheme.TextSubTittle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -234,6 +238,7 @@
         android:text="@string/save"
         android:textAllCaps="false"
         app:cornerRadius="@dimen/dp20"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

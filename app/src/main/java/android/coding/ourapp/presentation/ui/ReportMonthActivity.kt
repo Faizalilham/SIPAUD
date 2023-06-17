@@ -38,6 +38,7 @@ class ReportMonthActivity : AppCompatActivity() {
     private var nameStudent: String? = null
     private var nameMonth: String? = null
     private var idParent: String? = null
+    private var idStudent: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class ReportMonthActivity : AppCompatActivity() {
         nameStudent = intent.getStringExtra(EXTRA_DATA)
         nameMonth = intent.getStringExtra(MONTH)
         idParent = intent.getStringExtra(ID_PARENT)
+        idStudent = intent.getStringExtra(ID_STUDENT)
 
         binding.tvDetailNameStudent.text = nameStudent
         binding.tvDetailMonths.text = nameMonth
@@ -66,7 +68,8 @@ class ReportMonthActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         val narrative = mutableListOf<Narrative>()
                         val data = it.result.filter { uye ->
-                            uye.studentName == nameStudent
+                            uye.idStudent == idStudent
+
                         }
                         data.forEach { report ->
                             narrative.addAll(report.narratives)
@@ -77,7 +80,7 @@ class ReportMonthActivity : AppCompatActivity() {
 
                         val listReport = mutableListOf<Report>()
                         val dataReport = it.result.filter { dt ->
-                            dt.studentName == nameStudent
+                            dt.idStudent == idStudent
                         }
                         dataReport.forEach { its -> listReport.addAll(its.reports) }
                         val datak = listReport.filter { report ->
@@ -110,6 +113,7 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.tvDetailCategory.visibility = View.VISIBLE
                             binding.leftBox.visibility = View.VISIBLE
                             binding.leftBox1.visibility = View.VISIBLE
+                            binding.loadings.cancelAnimation()
                         } else {
                             binding.emptyReport.visibility = View.VISIBLE
                             binding.tvDetailNarasi.visibility = View.GONE
@@ -121,8 +125,10 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.leftBox.visibility = View.GONE
                             binding.leftBox1.visibility = View.GONE
                         }
+
                     }
                     is Resource.Loading -> {
+                        binding.loadings.playAnimation()
                     }
                     is Resource.Failure -> {
                         Toast.makeText(
@@ -173,6 +179,6 @@ class ReportMonthActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
-        const val EXTRA_SUMMARY = "extra_summary"
+        const val ID_STUDENT = "id_student"
     }
 }
