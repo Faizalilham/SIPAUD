@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
+import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
@@ -40,24 +41,20 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import com.itextpdf.layout.element.LineSeparator
+import com.itextpdf.layout.renderer.LineSeparatorRenderer
 import kotlin.collections.ArrayList
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
-import com.itextpdf.layout.element.Image
-import com.itextpdf.layout.element.Paragraph
-import com.itextpdf.layout.property.HorizontalAlignment
 import com.itextpdf.io.image.ImageDataFactory
+import com.itextpdf.kernel.colors.DeviceRgb
 import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.layout.borders.Border
-import com.itextpdf.layout.element.Cell
-import com.itextpdf.layout.element.Table
-import com.itextpdf.layout.property.TextAlignment
-import com.itextpdf.layout.property.VerticalAlignment
-import com.itextpdf.layout.property.UnitValue
-import java.text.DateFormatSymbols
+import com.itextpdf.layout.element.*
+import com.itextpdf.layout.property.*
 import java.time.LocalDate
-import java.time.YearMonth
+
 
 class Key{
     companion object{
@@ -121,6 +118,7 @@ object Utils {
 
 
     // FUNCTION TO GET MONTH FROM STRING LIKE 00-MEI-2023
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getMonthFromStringDate(dateString : String):String{
         val formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy", Locale("id"))
         val date = LocalDate.parse(dateString, formatter)
@@ -431,7 +429,7 @@ object Utils {
     }
 
     // FUNCTION TO EXPORT PDF TO LOCAL STORAGE
-    fun exportToPdf(bitmaps: List<Bitmap>, texts: List<String>, context: Context) {
+    suspend fun exportToPdf(name : String, summary : String,category : String, reports: List<Report>, month : String,context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
         if (!directory.exists()) {
@@ -440,7 +438,7 @@ object Utils {
         Log.d("DIRECTORY", "$directory")
 
         val outputDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val outputPath = File(outputDir, "${texts[0]}_${System.currentTimeMillis()}.pdf").path
+        val outputPath = File(outputDir, "${name}_${System.currentTimeMillis()}.pdf").path
         val outputFile = File(outputPath)
         if (outputFile.exists()) {
             outputFile.delete()
@@ -450,43 +448,84 @@ object Utils {
         val pdfDocument = PdfDocument(pdfWriter)
         val document = Document(pdfDocument)
 
-        val table = Table(UnitValue.createPercentArray(bitmaps.size)).useAllAvailableWidth()
+        setParagraph("LAPORAN BULANAN",TextAlignment.CENTER,document,10f,20f,22f,true)
+        val horizontalLine = LineSeparator(null)
+        horizontalLine.setMarginTop(10f)
+        horizontalLine.setMarginBottom(10f)
+        horizontalLine.setNextRenderer(LineSeparatorRenderer(horizontalLine))
+        document.add(horizontalLine)
+
+        setParagraph("Nama : $name",TextAlignment.LEFT,document,20f,10f,18f,false)
+        setParagraph("Laporan bulan : $month",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph("Kategori : $category",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph("Narasi :",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph(summary,TextAlignment.LEFT,document,5f,10f,18f,false)
+
+        var size = 0
+        reports.forEach { size = it.images.size }
+
+        val table = Table(UnitValue.createPercentArray(size)).useAllAvailableWidth()
         table.setHorizontalAlignment(HorizontalAlignment.LEFT)
 
-        for (bitmap in bitmaps) {
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val imageData = ImageDataFactory.create(stream.toByteArray())
-            val image = Image(imageData)
-            image.scaleToFit(160f, 160f)
-            image.setHorizontalAlignment(HorizontalAlignment.CENTER)
-            val cell = Cell()
-            cell.setBorder(Border.NO_BORDER)
-            if (bitmaps.size == 1) {
-                image.scaleToFit(260f, 160f)
-            }
-            cell.add(image)
-            if (bitmaps.size == 1) {
-                cell.setHorizontalAlignment(HorizontalAlignment.CENTER)
-            }
-            table.addCell(cell)
+        for (reports in reports) {
+            setParagraph(reports.reportName,TextAlignment.LEFT,document,20f,10f,18f,true)
+            setParagraph("Tanggal",TextAlignment.LEFT,document,10f,10f,18f,false)
+            setParagraph(reports.reportDate,TextAlignment.LEFT,document,5f,10f,18f,false)
+           for(bitmaps in reports.images){
+               val bitmap = convertStringToBitmap(bitmaps)
+               val stream = ByteArrayOutputStream()
+               bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+               val imageData = ImageDataFactory.create(stream.toByteArray())
+               val image = Image(imageData)
+               image.scaleToFit(160f, 160f)
+               image.setHorizontalAlignment(HorizontalAlignment.CENTER)
+               val cell = Cell()
+               cell.setBorder(Border.NO_BORDER)
+               if (reports.images.size == 1) {
+                   image.scaleToFit(260f, 160f)
+               }
+               cell.add(image)
+               cell.setMarginBottom(20f)
+
+               if (reports.images.size == 1) {
+                   cell.setHorizontalAlignment(HorizontalAlignment.CENTER)
+               }
+
+               table.addCell(cell)
+               document.add(table)
+           }
+            setParagraph("Capaian Kegiatan",TextAlignment.LEFT,document,20f,10f,18f,false)
+            setParagraph(convertListToString(reports.indicator),TextAlignment.LEFT,document,5f,10f,18f,false)
+
         }
 
-        for (text in texts) {
-            val paragraph = Paragraph(text)
-            paragraph.setFont(PdfFontFactory.createFont())
-            paragraph.setFontSize(22f)
-            paragraph.setTextAlignment(TextAlignment.CENTER)
-            paragraph.setVerticalAlignment(VerticalAlignment.MIDDLE)
-            paragraph.setHorizontalAlignment(HorizontalAlignment.CENTER)
-            paragraph.setMarginTop(20f)
-            paragraph.setMarginBottom(20f)
-
-            document.add(paragraph)
-        }
-
-        document.add(table)
         document.close()
+    }
+
+    private fun setParagraph(
+        text : String,textAligment : TextAlignment,document : Document,
+        marginTop : Float,
+        marginBottom : Float,
+        fontSize : Float,
+        isBold : Boolean){
+        val paragraph = Paragraph(text)
+        paragraph.setFont(PdfFontFactory.createFont())
+        paragraph.setFontSize(fontSize)
+        paragraph.setTextAlignment(textAligment)
+        paragraph.setMarginTop(marginTop)
+        paragraph.setMarginBottom(marginBottom)
+        if(isBold){ paragraph.setBold() }
+        document.add(paragraph)
+    }
+
+    fun category(skor : Int):String{
+        return when(skor){
+            in 1..5 -> "Belum berkembang"
+            in 6..10 -> "Mulai berkembang"
+            in 11..15 -> "Berkembang sesuai harapan"
+            in 16..20 -> "Berkembang sangat baik"
+            else -> "Tidak terdefinisi"
+        }
     }
 
 

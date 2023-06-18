@@ -43,7 +43,13 @@ class ReportActivity : AppCompatActivity() {
         nameStudent = intent.getStringExtra(NAME_STUDENT)
         idStudent = intent.getStringExtra(ID_STUDENT)
         binding.tvName.text = nameStudent
+        showLoading(false)
         Log.d("CEK UYE","\"$idStudent \"")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLoading(false)
     }
 
     private fun getAllReport(){
@@ -122,17 +128,25 @@ class ReportActivity : AppCompatActivity() {
         }
 
         adapterMonth.setItemClickedListener { name ->
+            showLoading(true)
             startActivity(Intent(this@ReportActivity,ReportMonthActivity::class.java).also{
                 it.putExtra(EXTRA_DATA,nameStudent)
                 it.putExtra(MONTH, name)
                 it.putExtra(ID_PARENT, idParent)
                 it.putExtra(ID_STUDENT, idStudent)
             })
+
         }
 
         binding.rvMonth.apply {
             adapter = adapterMonth
             layoutManager = GridLayoutManager(this@ReportActivity,2)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.apply {
+            if(isLoading )frameLoading.visibility = View.VISIBLE else frameLoading.visibility = View.GONE
         }
     }
 

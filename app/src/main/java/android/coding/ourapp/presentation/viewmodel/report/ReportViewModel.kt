@@ -31,7 +31,8 @@ class ReportViewModel @Inject constructor(
         nameStudent : String,
         tittle : String,
         date : String,
-        indicator : MutableList<String>,
+        indicatorAgama : MutableList<String>,
+        indicatorMoral : MutableList<String>,
         images : MutableList<String>,
 
     ){
@@ -39,7 +40,7 @@ class ReportViewModel @Inject constructor(
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.createReport(
                 idStudent,
-                nameStudent,tittle,date,indicator,images
+                nameStudent,tittle,date,indicatorAgama,indicatorMoral,images
             )
             _message.value = result
         }
@@ -50,7 +51,8 @@ class ReportViewModel @Inject constructor(
         idChild : String,
         tittle : String,
         date : String,
-        indicator : MutableList<String>,
+        indicatorAgama : MutableList<String>,
+        indicatorMoral : MutableList<String>,
         images : MutableList<String>,
         listReport : MutableList<Report>,
         listNarrative : MutableList<Narrative>
@@ -59,7 +61,7 @@ class ReportViewModel @Inject constructor(
         viewModelScope.launch {
             _message.value = Resource.Loading
             val result = reportRepositoryImpl.updateReport(
-                idParent,idChild,tittle,date,indicator,images,listReport,listNarrative
+                idParent,idChild,tittle,date,indicatorAgama,indicatorMoral,images,listReport,listNarrative
             )
             _message.value = result
         }
