@@ -10,6 +10,7 @@ class AchievementActivityAdapter(
     private val listener : OnClick
     ):RecyclerView.Adapter<AchievementActivityAdapter.AViewHolder>() {
 
+
     inner class AViewHolder(val binding : ListItemAchievementActivityBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AViewHolder {

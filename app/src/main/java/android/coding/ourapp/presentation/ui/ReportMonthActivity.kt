@@ -53,11 +53,6 @@ class ReportMonthActivity : AppCompatActivity() {
         getReport()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-    }
 
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
@@ -89,35 +84,12 @@ class ReportMonthActivity : AppCompatActivity() {
 
                         if (dataKu.isNotEmpty()) {
                             binding.tvDetailNarasi.text = dataKu[0].summary
+                            binding.tvDetailCategory.text = Utils.category(dataKu[0].totalIndicator)
                             binding.btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
                             binding.btnAddReporttMonth.setOnClickListener {
                                 showLoading(true)
-                                val datax = monthAdapter.getData()
                                 lifecycleScope.launch(Dispatchers.Main) {
-                                    val job = withContext(Dispatchers.Default) {
-                                        val listImageBitmap = arrayListOf<Bitmap>()
-                                        val textList = arrayListOf<String>()
-
-                                        for (item in datax) {
-                                            for (datas in item.images) {
-                                                listImageBitmap.add(Utils.convertStringToBitmap(datas))
-                                            }
-                                            textList.addAll(listOf(
-                                                item.month,
-                                                item.reportDate,
-                                                item.reportName,
-                                                "${item.indicator}"
-                                            ))
-
-                                            // Menunggu sejenak untuk memberikan kesempatan pemrosesan kepada UI thread
-                                            delay(1)
-                                        }
-
-                                        listImageBitmap to textList
-                                    }
-
-                                    val result =  job
-                                    exportPdf(result.first, result.second)
+                                    exportPdf(nameStudent!!,dataKu[0].summary,"Berkembang",datak,dataKu[0].month)
                                     showLoading(false)
                                 }
                             }
@@ -177,10 +149,13 @@ class ReportMonthActivity : AppCompatActivity() {
 
     }
 
-    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+    private suspend fun exportPdf(name : String,summary : String,category : String, reports: List<Report>,month : String,){
         if(Utils.checkStoragePermission(this,this)){
-            Utils.exportToPdf(bitmaps,texts,this)
-            Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+            val job = lifecycleScope.async(Dispatchers.Default) {
+                Utils.exportToPdf(name,summary,category,reports,month, applicationContext)
+            }
+            job.await()
+            Toast.makeText(this@ReportMonthActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()
         }
     }
 

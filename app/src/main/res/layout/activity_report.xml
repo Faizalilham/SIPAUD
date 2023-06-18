@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dp15"
+
     android:background="@color/backgroundColor"
     tools:context=".presentation.ui.ReportActivity">
 
@@ -13,6 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,6 +79,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp15"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
         android:text="Daftar Laporan Perkembangan Bulanan Anak yang Bernama :"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +94,8 @@
         android:layout_marginTop="@dimen/dp10"
         android:text="@string/app_name"
         android:textStyle="bold"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
         app:layout_constraintEnd_toEndOf="@+id/app_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tittle" />
@@ -98,6 +105,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tittle"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,5 +122,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+    <FrameLayout
+        android:id="@+id/frameLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/loadingBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="#000000"
+                android:orientation="horizontal" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/lottie_loading"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginBottom="50dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

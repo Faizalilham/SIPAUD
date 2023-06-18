@@ -51,7 +51,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private var idChild : String? = null
 
     private val listAchievementActivity = arrayListOf<String>()
-    private val listAchievement = arrayListOf<String>("Menulis","Menggambar")
+    private val listAchievementAgama = arrayListOf<String>()
+    private val listAchievementMoral = arrayListOf<String>()
     private val listImages = arrayListOf<String>()
     private val listImageBitmap = arrayListOf<Bitmap>()
     private val listReport : MutableList<Report> = mutableListOf()
@@ -68,6 +69,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idStudent = intent.getStringExtra(EXTRA_ID)
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
+        listAchievementAgama.addAll(resources.getStringArray(R.array.agama))
+        listAchievementMoral.addAll(resources.getStringArray(R.array.moral))
         binding.tvTittle.text = nameStudent
         chooseDate()
         selectSpinner()
@@ -138,10 +141,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     override fun onItemClick(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
         if (parent == binding.tvWeek) {
             binding.tvWeek.setText(parent.getItemAtPosition(position).toString())
-            Log.d("CEK 1","${binding.tvWeek.text.toString()}")
         } else if (parent == binding.tvReport) {
             binding.tvReport.setText(parent.getItemAtPosition(position).toString())
-            Log.d("CEK 2","${binding.tvWeek.text.toString()}")
         }
     }
 
@@ -155,9 +156,16 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private fun selectSpinner() {
         binding.apply {
             etIndicator.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etIndicator, listAchievement){ achievement ->
+                Utils.spinnerDialog(searchableSpinnerFrom,etIndicator, listAchievementAgama){ achievement ->
                     listAchievementActivity.add(achievement)
-                    listAchievement.remove(achievement)
+                    listAchievementAgama.remove(achievement)
+                    showActivityAchievement(listAchievementActivity)
+                }
+            }
+            etSecondIndicator.setOnClickListener{
+                Utils.spinnerDialog(searchableSpinnerFrom,etSecondIndicator, listAchievementMoral){ achievement ->
+                    listAchievementActivity.add(achievement)
+                    listAchievementMoral.remove(achievement)
                     showActivityAchievement(listAchievementActivity)
                 }
             }
@@ -168,7 +176,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         adapterAchievementActivityAdapter = AchievementActivityAdapter(data, object : AchievementActivityAdapter.OnClick{
             override fun onDelete(data: Int,text : String) {
                 listAchievementActivity.removeAt(data)
-                listAchievement.add(text)
+                if(resources.getStringArray(R.array.agama).contains(text)) listAchievementAgama.add(text) else listAchievementMoral.add(text)
                 binding.rvAchievementActivity.adapter?.notifyItemRemoved(data)
                 binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data,listAchievementActivity.size)
 
@@ -183,11 +191,14 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createReport(){
        binding.apply {
+           if(tvWeek.text.toString() == "Laporan 5"){
+               binding.imageParent.visibility = View.VISIBLE
+           }
            btnSave.setOnClickListener {
                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                val date = tvDate.text.toString().trim()
                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
-                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,listAchievementActivity,listImages)
+                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,listAchievementActivity,listAchievementActivity,listImages)
                }
            }
        }
@@ -196,10 +207,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private fun doCreateReport(
         studentName : String,
         tittle : String,date : String,
-        indicator : MutableList<String>,images : MutableList<String>
+        indicatorAgama : MutableList<String>,
+        indicatorMoral : MutableList<String>,
+        images : MutableList<String>
     ){
         if(idStudent != null){
-            reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicator, images)
+            reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicatorAgama,indicatorMoral, images)
             reportViewModel.message.observe(this){
                 when(it){
                     is Resource.Success -> {
@@ -217,7 +230,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }
     }
 
-    private fun updateReport(idParent : String,listReport : MutableList<Report>){
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateReport(idParent : String, listReport : MutableList<Report>){
         binding.apply {
             btnSave.setOnClickListener {
                 val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
@@ -225,12 +239,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 val idChild =  firebaseDatabase.reference.push().key.toString()
                 listReport.add(
                     Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                    indicator = listAchievementActivity, images = listImages
+                    indicatorAgama = listAchievementActivity,
+                    indicatorMoral = listAchievementActivity,
+                        images = listImages
                 ))
                 doUpdateReport(
                     idParent = idParent,
                     listReport = listReport,
-                    indicator = mutableListOf(),
+                    indicatorAgama = mutableListOf(),
+                    indicatorMoral = mutableListOf(),
                     images = mutableListOf(),
                     date = "",
                     idChild = "",
@@ -244,10 +261,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private fun doUpdateReport(
         idParent : String,idChild: String,
         tittle : String,date : String,
-        indicator : MutableList<String>,images : MutableList<String>,listReport : MutableList<Report>, listNarrative : MutableList<Narrative>
+        indicatorAgama : MutableList<String>,
+        indicatorMoral : MutableList<String>,
+        images : MutableList<String>,listReport : MutableList<Report>, listNarrative : MutableList<Narrative>
     ){
 
-        reportViewModel.updateReport(idParent,idChild, tittle, date, indicator, images, listReport,listNarrative)
+        reportViewModel.updateReport(idParent,idChild, tittle, date, indicatorAgama,indicatorMoral, images, listReport,listNarrative)
         reportViewModel.message.observe(this){
             when(it){
                 is Resource.Success -> {
@@ -279,6 +298,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 tittle,
                 binding.tvDate.text.toString(),
                 listAchievementActivity,
+                listAchievementActivity,
                 listImages,
                 mutableListOf(),
                 mutableListOf()
@@ -300,8 +320,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                            tvReport.setText(reportNames[1])
                            setupDropDown()
                            tvDate.text = report.reportDate
-                           listAchievement.removeAll(report.indicator)
-                           listAchievementActivity.addAll(report.indicator)
+                           listAchievementAgama.removeAll(report.indicatorAgama.toSet())
+                           listAchievementMoral.removeAll(report.indicatorMoral.toSet())
+                           listAchievementActivity.addAll(report.indicatorAgama)
+                           listAchievementActivity.addAll(report.indicatorMoral)
                            showActivityAchievement(ArrayList(listAchievementActivity.distinct()))
                            listImages.addAll(report.images)
                            for(i in listImages){
