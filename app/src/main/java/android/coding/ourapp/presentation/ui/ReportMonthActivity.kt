@@ -97,7 +97,7 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.btnAddReporttMonth.setOnClickListener {
                                 showLoading(true)
                                 lifecycleScope.launch(Dispatchers.Main) {
-                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),datak,dataKu[0].month)
+                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month)
                                     showLoading(false)
                                 }
                             }
@@ -167,10 +167,10 @@ class ReportMonthActivity : AppCompatActivity() {
 
     }
 
-    private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String, reports: List<Report>,month : String,){
+    private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>,month : String,){
         if(Utils.checkStoragePermission(this,this)){
             val job = lifecycleScope.async(Dispatchers.Default) {
-                Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,reports,month, applicationContext)
+                Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)
             }
             job.await()
             Toast.makeText(this@ReportMonthActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()

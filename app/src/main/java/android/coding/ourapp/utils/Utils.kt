@@ -205,7 +205,6 @@ object Utils {
 
     // FUNCTION TO SEND MULTI IMAGE WITH TEXT INTO WHATSAPP
     fun sendMultipleImagesAndText(images: List<Bitmap>, text: String,context : Context) {
-
         val uriList = ArrayList<Uri>()
 
         for (bitmap in images) {
@@ -430,7 +429,7 @@ object Utils {
     }
 
     // FUNCTION TO EXPORT PDF TO LOCAL STORAGE
-    suspend fun exportToPdf(name : String, summary : String,categoryMoral : String,categoryAgama : String, reports: List<Report>, month : String,context: Context) {
+    suspend fun exportToPdf(name : String, summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>, month : String,context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
         if (!directory.exists()) {
@@ -459,7 +458,8 @@ object Utils {
         setParagraph("Nama : $name",TextAlignment.LEFT,document,20f,10f,18f,false)
         setParagraph("Laporan bulan : $month",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph("Kategori Agama : $categoryAgama",TextAlignment.LEFT,document,5f,10f,18f,false)
-        setParagraph("Kategori Moral: $categoryMoral",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph("Kategori Moral : $categoryMoral",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph("Kategori Budi Pekerti : $categoryPekerti",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph("Narasi :",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph(summary,TextAlignment.LEFT,document,5f,10f,18f,false)
 
