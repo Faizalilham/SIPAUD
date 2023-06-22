@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -53,6 +54,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievementAgama = arrayListOf<String>()
     private val listAchievementMoral = arrayListOf<String>()
+    private val listAchievementPekerti = arrayListOf<String>()
     private val listImages = arrayListOf<String>()
     private val listImageBitmap = arrayListOf<Bitmap>()
     private val listReport : MutableList<Report> = mutableListOf()
@@ -69,8 +71,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idStudent = intent.getStringExtra(EXTRA_ID)
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
-        listAchievementAgama.addAll(resources.getStringArray(R.array.agama))
-        listAchievementMoral.addAll(resources.getStringArray(R.array.moral))
         binding.tvTittle.text = nameStudent
         chooseDate()
         selectSpinner()
@@ -82,6 +82,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             updateReport()
         }else{
             Log.d("CEK INTENT 2","\"$idParent $idChild $nameStudent \"")
+            listAchievementAgama.addAll(resources.getStringArray(R.array.agama))
+            listAchievementMoral.addAll(resources.getStringArray(R.array.moral))
+            listAchievementPekerti.addAll(resources.getStringArray(R.array.pekerti))
             getAllReport()
             createReport()
             setupDropDown()
@@ -95,7 +98,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 is Resource.Success -> {
                     if(idStudent != null){
                         var id = ""
-                        val dataByName = it.result.filter { result -> result.studentName == idStudent }
+                        val dataByName = it.result.filter { result -> result.idStudent == idStudent }
                         dataByName.forEach { result ->
                             listReport.addAll(result.reports)
                         }
@@ -103,7 +106,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                             id  = dataByName[0].id
                         }
                         val isAdded = it.result.any { result ->
-                            result.studentName == idStudent
+                            result.idStudent == idStudent
                         }
 
                         if(isAdded) updateReport(id,listReport) else createReport()
@@ -155,32 +158,69 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private fun selectSpinner() {
         binding.apply {
+            etIndicator.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+                }
+            }
             etIndicator.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etIndicator, listAchievementAgama){ achievement ->
+                Utils.spinnerDialog(searchableSpinnerFrom,etIndicator, ArrayList(listAchievementAgama.distinct())){ achievement ->
+                    binding.rvAchievementActivity.visibility =  View.VISIBLE
                     listAchievementActivity.add(achievement)
                     listAchievementAgama.remove(achievement)
                     showActivityAchievement(listAchievementActivity)
                 }
             }
+            etSecondIndicator.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+                }
+            }
+
             etSecondIndicator.setOnClickListener{
-                Utils.spinnerDialog(searchableSpinnerFrom,etSecondIndicator, listAchievementMoral){ achievement ->
+                Utils.spinnerDialog(searchableSpinnerFrom,etSecondIndicator, ArrayList(listAchievementMoral.distinct())){ achievement ->
+                    binding.rvAchievementActivity.visibility =  View.VISIBLE
                     listAchievementActivity.add(achievement)
                     listAchievementMoral.remove(achievement)
+                    showActivityAchievement(listAchievementActivity)
+                }
+            }
+
+            etIndicatorThird.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+                }
+            }
+            etIndicatorThird.setOnClickListener{
+                Utils.spinnerDialog(searchableSpinnerFrom,etIndicatorThird, ArrayList(listAchievementPekerti.distinct())){ achievement ->
+                    binding.rvAchievementActivity.visibility =  View.VISIBLE
+                    listAchievementActivity.add(achievement)
+                    listAchievementPekerti.remove(achievement)
                     showActivityAchievement(listAchievementActivity)
                 }
             }
         }
     }
 
-    private fun showActivityAchievement(data : ArrayList<String>){
-        adapterAchievementActivityAdapter = AchievementActivityAdapter(data, object : AchievementActivityAdapter.OnClick{
+    private fun showActivityAchievement(datas : ArrayList<String>){
+        adapterAchievementActivityAdapter = AchievementActivityAdapter(datas, object : AchievementActivityAdapter.OnClick{
             override fun onDelete(data: Int,text : String) {
-                listAchievementActivity.removeAt(data)
-                if(resources.getStringArray(R.array.agama).contains(text)) listAchievementAgama.add(text) else listAchievementMoral.add(text)
+                if (data >= 0 && data < datas.size) {
+                    datas.removeAt(data)
+                    if (resources.getStringArray(R.array.agama).contains(text)) {
+                        listAchievementAgama.add(text)
+                    } else if(resources.getStringArray(R.array.moral).contains(text)) {
+                        listAchievementMoral.add(text)
+                    }else{
+                        listAchievementPekerti.add(text)
+                    }
+                }else{
+                    binding.rvAchievementActivity.visibility =  View.GONE
+                }
                 binding.rvAchievementActivity.adapter?.notifyItemRemoved(data)
-                binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data,listAchievementActivity.size)
-
+                binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data, datas.size)
             }
+
         })
         binding.rvAchievementActivity.apply {
             adapter = adapterAchievementActivityAdapter
@@ -191,14 +231,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createReport(){
        binding.apply {
-           if(tvWeek.text.toString() == "Laporan 5"){
-               binding.imageParent.visibility = View.VISIBLE
-           }
            btnSave.setOnClickListener {
                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                val date = tvDate.text.toString().trim()
                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
-                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,listAchievementActivity,listAchievementActivity,listImages)
+                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,
+                       resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                       resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                       resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                       listImages)
                }
            }
        }
@@ -209,14 +250,16 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         tittle : String,date : String,
         indicatorAgama : MutableList<String>,
         indicatorMoral : MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images : MutableList<String>
     ){
         if(idStudent != null){
-            reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicatorAgama,indicatorMoral, images)
+            reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicatorAgama,indicatorMoral,indicatorPekerti, images)
             reportViewModel.message.observe(this){
                 when(it){
                     is Resource.Success -> {
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
+                        Utils.hideKeyboard(binding.btnSave)
                         finish()
                     }
                     is Resource.Loading -> {}
@@ -239,8 +282,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 val idChild =  firebaseDatabase.reference.push().key.toString()
                 listReport.add(
                     Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                    indicatorAgama = listAchievementActivity,
-                    indicatorMoral = listAchievementActivity,
+                    indicatorAgama =  resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    indicatorMoral =  resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    indicatorPekerti =  resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                         images = listImages
                 ))
                 doUpdateReport(
@@ -248,6 +292,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                     listReport = listReport,
                     indicatorAgama = mutableListOf(),
                     indicatorMoral = mutableListOf(),
+                    indicatorPekerti = mutableListOf(),
                     images = mutableListOf(),
                     date = "",
                     idChild = "",
@@ -263,17 +308,20 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         tittle : String,date : String,
         indicatorAgama : MutableList<String>,
         indicatorMoral : MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images : MutableList<String>,listReport : MutableList<Report>, listNarrative : MutableList<Narrative>
     ){
 
-        reportViewModel.updateReport(idParent,idChild, tittle, date, indicatorAgama,indicatorMoral, images, listReport,listNarrative)
+        reportViewModel.updateReport(idParent,idChild, tittle, date, indicatorAgama,indicatorMoral,indicatorPekerti, images, listReport,listNarrative)
         reportViewModel.message.observe(this){
             when(it){
                 is Resource.Success -> {
                     if(listReport.isEmpty()){
                         Toast.makeText(this, "Update laporan sukses", Toast.LENGTH_SHORT).show()
+                        Utils.hideKeyboard(binding.btnSave)
                     }else{
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
+                        Utils.hideKeyboard(binding.btnSave)
                     }
                     finish()
                 }
@@ -297,8 +345,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 idChild!!,
                 tittle,
                 binding.tvDate.text.toString(),
-                listAchievementActivity,
-                listAchievementActivity,
+                resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                 listImages,
                 mutableListOf(),
                 mutableListOf()
@@ -320,10 +369,11 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                            tvReport.setText(reportNames[1])
                            setupDropDown()
                            tvDate.text = report.reportDate
-                           listAchievementAgama.removeAll(report.indicatorAgama.toSet())
-                           listAchievementMoral.removeAll(report.indicatorMoral.toSet())
-                           listAchievementActivity.addAll(report.indicatorAgama)
-                           listAchievementActivity.addAll(report.indicatorMoral)
+                           listAchievementAgama.addAll(resources.getStringArray(R.array.agama).subtract(report.indicatorAgama).toTypedArray().toMutableList())
+                           listAchievementMoral.addAll(resources.getStringArray(R.array.moral).subtract(report.indicatorAgama).toTypedArray().toMutableList())
+                           listAchievementPekerti.addAll(resources.getStringArray(R.array.pekerti).subtract(report.indicatorPekerti).toTypedArray().toMutableList())
+                           listAchievementActivity.addAll(report.indicatorAgama + report.indicatorMoral + report.indicatorPekerti)
+                           Log.d("LIST","$listAchievementActivity")
                            showActivityAchievement(ArrayList(listAchievementActivity.distinct()))
                            listImages.addAll(report.images)
                            for(i in listImages){

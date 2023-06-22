@@ -145,13 +145,13 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
 
     private fun selectSpinner() {
         binding.apply {
-            etStudents.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(Utils.unique(listStudentActivity,listStudentSelected).sorted().distinct())){ student ->
-                    listStudentActivity.remove(student)
-                    listStudentSelected.add(student)
-                    showStudentsActivity(listStudentSelected)
-                }
-            }
+//            etStudents.setOnClickListener {
+//                Utils.spinnerDialog(searchableSpinnerFrom,etStudents,ArrayList(Utils.unique(listStudentActivity,listStudentSelected).sorted().distinct())){ student ->
+//                    listStudentActivity.remove(student)
+//                    listStudentSelected.add(student)
+//                    showStudentsActivity(listStudentSelected)
+//                }
+//            }
         }
     }
 

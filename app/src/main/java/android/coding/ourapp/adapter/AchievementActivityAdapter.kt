@@ -32,4 +32,10 @@ class AchievementActivityAdapter(
         fun onDelete(data : Int,text : String)
     }
 
+    fun setData(datas : ArrayList<String>){
+        this.data.clear()
+        this.data.addAll(datas)
+        notifyDataSetChanged()
+    }
+
 }

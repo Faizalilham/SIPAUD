@@ -6,6 +6,7 @@ import android.coding.ourapp.databinding.ActivityAddReportMonthBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
+import android.coding.ourapp.utils.Utils
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -19,7 +20,9 @@ class AddReportMonthActivity : AppCompatActivity() {
     private var nameStudent : String? = null
     private var nameMonth : String? = null
     private var idParent : String? = null
-    private var point = 0
+    private var pointAgama = 0
+    private var pointMoral = 0
+    private var pointPekerti = 0
     private var isFirst : Boolean = false
     private val reportViewModel by viewModels<ReportViewModel>()
     private val listNarrative : MutableList<Narrative> = mutableListOf()
@@ -57,11 +60,19 @@ class AddReportMonthActivity : AppCompatActivity() {
                            }
                        }
                        dataReport.reports.forEach { reports ->
-                           point += reports.indicator.size
+                           pointAgama += reports.indicatorAgama.size
+                           pointMoral += reports.indicatorMoral.size
+                           pointPekerti += reports.indicatorPekerti.size
                        }
                    }
-                    binding.tvDetailPoint.text = point.toString()
-                    binding.tvDetailCategory.text = "Berkembang"
+                    binding.apply {
+                        tvDetailPointAgama.text = " $pointAgama"
+                        tvDetailPointMoral.text = " $pointMoral"
+                        tvDetailPointPekerti.text = " $pointPekerti"
+                        tvDetailCategoryAgama.text = Utils.category(pointAgama)
+                        tvDetailKategoriMoral.text = Utils.category(pointMoral)
+                        tvDetailCategoryPekerti.text = Utils.category(pointPekerti)
+                    }
                 }
 
                 is Resource.Loading -> {}
@@ -83,13 +94,15 @@ class AddReportMonthActivity : AppCompatActivity() {
             listNarrative.clear()
             reportViewModel.deleteNarrative(idParent)
         }
-        listNarrative.add(Narrative(summary = narrative, month = nameMonth!!, totalIndicator = point))
+        listNarrative.add(Narrative(summary = narrative, month = nameMonth!!, totalIndicatorAgama = pointAgama, totalIndicatorMoral = pointMoral, totalIndicatorPekerti = pointPekerti))
 
         reportViewModel.
         updateReport(
             idParent,
             idChild = "",
-            indicator = mutableListOf(),
+            indicatorAgama = mutableListOf(),
+            indicatorMoral = mutableListOf(),
+            indicatorPekerti = mutableListOf(),
             images = mutableListOf(),
             listReport = mutableListOf(),
             date = "",

@@ -170,7 +170,6 @@
                         android:id="@+id/image_parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_margin="@dimen/dp15">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -314,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp8"
                     android:layout_marginTop="@dimen/dp20"
-                    android:text="@string/indicator_value" />
+                    android:text="@string/indicator_value_agama" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/indicator"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -330,10 +329,18 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_stroke"
                         android:fontFamily="@font/poppins"
-                        android:hint="@string/indicator_value_agama"
+                        android:hint="@string/indicator_value_agama_hint"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="@string/indicator_value_moral" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/secondIndicator"
@@ -350,7 +357,35 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_stroke"
                         android:fontFamily="@font/poppins"
-                        android:hint="@string/indicator_value_moral"
+                        android:hint="@string/indicator_value_moral_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="@string/indicator_value_pekerti" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/indicator_third"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp5"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp5"
+                    app:hintEnabled="false">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_indicator_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/indicator_value_pekerti_hint"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>

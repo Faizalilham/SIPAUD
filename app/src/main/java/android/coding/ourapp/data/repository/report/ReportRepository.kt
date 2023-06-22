@@ -19,6 +19,7 @@ interface ReportRepository {
         date : String,
         indicatorAgama : MutableList<String>,
         indicatorMoral : MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images : MutableList<String>,
     ): Resource<String>
 
@@ -29,6 +30,7 @@ interface ReportRepository {
         date : String,
         indicatorAgama : MutableList<String>,
         indicatorMoral : MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images : MutableList<String>,
         listReport : MutableList<Report>,
         listNarrative : MutableList<Narrative>

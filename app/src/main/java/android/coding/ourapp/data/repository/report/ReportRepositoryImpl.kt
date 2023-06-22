@@ -87,13 +87,14 @@ class ReportRepositoryImpl @Inject constructor(
         date: String,
         indicatorAgama: MutableList<String>,
         indicatorMoral: MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images: MutableList<String>,
     ): Resource<String> {
         var resultFix = ""
         var resultErr : Exception = Exception()
         val idChild =  firebaseDatabase.reference.push().key.toString()
         val dataReport = mutableListOf<Report>(
-            Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicatorAgama,indicatorMoral,images)
+            Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicatorAgama,indicatorMoral,indicatorPekerti,images)
         )
         val narrative = mutableListOf<Narrative>(Narrative())
 
@@ -128,6 +129,7 @@ class ReportRepositoryImpl @Inject constructor(
         date: String,
         indicatorAgama: MutableList<String>,
         indicatorMoral: MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images: MutableList<String>,
         listReport : MutableList<Report>,
         listNarrative : MutableList<Narrative>
@@ -140,6 +142,7 @@ class ReportRepositoryImpl @Inject constructor(
                                val childRef = snapshot.ref
                                childRef.child("indicatorAgama").setValue(indicatorAgama)
                                childRef.child("indicatorMoral").setValue(indicatorMoral)
+                               childRef.child("indicatorPekerti").setValue(indicatorPekerti)
                                childRef.child("images").setValue(images)
                                childRef.child("reportName").setValue(reportName)
                                childRef.child("reportDate").setValue(date)
