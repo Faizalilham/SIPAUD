@@ -20,6 +20,7 @@ data class Report(
     val month : String = "",
     val indicatorAgama : MutableList<String> = mutableListOf(),
     val indicatorMoral : MutableList<String> = mutableListOf(),
+    val indicatorPekerti : MutableList<String> = mutableListOf(),
     val images : MutableList<String> = mutableListOf()
 ):Parcelable
 
@@ -28,4 +29,5 @@ data class Narrative(
     val month : String = "",
     val totalIndicatorAgama : Int = 0,
     val totalIndicatorMoral : Int = 0,
+    val totalIndicatorPekerti : Int = 0,
 )

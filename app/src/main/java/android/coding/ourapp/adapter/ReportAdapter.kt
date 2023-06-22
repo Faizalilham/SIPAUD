@@ -5,6 +5,7 @@ import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.coding.ourapp.utils.Utils
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -48,7 +49,8 @@ class ReportAdapter(
             if(listBitmap.isNotEmpty()){
                 Utils.showImageReportDetail(true, ArrayList(listBitmap),null,this,context)
             }
-            tvActivity.text = Utils.convertListToString(data[position].indicator)
+            Log.d("CEK","${data[position].indicatorAgama.plus(data[position].indicatorMoral)}")
+            tvActivity.text = Utils.convertListToString(data[position].indicatorAgama.plus(data[position].indicatorMoral).plus(data[position].indicatorPekerti))
 
             linearTittle.setOnClickListener {
                 if (expandableLayout.isExpanded) {

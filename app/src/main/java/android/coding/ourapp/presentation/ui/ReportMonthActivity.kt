@@ -47,7 +47,7 @@ class ReportMonthActivity : AppCompatActivity() {
         Utils.language(this)
 
         binding.tvDetailNameStudent.text = nameStudent
-        binding.tvDetailMonths.text = nameMonth
+        binding.tvMonth.text = nameMonth
         moveToAdd()
         back()
         getReport()
@@ -83,13 +83,21 @@ class ReportMonthActivity : AppCompatActivity() {
                         }.toMutableList()
 
                         if (dataKu.isNotEmpty()) {
-                            binding.tvDetailNarasi.text = dataKu[0].summary
-                            binding.tvDetailCategory.text = Utils.category(dataKu[0].totalIndicator)
-                            binding.btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
+                            binding.apply {
+                                tvDetailNarasi.text = dataKu[0].summary
+                                tvDetailPointAgama.text = dataKu[0].totalIndicatorAgama.toString()
+                                tvDetailPointMoral.text = dataKu[0].totalIndicatorMoral.toString()
+                                tvDetailPointPekerti.text = dataKu[0].totalIndicatorPekerti.toString()
+                                tvDetailCategoryAgama.text = Utils.category(dataKu[0].totalIndicatorAgama)
+                                tvDetailKategoriMoral.text = Utils.category(dataKu[0].totalIndicatorMoral)
+                                tvDetailKategoriPekerti.text = Utils.category(dataKu[0].totalIndicatorPekerti)
+                                btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
+                            }
+
                             binding.btnAddReporttMonth.setOnClickListener {
                                 showLoading(true)
                                 lifecycleScope.launch(Dispatchers.Main) {
-                                    exportPdf(nameStudent!!,dataKu[0].summary,"Berkembang",datak,dataKu[0].month)
+                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),datak,dataKu[0].month)
                                     showLoading(false)
                                 }
                             }
@@ -98,26 +106,36 @@ class ReportMonthActivity : AppCompatActivity() {
                            binding.apply {
                                emptyReport.visibility = View.GONE
                                tvDetailNarasi.visibility = View.VISIBLE
-                               tvDetailMonths.visibility = View.VISIBLE
+                               tvDetailPointMoral.visibility = View.VISIBLE
+                               tvDetailPointPekerti.visibility = View.VISIBLE
                                tvMonthg.visibility = View.VISIBLE
                                tvNameee.visibility = View.VISIBLE
                                tvDetailNameStudent.visibility = View.VISIBLE
-                               tvDetailCategory.visibility = View.VISIBLE
+                               tvDetailPointAgama.visibility = View.VISIBLE
+                               tvDetailCategoryAgama.visibility = View.VISIBLE
+                               tvDetailKategoriMoral.visibility = View.VISIBLE
+                               tvDetailKategoriPekerti.visibility = View.VISIBLE
                                leftBox.visibility = View.VISIBLE
                                leftBox1.visibility = View.VISIBLE
+                               leftBox2.visibility = View.VISIBLE
                                loadings.cancelAnimation()
                            }
                         } else {
                            binding.apply{
                                emptyReport.visibility = View.VISIBLE
                                tvDetailNarasi.visibility = View.GONE
-                               tvDetailMonths.visibility = View.GONE
+                               tvDetailPointMoral.visibility = View.GONE
+                               tvDetailPointPekerti.visibility = View.GONE
                                tvMonthg.visibility = View.GONE
                                tvNameee.visibility = View.GONE
                                tvDetailNameStudent.visibility = View.GONE
-                               tvDetailCategory.visibility = View.GONE
+                               tvDetailPointAgama.visibility = View.GONE
+                               tvDetailCategoryAgama.visibility = View.GONE
+                               tvDetailKategoriMoral.visibility = View.GONE
+                               tvDetailKategoriPekerti.visibility = View.GONE
                                leftBox.visibility = View.GONE
                                leftBox1.visibility = View.GONE
+                               leftBox2.visibility = View.GONE
                            }
                         }
 
@@ -149,10 +167,10 @@ class ReportMonthActivity : AppCompatActivity() {
 
     }
 
-    private suspend fun exportPdf(name : String,summary : String,category : String, reports: List<Report>,month : String,){
+    private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String, reports: List<Report>,month : String,){
         if(Utils.checkStoragePermission(this,this)){
             val job = lifecycleScope.async(Dispatchers.Default) {
-                Utils.exportToPdf(name,summary,category,reports,month, applicationContext)
+                Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,reports,month, applicationContext)
             }
             job.await()
             Toast.makeText(this@ReportMonthActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()

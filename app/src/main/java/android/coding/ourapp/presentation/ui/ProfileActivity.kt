@@ -51,13 +51,11 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun moveToHome(){
         binding.imageBack.setOnClickListener {
-            startActivity(Intent(this, StudentsActivity::class.java))
             finish()
         }
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, StudentsActivity::class.java))
         finish()
     }
 
