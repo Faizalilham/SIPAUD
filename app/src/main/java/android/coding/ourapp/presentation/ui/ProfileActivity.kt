@@ -55,9 +55,6 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -117,7 +114,9 @@ class ProfileActivity : AppCompatActivity() {
 
         btnYes.setOnClickListener {
             authViewModel.deleteToken()
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this,LoginActivity::class.java).also{
+                it.putExtra("EXIT", true);
+            })
             finish()
             finish()
             alertDialog.dismiss()
@@ -127,4 +126,5 @@ class ProfileActivity : AppCompatActivity() {
         }
         alertDialog.show()
     }
+
 }
