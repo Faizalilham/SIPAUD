@@ -240,6 +240,8 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                        resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                        resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                        listImages)
+               }else{
+                   Toast.makeText(this@CreateUpdateReportActivity, "Data tidak lengkap", Toast.LENGTH_SHORT).show()
                }
            }
        }

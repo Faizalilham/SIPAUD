@@ -432,6 +432,12 @@ object Utils {
     suspend fun exportToPdf(name : String, summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>, month : String,context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
+        var size = 0
+        reports.forEach {
+            size = it.images.size
+            Log.d("SIZE","$size ${it.images.size}")
+        }
+
         if (!directory.exists()) {
             directory.mkdir()
         }
@@ -463,8 +469,7 @@ object Utils {
         setParagraph("Narasi :",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph(summary,TextAlignment.LEFT,document,5f,10f,18f,false)
 
-        var size = 0
-        reports.forEach { size = it.images.size }
+
 
         val table = Table(UnitValue.createPercentArray(size)).useAllAvailableWidth()
         table.setHorizontalAlignment(HorizontalAlignment.LEFT)
