@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         if (intent.getBooleanExtra("EXIT", false)) {
             finish()
         }
-        finish()
+        finishAffinity()
     }
 
     private fun moveToRegister(){
