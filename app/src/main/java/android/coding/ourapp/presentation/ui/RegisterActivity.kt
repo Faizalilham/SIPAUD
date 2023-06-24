@@ -60,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun moveToLogin(){
         binding.tvLogin.setOnClickListener {
-            startActivity(Intent(this,LoginActivity::class.java).also{ finish() })
+          finish()
         }
     }
 

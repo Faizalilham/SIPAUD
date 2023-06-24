@@ -85,14 +85,16 @@ class ReportRepositoryImpl @Inject constructor(
         studentName: String,
         reportName: String,
         date: String,
-        indicator: MutableList<String>,
+        indicatorAgama: MutableList<String>,
+        indicatorMoral: MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images: MutableList<String>,
     ): Resource<String> {
         var resultFix = ""
         var resultErr : Exception = Exception()
         val idChild =  firebaseDatabase.reference.push().key.toString()
         val dataReport = mutableListOf<Report>(
-            Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicator,images)
+            Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicatorAgama,indicatorMoral,indicatorPekerti,images)
         )
         val narrative = mutableListOf<Narrative>(Narrative())
 
@@ -125,7 +127,9 @@ class ReportRepositoryImpl @Inject constructor(
         idChild : String,
         reportName: String,
         date: String,
-        indicator: MutableList<String>,
+        indicatorAgama: MutableList<String>,
+        indicatorMoral: MutableList<String>,
+        indicatorPekerti : MutableList<String>,
         images: MutableList<String>,
         listReport : MutableList<Report>,
         listNarrative : MutableList<Narrative>
@@ -136,7 +140,9 @@ class ReportRepositoryImpl @Inject constructor(
                        if (snapshot.exists()) {
                            for (snapshot in snapshot.children) {
                                val childRef = snapshot.ref
-                               childRef.child("indicator").setValue(indicator)
+                               childRef.child("indicatorAgama").setValue(indicatorAgama)
+                               childRef.child("indicatorMoral").setValue(indicatorMoral)
+                               childRef.child("indicatorPekerti").setValue(indicatorPekerti)
                                childRef.child("images").setValue(images)
                                childRef.child("reportName").setValue(reportName)
                                childRef.child("reportDate").setValue(date)

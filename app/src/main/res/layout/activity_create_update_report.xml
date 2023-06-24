@@ -123,7 +123,7 @@
                     <LinearLayout
                         android:id="@+id/linear_image"
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
+                        android:layout_height="190dp"
                         android:layout_marginTop="@dimen/dp15"
                         android:visibility="gone"
                         android:orientation="horizontal">
@@ -131,7 +131,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_first"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="170dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"
@@ -143,7 +143,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_second"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="170dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"
@@ -155,7 +155,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_third"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="170dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"
@@ -167,6 +167,7 @@
                     </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/image_parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp15">
@@ -312,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp8"
                     android:layout_marginTop="@dimen/dp20"
-                    android:text="@string/indicator_value" />
+                    android:text="@string/indicator_value_agama" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/indicator"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -328,10 +329,67 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_stroke"
                         android:fontFamily="@font/poppins"
-                        android:hint="@string/indicator_value"
+                        android:hint="@string/indicator_value_agama_hint"
                         android:imeOptions="actionDone"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="@string/indicator_value_moral" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/secondIndicator"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp5"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp5"
+                    app:hintEnabled="false">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_second_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/indicator_value_moral_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="@string/indicator_value_pekerti" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/indicator_third"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp5"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp5"
+                    app:hintEnabled="false">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_indicator_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/indicator_value_pekerti_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_achievement_activity"
                     android:layout_width="match_parent"

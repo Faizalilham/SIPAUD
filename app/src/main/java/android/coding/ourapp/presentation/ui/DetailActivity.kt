@@ -216,7 +216,7 @@ class DetailActivity : AppCompatActivity() {
     private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
         binding.export?.setOnClickListener {
            if(Utils.checkStoragePermission(this,this)){
-               Utils.exportToPdf(bitmaps,texts,this)
+//               Utils.exportToPdf(bitmaps,texts,this)
                Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
            }
         }

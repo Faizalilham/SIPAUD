@@ -61,7 +61,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onBackPressed() {
+        if (intent.getBooleanExtra("EXIT", false)) {
+            finish()
+        }
+        finishAffinity()
+    }
 
     private fun moveToRegister(){
         binding.tvRegister.setOnClickListener {

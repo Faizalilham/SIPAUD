@@ -75,7 +75,12 @@
     <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
     <string name="alert_delete_1">Apakah Anda yakin ingin menghapus data ini?</string>
     <string name="not_found">Data tidak tersedia</string>
-    <string name="indicator_value">Indicator Penilaian</string>
+    <string name="indicator_value_pekerti">Indicator Penilaian Budi Pekerti</string>
+    <string name="indicator_value_agama" translatable="false">Indicator Penilaian Agama</string>
+    <string name="indicator_value_moral" translatable="false">Indicator Penilaian Moral</string>
+    <string name="indicator_value_pekerti_hint">Klik untuk melihat indicator Penilaian Budi Pekerti</string>
+    <string name="indicator_value_agama_hint" translatable="false">Klik untuk melihat Indicator Penilaian Agama</string>
+    <string name="indicator_value_moral_hint" translatable="false">Klik untuk melihat Indicator Penilaian Moral</string>
     <string name="add_indicator">Tambahkan Indicator</string>
     <string name="week_1">Minggu ke 1</string>
     <string name="report_1">Laporan ke 1</string>
@@ -85,6 +90,8 @@
     <string name="delete">Hapus</string>
     <string name="update">Ubah</string>
     <string name="ekspor_pdf">Ekspor ke PDF</string>
+    <string name="category">Kategori :</string>
+    <string name="point">Point :</string>
 
     <string-array name="week">
         <item>Minggu ke 1</item>
@@ -96,7 +103,47 @@
     <string-array name="report">
         <item>Laporan ke 1</item>
         <item>Laporan ke 2</item>
+        <item>Laporan ke 3</item>
+        <item>Laporan ke 4</item>
+        <item>Laporan ke 5</item>
     </string-array>
+
+    <string-array name="agama">
+        <item>Anak patuh dalam melaksanakan ajaran agama yang dianutnya</item>
+        <item>Anak dapat melaksanakan ibadah tepat waktu</item>
+        <item>Anak dapat berdoa sebelum atau sesudah melaksanakan sesuatu</item>
+        <item>Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
+        <item>Anak dapat mengingatkan teman untuk selalu berdoa</item>
+        <item>Anak tidak dapat mengganggu teman yang sedang beribadah</item>
+    </string-array>
+
+    <string-array name="pekerti">
+        <item>Anak Mampu mengucapkan maaf jika berbuat salah</item>
+        <item>Anak mampu mengucapkan minta tolong jika butuh bantuan</item>
+        <item>Anak mampu mengucapkan permisi jika melewati orang lain</item>
+        <item>Anak mampu gucapkan terima kasih jika menerima sesuatu</item>
+        <item>Anak mampu mendengarkan orang lain berbicara</item>
+    </string-array>
+
+
+    <string-array name="moral">
+        <item>Anak datang tepat waktu</item>
+        <item>Anak dapat duduk ditempat yang telah disediakan</item>
+        <item>Anak dapat menggunakan sesuatu secukupnya</item>
+        <item>Anak dapat sabar menunggu giliran saat antre</item>
+        <item>Anak dapat sabar menunggu giliran saat menerima tugas</item>
+        <item>Anak dapat makan sendiri</item>
+        <item>Anak dapat meletakkan barang sesuai dengan tempatnya</item>
+        <item>Anak dapat tunjuk tangan dulu sebelum menjawab pertanyaan atau berpendapat</item>
+        <item>Anak mampu mencuci tangan dengan sabun dan air mengalir</item>
+        <item>Anak mampu menggosok gigi minimal 2 kali sehari</item>
+        <item>Anak mau memotong kuku seminggu sekali</item>
+        <item>Anak mampu membuang sampah pada tempatnya</item>
+        <item>Anak mampu dengan rutin berolahraga pada pagi hari</item>
+        <item>Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
+    </string-array>
+
+
 
 
 </resources>

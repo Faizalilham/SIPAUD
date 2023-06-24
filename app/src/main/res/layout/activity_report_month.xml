@@ -128,60 +128,47 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Laporan bulan :"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nameee" />
+
+                <TextView
+                    android:id="@+id/tv_month"
+                    style="@style/AppTheme.TextSubTittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Nama Siswa :"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nameee" />
+
                 <LinearLayout
                     android:id="@+id/linearLayout5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:orientation="horizontal"
+                    android:padding="@dimen/dp8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nameee"
-                    tools:context=".MainActivity">
+                    app:layout_constraintTop_toBottomOf="@id/tv_month">
 
                     <LinearLayout
                         android:id="@+id/leftBox"
                         android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_margin="@dimen/dp8"
-                        android:layout_weight="1"
-                        android:background="@drawable/box_border"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_nameee">
-
-                        <TextView
-                            style="@style/AppTheme.TextSubTittle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:text="Laporan Bulan :"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_detail_months"
-                            style="@style/AppTheme.TextSubTittle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:layout_marginBottom="@dimen/dp10"
-                            android:text="Bulan"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/leftBox1"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp8"
                         android:layout_weight="1"
                         android:background="@drawable/box_border"
@@ -194,21 +181,217 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp10"
-                            android:text="Kategori : "
-                            android:textColor="@color/black"
+                            android:text="Nilai indicator Agama"
+                            android:textAlignment="center"
                             android:textStyle="bold" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text="@string/point" />
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:id="@+id/tv_detail_point_agama"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text=" 38"
+                                android:textSize="16sp"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text="@string/category" />
+
+                        </LinearLayout>
+
                         <TextView
-                            android:id="@+id/tv_detail_category"
+                            style="@style/AppTheme.TextSubTittle"
+                            android:id="@+id/tv_detail_category_agama"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:text=" 3hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh8"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/leftBox1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp8"
+                        android:layout_weight="1"
+                        android:background="@drawable/box_border"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
                             style="@style/AppTheme.TextSubTittle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp10"
-                            android:text="Berkembang"
-                            android:textColor="@color/black"
+                            android:text="Nilai indicator Moral"
+                            android:textAlignment="center"
                             android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text="@string/point" />
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:id="@+id/tv_detail_point_moral"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text=" 38"
+                                android:textSize="16sp"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/AppTheme.TextSubTittle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/dp5"
+                                android:text="@string/category" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:id="@+id/tv_detail_kategori_moral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:textAlignment="center"
+                            android:text=" 38"
+
+                            android:textSize="16sp" />
+
+
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/leftBox2"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:layout_weight="1"
+                    android:background="@drawable/box_border"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+                    <TextView
+                        style="@style/AppTheme.TextSubTittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:text="Nilai indicator Moral"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp5"
+                            android:text="@string/point" />
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:id="@+id/tv_detail_point_pekerti"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp5"
+                            android:text=" 38"
+                            android:textSize="16sp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/AppTheme.TextSubTittle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/dp5"
+                            android:text="@string/category" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/AppTheme.TextSubTittle"
+                        android:id="@+id/tv_detail_kategori_pekerti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:text=" 38"
+                        android:textSize="16sp" />
+
 
                 </LinearLayout>
 
@@ -235,7 +418,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+                    app:layout_constraintTop_toBottomOf="@+id/leftBox2" />
 
                 <TextView
                     android:id="@+id/tv_detail_narasi"
@@ -309,5 +492,43 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+       >
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/loadingBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="#000000"
+                android:orientation="horizontal" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/lottie_loading"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginBottom="50dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -27,7 +27,7 @@ class ReportActivity : AppCompatActivity() {
     private val reportViewModel by viewModels<ReportViewModel>()
     private lateinit var adapterMonth : AdapterMonthReport
     private val listBackground : MutableList<Int> = mutableListOf(R.raw.bg_januari,
-        R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei,R.raw.bg_juni,R.raw.bg_juli,R.raw.bg_agustus,R.raw.bg_september, R.raw.bg_oktober)
+        R.raw.bg_februari,R.raw.bg_maret,R.raw.bg_april,R.raw.bg_mei,R.raw.bg_juni,R.raw.bg_juli,R.raw.bg_agustus,R.raw.bg_september, R.raw.bg_oktober,R.raw.bg_oktober,R.raw.bg_oktober)
 
     private var nameStudent : String? = null
     private var idParent : String = ""
@@ -43,7 +43,13 @@ class ReportActivity : AppCompatActivity() {
         nameStudent = intent.getStringExtra(NAME_STUDENT)
         idStudent = intent.getStringExtra(ID_STUDENT)
         binding.tvName.text = nameStudent
+        showLoading(false)
         Log.d("CEK UYE","\"$idStudent \"")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLoading(false)
     }
 
     private fun getAllReport(){
@@ -122,17 +128,25 @@ class ReportActivity : AppCompatActivity() {
         }
 
         adapterMonth.setItemClickedListener { name ->
+            showLoading(true)
             startActivity(Intent(this@ReportActivity,ReportMonthActivity::class.java).also{
                 it.putExtra(EXTRA_DATA,nameStudent)
                 it.putExtra(MONTH, name)
                 it.putExtra(ID_PARENT, idParent)
                 it.putExtra(ID_STUDENT, idStudent)
             })
+
         }
 
         binding.rvMonth.apply {
             adapter = adapterMonth
             layoutManager = GridLayoutManager(this@ReportActivity,2)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.apply {
+            if(isLoading )frameLoading.visibility = View.VISIBLE else frameLoading.visibility = View.GONE
         }
     }
 

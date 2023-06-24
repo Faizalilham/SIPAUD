@@ -18,12 +18,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class ReportMonthActivity : AppCompatActivity() {
-
     private var _binding: ActivityReportMonthBinding? = null
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
@@ -37,28 +38,26 @@ class ReportMonthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityReportMonthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        showLoading(true)
         nameStudent = intent.getStringExtra(EXTRA_DATA)
         nameMonth = intent.getStringExtra(MONTH)
         idParent = intent.getStringExtra(ID_PARENT)
         idStudent = intent.getStringExtra(ID_STUDENT)
-
+        Utils.language(this)
         binding.tvDetailNameStudent.text = nameStudent
-        binding.tvDetailMonths.text = nameMonth
+        binding.tvMonth.text = nameMonth
         moveToAdd()
         back()
         getReport()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
         if (currentMonth != null) {
             reportViewModel.getAllReport.observe(this) {
                 when (it) {
                     is Resource.Success -> {
-                        stopLoading()
+                        showLoading(false)
                         val narrative = mutableListOf<Narrative>()
                         val data = it.result.filter { uye ->
                             uye.idStudent == idStudent
@@ -69,7 +68,6 @@ class ReportMonthActivity : AppCompatActivity() {
                         val dataKu = narrative.filter { report ->
                             report.month == currentMonth
                         }
-
                         val listReport = mutableListOf<Report>()
                         val dataReport = it.result.filter { dt ->
                             dt.idStudent == idStudent
@@ -80,41 +78,60 @@ class ReportMonthActivity : AppCompatActivity() {
                         }.toMutableList()
 
                         if (dataKu.isNotEmpty()) {
-                            binding.tvDetailNarasi.text = dataKu[0].summary
-                            binding.btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
-                            binding.btnAddReporttMonth.setOnClickListener {
-                                val datax = monthAdapter.getData()
-                                val listImageBitmap = arrayListOf<Bitmap>()
-                                val textList = arrayListOf<String>()
+                            binding.apply {
+                                tvDetailNarasi.text = dataKu[0].summary
+                                tvDetailPointAgama.text = dataKu[0].totalIndicatorAgama.toString()
+                                tvDetailPointMoral.text = dataKu[0].totalIndicatorMoral.toString()
+                                tvDetailPointPekerti.text = dataKu[0].totalIndicatorPekerti.toString()
+                                tvDetailCategoryAgama.text = Utils.category(dataKu[0].totalIndicatorAgama)
+                                tvDetailKategoriMoral.text = Utils.category(dataKu[0].totalIndicatorMoral)
+                                tvDetailKategoriPekerti.text = Utils.category(dataKu[0].totalIndicatorPekerti)
+                                btnAddReporttMonth.text = getString(R.string.ekspor_pdf)
+                            }
 
-                                for (item in datax) {
-                                    for(datas in item.images){
-                                        listImageBitmap.add(Utils.convertStringToBitmap(datas))
-                                    }
-                                    textList.addAll(listOf( "${item.month}","${item.reportDate}","${item.reportName}", "${item.indicator}"))
+                            binding.btnAddReporttMonth.setOnClickListener {
+                                showLoading(true)
+                                lifecycleScope.launch(Dispatchers.Main) {
+                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month)
+                                    showLoading(false)
                                 }
-                                exportPdf(listImageBitmap, textList)
                             }
                             setupRecycler(datak)
-                            binding.emptyReport.visibility = View.GONE
-                            binding.tvDetailNarasi.visibility = View.VISIBLE
-                            binding.tvDetailMonths.visibility = View.VISIBLE
-                            binding.tvMonthg.visibility = View.VISIBLE
-                            binding.tvNameee.visibility = View.VISIBLE
-                            binding.tvDetailNameStudent.visibility = View.VISIBLE
-                            binding.tvDetailCategory.visibility = View.VISIBLE
-                            binding.leftBox.visibility = View.VISIBLE
-                            binding.leftBox1.visibility = View.VISIBLE
+                            showLoading(false)
+                           binding.apply {
+                               emptyReport.visibility = View.GONE
+                               tvDetailNarasi.visibility = View.VISIBLE
+                               tvDetailPointMoral.visibility = View.VISIBLE
+                               tvDetailPointPekerti.visibility = View.VISIBLE
+                               tvMonthg.visibility = View.VISIBLE
+                               tvNameee.visibility = View.VISIBLE
+                               tvDetailNameStudent.visibility = View.VISIBLE
+                               tvDetailPointAgama.visibility = View.VISIBLE
+                               tvDetailCategoryAgama.visibility = View.VISIBLE
+                               tvDetailKategoriMoral.visibility = View.VISIBLE
+                               tvDetailKategoriPekerti.visibility = View.VISIBLE
+                               leftBox.visibility = View.VISIBLE
+                               leftBox1.visibility = View.VISIBLE
+                               leftBox2.visibility = View.VISIBLE
+                               loadings.cancelAnimation()
+                           }
                         } else {
-                            binding.emptyReport.visibility = View.VISIBLE
-                            binding.tvDetailNarasi.visibility = View.GONE
-                            binding.tvDetailMonths.visibility = View.GONE
-                            binding.tvMonthg.visibility = View.GONE
-                            binding.tvNameee.visibility = View.GONE
-                            binding.tvDetailNameStudent.visibility = View.GONE
-                            binding.tvDetailCategory.visibility = View.GONE
-                            binding.leftBox.visibility = View.GONE
-                            binding.leftBox1.visibility = View.GONE
+                           binding.apply{
+                               emptyReport.visibility = View.VISIBLE
+                               tvDetailNarasi.visibility = View.GONE
+                               tvDetailPointMoral.visibility = View.GONE
+                               tvDetailPointPekerti.visibility = View.GONE
+                               tvMonthg.visibility = View.GONE
+                               tvNameee.visibility = View.GONE
+                               tvDetailNameStudent.visibility = View.GONE
+                               tvDetailPointAgama.visibility = View.GONE
+                               tvDetailCategoryAgama.visibility = View.GONE
+                               tvDetailKategoriMoral.visibility = View.GONE
+                               tvDetailKategoriPekerti.visibility = View.GONE
+                               leftBox.visibility = View.GONE
+                               leftBox1.visibility = View.GONE
+                               leftBox2.visibility = View.GONE
+                           }
                         }
                     }
                     is Resource.Loading -> {
@@ -151,13 +168,21 @@ class ReportMonthActivity : AppCompatActivity() {
             adapter = monthAdapter
             layoutManager = LinearLayoutManager(this@ReportMonthActivity)
         }
-
     }
 
-    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+    private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>,month : String,){
         if(Utils.checkStoragePermission(this,this)){
-            Utils.exportToPdf(bitmaps,texts,this)
-            Toast.makeText(this, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+            val job = lifecycleScope.async(Dispatchers.Default) {
+                Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)
+            }
+            job.await()
+            Toast.makeText(this@ReportMonthActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.apply {
+            if(isLoading )frameLoading.visibility = View.VISIBLE else frameLoading.visibility = View.GONE
         }
     }
 
