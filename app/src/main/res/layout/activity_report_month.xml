@@ -83,7 +83,7 @@
                             style="@style/AppTheme.TextTittle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Detail Bulanan"
+                            android:text="@string/monthly_detail"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textStyle="bold"
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="Nama Siswa :"
+                    android:text= "@string/name_student"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="Laporan bulan :"
+                    android:text="@string/report_month"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -181,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp10"
-                            android:text="Nilai indicator Agama"
+                            android:text="@string/value_indicator_religious"
                             android:textAlignment="center"
                             android:textStyle="bold" />
 
@@ -256,7 +256,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp10"
-                            android:text="Nilai indicator Moral"
+                            android:text="@string/value_indicator_moral"
                             android:textAlignment="center"
                             android:textStyle="bold" />
 
@@ -337,7 +337,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp10"
-                        android:text="Nilai indicator Moral"
+                        android:text="@string/value_indicator_budi"
                         android:textAlignment="center"
                         android:textStyle="bold" />
 
@@ -414,7 +414,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Narasi :"
+                    android:text="@string/assesment"
                     android:textAlignment="center"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -482,7 +482,7 @@
             android:textStyle="bold"
             style="@style/AppTheme.TextSubTittle"
             android:textColor="@color/white"
-            android:text="Tambah Laporan Bulanan"
+            android:text="@string/add_report_month"
             app:icon="@drawable/ic_add"
             android:padding="12dp"
             app:cornerRadius="@dimen/dp15"

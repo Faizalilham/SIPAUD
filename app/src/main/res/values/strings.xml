@@ -76,11 +76,11 @@
     <string name="alert_delete_1">Apakah Anda yakin ingin menghapus data ini?</string>
     <string name="not_found">Data tidak tersedia</string>
     <string name="indicator_value_pekerti">Indicator Penilaian Budi Pekerti</string>
-    <string name="indicator_value_agama" translatable="false">Indicator Penilaian Agama</string>
-    <string name="indicator_value_moral" translatable="false">Indicator Penilaian Moral</string>
+    <string name="indicator_value_agama">Indicator Penilaian Agama</string>
+    <string name="indicator_value_moral">Indicator Penilaian Moral</string>
     <string name="indicator_value_pekerti_hint">Klik untuk melihat indicator Penilaian Budi Pekerti</string>
-    <string name="indicator_value_agama_hint" translatable="false">Klik untuk melihat Indicator Penilaian Agama</string>
-    <string name="indicator_value_moral_hint" translatable="false">Klik untuk melihat Indicator Penilaian Moral</string>
+    <string name="indicator_value_agama_hint">Klik untuk melihat Indicator Penilaian Agama</string>
+    <string name="indicator_value_moral_hint">Klik untuk melihat Indicator Penilaian Moral</string>
     <string name="add_indicator">Tambahkan Indicator</string>
     <string name="week_1">Minggu ke 1</string>
     <string name="report_1">Laporan ke 1</string>
@@ -92,6 +92,17 @@
     <string name="ekspor_pdf">Ekspor ke PDF</string>
     <string name="category">Kategori :</string>
     <string name="point">Point :</string>
+    <string name="report_month">Laporan bulan :</string>
+    <string name="assesment">Narasi :</string>
+    <string name="add_report_month">Tambah Laporan Bulanan</string>
+    <string name="value_indicator_moral">Nilai indicator Moral</string>
+    <string name="value_indicator_religious">Nilai indicator Agama</string>
+    <string name="value_indicator_budi">Nilai Indicator Budi pekerti</string>
+    <string name="weekly_report_details_from_student_named">Detail Laporan Perminggu Dari Siswa yang Bernama :</string>
+    <string name="monthly_progress_report_list_for_child_named">Daftar Laporan Perkembangan Bulanan Anak yang Bernama :</string>
+    <string name="report_monthan">Laporan Bulanan</string>
+    <string name="week_1_report_1">Minggu ke 1, Laporan ke 1</string>
+    <string name="edit">Ubah</string>
 
     <string-array name="week">
         <item>Minggu ke 1</item>
@@ -142,8 +153,14 @@
         <item>Anak mampu dengan rutin berolahraga pada pagi hari</item>
         <item>Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
     </string-array>
-
-
+    <string name="indicator_value">Indicator Penilaian</string>
+    <string name="the_weekly_report_has_been_created">Laporan mingguan telah dibuat</string>
+    <string name="not_showing_progress">Belum berkembang</string>
+    <string name="starting_to_show_progress">Mulai berkembang</string>
+    <string name="progressing_as_expected">Berkembang sesuai harapan</string>
+    <string name="showing_excellent_progress">Berkembang sangat baik</string>
+    <string name="undefined">Tidak terdefinisi</string>
+    <string name="monthly_detail">Detail Bulanan</string>
 
 
 </resources>

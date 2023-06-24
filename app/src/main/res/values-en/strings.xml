@@ -85,5 +85,32 @@
     <string name="delete">Delete</string>
     <string name="update">Update</string>
     <string name="ekspor_pdf">Ekspor to PDF</string>
+    <string name="indicator_value_pekerti_hint">Click to view indicators for assessing \"Budi pekerti\"</string>
+    <string name="indicator_value_agama_hint">Click to view indicators for assessing \"Agama\"</string>
+    <string name="indicator_value_moral_hint">Click to view indicators for assessing \"Moral\"</string>
+    <string name="category">Category :</string>
+    <string name="point">Point :</string>
+    <string name="assesment">Assesment :</string>
+    <string name="monthly_progress_report_list_for_child_named">"Monthly Progress Report List for Child Named : "</string>
+    <string name="week_1_report_1">Week 1, Report 1</string>
+    <string name="indicator_value_pekerti">Indicators for Assessing "Budi pekerti"</string>
+    <string name="indicator_value_agama">Indicators for Assessing "Agama"</string>
+    <string name="indicator_value_moral">Indicators for Assessing "Moral"</string>
+    <string name="report_month">Report month :</string>
+    <string name="add_report_month">Add Report Month</string>
+    <string name="value_indicator_moral">Indicator moral values</string>
+    <string name="value_indicator_religious">Indicator religious values</string>
+    <string name="value_indicator_budi">Indicator character values</string>
+    <string name="weekly_report_details_from_student_named">Weekly Report Details From Student Named</string>
+    <string name="report_monthan">Monthly Report</string>
+    <string name="edit">Edit</string>
+    <string name="the_weekly_report_has_been_created">The weekly report has been created</string>
+    <string name="not_showing_progress">Not showing progress</string>
+    <string name="starting_to_show_progress">Starting to show progress</string>
+    <string name="progressing_as_expected">progressing as expected</string>
+    <string name="showing_excellent_progress">Showing excellent progress</string>
+    <string name="undefined">Undefined</string>
+    <string name="monthly_detail">Monthly Detail</string>
+
 
 </resources>

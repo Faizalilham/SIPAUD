@@ -61,7 +61,7 @@
             style="@style/AppTheme.TextTittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Laporan Bulanan"
+            android:text="@string/report_monthan"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -81,7 +81,7 @@
         android:layout_marginTop="@dimen/dp15"
         android:layout_marginEnd="@dimen/dp15"
         android:layout_marginStart="@dimen/dp15"
-        android:text="Daftar Laporan Perkembangan Bulanan Anak yang Bernama :"
+        android:text="@string/monthly_progress_report_list_for_child_named"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar" />
