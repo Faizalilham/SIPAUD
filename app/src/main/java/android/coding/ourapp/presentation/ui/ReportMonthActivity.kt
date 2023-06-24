@@ -13,20 +13,13 @@ import android.coding.ourapp.utils.Key.Companion.MONTH
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
 import android.os.Bundle
-import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 @AndroidEntryPoint
 class ReportMonthActivity : AppCompatActivity() {
@@ -53,23 +46,22 @@ class ReportMonthActivity : AppCompatActivity() {
         binding.tvDetailMonths.text = nameMonth
         moveToAdd()
         back()
+        getReport()
     }
 
     override fun onResume() {
         super.onResume()
-        getReport()
     }
-
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
         if (currentMonth != null) {
             reportViewModel.getAllReport.observe(this) {
                 when (it) {
                     is Resource.Success -> {
+                        stopLoading()
                         val narrative = mutableListOf<Narrative>()
                         val data = it.result.filter { uye ->
                             uye.idStudent == idStudent
-
                         }
                         data.forEach { report ->
                             narrative.addAll(report.narratives)
@@ -113,7 +105,6 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.tvDetailCategory.visibility = View.VISIBLE
                             binding.leftBox.visibility = View.VISIBLE
                             binding.leftBox1.visibility = View.VISIBLE
-                            binding.loadings.cancelAnimation()
                         } else {
                             binding.emptyReport.visibility = View.VISIBLE
                             binding.tvDetailNarasi.visibility = View.GONE
@@ -125,10 +116,9 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.leftBox.visibility = View.GONE
                             binding.leftBox1.visibility = View.GONE
                         }
-
                     }
                     is Resource.Loading -> {
-                        binding.loadings.playAnimation()
+                        showLoading()
                     }
                     is Resource.Failure -> {
                         Toast.makeText(
@@ -143,6 +133,16 @@ class ReportMonthActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(){
+        binding.loadings.visibility = View.VISIBLE
+        binding.loadings.playAnimation()
+    }
+
+    private fun stopLoading(){
+        binding.loadings.visibility = View.GONE
+        binding.loadings.cancelAnimation()
     }
 
     private fun setupRecycler(data: MutableList<Report>) {

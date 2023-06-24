@@ -86,7 +86,4 @@ class ReportViewModel @Inject constructor(
 
         }
     }
-
-
-
 }
