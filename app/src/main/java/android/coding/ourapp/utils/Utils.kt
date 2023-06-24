@@ -1,7 +1,10 @@
+@file:Suppress("EmptyMethod", "RedundantSuspendModifier", "RedundantSamConstructor")
+
 package android.coding.ourapp.utils
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.coding.ourapp.R
@@ -11,6 +14,7 @@ import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.coding.ourapp.databinding.ListItemMonthBinding
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -23,15 +27,22 @@ import android.os.Environment
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import android.content.Context
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.itextpdf.io.image.ImageDataFactory
+import com.itextpdf.kernel.font.PdfFontFactory
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfWriter
+import com.itextpdf.layout.Document
+import com.itextpdf.layout.borders.Border
+import com.itextpdf.layout.element.*
+import com.itextpdf.layout.property.*
+import com.itextpdf.layout.renderer.LineSeparatorRenderer
 import com.leo.searchablespinner.SearchableSpinner
 import com.leo.searchablespinner.interfaces.OnItemSelectListener
 import java.io.ByteArrayOutputStream
@@ -39,23 +50,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import com.itextpdf.layout.element.LineSeparator
-import com.itextpdf.layout.renderer.LineSeparatorRenderer
-import kotlin.collections.ArrayList
-import com.itextpdf.kernel.pdf.PdfWriter
-import com.itextpdf.layout.Document
-import com.itextpdf.io.image.ImageDataFactory
-import com.itextpdf.kernel.colors.DeviceRgb
-import com.itextpdf.kernel.font.PdfFontFactory
-import com.itextpdf.kernel.pdf.PdfDocument
-import com.itextpdf.layout.borders.Border
-import com.itextpdf.layout.element.*
-import com.itextpdf.layout.property.*
-import java.time.LocalDate
-import kotlin.coroutines.coroutineContext
 
 
 class Key{
@@ -80,7 +78,7 @@ object Utils {
                 now.set(Calendar.YEAR,mYear)
                 now.set(Calendar.MONTH,mMount)
                 now.set(Calendar.DAY_OF_MONTH,mDay)
-                e.setText(formatDate.format(now.time))
+                e.text = formatDate.format(now.time)
             },year,month,day
         )
         datePicker.show()
@@ -230,6 +228,7 @@ object Utils {
     }
 
     // FUNCTION TO CHECK PERMISSION
+    @RequiresApi(Build.VERSION_CODES.R)
     fun checkStoragePermission(
         activity : Activity,
         context : Context):Boolean {
@@ -589,10 +588,11 @@ object Utils {
 //    }
 
     // FUNCTION TO SEARCH STUDENT
+    @SuppressLint("DefaultLocale")
     fun userMatchesSearch(student : Student, searchQuery: String): Boolean {
-        val lowercaseQuery = searchQuery.toLowerCase()
-        val nameMatches = student.nameStudent?.toLowerCase()?.contains(lowercaseQuery)
-        val emailMatches = student.group?.toLowerCase()?.contains(lowercaseQuery)
+        val lowercaseQuery = searchQuery.lowercase(Locale.getDefault())
+        val nameMatches = student.nameStudent?.lowercase(Locale.getDefault())?.contains(lowercaseQuery)
+        val emailMatches = student.group?.lowercase(Locale.getDefault())?.contains(lowercaseQuery)
         return nameMatches == true|| emailMatches == true
     }
 
@@ -613,6 +613,7 @@ object LanguageManager {
     private const val PREFERENCE_LANGUAGE = "language"
     private const val DEFAULT_LANGUAGE = "id"
 
+    @SuppressLint("AppBundleLocaleChanges")
     fun setLanguage(context: Context, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)

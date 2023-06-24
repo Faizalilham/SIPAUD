@@ -2,9 +2,9 @@ package android.coding.ourapp.data.repository.report_month
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
 import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.data.datasource.model.ReportMonth
-import android.coding.ourapp.data.datasource.model.Student
 import android.util.Log
 
+@Suppress("ControlFlowWithEmptyBody", "ControlFlowWithEmptyBody")
 class ReportMonthRepository(private val firebaseHelper: FirebaseHelper) {
 
     fun addData(
@@ -34,7 +34,7 @@ class ReportMonthRepository(private val firebaseHelper: FirebaseHelper) {
     }
 
     fun updateData(reportMonth: DataReport) {
-        val dataRef = firebaseHelper.dbReferences.child(reportMonth.id ?: "").child("narrative")
+        val dataRef = firebaseHelper.dbReferences.child(reportMonth.id).child("narrative")
         val newStudent = DataReport(
             id = reportMonth.id,
             idStudent = "",

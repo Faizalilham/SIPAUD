@@ -5,7 +5,9 @@ import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.utils.Utils
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -80,6 +82,7 @@ class ReportRepositoryImpl @Inject constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun createReport(
         idStudent : String,
         studentName: String,
@@ -136,6 +139,7 @@ class ReportRepositoryImpl @Inject constructor(
     ): Resource<String> {
        return if(listReport.isEmpty() && listNarrative.isEmpty()){
            firebaseDatabase.reference.child("report").child(idParent).child("reports").orderByChild("id").equalTo(idChild).addListenerForSingleValueEvent(object : ValueEventListener{
+                   @RequiresApi(Build.VERSION_CODES.O)
                    override fun onDataChange(snapshot: DataSnapshot) {
                        if (snapshot.exists()) {
                            for (snapshot in snapshot.children) {

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SIAP-AUD</string>
     <string name="tittle">System Information daily early childhood development</string>
     <string name="card_tittle">Belajar Menghitung</string>
-    <string name="card_description">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
+    <string name="card_description" tools:ignore="TypographyEllipsis">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
     <string name="hint_search">Search Document</string>
     <string name="filter">Filter by :</string>
-    <string name="filter_alphabet">A - Z</string>
-    <string name="filter_news">Newest</string>
-    <string name="filter_latest">Oldest</string>
-    <string name="filter_favorite">Favorite</string>
+    <string name="filter_alphabet" tools:ignore="UnusedResources">A - Z</string>
+    <string name="filter_news" tools:ignore="UnusedResources">Newest</string>
+    <string name="filter_latest" tools:ignore="UnusedResources">Oldest</string>
+    <string name="filter_favorite" tools:ignore="UnusedResources">Favorite</string>
     <string name="hint_tittle">Insert Title . . .</string>
     <string name="hint_description">Insert Description Assessment . . .</string>
     <string name="hint_activity_achievement">Insert Activity Achievement . . .</string>
@@ -24,18 +24,18 @@
     <string name="date_detail">Dibuat pada 08 Juni 2023</string>
     <string name="description_detail">Kirana mengambil benang wol warna jingga dan merah. Dia menarik benang wol panjang dan mengguntinya.</string>
     <string name="student_detail">Siswa dalam kegiatan</string>
-    <string name="student_name">Alex</string>
+    <string name="student_name" tools:ignore="UnusedResources">Alex</string>
     <string name="add_student_activity">Add Student in Activity</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="camera">Camera</string>
-    <string name="gallery">Gallery</string>
-    <string name="choose_image">Choose Image</string>
+    <string name="camera" tools:ignore="UnusedResources">Camera</string>
+    <string name="gallery" tools:ignore="UnusedResources">Gallery</string>
+    <string name="choose_image" tools:ignore="UnusedResources">Choose Image</string>
     <string name="add_asesment">Add Assessment</string>
     <string name="update_asesment">Update Assessment</string>
     <string name="update_student">Update Student</string>
     <string name="profile">Profile</string>
-    <string name="student_bio">Student Biodata</string>
+    <string name="student_bio" tools:ignore="UnusedResources">Student Biodata</string>
     <string name="student_identity">List Student Identify</string>
     <string name="register">Register</string>
     <string name="register_message">Create New Account for Login</string>
@@ -60,30 +60,30 @@
     <string name="tittle_third_onboarding">Share Your Journey</string>
     <string name="subtittle_third_onboarding">Our application makes it easy for you to share your activity narrative via social media or directly to the people closest to you.</string>
     <string name="back">Back</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" tools:ignore="UnusedResources">Hello blank fragment</string>
     <string name="info_app">SIAP - AUD is an application used to document student activities by creating narratives of their activities, which can also be used as daily activity reports.</string>
-    <string name="tutup">Close</string>
+    <string name="tutup" tools:ignore="UnusedResources">Close</string>
     <string name="pilih_bahasa">Choose Language</string>
     <string name="bahasa_indonesia">Bahasa Indonesia</string>
     <string name="english">English</string>
     <string name="alert_logout">Are you sure you want to log out of your account?</string>
     <string name="alert_confirm">Confirmation</string>
-    <string name="alert_delete">Are you sure you want to delete the selected data?</string>
+    <string name="alert_delete" tools:ignore="UnusedResources">Are you sure you want to delete the selected data?</string>
     <string name="alert_update">re you sure you want to make changes to this data?</string>
-    <string name="alert_delete_1">Are you sure you want to delete this data?</string>
+    <string name="alert_delete_1" tools:ignore="UnusedResources">Are you sure you want to delete this data?</string>
     <string name="not_found">Data Not Found</string>
     <string name="warning_form">All fields are required</string>
     <string name="alert_tittle">Warning !!</string>
     <string name="alert_subtile_delete">The assessment will be permanently deleted, are you sure you want to delete this assessment? </string>
-    <string name="indicator_value">Indicator Value</string>
-    <string name="add_indicator">Add Indicator</string>
+    <string name="indicator_value" tools:ignore="UnusedResources">Indicator Value</string>
+    <string name="add_indicator" tools:ignore="UnusedResources">Add Indicator</string>
     <string name="week_1">Week 1</string>
     <string name="report_1">Report 1</string>
     <string name="create_report">Create Report</string>
     <string name="name_student">Name Student :</string>
     <string name="date">Date</string>
     <string name="delete">Delete</string>
-    <string name="update">Update</string>
+    <string name="update" tools:ignore="UnusedResources">Update</string>
     <string name="ekspor_pdf">Ekspor to PDF</string>
     <string name="indicator_value_pekerti_hint">Click to view indicators for assessing \"Budi pekerti\"</string>
     <string name="indicator_value_agama_hint">Click to view indicators for assessing \"Agama\"</string>
@@ -105,11 +105,11 @@
     <string name="report_monthan">Monthly Report</string>
     <string name="edit">Edit</string>
     <string name="the_weekly_report_has_been_created">The weekly report has been created</string>
-    <string name="not_showing_progress">Not showing progress</string>
-    <string name="starting_to_show_progress">Starting to show progress</string>
-    <string name="progressing_as_expected">progressing as expected</string>
-    <string name="showing_excellent_progress">Showing excellent progress</string>
-    <string name="undefined">Undefined</string>
+    <string name="not_showing_progress" tools:ignore="UnusedResources">Not showing progress</string>
+    <string name="starting_to_show_progress" tools:ignore="UnusedResources">Starting to show progress</string>
+    <string name="progressing_as_expected" tools:ignore="UnusedResources">progressing as expected</string>
+    <string name="showing_excellent_progress" tools:ignore="UnusedResources">Showing excellent progress</string>
+    <string name="undefined" tools:ignore="UnusedResources">Undefined</string>
     <string name="monthly_detail">Monthly Detail</string>
 
 

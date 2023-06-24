@@ -1,5 +1,6 @@
 package android.coding.ourapp.adapter
 
+import android.annotation.SuppressLint
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemStudentBinding
@@ -100,6 +101,7 @@ class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerV
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun showConfirmationDialog(student: Student) {
             val dialogView = LayoutInflater.from(context).inflate(R.layout.alert_component, null)
             val alertDialogBuilder = AlertDialog.Builder(context)

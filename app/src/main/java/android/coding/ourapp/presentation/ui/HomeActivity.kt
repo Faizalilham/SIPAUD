@@ -1,10 +1,6 @@
 package android.coding.ourapp.presentation.ui
 
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AssessmentAdapter
 import android.coding.ourapp.data.Resource
@@ -15,10 +11,7 @@ import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewMod
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.util.Log
 import android.view.View
-import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.EditorInfo
 import android.widget.RadioButton
 import android.widget.Toast
@@ -27,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.database.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

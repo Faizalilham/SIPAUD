@@ -37,7 +37,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private val assessmentViewModel by viewModels<AssessmentViewModel>()
     private lateinit var studentViewModel: StudentViewModel
     private lateinit var firebaseHelper: FirebaseHelper
-    private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
     private lateinit var adapterStudentActivityAdapter: StudentActivityAdapter
     private val listAchievementActivity = arrayListOf<String>()
     private val listStudentActivity = arrayListOf<String>()

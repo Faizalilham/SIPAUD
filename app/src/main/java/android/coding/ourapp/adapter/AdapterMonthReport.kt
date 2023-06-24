@@ -2,21 +2,20 @@ package android.coding.ourapp.adapter
 
 import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.Month
-import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemAssessmentShimmerBinding
 import android.coding.ourapp.databinding.ListItemReportBinding
-import android.coding.ourapp.presentation.ui.ReportMonthActivity
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.PictureDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.caverock.androidsvg.SVG
 import java.io.InputStream
 
+@Suppress("PrivatePropertyName", "PrivatePropertyName", "PrivatePropertyName",
+    "PrivatePropertyName"
+)
 class AdapterMonthReport(private val data : MutableList<Month>, private val context : Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ITEM_ACTUAL = 0
     private val ITEM_SHIMMER = 1

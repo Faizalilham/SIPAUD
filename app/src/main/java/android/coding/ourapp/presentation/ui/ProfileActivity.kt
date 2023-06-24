@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("RedundantSemicolon")
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private var _binding : ActivityProfileBinding? = null

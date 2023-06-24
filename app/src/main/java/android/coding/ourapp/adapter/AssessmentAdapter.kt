@@ -6,11 +6,9 @@ import android.coding.ourapp.databinding.ListItemAssessmentShimmerBinding
 import android.coding.ourapp.databinding.ListItemNarasiBinding
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 

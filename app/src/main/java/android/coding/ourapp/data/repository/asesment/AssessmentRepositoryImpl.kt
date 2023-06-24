@@ -3,13 +3,13 @@ package android.coding.ourapp.data.repository.asesment
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.AssessmentResponse
-import android.coding.ourapp.utils.Utils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
-import kotlinx.coroutines.delay
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import javax.inject.Inject
 
 class AssessmentRepositoryImpl @Inject constructor(

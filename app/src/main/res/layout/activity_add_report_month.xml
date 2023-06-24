@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".presentation.ui.AddReportMonthActivity">
+    tools:context=".presentation.ui.AddReportMonthActivity"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,7 +43,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -58,7 +60,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/AppTheme.TextSubTittle"
@@ -69,7 +72,8 @@
             android:text="Nama :"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/tittle" />
+            app:layout_constraintTop_toBottomOf="@+id/tittle"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/AppTheme.TextSubTittle"
@@ -79,7 +83,8 @@
             android:layout_marginTop="8dp"
             android:text="Silvianan"
             app:layout_constraintStart_toStartOf="@+id/tv_namee"
-            app:layout_constraintTop_toBottomOf="@+id/tv_namee" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_namee"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/AppTheme.TextSubTittle"
@@ -90,7 +95,8 @@
             android:text="Laporan Untuk Bulan :"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_detail_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
+            tools:ignore="HardcodedText" />
 
         <TextView
             style="@style/AppTheme.TextSubTittle"
@@ -100,7 +106,8 @@
             android:layout_marginTop="8dp"
             android:text="Januari"
             app:layout_constraintStart_toStartOf="@+id/tv_month"
-            app:layout_constraintTop_toBottomOf="@+id/tv_month" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_month"
+            tools:ignore="HardcodedText" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -127,7 +134,8 @@
                     android:padding="@dimen/dp8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DisableBaselineAlignment">
 
                     <LinearLayout
                         android:id="@+id/leftBox"
@@ -147,7 +155,8 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:text="Nilai Indicator Agama"
                             android:textAlignment="center"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -171,7 +180,7 @@
                                 android:layout_marginBottom="@dimen/dp5"
                                 android:text=" 38"
                                 android:textSize="16sp"
-                                />
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -197,7 +206,8 @@
                             android:layout_marginBottom="@dimen/dp10"
                             android:text=" 3hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh8"
                             android:textAlignment="center"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
 
 
                     </LinearLayout>
@@ -220,7 +230,8 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:text="Nilai Indicator Moral"
                             android:textAlignment="center"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -244,7 +255,7 @@
                                 android:layout_marginBottom="@dimen/dp5"
                                 android:text=" 38"
                                 android:textSize="16sp"
-                                />
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -270,7 +281,8 @@
                             android:layout_marginBottom="@dimen/dp10"
                             android:text=" 38"
                             android:textAlignment="center"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
 
 
                     </LinearLayout>
@@ -300,7 +312,8 @@
                         android:layout_marginTop="@dimen/dp10"
                         android:text="Nilai Indicator Budi Pekerti"
                         android:textAlignment="center"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -325,7 +338,8 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp5"
                             android:text=" 38"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -351,7 +365,8 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="@dimen/dp10"
                         android:text=" 3hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh8"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
 
 
                 </LinearLayout>
@@ -366,7 +381,8 @@
                     android:text="Laporan :"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/leftBox2" />
+                    app:layout_constraintTop_toBottomOf="@+id/leftBox2"
+                    tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/et_desc"
@@ -384,7 +400,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    app:layout_constraintVertical_bias="0.07999998" />
+                    app:layout_constraintVertical_bias="0.07999998"
+                    tools:ignore="Autofill,HardcodedText,TextFields" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_saveReport"

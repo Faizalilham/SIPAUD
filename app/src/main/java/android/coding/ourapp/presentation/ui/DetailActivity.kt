@@ -7,7 +7,6 @@ import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.databinding.ActivityDetailBinding
 import android.coding.ourapp.databinding.AlertComponentBinding
-import android.coding.ourapp.databinding.ImageBottomSheetBinding
 import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
@@ -15,7 +14,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,10 +21,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("RemoveSingleExpressionStringTemplate")
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
@@ -111,11 +110,15 @@ class DetailActivity : AppCompatActivity() {
                 ${i.feedback}
             """.trimIndent()
 
-            shareToWhatsApp(
-                listImageBitmap,message.trim()
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                shareToWhatsApp(
+                    listImageBitmap,message.trim()
+                )
+            }
 
-            exportPdf(listImageBitmap, listOf("${i.tittle}","${i.date}","${i.description}",Utils.convertListToString(i.students),Utils.convertListToString(i.achievementActivity),"${i.feedback}"))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                exportPdf(listImageBitmap, listOf("${i.tittle}","${i.date}","${i.description}",Utils.convertListToString(i.students),Utils.convertListToString(i.achievementActivity),"${i.feedback}"))
+            }
         }
     }
 
@@ -191,6 +194,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun shareToWhatsApp(
         imageUris : ArrayList<Bitmap>, message : String
     ){
@@ -213,6 +217,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
         binding.export?.setOnClickListener {
            if(Utils.checkStoragePermission(this,this)){

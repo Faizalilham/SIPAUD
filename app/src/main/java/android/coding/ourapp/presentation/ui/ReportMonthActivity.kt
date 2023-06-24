@@ -12,11 +12,12 @@ import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
-import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,7 @@ class ReportMonthActivity : AppCompatActivity() {
     private var idParent: String? = null
     private var idStudent: String? = null
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityReportMonthBinding.inflate(layoutInflater)
@@ -51,6 +53,8 @@ class ReportMonthActivity : AppCompatActivity() {
         getReport()
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
         if (currentMonth != null) {
@@ -74,7 +78,7 @@ class ReportMonthActivity : AppCompatActivity() {
                         }
                         dataReport.forEach { its -> listReport.addAll(its.reports) }
                         val datak = listReport.filter { report ->
-                            report?.month == currentMonth
+                            report.month == currentMonth
                         }.toMutableList()
 
                         if (dataKu.isNotEmpty()) {
@@ -170,7 +174,8 @@ class ReportMonthActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>,month : String,){
+    @RequiresApi(Build.VERSION_CODES.R)
+    private suspend fun exportPdf(name : String, summary : String, categoryAgama : String, categoryMoral : String, categoryPekerti : String, reports: List<Report>, month : String,){
         if(Utils.checkStoragePermission(this,this)){
             val job = lifecycleScope.async(Dispatchers.Default) {
                 Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)

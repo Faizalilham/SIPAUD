@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:padding="@dimen/dp15"
-    tools:context=".presentation.ui.StudentsActivity">
+    tools:context=".presentation.ui.StudentsActivity"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/textView2"
@@ -19,7 +20,8 @@
         android:text="SIAP-AUD"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_studnet"
@@ -30,7 +32,8 @@
         android:backgroundTint="@color/third_color"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
 
 
     <TextView
@@ -85,7 +88,8 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Cari Siswa"
                 android:imeOptions="actionSearch"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -172,7 +176,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 
 <!--    <TextView-->

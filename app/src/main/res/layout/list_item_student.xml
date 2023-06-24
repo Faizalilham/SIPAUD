@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -30,13 +31,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_tittle">
+            app:layout_constraintTop_toBottomOf="@id/tv_tittle"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp15"
-                android:src="@drawable/ic_student" />
+                android:src="@drawable/ic_student"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_group"
@@ -57,13 +60,15 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_group">
+            app:layout_constraintTop_toBottomOf="@id/linear_group"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp15"
-                android:src="@drawable/ic_company" />
+                android:src="@drawable/ic_company"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_company"
@@ -94,7 +99,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp15"
-                android:src="@drawable/ic_history_month" />
+                android:src="@drawable/ic_history_month"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/btn_add_report"
@@ -102,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp15"
                 android:layout_marginEnd="@dimen/dp5"
-                android:src="@drawable/ic_add_report" />
+                android:src="@drawable/ic_add_report"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/btn_menus"
@@ -110,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp15"
                 android:layout_marginEnd="@dimen/dp5"
-                android:src="@drawable/ic_other" />
+                android:src="@drawable/ic_other"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

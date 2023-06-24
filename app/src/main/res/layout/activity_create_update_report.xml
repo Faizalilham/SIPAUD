@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".presentation.ui.ReportMonthActivity">
+    tools:context=".presentation.ui.ReportMonthActivity"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -72,7 +73,8 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
@@ -89,7 +91,8 @@
                             app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
+                            app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+                            tools:ignore="HardcodedText" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
@@ -189,7 +192,8 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -225,7 +229,8 @@
                         android:layout_weight="1"
                         android:text="SING DAGANG PONggol"
                         android:textAlignment="textEnd"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                 </LinearLayout>
                 <TextView
@@ -255,7 +260,8 @@
                         android:layout_height="70dp"
                         android:src="@drawable/ic_date"
                         android:layout_gravity="end"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        tools:ignore="ContentDescription" />
                 </LinearLayout>
                 <TextView
                     style="@style/AppTheme.TextSubTittle"
@@ -268,7 +274,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp10"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="DisableBaselineAlignment">
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -286,7 +293,8 @@
                             android:textColor="@color/black"
                             android:inputType="none"
                             android:dropDownAnchor="@id/tv_week"
-                            android:fontFamily="@font/poppins"/>
+                            android:fontFamily="@font/poppins"
+                            tools:ignore="LabelFor" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -304,7 +312,8 @@
                             android:text="@string/report_1"
                             android:textColor="@color/black"
                             android:inputType="none"
-                            android:fontFamily="@font/poppins"/>
+                            android:fontFamily="@font/poppins"
+                            tools:ignore="LabelFor" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <TextView

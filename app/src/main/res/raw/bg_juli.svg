@@ -1,1 +1,9 @@
-<svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><rect width="900" height="600" fill="#4F81C7"></rect><g><g transform="translate(883 155)"><path d="M0 -170.4L147.5 -85.2L147.5 85.2L0 170.4L-147.5 85.2L-147.5 -85.2Z" fill="#64C4ED"></path></g><g transform="translate(512 144)"><path d="M0 -115L99.6 -57.5L99.6 57.5L0 115L-99.6 57.5L-99.6 -57.5Z" fill="#64C4ED"></path></g><g transform="translate(336 535)"><path d="M0 -129L111.7 -64.5L111.7 64.5L0 129L-111.7 64.5L-111.7 -64.5Z" fill="#64C4ED"></path></g></g></svg>
+<!--suppress ALL -->
+
+
+<svg id="visual"
+    viewBox="0 0 900 600"
+    width="900"
+    height="600"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"><rect width="900" height="600" fill="#4F81C7"></rect><g><g transform="translate(883 155)"><path d="M0 -170.4L147.5 -85.2L147.5 85.2L0 170.4L-147.5 85.2L-147.5 -85.2Z" fill="#64C4ED"></path></g><g transform="translate(512 144)"><path d="M0 -115L99.6 -57.5L99.6 57.5L0 115L-99.6 57.5L-99.6 -57.5Z" fill="#64C4ED"></path></g><g transform="translate(336 535)"><path d="M0 -129L111.7 -64.5L111.7 64.5L0 129L-111.7 64.5L-111.7 -64.5Z" fill="#64C4ED"></path></g></g></svg>
