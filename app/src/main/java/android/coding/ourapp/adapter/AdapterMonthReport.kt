@@ -1,5 +1,6 @@
 package android.coding.ourapp.adapter
 
+import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.Month
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemAssessmentShimmerBinding
@@ -37,7 +38,7 @@ class AdapterMonthReport(private val data : MutableList<Month>, private val cont
            binding.apply {
                tittle.text = data[position].name
                val count = "${data[position].count}"
-               val text =  "Laporan mingguan telah dibuat"
+               val text =  context.getString(R.string.the_weekly_report_has_been_created)
                tvCount.text = count
                subTittle.text = text
                val svgInputStream: InputStream = context.resources.openRawResource(data[position].background)

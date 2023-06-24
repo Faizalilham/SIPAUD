@@ -99,7 +99,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Laporan Bulanan"
+                android:text="@string/report_monthan"
                 android:textSize="13sp"
                 android:textColor="@color/primary_color"
                 android:maxLines="1"
