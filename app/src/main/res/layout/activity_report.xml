@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
 
     android:background="@color/backgroundColor"
-    tools:context=".presentation.ui.ReportActivity">
+    tools:context=".presentation.ui.ReportActivity"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/app_bar"
@@ -50,7 +51,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,7 +123,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        tools:ignore="ContentDescription" />
 
     <FrameLayout
         android:id="@+id/frameLoading"
@@ -134,7 +137,8 @@
             android:id="@+id/loadingPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:id="@+id/loadingBg"

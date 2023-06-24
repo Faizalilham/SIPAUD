@@ -1,12 +1,12 @@
+@file:Suppress("ConvertArgumentToSet", "ConvertArgumentToSet", "ConvertArgumentToSet")
+
 package android.coding.ourapp.presentation.ui
 import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.data.Resource
-import android.coding.ourapp.data.datasource.model.Month
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
-import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_CHILD
@@ -16,7 +16,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -29,12 +28,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.FirebaseDatabase
 import com.leo.searchablespinner.SearchableSpinner
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@Suppress("RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
+    "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
+    "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate"
+)
 @AndroidEntryPoint
 class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -247,6 +251,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
        }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun doCreateReport(
         studentName : String,
         tittle : String,date : String,
@@ -358,7 +363,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     }
 
     private fun setupViewUpdate(i :String,idChild : String){
-       reportViewModel.getDataReportById(i).observe(this){
+       reportViewModel.getDataReportById(i).observe(this){ it ->
            when(it){
                is Resource.Success -> {
                    binding.apply {

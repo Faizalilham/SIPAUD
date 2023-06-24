@@ -1,24 +1,24 @@
 package android.coding.ourapp.presentation.ui.onboarding
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.annotation.SuppressLint
 import android.coding.ourapp.R
 import android.coding.ourapp.databinding.FragmentSplashScreenBinding
-import android.coding.ourapp.presentation.ui.HomeActivity
 import android.coding.ourapp.presentation.ui.LoginActivity
 import android.coding.ourapp.presentation.ui.StudentsActivity
 import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.viewModels
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
 

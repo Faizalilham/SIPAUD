@@ -1,3 +1,8 @@
+@file:Suppress("RemoveExplicitTypeArguments", "RemoveExplicitTypeArguments",
+    "RemoveExplicitTypeArguments", "RemoveExplicitTypeArguments", "RemoveExplicitTypeArguments",
+    "RemoveExplicitTypeArguments", "RemoveExplicitTypeArguments"
+)
+
 package android.coding.ourapp.utils
 import android.net.Uri
 import io.ak1.pix.models.Flash

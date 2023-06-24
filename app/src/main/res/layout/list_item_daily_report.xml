@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp10"
@@ -16,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        tools:targetApi="m">
 
 
         <LinearLayout
@@ -47,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp10"
-                android:src="@drawable/ic_arrow_down" />
+                android:src="@drawable/ic_arrow_down"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <net.cachapa.expandablelayout.ExpandableLayout
@@ -72,12 +75,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp20"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_date"/>
+                        android:src="@drawable/ic_date"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tv_date"
@@ -142,12 +147,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp20"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_achievement_blue"/>
+                        android:src="@drawable/ic_achievement_blue"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"

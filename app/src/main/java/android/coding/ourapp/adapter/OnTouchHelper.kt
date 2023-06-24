@@ -13,6 +13,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
+@Suppress("SameReturnValue", "SameReturnValue", "UnclearPrecedenceOfBinaryExpression")
 open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelper.Callback() {
 
 
@@ -133,7 +134,7 @@ open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelpe
     private fun onSelectedChangedForSwipe(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (viewHolder !is SwipeViewHolder) return
 
-        if (viewHolder.foregroundKnobLayout.isClickable == false) {
+        if (!viewHolder.foregroundKnobLayout.isClickable) {
             return
         }
 
@@ -162,7 +163,7 @@ open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelpe
 
         viewHolder as SwipeViewHolder
 
-        if (viewHolder.foregroundKnobLayout.isClickable == false) {
+        if (!viewHolder.foregroundKnobLayout.isClickable) {
             return
         }
 

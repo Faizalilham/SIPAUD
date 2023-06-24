@@ -1,11 +1,12 @@
 package android.coding.ourapp.presentation.viewmodel.report
 
 import android.coding.ourapp.data.Resource
-import android.coding.ourapp.data.datasource.model.AssessmentResponse
 import android.coding.ourapp.data.datasource.model.DataReport
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.repository.report.ReportRepositoryImpl
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,7 @@ class ReportViewModel @Inject constructor(
     private val _message : MutableLiveData<Resource<String>> = MutableLiveData()
     val message : LiveData<Resource<String>> = _message
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun createReport(
         idStudent : String,
         nameStudent : String,

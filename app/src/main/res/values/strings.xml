@@ -1,14 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SIAP-AUD</string>
     <string name="tittle">Sistem Informasi Asesmen Harian Perkembangan Anak Usia Dini</string>
     <string name="card_tittle">Belajar Menghitung</string>
-    <string name="card_description">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
+    <string name="card_description" tools:ignore="TypographyEllipsis">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
     <string name="hint_search">Cari Dokumen</string>
     <string name="filter">Filter berdasarkan :</string>
-    <string name="filter_alphabet">A - Z</string>
-    <string name="filter_news">Terbaru</string>
-    <string name="filter_latest">Terlama</string>
-    <string name="filter_favorite">Favorit</string>
+    <string name="filter_alphabet" tools:ignore="UnusedResources">A - Z</string>
+    <string name="filter_news" tools:ignore="UnusedResources">Terbaru</string>
+    <string name="filter_latest" tools:ignore="UnusedResources">Terlama</string>
+    <string name="filter_favorite" tools:ignore="UnusedResources">Favorit</string>
     <string name="hint_tittle">Masukkan judul . . .</string>
     <string name="hint_description">Masukkan deskripsi narasi . . .</string>
     <string name="hint_activity_achievement">Tuliskan capaian kegiatan . . .</string>
@@ -23,18 +23,18 @@
     <string name="date_detail">Dibuat pada 08 Juni 2023</string>
     <string name="description_detail">Kirana mengambil benang wol warna jingga dan merah. Dia menarik benang wol panjang dan mengguntinya.</string>
     <string name="student_detail">Siswa dalam kegiatan</string>
-    <string name="student_name">Alex</string>
+    <string name="student_name" tools:ignore="UnusedResources">Alex</string>
     <string name="add_student_activity">Tambahkan siswa pada kegiatan</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
-    <string name="camera">Kamera</string>
-    <string name="gallery">Gallery</string>
-    <string name="choose_image">Pilih gambar</string>
+    <string name="camera" tools:ignore="UnusedResources">Kamera</string>
+    <string name="gallery" tools:ignore="UnusedResources">Gallery</string>
+    <string name="choose_image" tools:ignore="UnusedResources">Pilih gambar</string>
     <string name="add_asesment">Tambah narasi</string>
     <string name="update_asesment">Ubah narasi</string>
     <string name="update_student">Ubah siswa</string>
     <string name="profile">Profil</string>
-    <string name="student_bio">Biodata siswa</string>
+    <string name="student_bio" tools:ignore="UnusedResources">Biodata siswa</string>
     <string name="student_identity">Daftar identitas siswa</string>
     <string name="register">Daftar</string>
     <string name="register_message">Buat akun baru untuk masuk</string>
@@ -61,19 +61,19 @@
     <string name="back">Kembali</string>
     <string name="warning_form">Semua kolom wajib diisi</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" tools:ignore="UnusedResources">Hello blank fragment</string>
     <string name="alert_tittle">Peringatan !!</string>
     <string name="alert_subtile_delete">Narasi akan dihapus secara permanen, apakah anda yakin ingin menghapus narasi ini? </string>
     <string name="info_app">SIAP - AUD adalah sebuah aplikasi untuk mendokumentasikan kegiatan siswa dengan membuat narasi kegiatan yang dilakukan, dan dapat dijadikan sebagai laporan kegiatan harian juga.</string>
-    <string name="tutup">Tutup</string>
+    <string name="tutup" tools:ignore="UnusedResources">Tutup</string>
     <string name="pilih_bahasa">Pilih Bahasa</string>
     <string name="bahasa_indonesia">Bahasa Indonesia</string>
     <string name="english">English</string>
     <string name="alert_logout">Apakah Anda yakin ingin keluar dari akun</string>
     <string name="alert_confirm">Konfirmasi</string>
-    <string name="alert_delete">Apakah Anda yakin ingin menghapus data yang dipilih ?</string>
+    <string name="alert_delete" tools:ignore="UnusedResources">Apakah Anda yakin ingin menghapus data yang dipilih ?</string>
     <string name="alert_update">Apakah Anda yakin ingin melakukan perubahan data ini?</string>
-    <string name="alert_delete_1">Apakah Anda yakin ingin menghapus data ini?</string>
+    <string name="alert_delete_1" tools:ignore="UnusedResources">Apakah Anda yakin ingin menghapus data ini?</string>
     <string name="not_found">Data tidak tersedia</string>
     <string name="indicator_value_pekerti">Indicator Penilaian Budi Pekerti</string>
     <string name="indicator_value_agama">Indicator Penilaian Agama</string>
@@ -81,14 +81,14 @@
     <string name="indicator_value_pekerti_hint">Klik untuk melihat indicator Penilaian Budi Pekerti</string>
     <string name="indicator_value_agama_hint">Klik untuk melihat Indicator Penilaian Agama</string>
     <string name="indicator_value_moral_hint">Klik untuk melihat Indicator Penilaian Moral</string>
-    <string name="add_indicator">Tambahkan Indicator</string>
+    <string name="add_indicator" tools:ignore="UnusedResources">Tambahkan Indicator</string>
     <string name="week_1">Minggu ke 1</string>
     <string name="report_1">Laporan ke 1</string>
     <string name="create_report">pembuatan laporan</string>
     <string name="name_student">Nama siswa :</string>
     <string name="date">Tanggal</string>
     <string name="delete">Hapus</string>
-    <string name="update">Ubah</string>
+    <string name="update" tools:ignore="UnusedResources">Ubah</string>
     <string name="ekspor_pdf">Ekspor ke PDF</string>
     <string name="category">Kategori :</string>
     <string name="point">Point :</string>
@@ -153,13 +153,13 @@
         <item>Anak mampu dengan rutin berolahraga pada pagi hari</item>
         <item>Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
     </string-array>
-    <string name="indicator_value">Indicator Penilaian</string>
+    <string name="indicator_value" tools:ignore="UnusedResources">Indicator Penilaian</string>
     <string name="the_weekly_report_has_been_created">Laporan mingguan telah dibuat</string>
-    <string name="not_showing_progress">Belum berkembang</string>
-    <string name="starting_to_show_progress">Mulai berkembang</string>
-    <string name="progressing_as_expected">Berkembang sesuai harapan</string>
-    <string name="showing_excellent_progress">Berkembang sangat baik</string>
-    <string name="undefined">Tidak terdefinisi</string>
+    <string name="not_showing_progress" tools:ignore="UnusedResources">Belum berkembang</string>
+    <string name="starting_to_show_progress" tools:ignore="UnusedResources">Mulai berkembang</string>
+    <string name="progressing_as_expected" tools:ignore="UnusedResources">Berkembang sesuai harapan</string>
+    <string name="showing_excellent_progress" tools:ignore="UnusedResources">Berkembang sangat baik</string>
+    <string name="undefined" tools:ignore="UnusedResources">Tidak terdefinisi</string>
     <string name="monthly_detail">Detail Bulanan</string>
 
 

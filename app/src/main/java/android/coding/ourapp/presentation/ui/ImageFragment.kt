@@ -2,24 +2,20 @@ package android.coding.ourapp.presentation.ui
 
 import android.Manifest
 import android.app.Activity
-import android.os.Bundle
 import android.coding.ourapp.R
-import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel
 import android.coding.ourapp.presentation.viewmodel.PermissionViewModel
-import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.utils.TAG
 import android.coding.ourapp.utils.options
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.helpers.*
 

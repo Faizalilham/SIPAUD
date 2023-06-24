@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".presentation.ui.ReportMonthActivity">
+    tools:context=".presentation.ui.ReportMonthActivity"
+    tools:ignore="Overdraw">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,7 +74,8 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="ContentDescription" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
@@ -160,7 +162,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nameee" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_nameee"
+                    tools:ignore="HardcodedText" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout5"
@@ -170,7 +173,8 @@
                     android:padding="@dimen/dp8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_month">
+                    app:layout_constraintTop_toBottomOf="@id/tv_month"
+                    tools:ignore="DisableBaselineAlignment">
 
                     <LinearLayout
                         android:id="@+id/leftBox"
@@ -215,7 +219,7 @@
                                 android:layout_marginBottom="@dimen/dp5"
                                 android:text=" 38"
                                 android:textSize="16sp"
-                                />
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -242,7 +246,8 @@
                             android:textAlignment="center"
                             android:layout_marginBottom="@dimen/dp10"
                             android:text=" 3hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh8"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
 
 
                     </LinearLayout>
@@ -290,7 +295,7 @@
                                 android:layout_marginBottom="@dimen/dp5"
                                 android:text=" 38"
                                 android:textSize="16sp"
-                                />
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -318,7 +323,8 @@
                             android:textAlignment="center"
                             android:text=" 38"
 
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
 
 
                     </LinearLayout>
@@ -371,7 +377,7 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text=" 38"
                             android:textSize="16sp"
-                            />
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -397,7 +403,8 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="@dimen/dp10"
                         android:text=" 38"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
 
 
                 </LinearLayout>
@@ -412,7 +419,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_nameee" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_nameee"
+                    tools:ignore="HardcodedText" />
 
 
                 <TextView
@@ -463,7 +471,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/empty_report" />
+            app:srcCompat="@drawable/empty_report"
+            tools:ignore="ContentDescription" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loadings"
@@ -511,7 +520,8 @@
             android:id="@+id/loadingPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:id="@+id/loadingBg"

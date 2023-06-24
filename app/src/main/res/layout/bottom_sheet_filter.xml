@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/background_top_rounded"
     android:layout_width="match_parent"
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="A-Z"
             style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
+            app:buttonTint="@color/primary_color"
+            tools:ignore="HardcodedText" />
 
         <RadioButton
             android:id="@+id/rb_name_desc"
@@ -37,7 +39,8 @@
             android:layout_height="wrap_content"
             android:text="Z-A"
             style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
+            app:buttonTint="@color/primary_color"
+            tools:ignore="HardcodedText" />
 
 
 

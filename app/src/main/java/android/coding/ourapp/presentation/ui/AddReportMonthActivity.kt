@@ -1,5 +1,6 @@
 package android.coding.ourapp.presentation.ui
 
+import android.annotation.SuppressLint
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.databinding.ActivityAddReportMonthBinding
@@ -47,6 +48,7 @@ class AddReportMonthActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getAllData(){
         reportViewModel.getAllReport.observe(this){
             when (it) {

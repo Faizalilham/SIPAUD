@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_color"
-    tools:context=".presentation.ui.CreateUpdateAsesmentActivity">
+    tools:context=".presentation.ui.CreateUpdateAsesmentActivity"
+    tools:ignore="Overdraw">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -68,7 +69,8 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -158,7 +160,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,19 +200,22 @@
                 android:layout_marginTop="@dimen/dp10"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/hint_tittle"
-                android:imeOptions="actionNext" />
+                android:imeOptions="actionNext"
+                tools:ignore="Autofill,TextFields" />
 
             <LinearLayout
                 android:id="@+id/linear_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp20"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_date" />
+                    android:src="@drawable/ic_date"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/tv_date"
@@ -231,19 +237,22 @@
                 android:layout_marginTop="@dimen/dp15"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/hint_description"
-                android:imeOptions="actionNext" />
+                android:imeOptions="actionNext"
+                tools:ignore="Autofill,TextFields" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp20"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="@dimen/dp25"
                     android:layout_height="@dimen/dp25"
                     android:src="@drawable/ic_students"
-                    app:tint="@color/secondary_grey" />
+                    app:tint="@color/secondary_grey"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/AppTheme.TextSubTittle"
@@ -271,19 +280,22 @@
                 android:layout_marginTop="@dimen/dp10"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/add_student"
-                android:imeOptions="actionNext" />
+                android:imeOptions="actionNext"
+                tools:ignore="Autofill,TextFields" />
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp20"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_achievement_black" />
+                    android:src="@drawable/ic_achievement_black"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/AppTheme.TextSubTittle"
@@ -332,7 +344,8 @@
                 android:layout_marginTop="@dimen/dp15"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/hint_feedback"
-                android:imeOptions="actionDone" />
+                android:imeOptions="actionDone"
+                tools:ignore="Autofill,TextFields" />
 
 
             <com.google.android.material.button.MaterialButton

@@ -1,7 +1,5 @@
 package android.coding.ourapp.data.datastore
 
-import android.coding.ourapp.data.datastore.PermissionPreferences.Companion.dataStoreName
-import android.coding.ourapp.data.datastore.PermissionPreferences.Companion.permissionKey
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

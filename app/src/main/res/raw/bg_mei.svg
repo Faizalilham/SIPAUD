@@ -1,1 +1,9 @@
-<svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><rect x="0" y="0" width="900" height="600" fill="#4F81C7"></rect><g fill="#64C4ED"><circle r="185" cx="734" cy="586"></circle><circle r="81" cx="785" cy="210"></circle><circle r="128" cx="39" cy="7"></circle></g></svg>
+<!--suppress ALL -->
+
+
+<svg id="visual"
+    viewBox="0 0 900 600"
+    width="900"
+    height="600"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"><rect x="0" y="0" width="900" height="600" fill="#4F81C7"></rect><g fill="#64C4ED"><circle r="185" cx="734" cy="586"></circle><circle r="81" cx="785" cy="210"></circle><circle r="128" cx="39" cy="7"></circle></g></svg>

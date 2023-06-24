@@ -1,3 +1,7 @@
+@file:Suppress("KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation"
+)
+
 package android.coding.ourapp.presentation.ui
 
 import ReportAdapter
@@ -22,6 +26,9 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation",
+    "KotlinDeprecation", "KotlinDeprecation", "KotlinDeprecation"
+)
 @AndroidEntryPoint
 class DetailReportActivity : AppCompatActivity() {
     private var _binding: ActivityDetailReportBinding? = null

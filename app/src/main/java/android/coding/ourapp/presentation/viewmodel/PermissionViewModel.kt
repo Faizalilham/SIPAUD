@@ -1,6 +1,5 @@
 package android.coding.ourapp.presentation.viewmodel
 
-import android.coding.ourapp.data.datastore.OnBoardingPreferences
 import android.coding.ourapp.data.datastore.PermissionPreferences
 import android.content.Context
 import androidx.lifecycle.ViewModel
