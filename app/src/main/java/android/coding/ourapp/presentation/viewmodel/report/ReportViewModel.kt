@@ -90,7 +90,4 @@ class ReportViewModel @Inject constructor(
 
         }
     }
-
-
-
 }

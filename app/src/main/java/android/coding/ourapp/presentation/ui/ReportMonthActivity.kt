@@ -25,7 +25,6 @@ import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class ReportMonthActivity : AppCompatActivity() {
-
     private var _binding: ActivityReportMonthBinding? = null
     private val binding get() = _binding!!
     private val reportViewModel by viewModels<ReportViewModel>()
@@ -45,14 +44,12 @@ class ReportMonthActivity : AppCompatActivity() {
         idParent = intent.getStringExtra(ID_PARENT)
         idStudent = intent.getStringExtra(ID_STUDENT)
         Utils.language(this)
-
         binding.tvDetailNameStudent.text = nameStudent
         binding.tvMonth.text = nameMonth
         moveToAdd()
         back()
         getReport()
     }
-
 
     private fun getReport() {
         val currentMonth = intent.getStringExtra(MONTH)
@@ -64,7 +61,6 @@ class ReportMonthActivity : AppCompatActivity() {
                         val narrative = mutableListOf<Narrative>()
                         val data = it.result.filter { uye ->
                             uye.idStudent == idStudent
-
                         }
                         data.forEach { report ->
                             narrative.addAll(report.narratives)
@@ -72,7 +68,6 @@ class ReportMonthActivity : AppCompatActivity() {
                         val dataKu = narrative.filter { report ->
                             report.month == currentMonth
                         }
-
                         val listReport = mutableListOf<Report>()
                         val dataReport = it.result.filter { dt ->
                             dt.idStudent == idStudent
@@ -138,10 +133,9 @@ class ReportMonthActivity : AppCompatActivity() {
                                leftBox2.visibility = View.GONE
                            }
                         }
-
                     }
                     is Resource.Loading -> {
-                        binding.loadings.playAnimation()
+                        showLoading()
                     }
                     is Resource.Failure -> {
                         Toast.makeText(
@@ -158,13 +152,22 @@ class ReportMonthActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(){
+        binding.loadings.visibility = View.VISIBLE
+        binding.loadings.playAnimation()
+    }
+
+    private fun stopLoading(){
+        binding.loadings.visibility = View.GONE
+        binding.loadings.cancelAnimation()
+    }
+
     private fun setupRecycler(data: MutableList<Report>) {
         monthAdapter = MonthAdapter(this, data)
         binding.rvMonthhh.apply {
             adapter = monthAdapter
             layoutManager = LinearLayoutManager(this@ReportMonthActivity)
         }
-
     }
 
     private suspend fun exportPdf(name : String,summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>,month : String,){
