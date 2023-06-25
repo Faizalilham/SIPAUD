@@ -1,4 +1,6 @@
-@file:Suppress("EmptyMethod", "RedundantSuspendModifier", "RedundantSamConstructor")
+@file:Suppress("EmptyMethod", "RedundantSuspendModifier", "RedundantSamConstructor",
+    "NAME_SHADOWING", "DEPRECATION"
+)
 
 package android.coding.ourapp.utils
 
@@ -12,7 +14,6 @@ import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
-import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.coding.ourapp.databinding.ListItemMonthBinding
 import android.content.Context
 import android.content.Intent
@@ -48,12 +49,12 @@ import com.leo.searchablespinner.interfaces.OnItemSelectListener
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import android.coding.ourapp.databinding.ListItemDailyReportBinding as ListItemDailyReportBinding1
 
 
 class Key{
@@ -170,26 +171,6 @@ object Utils {
     }
 
 
-    // FUNCTION TO SAVE IMAGE TO LOCAL STORAGE
-    private fun saveImageToExternalStorage(bitmap: ArrayList<Bitmap>): ArrayList<Uri> {
-        val path = Environment.getExternalStorageDirectory().toString()
-        val file = File(path, "${UUID.randomUUID()}.jpeg")
-        val list = ArrayList<Uri>()
-
-        for(i in bitmap){
-            try {
-                val stream: OutputStream = FileOutputStream(file)
-                i.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                stream.flush()
-                stream.close()
-            } catch (e : Exception){
-                println(e.printStackTrace())
-            }
-            list.add(Uri.parse(file.absolutePath))
-        }
-        return list
-    }
-
     // FUNCTION TO GET URI FROM STRING FIREBASE
     fun base64ToUri(base64String: String): Uri? {
         try {
@@ -243,7 +224,7 @@ object Utils {
     }
 
     // FUNCTION TO SHOW IMAGE WITH ANYTHING CONDITION IN REPORT DETAIL ACTIVITY
-    fun showImageReportDetail(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemDailyReportBinding, context: Context){
+    fun showImageReportDetail(isShow: Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding: ListItemDailyReportBinding1, context: Context){
         binding.apply {
             if(isShow && imageUri != null){
                 linearImage.visibility = View.VISIBLE
@@ -289,7 +270,7 @@ object Utils {
                     linearImage.visibility = View.GONE
                 }
             }else{
-                binding.linearImage.visibility = View.GONE
+                View.GONE.also { binding.linearImage.visibility = it }
             }
         }
     }
@@ -538,30 +519,7 @@ object Utils {
     }
 
 
-
-    // FUNCTION TO GET UNIQUE DATA FROM ARRAYLIST
-    fun unique(arr1 : ArrayList<String>,arr2 : ArrayList<String>):ArrayList<String>{
-        val uniqueArray = mutableListOf<String>()
-
-        for (element in arr1) {
-            if (!arr2.contains(element) && !uniqueArray.contains(element)) {
-                uniqueArray.add(element)
-            }
-        }
-
-        for (element in arr2) {
-            if (!arr1.contains(element) && !uniqueArray.contains(element)) {
-                uniqueArray.add(element)
-            }
-        }
-
-        return ArrayList(uniqueArray)
-    }
-
-    fun checkDataIsExist(){}
-
-
-//    fun exportToPdf(images: List<Bitmap>, texts: List<String>, outputPath: String) {
+    //    fun exportToPdf(images: List<Bitmap>, texts: List<String>, outputPath: String) {
 //        val document = Documen
 //        PdfWriter.getInstance(document, FileOutputStream(outputPath))
 //        document.open()

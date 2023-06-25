@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
     private val listStudent = ArrayList<Student>()
-    private var selectedItems = HashSet<Int>()
 
     fun setListStudent(listStudent: List<Student>) {
         val diffCallback = StudentDiffCallback(this.listStudent, listStudent)

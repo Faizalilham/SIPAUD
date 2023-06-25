@@ -1,5 +1,6 @@
+package android.coding.ourapp.adapter
+
 import android.coding.ourapp.R
-import android.coding.ourapp.adapter.OnTouchHelper
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ListItemDailyReportBinding
 import android.coding.ourapp.utils.Utils
@@ -11,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 
 class ReportAdapter(
     private val context : Context,

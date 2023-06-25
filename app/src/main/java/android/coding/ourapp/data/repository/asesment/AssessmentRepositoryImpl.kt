@@ -159,7 +159,7 @@ class AssessmentRepositoryImpl @Inject constructor(
 
                         if (snapshot.exists()) {
                             for (data in snapshot.children) {
-                                val item = data.getValue(AssessmentRequest::class.java)
+                                data.getValue(AssessmentRequest::class.java)
 //                                if (item != null && Utils.userMatchesSearch(item, query)) {
 //                                    result.add(item)
 //                                }

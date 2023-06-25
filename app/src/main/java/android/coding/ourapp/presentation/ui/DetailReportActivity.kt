@@ -4,9 +4,8 @@
 
 package android.coding.ourapp.presentation.ui
 
-import ReportAdapter
-import android.coding.ourapp.adapter.AdapterMonthReport
 import android.coding.ourapp.adapter.OnTouchHelper
+import android.coding.ourapp.adapter.ReportAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityDetailReportBinding
@@ -17,12 +16,12 @@ import android.coding.ourapp.utils.Key.Companion.ID_CHILD
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
 import android.coding.ourapp.utils.Key.Companion.MONTH
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +33,6 @@ class DetailReportActivity : AppCompatActivity() {
     private var _binding: ActivityDetailReportBinding? = null
     private val binding get() = _binding!!
     private lateinit var reportAdapter: ReportAdapter
-    private lateinit var adapterMonthReport: AdapterMonthReport
     private val reportViewModel by viewModels<ReportViewModel>()
     private var idParent: String? = null
     private var idChild: String? = null
@@ -72,7 +70,7 @@ class DetailReportActivity : AppCompatActivity() {
                             }
                             dataReport.forEach { its -> listReport.addAll(its.reports) }
                             val data = listReport.filter { report ->
-                                report?.month == i
+                                report.month == i
                             }.toMutableList()
 
                             if (data.isNotEmpty()) {

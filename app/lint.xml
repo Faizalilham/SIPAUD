@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Disable this given check in this project -->
+    <issue id="ContentDescription" severity="ignore"/>
+    <issue id="UnusedResources" severity="ignore"/>
+    <issue id="DisableBaselineAlignment" severity="ignore"/>
+    <issue id="SetTextI18n" severity="ignore"/>
+
+</lint>

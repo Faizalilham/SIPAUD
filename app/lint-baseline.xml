@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.3.1" type="baseline" client="gradle" dependencies="false" name="AGP (7.3.1)" variant="all" version="7.3.1">
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 24 (current min is 21): `java.lang.Iterable#forEach`"
+        errorLine1="                    it.data.forEach { uri ->"
+        errorLine2="                            ~~~~~~~">
+        <location
+            file="src/main/java/android/coding/ourapp/presentation/ui/ImageFragment.kt"
+            line="52"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="Call requires API level 24 (current min is 21): `java.util.ArrayList#forEach`"
+        errorLine1="                data.forEach {"
+        errorLine2="                     ~~~~~~~">
+        <location
+            file="src/main/java/android/coding/ourapp/utils/Utils.kt"
+            line="421"
+            column="22"/>
+    </issue>
+
+
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.firebase:firebase-bom than 31.1.0 is available: 32.1.1"
+        errorLine1="    implementation platform(&apos;com.google.firebase:firebase-bom:31.1.0&apos;)"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="101"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        message="`checkClientTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
+        <location
+            file="org/bouncycastle/est/jcajce/JcaJceUtils$1.class"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
+        <location
+            file="org/bouncycastle/est/jcajce/JcaJceUtils$1.class"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        message="`checkClientTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
+        <location
+            file="org/bouncycastle/est/jcajce/JcaJceUtils$2.class"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/avatar.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/avatar.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/danilla.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/danilla.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/empty_report.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/empty_report.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_achievement_black.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_achievement_black.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_achievement_blue.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_achievement_blue.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_add.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_add.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_background_gradient.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_background_gradient.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_background_gradient_cut.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_background_gradient_cut.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_cameras.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_cameras.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_closes.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_closes.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_company.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_company.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_email.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_email.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_export.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_export.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_feedback.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_feedback.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_filter.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_filter.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_gallery.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_gallery.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_group.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_group.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_image_sample.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_image_sample.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_info.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_info.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_logout.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_logout.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_next.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_next.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_password.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_password.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_student.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_student.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_students.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_students.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_translate.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ic_translate.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/not_result.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/not_result.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/not_result2.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/not_result2.png"/>
+    </issue>
+
+</issues>

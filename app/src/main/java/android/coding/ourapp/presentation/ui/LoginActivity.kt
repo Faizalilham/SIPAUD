@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (intent.getBooleanExtra("EXIT", false)) {
             finish()

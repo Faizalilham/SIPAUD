@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:foreground="?android:attr/selectableItemBackground"
-        tools:targetApi="m">
+        >
 
 
         <LinearLayout

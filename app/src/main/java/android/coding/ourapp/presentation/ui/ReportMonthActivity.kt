@@ -139,7 +139,7 @@ class ReportMonthActivity : AppCompatActivity() {
                         }
                     }
                     is Resource.Loading -> {
-                        showLoading()
+                        binding.loadings.playAnimation()
                     }
                     is Resource.Failure -> {
                         Toast.makeText(
@@ -154,16 +154,6 @@ class ReportMonthActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun showLoading(){
-        binding.loadings.visibility = View.VISIBLE
-        binding.loadings.playAnimation()
-    }
-
-    private fun stopLoading(){
-        binding.loadings.visibility = View.GONE
-        binding.loadings.cancelAnimation()
     }
 
     private fun setupRecycler(data: MutableList<Report>) {

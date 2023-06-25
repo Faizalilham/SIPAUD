@@ -1,8 +1,9 @@
+@file:Suppress("SameParameterValue")
+
 package android.coding.ourapp.presentation.ui
 
 import android.app.Activity
 import android.coding.ourapp.R
-import android.coding.ourapp.adapter.AchievementActivityAdapter
 import android.coding.ourapp.adapter.StudentActivityAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
@@ -17,19 +18,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.leo.searchablespinner.SearchableSpinner
 import dagger.hilt.android.AndroidEntryPoint
 
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private var _binding : ActivityCreateUpdateAsesmentBinding? = null
@@ -45,7 +47,7 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
     private val listImageBitmap = arrayListOf<Bitmap>()
     private lateinit var searchableSpinnerFrom : SearchableSpinner
     var i : String? = null
-    var favorite : Boolean? = null
+    private var favorite : Boolean? = null
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -278,7 +280,6 @@ class CreateUpdateAsesmentActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun openGallery(){
         val intent = Intent(this, ImageFragment::class.java)
         binding.linearImage.setOnClickListener {

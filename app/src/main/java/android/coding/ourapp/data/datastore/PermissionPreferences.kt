@@ -28,7 +28,6 @@ class PermissionPreferences(@ApplicationContext private val context  : Context) 
 
 
     companion object{
-        const val dataStoreName = "DataStorePreferences"
         const val permissionKey = "permissionKey"
     }
 }
