@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 
+@Suppress("DEPRECATION")
 class CreateUpdateStudentActivity : AppCompatActivity() {
     private var _binding: ActivityCreateUpdateStudentBinding? = null
     private val binding get() = _binding!!
@@ -145,7 +146,7 @@ class CreateUpdateStudentActivity : AppCompatActivity() {
         val studentRepository = StudentRepository(firebaseHelper)
         val viewModelFactory = ViewModelFactory(studentRepository)
         studentViewModel =
-            ViewModelProvider(this, viewModelFactory).get(StudentViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory)[StudentViewModel::class.java]
     }
 
 

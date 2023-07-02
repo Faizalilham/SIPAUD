@@ -57,11 +57,5 @@ class AuthViewModel @Inject constructor(
         _register.value = result
     }
 
-    fun logout() {
-         authRepositoryImpl.logout()
-        _register.value = null
-    }
-
-
 
 }

@@ -65,11 +65,5 @@ class AssessmentViewModel @Inject constructor(
         return assessmentRepositoryImpl.getByIdAssessment(id)
     }
 
-    fun searchAssessment(query : String):LiveData<Resource<AssessmentResponse>>{
-        return assessmentRepositoryImpl.searchAssessment(query)
-    }
-
-
-
 
 }

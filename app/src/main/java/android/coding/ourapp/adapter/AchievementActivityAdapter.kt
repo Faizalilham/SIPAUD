@@ -1,24 +1,4 @@
-@file:Suppress("unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
-    "unused", "unused", "unused"
-)
+
 
 package android.coding.ourapp.adapter
 

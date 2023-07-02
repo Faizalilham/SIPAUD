@@ -1,5 +1,6 @@
 package android.coding.ourapp.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.MotionEvent
@@ -35,6 +36,7 @@ open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelpe
     private var helper: WeakReference<ItemTouchHelper?>? = null
 
 
+    @SuppressLint("ClickableViewAccessibility")
     fun build() {
         helper = WeakReference(ItemTouchHelper(this))
         helper?.get()?.attachToRecyclerView(recyclerView)
@@ -126,12 +128,12 @@ open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelpe
         super.onSelectedChanged(viewHolder, actionState)
 
         when (actionState) {
-            ItemTouchHelper.ACTION_STATE_SWIPE -> onSelectedChangedForSwipe(viewHolder, actionState)
+            ItemTouchHelper.ACTION_STATE_SWIPE -> onSelectedChangedForSwipe(viewHolder)
         }
     }
 
 
-    private fun onSelectedChangedForSwipe(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+    private fun onSelectedChangedForSwipe(viewHolder: RecyclerView.ViewHolder?) {
         if (viewHolder !is SwipeViewHolder) return
 
         if (!viewHolder.foregroundKnobLayout.isClickable) {
@@ -152,11 +154,17 @@ open class OnTouchHelper(private val recyclerView: RecyclerView): ItemTouchHelpe
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
         when (actionState) {
-            ItemTouchHelper.ACTION_STATE_SWIPE -> onChildDrawForSwipe(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            ItemTouchHelper.ACTION_STATE_SWIPE -> onChildDrawForSwipe(
+                viewHolder,
+                dX
+            )
         }
     }
 
-    private fun onChildDrawForSwipe(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+    private fun onChildDrawForSwipe(
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float
+    ) {
         if (swipingAdapterPosition != viewHolder.adapterPosition) {
             return
         }

@@ -4,7 +4,6 @@ import android.coding.ourapp.R
 import android.coding.ourapp.adapter.StudentAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.firebase.FirebaseHelper
-import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
@@ -45,7 +44,7 @@ class StudentsActivity : AppCompatActivity() {
         moveToAddStudent()
         moveToProfile()
         search()
-        bottomSheet(arrayListOf())
+        bottomSheet()
         binding.swipeRefreshLayout.setOnRefreshListener { getAllData() }
         setRecyclerView()
         binding.rvStudents.adapter = studentAdapter
@@ -168,7 +167,7 @@ class StudentsActivity : AppCompatActivity() {
         _binding = null
     }
 
-    private fun bottomSheet(data: ArrayList<AssessmentRequest>) {
+    private fun bottomSheet() {
         binding.btnFilter.setOnClickListener {
             val bottomSheet = BottomSheetDialog(this)
             val view = BottomSheetFilterBinding.inflate(layoutInflater)

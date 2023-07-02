@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import javax.inject.Inject
 
 
+@Suppress("NAME_SHADOWING")
 class ReportRepositoryImpl @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ):ReportRepository {
@@ -96,10 +97,10 @@ class ReportRepositoryImpl @Inject constructor(
         var resultFix = ""
         var resultErr : Exception = Exception()
         val idChild =  firebaseDatabase.reference.push().key.toString()
-        val dataReport = mutableListOf<Report>(
+        val dataReport = mutableListOf(
             Report(id=idChild,reportName,date,Utils.getMonthFromStringDate(date),indicatorAgama,indicatorMoral,indicatorPekerti,images)
         )
-        val narrative = mutableListOf<Narrative>(Narrative())
+        val narrative = mutableListOf(Narrative())
 
         return try{
             val id = firebaseDatabase.reference.push().key.toString()
@@ -197,7 +198,7 @@ class ReportRepositoryImpl @Inject constructor(
                         if (snapshot.exists()) {
                             for (snapshot in snapshot.children) {
                                 snapshot.ref.removeValue()
-                                    .addOnSuccessListener { aVoid: Void? ->
+                                    .addOnSuccessListener {
                                         println(
                                             "Data berhasil dihapus"
                                         )

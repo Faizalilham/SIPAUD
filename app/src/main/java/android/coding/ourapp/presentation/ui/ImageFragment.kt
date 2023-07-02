@@ -1,6 +1,7 @@
 package android.coding.ourapp.presentation.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.coding.ourapp.R
 import android.coding.ourapp.presentation.viewmodel.PermissionViewModel
@@ -9,12 +10,10 @@ import android.coding.ourapp.utils.options
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.helpers.*
@@ -28,7 +27,6 @@ class ImageFragment : AppCompatActivity() {
     var i : String? = null
     private val permission by viewModels<PermissionViewModel>()
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_image)
@@ -69,7 +67,7 @@ class ImageFragment : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    @SuppressLint("InlinedApi")
     private fun requestLocationPermission() {
         requestPermissions(arrayOf(
             Manifest.permission.CAMERA,
@@ -77,7 +75,7 @@ class ImageFragment : AppCompatActivity() {
             Manifest.permission.MANAGE_EXTERNAL_STORAGE,), 201)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    @SuppressLint("InlinedApi")
     private fun checkPermission():Boolean{
         val permissionCheck = checkSelfPermission(Manifest.permission.CAMERA)
         val permissionCheck3 = checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
@@ -124,6 +122,8 @@ class ImageFragment : AppCompatActivity() {
 
 
 
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         PixBus.onBackPressedEvent()

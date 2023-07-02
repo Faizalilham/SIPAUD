@@ -37,7 +37,8 @@ import javax.inject.Inject
 
 @Suppress("RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
     "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
-    "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate"
+    "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate", "NAME_SHADOWING",
+    "DEPRECATION"
 )
 @AndroidEntryPoint
 class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -417,7 +418,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun openGallery(){
         val intent = Intent(this, ImageFragment::class.java)
         binding.linearImage.setOnClickListener {

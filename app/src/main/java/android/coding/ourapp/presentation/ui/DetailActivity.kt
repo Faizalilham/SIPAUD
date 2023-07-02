@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("RemoveSingleExpressionStringTemplate")
+@Suppress("RemoveSingleExpressionStringTemplate", "NAME_SHADOWING")
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
@@ -117,7 +117,7 @@ class DetailActivity : AppCompatActivity() {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                exportPdf(listImageBitmap, listOf("${i.tittle}","${i.date}","${i.description}",Utils.convertListToString(i.students),Utils.convertListToString(i.achievementActivity),"${i.feedback}"))
+                exportPdf()
             }
         }
     }
@@ -218,7 +218,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun exportPdf(bitmaps: List<Bitmap>, texts: List<String>){
+    private fun exportPdf() {
         binding.export?.setOnClickListener {
            if(Utils.checkStoragePermission(this,this)){
 //               Utils.exportToPdf(bitmaps,texts,this)

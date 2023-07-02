@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
 
+@Suppress("NAME_SHADOWING")
 @AndroidEntryPoint
 class ReportActivity : AppCompatActivity() {
     private var _binding : ActivityReportBinding? = null

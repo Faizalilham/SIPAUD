@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
