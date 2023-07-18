@@ -9,6 +9,8 @@ import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
 import android.coding.ourapp.databinding.BottomSheetFilterBinding
 import android.coding.ourapp.helper.ViewModelFactory
+import android.coding.ourapp.presentation.viewmodel.AchievementViewModel
+import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.coding.ourapp.utils.Utils
 import android.content.Intent
@@ -17,6 +19,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +35,8 @@ class StudentsActivity : AppCompatActivity() {
     private var originalStudents: List<Student> = listOf()
     private var isFilterByNameAscending = false
     private var isFilterByNameDescending = false
+
+    private val achievementViewModel by viewModels<AchievementViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +73,7 @@ class StudentsActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() {
-        studentAdapter = StudentAdapter(studentViewModel)
+        studentAdapter = StudentAdapter(this,studentViewModel,achievementViewModel)
         binding.rvStudents.setHasFixedSize(true)
         binding.rvStudents.layoutManager = LinearLayoutManager(this)
         binding.rvStudents.adapter = studentAdapter

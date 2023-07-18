@@ -5,6 +5,7 @@ import android.coding.ourapp.R
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ListItemStudentBinding
 import android.coding.ourapp.helper.StudentDiffCallback
+import android.coding.ourapp.presentation.ui.AchievementActivity
 import android.coding.ourapp.presentation.ui.CreateUpdateReportActivity
 import android.coding.ourapp.presentation.ui.CreateUpdateReportActivity.Companion.EXTRA_ID
 import android.coding.ourapp.presentation.ui.CreateUpdateReportActivity.Companion.EXTRA_NAME
@@ -13,6 +14,7 @@ import android.coding.ourapp.presentation.ui.CreateUpdateStudentActivity.Compani
 import android.coding.ourapp.presentation.ui.ReportActivity
 import android.coding.ourapp.presentation.ui.ReportActivity.Companion.ID_STUDENT
 import android.coding.ourapp.presentation.ui.ReportActivity.Companion.NAME_STUDENT
+import android.coding.ourapp.presentation.viewmodel.AchievementViewModel
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
 import android.content.Context
 import android.content.Intent
@@ -21,13 +23,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 
-class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+class StudentAdapter(
+    private val lifecycleOwner: LifecycleOwner,
+    private val studentViewModel: StudentViewModel,
+    private val achievement : AchievementViewModel
+) : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
     private val listStudent = ArrayList<Student>()
+
 
     fun setListStudent(listStudent: List<Student>) {
         val diffCallback = StudentDiffCallback(this.listStudent, listStudent)
@@ -63,10 +72,18 @@ class StudentAdapter(private val studentViewModel: StudentViewModel) : RecyclerV
                 tvGroup.text = student.group
 
                 btnAddReport.setOnClickListener {
-                    val intent = Intent(context, CreateUpdateReportActivity::class.java)
-                    intent.putExtra(EXTRA_NAME, student.nameStudent)
-                    intent.putExtra(EXTRA_ID, student.id)
-                    context.startActivity(intent)
+                    achievement.getAchievementKey().observe(lifecycleOwner){
+                        if(it.isEmpty()){
+                            val intent = Intent(context, AchievementActivity::class.java)
+                            context.startActivity(intent)
+                        }else{
+                            val intent = Intent(context, CreateUpdateReportActivity::class.java)
+                            intent.putExtra(EXTRA_NAME, student.nameStudent)
+                            intent.putExtra(EXTRA_ID, student.id)
+                            context.startActivity(intent)
+                        }
+                    }
+
                 }
 
                 btnHistoryReport.setOnClickListener {
