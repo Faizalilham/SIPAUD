@@ -9,6 +9,7 @@ import android.coding.ourapp.data.datasource.model.Achievement
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
+import android.coding.ourapp.presentation.viewmodel.AchievementViewModel
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
 import android.coding.ourapp.utils.Key.Companion.ID_CHILD
 import android.coding.ourapp.utils.Key.Companion.ID_PARENT
@@ -67,6 +68,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val listImageBitmap = arrayListOf<Bitmap>()
     private val listReport : MutableList<Report> = mutableListOf()
     private val reportViewModel by viewModels<ReportViewModel>()
+    private val achievementViewModel by viewModels<AchievementViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +97,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             getAllReport()
             createReport()
             setupDropDown()
+        }
+
+        achievementViewModel.getAchievementKey().observe(this){
+            if(it != null && it.isNotEmpty()){
+                showActivityAchievement(it)
+            }
         }
     }
 
