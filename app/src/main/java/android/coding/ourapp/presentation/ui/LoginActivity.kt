@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
         finishAffinity()
+        finish()
     }
 
     private fun moveToRegister(){

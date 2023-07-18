@@ -409,14 +409,14 @@ object Utils {
         return resultFilter
     }
 
-    // FUNCTION TO EXPORT PDF TO LOCAL STORAGE
     suspend fun exportToPdf(name : String, summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>, month : String,context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
         var size = 0
         reports.forEach {
-            size = it.images.size
-            Log.d("SIZE","$size ${it.images.size}")
+            it.images.forEach {
+                size ++
+            }
         }
 
         if (!directory.exists()) {
@@ -454,40 +454,40 @@ object Utils {
 
         val table = Table(UnitValue.createPercentArray(size)).useAllAvailableWidth()
         table.setHorizontalAlignment(HorizontalAlignment.LEFT)
+        val images = mutableListOf<String>()
 
         for (reports in reports) {
             setParagraph(reports.reportName,TextAlignment.LEFT,document,20f,10f,18f,true)
             setParagraph("Tanggal",TextAlignment.LEFT,document,10f,10f,18f,false)
             setParagraph(reports.reportDate,TextAlignment.LEFT,document,5f,10f,18f,false)
-            if(reports.images.isNotEmpty()){
-                for(bitmaps in reports.images){
-                    val bitmap = convertStringToBitmap(bitmaps)
-                    val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                    val imageData = ImageDataFactory.create(stream.toByteArray())
-                    val image = Image(imageData)
-                    image.scaleToFit(160f, 160f)
-                    image.setHorizontalAlignment(HorizontalAlignment.CENTER)
-                    val cell = Cell()
-                    cell.setBorder(Border.NO_BORDER)
-                    if (reports.images.size == 1) {
-                        image.scaleToFit(260f, 160f)
-                    }
-                    cell.add(image)
-                    cell.setMarginBottom(20f)
-
-                    if (reports.images.size == 1) {
-                        cell.setHorizontalAlignment(HorizontalAlignment.CENTER)
-                    }
-
-                    table.addCell(cell)
-                    document.add(table)
-                }
-            }
-            setParagraph("Capaian Kegiatan",TextAlignment.LEFT,document,20f,10f,18f,false)
-            setParagraph(convertListToString(reports.indicatorAgama),TextAlignment.LEFT,document,5f,10f,18f,false)
-
+            images.addAll(reports.images)
         }
+
+        if(size > 0){
+            for(bitmaps in 0..size-1){
+
+                val bitmap = convertStringToBitmap(images[bitmaps])
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val imageData = ImageDataFactory.create(stream.toByteArray())
+                val image = Image(imageData)
+                image.scaleToFit(160f, 160f)
+                image.setHorizontalAlignment(HorizontalAlignment.CENTER)
+                val cell = Cell()
+                cell.setBorder(Border.NO_BORDER)
+
+                cell.add(image)
+                cell.setMarginBottom(20f)
+                table.addCell(cell)
+            }
+        }
+        document.add(table)
+
+        for(reports in reports){
+            setParagraph("Capaian Kegiatan",TextAlignment.LEFT,document,25f,10f,18f,false)
+            setParagraph(convertListToString(reports.indicatorAgama.plus(reports.indicatorMoral).plus(reports.indicatorPekerti)),TextAlignment.LEFT,document,5f,10f,18f,false)
+        }
+
 
         document.close()
     }

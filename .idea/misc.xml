@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/ic_update.xml" value="0.119" />
         <entry key="app/src/main/res/layout-sw480dp/activity_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout-sw480dp/image_bottom_sheet.xml" value="0.12734375" />
+        <entry key="app/src/main/res/layout/activity_achievement.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_add_report_month.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_create_edit_asesment.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
@@ -54,6 +55,7 @@
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.33" />
         <entry key="app/src/main/res/layout/image_bottom_sheet.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/list_item_achievement.xml" value="0.10945945945945947" />
         <entry key="app/src/main/res/layout/list_item_achievement_activity.xml" value="0.21" />
         <entry key="app/src/main/res/layout/list_item_assessment_shimmer.xml" value="0.17" />
         <entry key="app/src/main/res/layout/list_item_daily_report.xml" value="0.25" />

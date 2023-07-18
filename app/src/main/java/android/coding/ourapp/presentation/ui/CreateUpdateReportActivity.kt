@@ -3,8 +3,9 @@
 package android.coding.ourapp.presentation.ui
 import android.app.Activity
 import android.coding.ourapp.R
-import android.coding.ourapp.adapter.AchievementActivityAdapter
+import android.coding.ourapp.adapter.AchievementAdapter
 import android.coding.ourapp.data.Resource
+import android.coding.ourapp.data.datasource.model.Achievement
 import android.coding.ourapp.data.datasource.model.Narrative
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
@@ -46,12 +47,14 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private var _binding : ActivityCreateUpdateReportBinding? = null
     private val binding get() = _binding!!
     private lateinit var searchableSpinnerFrom : SearchableSpinner
-    private lateinit var adapterAchievementActivityAdapter: AchievementActivityAdapter
+    private lateinit var adapterAchievementAdapter: AchievementAdapter
 
     @Inject
     lateinit var firebaseDatabase : FirebaseDatabase
 
     private var nameStudent : String? = null
+
+    // DATA YANG DIPERLUKAN UTK UPDATE, DIDAPAT DARI INTENT
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
@@ -78,7 +81,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idChild = intent.getStringExtra(ID_CHILD)
         binding.tvTittle.text = nameStudent
         chooseDate()
-        selectSpinner()
         openGallery()
         back()
 
@@ -161,74 +163,28 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         dropDownMenu(report,R.layout.dropdown_item,binding.tvReport)
     }
 
-    private fun selectSpinner() {
-        binding.apply {
-            etIndicator.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-                }
-            }
-            etIndicator.setOnClickListener {
-                Utils.spinnerDialog(searchableSpinnerFrom,etIndicator, ArrayList(listAchievementAgama.distinct())){ achievement ->
-                    binding.rvAchievementActivity.visibility =  View.VISIBLE
-                    listAchievementActivity.add(achievement)
-                    listAchievementAgama.remove(achievement)
-                    showActivityAchievement(listAchievementActivity)
-                }
-            }
-            etSecondIndicator.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-                }
-            }
 
-            etSecondIndicator.setOnClickListener{
-                Utils.spinnerDialog(searchableSpinnerFrom,etSecondIndicator, ArrayList(listAchievementMoral.distinct())){ achievement ->
-                    binding.rvAchievementActivity.visibility =  View.VISIBLE
-                    listAchievementActivity.add(achievement)
-                    listAchievementMoral.remove(achievement)
-                    showActivityAchievement(listAchievementActivity)
-                }
-            }
 
-            etIndicatorThird.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-                }
+    private fun showActivityAchievement(datas : List<String>){
+        val listData = mutableListOf<Achievement>()
+        if(idParent != null){
+            datas.forEach {
+                listData.add(Achievement(it,true))
+
             }
-            etIndicatorThird.setOnClickListener{
-                Utils.spinnerDialog(searchableSpinnerFrom,etIndicatorThird, ArrayList(listAchievementPekerti.distinct())){ achievement ->
-                    binding.rvAchievementActivity.visibility =  View.VISIBLE
-                    listAchievementActivity.add(achievement)
-                    listAchievementPekerti.remove(achievement)
-                    showActivityAchievement(listAchievementActivity)
-                }
+        }else{
+            datas.forEach {
+                listData.add(Achievement(it,false))
+
             }
         }
-    }
-
-    private fun showActivityAchievement(datas : ArrayList<String>){
-        adapterAchievementActivityAdapter = AchievementActivityAdapter(datas, object : AchievementActivityAdapter.OnClick{
-            override fun onDelete(data: Int,text : String) {
-                if (data >= 0 && data < datas.size) {
-                    datas.removeAt(data)
-                    if (resources.getStringArray(R.array.agama).contains(text)) {
-                        listAchievementAgama.add(text)
-                    } else if(resources.getStringArray(R.array.moral).contains(text)) {
-                        listAchievementMoral.add(text)
-                    }else{
-                        listAchievementPekerti.add(text)
-                    }
-                }else{
-                    binding.rvAchievementActivity.visibility =  View.GONE
-                }
-                binding.rvAchievementActivity.adapter?.notifyItemRemoved(data)
-                binding.rvAchievementActivity.adapter?.notifyItemRangeChanged(data, datas.size)
+        adapterAchievementAdapter = AchievementAdapter(listData,object : AchievementAdapter.OnClick{
+            override fun onChecked(name: List<String>) {
+                listAchievementActivity.addAll(name)
             }
-
         })
         binding.rvAchievementActivity.apply {
-            adapter = adapterAchievementActivityAdapter
+            adapter = adapterAchievementAdapter
             layoutManager = LinearLayoutManager(this@CreateUpdateReportActivity)
         }
     }
