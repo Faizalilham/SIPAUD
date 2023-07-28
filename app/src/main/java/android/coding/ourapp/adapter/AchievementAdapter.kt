@@ -21,16 +21,9 @@ class AchievementAdapter(
        holder.binding.apply {
            tittle.text = data[position].name
            isMuncul.isChecked = data[position].isChecked
-           val listChecked = mutableListOf<String>()
-           isMuncul.setOnCheckedChangeListener { _, _ ->
-               isMuncul.isChecked = !isMuncul.isChecked
-               if(isMuncul.isChecked){
-                   listChecked.add(data[position].name)
-                   listener.onChecked(listChecked)
-               }else{
-                   listChecked.remove(data[position].name)
-                   listener.onChecked(listChecked)
-               }
+           isMuncul.setOnCheckedChangeListener { _, isChecked ->
+               data[position].isChecked = isChecked
+               listener.onChecked(data.filter { it.isChecked }.map { it.name },data[position].isChecked )
            }
 
        }
@@ -40,7 +33,7 @@ class AchievementAdapter(
 
 
     interface OnClick{
-        fun onChecked(name : List<String>)
+        fun onChecked(name : List<String>,isMuncul : Boolean)
     }
 
 }

@@ -101,6 +101,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
         achievementViewModel.getAchievementKey().observe(this){
             if(it != null && it.isNotEmpty()){
+                Log.d("DATA SAVE","$it")
                 showActivityAchievement(it)
             }
         }
@@ -183,18 +184,20 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         }else{
             datas.forEach {
                 listData.add(Achievement(it,false))
-
             }
         }
         adapterAchievementAdapter = AchievementAdapter(listData,object : AchievementAdapter.OnClick{
-            override fun onChecked(name: List<String>) {
-                listAchievementActivity.addAll(name)
+            override fun onChecked(name: List<String>,isMuncul : Boolean) {
+
+                if(isMuncul) listAchievementActivity.addAll(name) else listAchievementActivity.removeAll(name)
+
             }
         })
         binding.rvAchievementActivity.apply {
             adapter = adapterAchievementAdapter
             layoutManager = LinearLayoutManager(this@CreateUpdateReportActivity)
         }
+        adapterAchievementAdapter.notifyDataSetChanged()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -230,9 +233,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             reportViewModel.message.observe(this){
                 when(it){
                     is Resource.Success -> {
+
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
-                        finish()
+
+                        finishAffinity()
+
                     }
                     is Resource.Loading -> {}
 
@@ -291,11 +297,15 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                     if(listReport.isEmpty()){
                         Toast.makeText(this, "Update laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
+
+                        finishAffinity()
                     }else{
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
+
                     }
                     finish()
+
                 }
                 is Resource.Loading -> {}
 

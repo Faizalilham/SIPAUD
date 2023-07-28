@@ -64,7 +64,9 @@ class ReportActivity : AppCompatActivity() {
                         a.forEach { reportResult ->
                             idParent = reportResult.id
                             reportResult.reports.forEach { its ->
+//                                Toast.makeText(this, "${its}", Toast.LENGTH_SHORT).show()
                                 listMonthString.add(its.month)
+
                             }
                         }
                         Log.d("CEK INTENT","\"$idParent $nameStudent \" $listMonthString")

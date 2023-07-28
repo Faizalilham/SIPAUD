@@ -192,18 +192,21 @@ class ReportRepositoryImpl @Inject constructor(
     override fun deleteReport(idParent: String,idChild:String) : Resource<String> {
         return try {
             firebaseDatabase.reference.child("report").child(idParent).child("reports")
-                .orderByChild("id").equalTo(idChild)
+                .orderByChild("id").equalTo(idChild).limitToFirst(1)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             for (snapshot in snapshot.children) {
-                                snapshot.ref.removeValue()
+                                // Remove data from the top index using setValue(null)
+                                snapshot.ref.setValue(null)
                                     .addOnSuccessListener {
-                                        println(
-                                            "Data berhasil dihapus"
-                                        )
+                                        println("Data berhasil dihapus")
                                     }
-                                    .addOnFailureListener { e: java.lang.Exception -> println("Gagal menghapus data: " + e.message) }
+                                    .addOnFailureListener { e: Exception ->
+                                        println("Gagal menghapus data: ${e.message}")
+                                    }
+                                // Break the loop after deleting the top index
+                                break
                             }
                         }
                     }

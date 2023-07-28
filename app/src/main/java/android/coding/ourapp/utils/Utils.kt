@@ -444,11 +444,16 @@ object Utils {
 
         setParagraph("Nama : $name",TextAlignment.LEFT,document,20f,10f,18f,false)
         setParagraph("Laporan bulan : $month",TextAlignment.LEFT,document,5f,10f,18f,false)
+
         setParagraph("Kategori Agama : $categoryAgama",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph("Kategori Moral : $categoryMoral",TextAlignment.LEFT,document,5f,10f,18f,false)
         setParagraph("Kategori Budi Pekerti : $categoryPekerti",TextAlignment.LEFT,document,5f,10f,18f,false)
-        setParagraph("Narasi :",TextAlignment.LEFT,document,5f,10f,18f,false)
-        setParagraph(summary,TextAlignment.LEFT,document,5f,10f,18f,false)
+
+        for(reports in reports){
+            setParagraph("Capaian Kegiatan",TextAlignment.LEFT,document,25f,10f,18f,false)
+            setParagraph(convertListToString(reports.indicatorAgama.plus(reports.indicatorMoral).plus(reports.indicatorPekerti)),TextAlignment.LEFT,document,5f,10f,18f,false)
+            break
+        }
 
 
 
@@ -483,10 +488,9 @@ object Utils {
         }
         document.add(table)
 
-        for(reports in reports){
-            setParagraph("Capaian Kegiatan",TextAlignment.LEFT,document,25f,10f,18f,false)
-            setParagraph(convertListToString(reports.indicatorAgama.plus(reports.indicatorMoral).plus(reports.indicatorPekerti)),TextAlignment.LEFT,document,5f,10f,18f,false)
-        }
+        setParagraph("Narasi :",TextAlignment.LEFT,document,5f,10f,18f,false)
+        setParagraph(summary,TextAlignment.LEFT,document,5f,10f,18f,false)
+
 
 
         document.close()

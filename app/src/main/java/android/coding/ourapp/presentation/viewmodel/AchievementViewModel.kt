@@ -25,4 +25,8 @@ class AchievementViewModel @Inject constructor(@ApplicationContext context : Con
 
     fun getAchievementKey() = achievementPreferences.getList().asLiveData()
 
+    fun deleteAchievement() {
+        viewModelScope.launch { achievementPreferences.deleteListIfNeeded() }
+    }
+
 }

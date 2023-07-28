@@ -25,7 +25,7 @@
         android:theme="@style/Theme.OurApp"
         tools:targetApi="31">
         <activity
-            android:name=".AchievementActivity"
+            android:name=".presentation.ui.AchievementActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.AddReportMonthActivity"
@@ -120,6 +120,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/path" />
         </provider>
+
+<!--        <receiver-->
+<!--            android:name=".utils.BootReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
     </application>
 
 </manifest>
