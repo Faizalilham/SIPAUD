@@ -119,7 +119,7 @@ class ProfileActivity : AppCompatActivity() {
                 it.putExtra("EXIT", true);
             })
             finish()
-            finish()
+            finishAffinity()
             alertDialog.dismiss()
         }
         btnCancel.setOnClickListener {

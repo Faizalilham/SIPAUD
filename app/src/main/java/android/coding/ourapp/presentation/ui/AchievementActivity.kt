@@ -8,12 +8,16 @@ import android.coding.ourapp.utils.Utils
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leo.searchablespinner.SearchableSpinner
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AchievementActivity : AppCompatActivity() {
     private var _binding : ActivityAchievementBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +35,12 @@ class AchievementActivity : AppCompatActivity() {
         _binding = ActivityAchievementBinding.inflate(layoutInflater)
         setContentView(binding.root)
         searchableSpinnerFrom = SearchableSpinner(this)
+        listAchievementAgama.addAll(resources.getStringArray(R.array.agama))
+        listAchievementMoral.addAll(resources.getStringArray(R.array.moral))
+        listAchievementPekerti.addAll(resources.getStringArray(R.array.pekerti))
         selectSpinner()
+        doSaveToLocal()
+        back()
     }
 
     private fun selectSpinner() {
@@ -85,7 +94,7 @@ class AchievementActivity : AppCompatActivity() {
             override fun onDelete(data: Int,text : String) {
                 if (data >= 0 && data < datas.size) {
                     datas.removeAt(data)
-                    listAchievementActivity.removeAt(data)
+//                    listAchievementActivity.removeAt(data)
                     if (resources.getStringArray(R.array.agama).contains(text)) {
                         listAchievementAgama.add(text)
                     } else if(resources.getStringArray(R.array.moral).contains(text)) {
@@ -107,10 +116,25 @@ class AchievementActivity : AppCompatActivity() {
         }
     }
 
+    private fun back(){ binding.imageBack.setOnClickListener{finish()}}
+
     private fun doSaveToLocal(){
+       val name =  intent.getStringExtra(CreateUpdateReportActivity.EXTRA_NAME)
+       val id =  intent.getStringExtra(CreateUpdateReportActivity.EXTRA_ID)
         binding.btnSave.setOnClickListener {
-            achievementActivityViewModel.setAchievementKey(listAchievementActivity.toList())
-            startActivity(Intent(this,CreateUpdateReportActivity::class.java))
+            if(listAchievementActivity.isNotEmpty()){
+                achievementActivityViewModel.setAchievementKey(listAchievementActivity.toList())
+
+
+                startActivity(Intent(this,CreateUpdateReportActivity::class.java).also{
+                    it.putExtra(CreateUpdateReportActivity.EXTRA_NAME, name)
+                    it.putExtra(CreateUpdateReportActivity.EXTRA_ID, id)
+                    finish()
+                })
+                Log.d("Hahai","$listAchievementActivity")
+            }else{
+                Toast.makeText(this, "Minimal ada 1 pencapaian siswa yang akan direkam", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

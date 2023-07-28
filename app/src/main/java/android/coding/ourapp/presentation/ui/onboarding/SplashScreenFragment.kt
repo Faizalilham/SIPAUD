@@ -41,6 +41,7 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logicSplash()
+
     }
 
     private fun logicSplash(){

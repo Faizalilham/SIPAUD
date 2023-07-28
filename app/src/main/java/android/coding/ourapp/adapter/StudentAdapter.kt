@@ -75,6 +75,8 @@ class StudentAdapter(
                     achievement.getAchievementKey().observe(lifecycleOwner){
                         if(it.isEmpty()){
                             val intent = Intent(context, AchievementActivity::class.java)
+                            intent.putExtra(EXTRA_NAME, student.nameStudent)
+                            intent.putExtra(EXTRA_ID, student.id)
                             context.startActivity(intent)
                         }else{
                             val intent = Intent(context, CreateUpdateReportActivity::class.java)
