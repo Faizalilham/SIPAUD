@@ -69,7 +69,7 @@ class DetailReportActivity : AppCompatActivity() {
                                 dt.idStudent == idStudent
                             }
                             dataReport.forEach { its -> listReport.addAll(its.reports) }
-                            val data = listReport.filter { report ->
+                            val data = listReport.filterNotNull().filter { report ->
                                 report.month == i
                             }.toMutableList()
 

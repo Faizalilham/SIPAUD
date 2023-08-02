@@ -33,12 +33,20 @@ class ReportRepositoryImpl @Inject constructor(
 
                     if(snapshot.exists()){
                         for(data in snapshot.children){
-                            val item = data.getValue(DataReport::class.java)
-                            result.add(item!!)
+                            if(data != null){
+                                val item = data.getValue(DataReport::class.java)
+                                if(item != null){
+
+                                    result.add(item)
+
+                                }
+                            }
                             
                         }
                     }
+
                     assessmentLiveData.value = Resource.Success(result)
+                    Log.d("datasKUE","${assessmentLiveData.value} ")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -106,7 +114,11 @@ class ReportRepositoryImpl @Inject constructor(
             val id = firebaseDatabase.reference.push().key.toString()
             firebaseDatabase.getReference("report")
                 .child(id).setValue(
-                    DataReport(id=id,idStudent=idStudent,studentName=studentName,reports = dataReport, narratives = narrative)
+                    DataReport(
+                        id =id,
+                        idStudent =idStudent,
+                        studentName =studentName,
+                        reports = dataReport, narratives = narrative)
                 )
                 .addOnSuccessListener {
                     resultFix = "Success add data"

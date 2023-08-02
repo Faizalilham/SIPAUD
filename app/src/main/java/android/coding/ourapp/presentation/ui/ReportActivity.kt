@@ -59,13 +59,18 @@ class ReportActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     val listMonthString = mutableListOf<String>()
                     val listMonth = mutableListOf<Month>()
+
                     if(its.result.isNotEmpty()){
+
                         val a = its.result.filter { its -> its.idStudent == idStudent }
                         a.forEach { reportResult ->
                             idParent = reportResult.id
                             reportResult.reports.forEach { its ->
+                                Log.d("datasKUES","${its} ")
 //                                Toast.makeText(this, "${its}", Toast.LENGTH_SHORT).show()
-                                listMonthString.add(its.month)
+                                if(its != null){
+                                    listMonthString.add(its.month!!)
+                                }
 
                             }
                         }

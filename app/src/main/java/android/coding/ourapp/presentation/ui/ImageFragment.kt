@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,10 @@ class ImageFragment : AppCompatActivity() {
     private val listPath : MutableList<String> = mutableListOf()
     var i : String? = null
     private val permission by viewModels<PermissionViewModel>()
+    private var nameStudent : String? = null
+    private var idStudent : String? = null
+    private var idParent : String? = null
+    private var idChild : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,13 @@ class ImageFragment : AppCompatActivity() {
             }
         }
 
+        nameStudent = intent.getStringExtra(EXTRA_NAME)
+        idStudent = intent.getStringExtra(EXTRA_ID)
+
+        idParent = intent.getStringExtra(EXTRA_ID_PARENT)
+        idChild = intent.getStringExtra(EXTRA_ID_CHILD)
+        Toast.makeText(this, "$nameStudent $idStudent", Toast.LENGTH_SHORT).show()
+
     }
 
     private fun showCameraFragment() {
@@ -52,11 +64,17 @@ class ImageFragment : AppCompatActivity() {
                     listUri.addAll(it.data)
                     Log.d(TAG,"$listPath $listUri uhuy")
                     if(listUri.isNotEmpty() && listUri.size != 4){
-                        val data = Intent()
-                        data.putParcelableArrayListExtra("list_uri", ArrayList(listUri))
-                        setResult(Activity.RESULT_OK, data)
+                        startActivity(Intent(this, CreateUpdateReportActivity::class.java).also {
+                            it.putParcelableArrayListExtra("list_uri", ArrayList(listUri))
+                            it.putExtra(EXTRA_NAME, nameStudent)
+                            it.putExtra(EXTRA_ID, idStudent)
+                            it.putExtra(EXTRA_ID_PARENT, idParent)
+                            it.putExtra(EXTRA_ID_CHILD, idChild)
+                            finishAffinity()
+                            finish()
+                        })
 
-                           finish()
+
 
                     }else{
                         finish()
@@ -129,6 +147,13 @@ class ImageFragment : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         PixBus.onBackPressedEvent()
+    }
+
+    companion object{
+        const val EXTRA_NAME = "name_student"
+        const val EXTRA_ID = "id_student"
+        const val EXTRA_ID_CHILD = "id_child"
+        const val EXTRA_ID_PARENT = "id_parent"
     }
 
 }

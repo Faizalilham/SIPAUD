@@ -53,7 +53,7 @@ class AddReportMonthActivity : AppCompatActivity() {
         reportViewModel.getAllReport.observe(this){
             when (it) {
                 is Resource.Success -> {
-                   val data = it.result.filter { result ->  result.studentName == nameStudent && result.reports.any { reports -> reports.month == nameMonth }}
+                   val data = it.result.filter { result ->  result.studentName == nameStudent && result.reports.any { reports -> reports?.month == nameMonth }}
                    data.forEach { dataReport ->
                        listNarrative.addAll(dataReport.narratives)
                        dataReport.narratives.forEach { narrative ->
