@@ -236,8 +236,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
-
-                        finishAffinity()
+                        startActivity(Intent(this, StudentsActivity::class.java).also{
+                            finishAffinity()
+                        })
 
                     }
                     is Resource.Loading -> {}
@@ -410,7 +411,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private fun back(){
         binding.imageBack.setOnClickListener {
-            finish()
+            startActivity(Intent(this,StudentsActivity::class.java).also {
+                finishAffinity()
+            })
+
         }
     }
 

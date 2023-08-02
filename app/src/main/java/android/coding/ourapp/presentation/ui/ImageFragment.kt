@@ -55,7 +55,9 @@ class ImageFragment : AppCompatActivity() {
                         val data = Intent()
                         data.putParcelableArrayListExtra("list_uri", ArrayList(listUri))
                         setResult(Activity.RESULT_OK, data)
-                        finish()
+
+                           finish()
+
                     }else{
                         finish()
                     }
