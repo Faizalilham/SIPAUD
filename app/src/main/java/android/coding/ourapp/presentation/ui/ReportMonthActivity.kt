@@ -96,7 +96,7 @@ class ReportMonthActivity : AppCompatActivity() {
                             binding.btnAddReporttMonth.setOnClickListener {
                                 showLoading(true)
                                 lifecycleScope.launch(Dispatchers.Main) {
-                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month)
+                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month ?: "")
                                     showLoading(false)
                                 }
                             }

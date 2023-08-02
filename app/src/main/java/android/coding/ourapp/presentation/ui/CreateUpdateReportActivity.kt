@@ -59,13 +59,16 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
+    private var name : String? = null
 
     private val listAchievementActivity = arrayListOf<String>()
+    private val listAchievementActivityRemote = arrayListOf<String>()
     private val listAchievementAgama = arrayListOf<String>()
     private val listAchievementMoral = arrayListOf<String>()
     private val listAchievementPekerti = arrayListOf<String>()
-    private val listImages = arrayListOf<String>()
+    private var listImages = arrayListOf<String>()
     private val listImageBitmap = arrayListOf<Bitmap>()
+    private lateinit var listUri: ArrayList<Uri>
     private val listReport : MutableList<Report> = mutableListOf()
     private val reportViewModel by viewModels<ReportViewModel>()
     private val achievementViewModel by viewModels<AchievementViewModel>()
@@ -78,9 +81,21 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         searchableSpinnerFrom = SearchableSpinner(this)
 
         nameStudent = intent.getStringExtra(EXTRA_NAME)
+        name = intent.getStringExtra("nama")
         idStudent = intent.getStringExtra(EXTRA_ID)
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
+        listUri =  intent.getParcelableArrayListExtra("list_uri") ?: arrayListOf()
+
+        if(listUri != null){
+            Utils.showImageReport(true,null,listUri,binding,this)
+            for(i in listUri){
+                listImages.add(Utils.uploadImage(i,this))
+            }
+        }
+
+        Toast.makeText(this, "$listUri", Toast.LENGTH_SHORT).show()
+
         binding.tvTittle.text = nameStudent
         chooseDate()
         openGallery()
@@ -102,6 +117,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         achievementViewModel.getAchievementKey().observe(this){
             if(it != null && it.isNotEmpty()){
                 Log.d("DATA SAVE","$it")
+                listAchievementActivity.addAll(it)
                 showActivityAchievement(it)
             }
         }
@@ -176,7 +192,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private fun showActivityAchievement(datas : List<String>){
         val listData = mutableListOf<Achievement>()
-        if(idParent != null){
+        if(idParent != null && datas.containsAll(listAchievementActivityRemote)){
             datas.forEach {
                 listData.add(Achievement(it,true))
 
@@ -206,12 +222,14 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
            btnSave.setOnClickListener {
                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                val date = tvDate.text.toString().trim()
+               Log.d("HELLO","${binding.tvTittle.text.toString()}, $date $listAchievementActivity")
                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
                    doCreateReport(binding.tvTittle.text.toString(),tittle,date,
                        resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                        resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                        resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                        listImages)
+
                }else{
                    Toast.makeText(this@CreateUpdateReportActivity, "Data tidak lengkap", Toast.LENGTH_SHORT).show()
                }
@@ -241,12 +259,16 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                         })
 
                     }
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> {
+                        Toast.makeText(this, "Tambah laporan suksess", Toast.LENGTH_SHORT).show()
+                    }
 
                     is Resource.Failure -> {
                         Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
                     }
-                    else -> {}
+                    else -> {
+                        Toast.makeText(this, "Tambah laporan suksesss", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -323,18 +345,22 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         binding.btnSave.setOnClickListener {
             val tittle = "${binding.tvWeek.text.toString()}, ${binding.tvReport.text.toString()}"
             Log.d("CEK 3",tittle)
-            doUpdateReport(
-                idParent!!,
-                idChild!!,
-                tittle,
-                binding.tvDate.text.toString(),
-                resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                listImages,
-                mutableListOf(),
-                mutableListOf()
-            )
+            if(listAchievementActivity.isNotEmpty()){
+                doUpdateReport(
+                    idParent!!,
+                    idChild!!,
+                    tittle,
+                    binding.tvDate.text.toString(),
+                    resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    listImages,
+                    mutableListOf(),
+                    mutableListOf()
+                )
+            }else{
+                Toast.makeText(this, "Minimal terdapat 1 capaian kegiatan untuk sisw", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -343,7 +369,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
            when(it){
                is Resource.Success -> {
                    binding.apply {
-                       val dataDetail = it.result.reports.filter {  it.month == intent.getStringExtra("month") }
+                       val dataDetail = it.result.reports.filterNotNull().filter {  it.month == intent.getStringExtra("month") }
                        val dataDetailResult = dataDetail.filter { it.id == idChild }
                        Log.d("DATA DETAIL UPDATE","$dataDetail")
                        dataDetailResult.forEach { report ->
@@ -352,10 +378,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                            tvReport.setText(reportNames[1])
                            setupDropDown()
                            tvDate.text = report.reportDate
-                           listAchievementAgama.addAll(resources.getStringArray(R.array.agama).subtract(report.indicatorAgama).toTypedArray().toMutableList())
-                           listAchievementMoral.addAll(resources.getStringArray(R.array.moral).subtract(report.indicatorAgama).toTypedArray().toMutableList())
-                           listAchievementPekerti.addAll(resources.getStringArray(R.array.pekerti).subtract(report.indicatorPekerti).toTypedArray().toMutableList())
-                           listAchievementActivity.addAll(report.indicatorAgama + report.indicatorMoral + report.indicatorPekerti)
+//                           listAchievementAgama.addAll(resources.getStringArray(R.array.agama).subtract(report.indicatorAgama).toTypedArray().toMutableList())
+//                           listAchievementMoral.addAll(resources.getStringArray(R.array.moral).subtract(report.indicatorAgama).toTypedArray().toMutableList())
+//
+                           listAchievementActivityRemote.addAll(report.indicatorPekerti + report.indicatorMoral + report.indicatorAgama)
                            Log.d("LIST","$listAchievementActivity")
                            showActivityAchievement(ArrayList(listAchievementActivity.distinct()))
                            listImages.addAll(report.images)
@@ -379,34 +405,40 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     }
 
 
-    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data
-            val uriList = data?.getParcelableArrayListExtra<Uri>("list_uri")
-            if(uriList != null){
-                listImages.clear()
-                Utils.showImageReport(true,null,uriList,binding,this)
-                for(i in uriList){
-                    listImages.add(Utils.uploadImage(i,this))
-                }
-            }
-        }
-    }
+//    private val getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == Activity.RESULT_OK) {
+//            val data = result.data
+//            val uriList = data?.getParcelableArrayListExtra<Uri>("list_uri")
+//            if(uriList != null){
+//                listImages.clear()
+//
+//            }
+//        }
+//    }
 
     private fun openGallery(){
         val intent = Intent(this, ImageFragment::class.java)
+        intent.putExtra(EXTRA_NAME, nameStudent)
+        intent.putExtra(EXTRA_ID, idStudent)
+        intent.putExtra(EXTRA_ID_CHILD, idChild)
+        intent.putExtra(EXTRA_ID_PARENT, idParent)
+
         binding.linearImage.setOnClickListener {
             listImageBitmap.clear()
-            getResult.launch(intent)
+            startActivity(intent)
+//            getResult.launch(intent)
         }
         binding.image.setOnClickListener {
-            getResult.launch(intent)
+            startActivity(intent)
+//            getResult.launch(intent)
         }
     }
 
     companion object{
         const val EXTRA_NAME = "name_student"
         const val EXTRA_ID = "id_student"
+        const val EXTRA_ID_CHILD = "id_child"
+        const val EXTRA_ID_PARENT = "id_parent"
     }
 
     private fun back(){
