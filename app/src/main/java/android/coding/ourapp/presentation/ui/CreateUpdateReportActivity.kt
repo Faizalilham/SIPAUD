@@ -63,9 +63,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private val listAchievementActivity = arrayListOf<String>()
     private val listAchievementActivityRemote = arrayListOf<String>()
-    private val listAchievementAgama = arrayListOf<String>()
-    private val listAchievementMoral = arrayListOf<String>()
-    private val listAchievementPekerti = arrayListOf<String>()
     private var listImages = arrayListOf<String>()
     private val listImageBitmap = arrayListOf<Bitmap>()
     private lateinit var listUri: ArrayList<Uri>
@@ -94,7 +91,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             }
         }
 
-        Toast.makeText(this, "$listUri", Toast.LENGTH_SHORT).show()
+
 
         binding.tvTittle.text = nameStudent
         chooseDate()
@@ -104,11 +101,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         if(idParent != null && idChild != null) {
             Log.d("CEK INTENT","\"$idParent $idChild $nameStudent $idStudent \"")
             updateReport()
+            binding.tittle.text = "Update Laporan"
         }else{
             Log.d("CEK INTENT 2","\"$idParent $idChild $nameStudent \"")
-            listAchievementAgama.addAll(resources.getStringArray(R.array.agama))
-            listAchievementMoral.addAll(resources.getStringArray(R.array.moral))
-            listAchievementPekerti.addAll(resources.getStringArray(R.array.pekerti))
             getAllReport()
             createReport()
             setupDropDown()
@@ -117,10 +112,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         achievementViewModel.getAchievementKey().observe(this){
             if(it != null && it.isNotEmpty()){
                 Log.d("DATA SAVE","$it")
-                listAchievementActivity.addAll(it)
+
                 showActivityAchievement(it)
             }
         }
+
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -192,11 +189,28 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private fun showActivityAchievement(datas : List<String>){
         val listData = mutableListOf<Achievement>()
-        if(idParent != null && datas.containsAll(listAchievementActivityRemote)){
-            datas.forEach {
-                listData.add(Achievement(it,true))
-
+        val listDatas = mutableListOf<String>()
+        if(idParent != null && idChild != null){
+            achievementViewModel.getAchievementKey().observe(this){
+                if(it != null && it.isNotEmpty()){
+                    listDatas.addAll(it)
+                }
             }
+
+            val a = listDatas.intersect(datas).toMutableList()
+            val b = listDatas.subtract(datas).toMutableList()
+
+            listAchievementActivity.addAll(a)
+            a.forEach {
+                listData.add(Achievement(it,true))
+            }
+            Log.d("DATA","$a $b $listDatas")
+            Log.d("DATAX","$datas $listAchievementActivityRemote")
+
+            b.forEach {
+                listData.add(Achievement(it,false))
+            }
+
         }else{
             datas.forEach {
                 listData.add(Achievement(it,false))
@@ -206,6 +220,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             override fun onChecked(name: List<String>,isMuncul : Boolean) {
 
                 if(isMuncul) listAchievementActivity.addAll(name) else listAchievementActivity.removeAll(name)
+                listAchievementActivity.distinct()
+
+
 
             }
         })
@@ -218,23 +235,23 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createReport(){
-       binding.apply {
-           btnSave.setOnClickListener {
-               val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
-               val date = tvDate.text.toString().trim()
-               Log.d("HELLO","${binding.tvTittle.text.toString()}, $date $listAchievementActivity")
-               if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
-                   doCreateReport(binding.tvTittle.text.toString(),tittle,date,
-                       resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                       resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                       resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                       listImages)
+        binding.apply {
+            btnSave.setOnClickListener {
+                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
+                val date = tvDate.text.toString().trim()
 
-               }else{
-                   Toast.makeText(this@CreateUpdateReportActivity, "Data tidak lengkap", Toast.LENGTH_SHORT).show()
-               }
-           }
-       }
+                if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
+                    doCreateReport(binding.tvTittle.text.toString(),tittle,date,
+                        resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        listImages)
+
+                }else{
+                    Toast.makeText(this@CreateUpdateReportActivity, "Data tidak lengkap", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -254,8 +271,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
+
                         startActivity(Intent(this, StudentsActivity::class.java).also{
-                            finishAffinity()
+                            finish()
                         })
 
                     }
@@ -283,11 +301,11 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 val idChild =  firebaseDatabase.reference.push().key.toString()
                 listReport.add(
                     Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                    indicatorAgama =  resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                    indicatorMoral =  resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                    indicatorPekerti =  resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        indicatorAgama =  resources.getStringArray(R.array.agama).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
+                        indicatorMoral =  resources.getStringArray(R.array.moral).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
+                        indicatorPekerti =  resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
                         images = listImages
-                ))
+                    ))
                 doUpdateReport(
                     idParent = idParent,
                     listReport = listReport,
@@ -321,7 +339,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                         Toast.makeText(this, "Update laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
 
-                        finishAffinity()
+                        finish()
                     }else{
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
@@ -365,43 +383,43 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     }
 
     private fun setupViewUpdate(i :String,idChild : String){
-       reportViewModel.getDataReportById(i).observe(this){ it ->
-           when(it){
-               is Resource.Success -> {
-                   binding.apply {
-                       val dataDetail = it.result.reports.filterNotNull().filter {  it.month == intent.getStringExtra("month") }
-                       val dataDetailResult = dataDetail.filter { it.id == idChild }
-                       Log.d("DATA DETAIL UPDATE","$dataDetail")
-                       dataDetailResult.forEach { report ->
-                           val reportNames = report.reportName.split(",")
-                           tvWeek.setText(reportNames[0])
-                           tvReport.setText(reportNames[1])
-                           setupDropDown()
-                           tvDate.text = report.reportDate
+        reportViewModel.getDataReportById(i).observe(this){ it ->
+            when(it){
+                is Resource.Success -> {
+                    binding.apply {
+                        val dataDetail = it.result.reports.filterNotNull().filter {  it.month == intent.getStringExtra("month") }
+                        val dataDetailResult = dataDetail.filter { it.id == idChild }
+                        Log.d("DATA DETAIL UPDATE","$dataDetail")
+                        dataDetailResult.forEach { report ->
+                            val reportNames = report.reportName.split(",")
+                            tvWeek.setText(reportNames[0])
+                            tvReport.setText(reportNames[1])
+                            setupDropDown()
+                            tvDate.text = report.reportDate
 //                           listAchievementAgama.addAll(resources.getStringArray(R.array.agama).subtract(report.indicatorAgama).toTypedArray().toMutableList())
 //                           listAchievementMoral.addAll(resources.getStringArray(R.array.moral).subtract(report.indicatorAgama).toTypedArray().toMutableList())
 //
-                           listAchievementActivityRemote.addAll(report.indicatorPekerti + report.indicatorMoral + report.indicatorAgama)
-                           Log.d("LIST","$listAchievementActivity")
-                           showActivityAchievement(ArrayList(listAchievementActivity.distinct()))
-                           listImages.addAll(report.images)
-                           for(i in listImages){
-                               listImageBitmap.add(Utils.convertStringToBitmap(i))
-                           }
-                           Utils.showImageReport(true,listImageBitmap,null,this,this@CreateUpdateReportActivity) }
+                            listAchievementActivityRemote.addAll(report.indicatorPekerti + report.indicatorMoral + report.indicatorAgama)
+                            Log.d("LIST","$listAchievementActivity")
+                            showActivityAchievement(ArrayList(listAchievementActivityRemote.distinct()))
+                            listImages.addAll(report.images)
+                            for(i in listImages){
+                                listImageBitmap.add(Utils.convertStringToBitmap(i))
+                            }
+                            Utils.showImageReport(true,listImageBitmap,null,this,this@CreateUpdateReportActivity) }
 
-                   }
-               }
-               is Resource.Loading -> {}
-               is Resource.Failure -> {
-                   Log.d("ERROR","${it.exception}")
-               }
-               else -> {
-                   Log.d("ERROR","There is an error")
-               }
+                    }
+                }
+                is Resource.Loading -> {}
+                is Resource.Failure -> {
+                    Log.d("ERROR","${it.exception}")
+                }
+                else -> {
+                    Log.d("ERROR","There is an error")
+                }
 
-           }
-       }
+            }
+        }
     }
 
 
@@ -443,10 +461,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
     private fun back(){
         binding.imageBack.setOnClickListener {
-            startActivity(Intent(this,StudentsActivity::class.java).also {
-                finishAffinity()
-            })
-
+            finish()
         }
     }
 
