@@ -101,7 +101,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         if(idParent != null && idChild != null) {
             Log.d("CEK INTENT","\"$idParent $idChild $nameStudent $idStudent \"")
             updateReport()
+
             binding.tittle.text = "Update Laporan"
+            binding.btnSave.text = "Update Laporan"
         }else{
             Log.d("CEK INTENT 2","\"$idParent $idChild $nameStudent \"")
             getAllReport()
@@ -132,7 +134,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                             listReport.addAll(result.reports)
                         }
                         if(dataByName.isNotEmpty()){
-                            id  = dataByName[0].id
+                            id  = dataByName[0].ids
                         }
                         val isAdded = it.result.any { result ->
                             result.idStudent == idStudent
@@ -269,23 +271,20 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 when(it){
                     is Resource.Success -> {
 
+                        startActivity(Intent(this, StudentsActivity::class.java).also{finish()})
+
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
-
-                        startActivity(Intent(this, StudentsActivity::class.java).also{
-                            finish()
-                        })
-
                     }
                     is Resource.Loading -> {
-                        Toast.makeText(this, "Tambah laporan suksess", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
                     }
 
                     is Resource.Failure -> {
                         Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
                     }
                     else -> {
-                        Toast.makeText(this, "Tambah laporan suksesss", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -338,14 +337,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                     if(listReport.isEmpty()){
                         Toast.makeText(this, "Update laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
-
                         finish()
                     }else{
                         Toast.makeText(this, "Tambah laporan sukses", Toast.LENGTH_SHORT).show()
                         Utils.hideKeyboard(binding.btnSave)
-
+                        startActivity(Intent(this, StudentsActivity::class.java).also{finish()})
                     }
-                    finish()
 
                 }
                 is Resource.Loading -> {}
