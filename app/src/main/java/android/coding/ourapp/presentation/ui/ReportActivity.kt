@@ -64,7 +64,7 @@ class ReportActivity : AppCompatActivity() {
 
                         val a = its.result.filter { its -> its.idStudent == idStudent }
                         a.forEach { reportResult ->
-                            idParent = reportResult.id
+                            idParent = reportResult.ids
                             reportResult.reports.forEach { its ->
                                 Log.d("datasKUES","${its} ")
 //                                Toast.makeText(this, "${its}", Toast.LENGTH_SHORT).show()

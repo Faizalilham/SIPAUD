@@ -115,7 +115,7 @@ class ReportRepositoryImpl @Inject constructor(
             firebaseDatabase.getReference("report")
                 .child(id).setValue(
                     DataReport(
-                        id =id,
+                        ids =id,
                         idStudent =idStudent,
                         studentName =studentName,
                         reports = dataReport, narratives = narrative)
@@ -209,15 +209,15 @@ class ReportRepositoryImpl @Inject constructor(
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             for (snapshot in snapshot.children) {
-                                // Remove data from the top index using setValue(null)
-                                snapshot.ref.setValue(null)
+
+                                snapshot.ref.removeValue()
                                     .addOnSuccessListener {
                                         println("Data berhasil dihapus")
                                     }
                                     .addOnFailureListener { e: Exception ->
                                         println("Gagal menghapus data: ${e.message}")
                                     }
-                                // Break the loop after deleting the top index
+
                                 break
                             }
                         }
