@@ -206,8 +206,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             a.forEach {
                 listData.add(Achievement(it,true))
             }
-            Log.d("DATA","$a $b $listDatas")
-            Log.d("DATAX","$datas $listAchievementActivityRemote")
 
             b.forEach {
                 listData.add(Achievement(it,false))
@@ -222,10 +220,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             override fun onChecked(name: List<String>,isMuncul : Boolean) {
 
                 if(isMuncul) listAchievementActivity.addAll(name) else listAchievementActivity.removeAll(name)
-                listAchievementActivity.distinct()
-
-
-
+               Log.d("TAG","$listAchievementActivity $name")
             }
         })
         binding.rvAchievementActivity.apply {

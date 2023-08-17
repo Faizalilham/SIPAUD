@@ -23,7 +23,7 @@ class AchievementAdapter(
            isMuncul.isChecked = data[position].isChecked
            isMuncul.setOnCheckedChangeListener { _, isChecked ->
                data[position].isChecked = isChecked
-               listener.onChecked(data.filter { it.isChecked }.map { it.name },data[position].isChecked )
+               listener.onChecked(listOf(data[position].name),data[position].isChecked )
            }
 
        }

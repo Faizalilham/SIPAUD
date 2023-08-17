@@ -47,7 +47,14 @@ class AchievementPreferences(@ApplicationContext private val context: Context) {
             context.achievement.edit { preferences ->
                 preferences.remove(listKey)
                 preferences.remove(lastSavedDateKey)
+                preferences.clear()
             }
+        }
+
+        context.achievement.edit { preferences ->
+            preferences.remove(listKey)
+            preferences.remove(lastSavedDateKey)
+            preferences.clear()
         }
 //        if(isDataExpired()){
 //            context.achievement.edit {
