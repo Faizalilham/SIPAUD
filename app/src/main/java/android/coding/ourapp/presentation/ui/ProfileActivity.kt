@@ -4,6 +4,7 @@ import android.coding.ourapp.R
 import android.coding.ourapp.databinding.ActivityProfileBinding
 import android.coding.ourapp.databinding.InformationBottomSheetBinding
 import android.coding.ourapp.databinding.LanguageBottomSheetBinding
+import android.coding.ourapp.presentation.viewmodel.AchievementViewModel
 import android.coding.ourapp.presentation.viewmodel.auth.AuthViewModel
 import android.coding.ourapp.utils.LanguageManager
 import android.coding.ourapp.utils.Utils
@@ -13,6 +14,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -24,6 +26,8 @@ class ProfileActivity : AppCompatActivity() {
     private var _binding : ActivityProfileBinding? = null
     private val binding get() = _binding!!
     private val authViewModel by viewModels<AuthViewModel>()
+    private val achievementViewModel by viewModels<AchievementViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -34,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         moveToHome()
         bottomSheetLanguage()
         bottomSheetInformation()
+        doReset()
 
     }
 
@@ -41,6 +46,13 @@ class ProfileActivity : AppCompatActivity() {
         binding.apply {
             tvEmail.text = authViewModel.currentUser?.email
             tvSchool.text = authViewModel.currentUser?.displayName
+        }
+    }
+
+    private fun doReset(){
+        binding.cardReset.setOnClickListener {
+            achievementViewModel.deleteAchievement()
+            Toast.makeText(this, "Indicator Penilaian tereset", Toast.LENGTH_SHORT).show()
         }
     }
 

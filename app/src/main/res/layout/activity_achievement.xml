@@ -80,7 +80,7 @@
                         style="@style/AppTheme.TextTittle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tambah Laporan"
+                        android:text="Tambah Indikator Penilaian "
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"

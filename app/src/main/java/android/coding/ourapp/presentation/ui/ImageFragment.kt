@@ -50,7 +50,7 @@ class ImageFragment : AppCompatActivity() {
 
         idParent = intent.getStringExtra(EXTRA_ID_PARENT)
         idChild = intent.getStringExtra(EXTRA_ID_CHILD)
-       
+
 
     }
 
