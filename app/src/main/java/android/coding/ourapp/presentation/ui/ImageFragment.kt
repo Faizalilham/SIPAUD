@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.coding.ourapp.R
+import android.coding.ourapp.data.datasource.model.Achievement
 import android.coding.ourapp.presentation.viewmodel.PermissionViewModel
 import android.coding.ourapp.utils.TAG
 import android.coding.ourapp.utils.options
@@ -31,6 +32,7 @@ class ImageFragment : AppCompatActivity() {
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
+    private lateinit var listDataAchievement : ArrayList<Achievement>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,8 @@ class ImageFragment : AppCompatActivity() {
 
         idParent = intent.getStringExtra(EXTRA_ID_PARENT)
         idChild = intent.getStringExtra(EXTRA_ID_CHILD)
+        listDataAchievement = intent.getParcelableArrayListExtra<Achievement>(CreateUpdateReportActivity.EXTRA_ID_ACHIEVEMENT)!!
+        Toast.makeText(this, "$listDataAchievement", Toast.LENGTH_SHORT).show()
 
 
     }
@@ -64,12 +68,13 @@ class ImageFragment : AppCompatActivity() {
                     listUri.addAll(it.data)
                     Log.d(TAG,"$listPath $listUri uhuy")
                     if(listUri.isNotEmpty() && listUri.size != 4){
-                        startActivity(Intent(this, CreateUpdateReportActivity::class.java).also {
-                            it.putParcelableArrayListExtra("list_uri", ArrayList(listUri))
-                            it.putExtra(EXTRA_NAME, nameStudent)
-                            it.putExtra(EXTRA_ID, idStudent)
-                            it.putExtra(EXTRA_ID_PARENT, idParent)
-                            it.putExtra(EXTRA_ID_CHILD, idChild)
+                        startActivity(Intent(this, CreateUpdateReportActivity::class.java).also { intent ->
+                            intent.putParcelableArrayListExtra("list_uri", ArrayList(listUri))
+                            intent.putExtra(EXTRA_NAME, nameStudent)
+                            intent.putExtra(EXTRA_ID, idStudent)
+                            intent.putExtra(EXTRA_ID_PARENT, idParent)
+                            intent.putExtra(EXTRA_ID_CHILD, idChild)
+                            intent.putParcelableArrayListExtra(CreateUpdateReportActivity.EXTRA_ID_ACHIEVEMENT, listDataAchievement)
                             finishAffinity()
                             finish()
                         })
@@ -122,7 +127,6 @@ class ImageFragment : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d("CUCUY","$grantResults")
         when (requestCode) {
             201 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED &&

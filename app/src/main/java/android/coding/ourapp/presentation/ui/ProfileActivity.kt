@@ -51,7 +51,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun doReset(){
         binding.cardReset.setOnClickListener {
-            achievementViewModel.deleteAchievement()
+            achievementViewModel.deleteListFromSharedPreferences()
             Toast.makeText(this, "Indicator Penilaian tereset", Toast.LENGTH_SHORT).show()
         }
     }

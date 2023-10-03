@@ -67,6 +67,13 @@ class Key{
 
 object Utils {
 
+    fun removeNumbersFromList(list: List<String>): List<String> {
+        val regex = "\\d+\\.\\s+".toRegex() // Mencocokkan angka dan tanda titik diikuti oleh spasi
+        return list.map { item ->
+            regex.replace(item, "") // Mengganti angka dan tanda titik dengan string kosong
+        }
+    }
+
     // FUNCTION FOR DATE PICKER CHOOSE
     fun datePicker(context : Context,e : TextView) {
         val formatDate = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())

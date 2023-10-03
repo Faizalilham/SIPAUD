@@ -2,6 +2,7 @@ package android.coding.ourapp.data.datastore
 
 import android.coding.ourapp.data.datastore.AchievementPreferences.Companion.token
 import android.content.Context
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -17,8 +18,8 @@ import java.util.*
 private val Context.achievement : DataStore<Preferences> by preferencesDataStore(name = token)
 class AchievementPreferences(@ApplicationContext private val context: Context) {
 
-    private val listKey = stringSetPreferencesKey("achievementKey")
-    private val lastSavedDateKey = stringPreferencesKey("lastSavedDate")
+    private val listKey = stringSetPreferencesKey("achievementKeys")
+    private val lastSavedDateKey = stringPreferencesKey("lastSavedDates")
 
 
     suspend fun saveList( list: List<String>) {
@@ -31,6 +32,7 @@ class AchievementPreferences(@ApplicationContext private val context: Context) {
 
     fun getList(): Flow<List<String>> {
         return context.achievement.data.map { preferences ->
+            Toast.makeText(context, " s ${preferences[listKey]} ", Toast.LENGTH_SHORT).show()
             preferences[listKey]?.toList() ?: emptyList()
         }
     }
@@ -87,7 +89,7 @@ class AchievementPreferences(@ApplicationContext private val context: Context) {
     }
 
     companion object{
-        const val token = "achievement"
+        const val token = "achievements"
         const val FIVE_HOURS_IN_MILLIS = 5 * 60 * 60 * 1000L // 5 hours in milliseconds
     }
 }

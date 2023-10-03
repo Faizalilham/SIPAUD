@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SIAP-AUD</string>
-    <string name="tittle">Sistem Informasi Asesmen Harian Perkembangan Anak Usia Dini</string>
+    <string name="app_name">Si-PAUD</string>
+    <string name="tittle">Sistem Informasi Assesment Perkembangan Nilai Agama dan Budi Pekerti Anak Usia Dini</string>
     <string name="card_tittle">Belajar Menghitung</string>
     <string name="card_description" tools:ignore="TypographyEllipsis">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
     <string name="hint_search">Cari Dokumen</string>
@@ -54,10 +54,10 @@
     <string name="finish">Selesai</string>
     <string name="tittle_first_onboarding">Nikmati Kemudahan Mencatat</string>
     <string name="subtittle_first_onboarding">Tidak perlu lagi repot membawa catatan fisik Anda dapat dengan mudah mencatat kegiatan harian Anda hanya dengan beberapa ketukan jari.</string>
-    <string name="tittle_second_onboarding">Laporan Harian Lebih Menarik</string>
+    <string name="tittle_second_onboarding">Laporan Perkembangan Anak Lebih Menarik</string>
     <string name="subtittle_second_onboarding">Buat laporan kegiatan harian yang menarik dan informatif dengan menyertakan deskripsi, gambar, dan informasi tambahan.</string>
     <string name="tittle_third_onboarding">Bagikan Perjalanan Anda</string>
-    <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi narasi kegiatan Anda melalui media sosial atau langsung ke orang-orang terdekat.</string>
+    <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi informasi perkembangan agama dan budi pekerti anak melalui media sosial atau langsung ke orang orang terdekat</string>
     <string name="back">Kembali</string>
     <string name="warning_form">Semua kolom wajib diisi</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -120,39 +120,40 @@
     </string-array>
 
     <string-array name="agama">
-        <item>Anak patuh dalam melaksanakan ajaran agama yang dianutnya</item>
-        <item>Anak dapat melaksanakan ibadah tepat waktu</item>
-        <item>Anak dapat berdoa sebelum atau sesudah melaksanakan sesuatu</item>
-        <item>Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
-        <item>Anak dapat mengingatkan teman untuk selalu berdoa</item>
-        <item>Anak tidak dapat mengganggu teman yang sedang beribadah</item>
+        <item>1. Anak patuh dalam melaksanakan ajaran agama yang dianutnya</item>
+        <item>2. Anak dapat melaksanakan ibadah tepat waktu</item>
+        <item>3. Anak dapat berdoa sebelum atau sesudah melaksanakan sesuatu</item>
+        <item>4. Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
+        <item>5. Anak dapat mengingatkan teman untuk selalu berdoa</item>
+        <item>6. Anak tidak dapat mengganggu teman yang sedang beribadah</item>
     </string-array>
 
     <string-array name="pekerti">
-        <item>Anak Mampu mengucapkan maaf jika berbuat salah</item>
-        <item>Anak mampu mengucapkan minta tolong jika butuh bantuan</item>
-        <item>Anak mampu mengucapkan permisi jika melewati orang lain</item>
-        <item>Anak mampu gucapkan terima kasih jika menerima sesuatu</item>
-        <item>Anak mampu mendengarkan orang lain berbicara</item>
+        <item>1. Anak dengan kesadaran sendiri mampu mengucapkan maaf jika berbuat salah</item>
+        <item>2. Anak dengan kesadaran sendiri mampu mengucapkan minta tolong jika butuh bantuan</item>
+        <item>3. Anak dengan kesadaran sendiri mampu mengucapkan permisi jika melewati orang lain</item>
+        <item>4. Anak dengan kesadaran sendiri mampu gucapkan terima kasih jika menerima sesuatu</item>
+        <item>5. Anak dengan kesadaran sendiri mampu mendengarkan orang lain berbicara</item>
     </string-array>
 
 
     <string-array name="moral">
-        <item>Anak datang tepat waktu</item>
-        <item>Anak dapat duduk ditempat yang telah disediakan</item>
-        <item>Anak dapat menggunakan sesuatu secukupnya</item>
-        <item>Anak dapat sabar menunggu giliran saat antre</item>
-        <item>Anak dapat sabar menunggu giliran saat menerima tugas</item>
-        <item>Anak dapat makan sendiri</item>
-        <item>Anak dapat meletakkan barang sesuai dengan tempatnya</item>
-        <item>Anak dapat tunjuk tangan dulu sebelum menjawab pertanyaan atau berpendapat</item>
-        <item>Anak mampu mencuci tangan dengan sabun dan air mengalir</item>
-        <item>Anak mampu menggosok gigi minimal 2 kali sehari</item>
-        <item>Anak mau memotong kuku seminggu sekali</item>
-        <item>Anak mampu membuang sampah pada tempatnya</item>
-        <item>Anak mampu dengan rutin berolahraga pada pagi hari</item>
-        <item>Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
+        <item>1. Anak datang tepat waktu</item>
+        <item>2. Anak dapat duduk ditempat yang telah disediakan</item>
+        <item>3. Anak dapat menggunakan sesuatu secukupnya</item>
+        <item>4. Anak dapat sabar menunggu giliran saat antre</item>
+        <item>5. Anak dapat sabar menunggu giliran saat menerima tugas</item>
+        <item>6. Anak dapat makan sendiri</item>
+        <item>7. Anak dapat meletakkan barang sesuai dengan tempatnya</item>
+        <item>8. Anak dapat tunjuk tangan dulu sebelum menjawab pertanyaan atau berpendapat</item>
+        <item>9. Anak mampu mencuci tangan dengan sabun dan air mengalir</item>
+        <item>10. Anak mampu menggosok gigi minimal 2 kali sehari</item>
+        <item>11. Anak mau memotong kuku seminggu sekali</item>
+        <item>12. Anak mampu membuang sampah pada tempatnya</item>
+        <item>13. Anak mampu dengan rutin berolahraga pada pagi hari</item>
+        <item>14. Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
     </string-array>
+
     <string name="indicator_value" tools:ignore="UnusedResources">Indicator Penilaian</string>
     <string name="the_weekly_report_has_been_created">Laporan mingguan telah dibuat</string>
     <string name="not_showing_progress" tools:ignore="UnusedResources">Belum berkembang</string>

@@ -70,6 +70,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val reportViewModel by viewModels<ReportViewModel>()
     private val achievementViewModel by viewModels<AchievementViewModel>()
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +84,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         listUri =  intent.getParcelableArrayListExtra("list_uri") ?: arrayListOf()
+
 
         if(listUri != null){
             Utils.showImageReport(true,null,listUri,binding,this)
@@ -110,16 +112,19 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             createReport()
             setupDropDown()
         }
+        getAchievement()
 
-        achievementViewModel.getAchievementKey().observe(this){
+
+
+    }
+
+    private fun getAchievement(){
+        achievementViewModel.myList.observe(this){
+            val listDatax = it.distinct()
             if(it != null && it.isNotEmpty()){
-                Log.d("DATA SAVE","$it")
-
-                showActivityAchievement(it)
+                showActivityAchievement(listDatax)
             }
         }
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -190,12 +195,14 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
 
     private fun showActivityAchievement(datas : List<String>){
+
         val listData = mutableListOf<Achievement>()
         val listDatas = mutableListOf<String>()
+
         if(idParent != null && idChild != null){
-            achievementViewModel.getAchievementKey().observe(this){
+            achievementViewModel.myList.observe(this){
                 if(it != null && it.isNotEmpty()){
-                    listDatas.addAll(it)
+                    listDatas.addAll(it.distinct())
                 }
             }
 
@@ -433,6 +440,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         intent.putExtra(EXTRA_ID_CHILD, idChild)
         intent.putExtra(EXTRA_ID_PARENT, idParent)
 
+
         binding.linearImage.setOnClickListener {
             listImageBitmap.clear()
             startActivity(intent)
@@ -449,10 +457,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         const val EXTRA_ID = "id_student"
         const val EXTRA_ID_CHILD = "id_child"
         const val EXTRA_ID_PARENT = "id_parent"
+        const val EXTRA_ID_ACHIEVEMENT = "list_data_achievement"
     }
 
     private fun back(){
         binding.imageBack.setOnClickListener {
+            startActivity(Intent(this,StudentsActivity::class.java))
             finish()
         }
     }
