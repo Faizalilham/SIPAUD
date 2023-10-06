@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_back"
             android:layout_width="50dp"
@@ -29,17 +34,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:scaleType="fitEnd"
-            android:src="@drawable/danilla" />
 
         <LinearLayout
             android:id="@+id/linear_rounded"
@@ -96,14 +94,17 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tittle">
+                    app:layout_constraintTop_toBottomOf="@id/tv_tittle"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_date"/>
+                        android:src="@drawable/ic_date"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/tv_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/date_detail"
@@ -135,12 +136,14 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_description">
+                    app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_students"/>
+                        android:src="@drawable/ic_students"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -175,17 +178,19 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name">
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_achievement_blue"/>
+                        android:src="@drawable/ic_achievement_blue"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/activity_achievement"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"
@@ -215,17 +220,19 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_activity">
+                    app:layout_constraintTop_toBottomOf="@id/tv_activity"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_feedback"/>
+                        android:src="@drawable/ic_feedback"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/feedback"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"
@@ -257,13 +264,64 @@
     </androidx.cardview.widget.CardView>
 
 
-    <include
-        layout="@layout/detail_bottom_component"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:background="@drawable/background_top_rounded"
+        android:backgroundTint="@color/white"
+        android:layout_gravity="bottom"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_favorite_inactive"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/update"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_update"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_share"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_delete"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+        <ImageView
+            android:id="@+id/export"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_export"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

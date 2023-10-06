@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.AchievementActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundColor"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/image_back"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/background_rounded"
+                            android:backgroundTint="@color/black"
+                            android:padding="@dimen/dp10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tittle"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:src="@drawable/ic_back"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tittle"
+                        style="@style/AppTheme.TextTittle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tambah Indikator Penilaian "
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_margin="@dimen/dp10"
+       android:orientation="vertical">
+
+       <TextView
+           style="@style/AppTheme.TextSubTittle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp8"
+           android:layout_marginTop="@dimen/dp20"
+           android:text="@string/indicator_value_agama" />
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/indicator"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp5"
+           android:layout_marginTop="@dimen/dp15"
+           android:layout_marginEnd="@dimen/dp5"
+           app:hintEnabled="false">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_indicator"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/background_stroke"
+               android:fontFamily="@font/poppins"
+               android:hint="@string/indicator_value_agama_hint"
+               android:imeOptions="actionDone"
+               android:inputType="text" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <TextView
+           style="@style/AppTheme.TextSubTittle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp8"
+           android:layout_marginTop="@dimen/dp20"
+           android:text="@string/indicator_value_moral" />
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/secondIndicator"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp5"
+           android:layout_marginTop="@dimen/dp15"
+           android:layout_marginEnd="@dimen/dp5"
+           app:hintEnabled="false">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_second_indicator"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/background_stroke"
+               android:fontFamily="@font/poppins"
+               android:hint="@string/indicator_value_moral_hint"
+               android:imeOptions="actionDone"
+               android:inputType="text" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <TextView
+           style="@style/AppTheme.TextSubTittle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp8"
+           android:layout_marginTop="@dimen/dp20"
+           android:text="@string/indicator_value_pekerti" />
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/indicator_third"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp5"
+           android:layout_marginTop="@dimen/dp15"
+           android:layout_marginEnd="@dimen/dp5"
+           app:hintEnabled="false">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_indicator_third"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/background_stroke"
+               android:fontFamily="@font/poppins"
+               android:hint="@string/indicator_value_pekerti_hint"
+               android:imeOptions="actionDone"
+               android:inputType="text" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rv_achievement_activity"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/dp10"
+           tools:listitem="@layout/list_item_achievement_activity" />
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/btn_save"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="@dimen/dp5"
+           android:layout_marginTop="50dp"
+           android:layout_marginEnd="@dimen/dp5"
+           android:layout_marginBottom="@dimen/dp15"
+           android:textStyle="bold"
+           android:backgroundTint="@color/primary_color"
+           android:fontFamily="@font/poppins"
+           android:padding="@dimen/dp15"
+           android:text="@string/save"
+           android:textAllCaps="false"
+           app:cornerRadius="@dimen/dp20" />
+   </LinearLayout>
+
+</LinearLayout>

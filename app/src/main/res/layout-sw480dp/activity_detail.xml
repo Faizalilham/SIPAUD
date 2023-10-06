@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,6 +10,11 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_back"
@@ -28,34 +34,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="fitEnd"
-                android:layout_weight="0.7"
-                android:src="@drawable/danilla" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/background_top_rounded"
-                android:layout_weight="1.7">
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,14 +93,17 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tittle">
+                    app:layout_constraintTop_toBottomOf="@id/tv_tittle"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_date"/>
+                        android:src="@drawable/ic_date"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
+                        android:id="@+id/tv_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/date_detail"
@@ -149,12 +135,14 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_description">
+                    app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_students"/>
+                        android:src="@drawable/ic_students"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -189,17 +177,19 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name">
+                    app:layout_constraintTop_toBottomOf="@id/tv_name"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_achievement_blue"/>
+                        android:src="@drawable/ic_achievement_blue"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/activity_achievement"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"
@@ -229,17 +219,19 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_activity">
+                    app:layout_constraintTop_toBottomOf="@id/tv_activity"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="@dimen/dp25"
                         android:layout_height="@dimen/dp25"
-                        android:src="@drawable/ic_feedback"/>
+                        android:src="@drawable/ic_feedback"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/student_detail"
+                        android:text="@string/feedback"
                         style="@style/AppTheme.TextSubTittle"
                         android:layout_marginStart="@dimen/dp8"
                         android:layout_marginTop="@dimen/dp3"

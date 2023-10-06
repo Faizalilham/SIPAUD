@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:paddingStart="30dp"
@@ -14,14 +15,16 @@
         android:layout_height="30dp"
         android:src="@drawable/ic_favorite_inactive"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_update"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/share"
@@ -29,18 +32,21 @@
         android:layout_height="30dp"
         android:src="@drawable/ic_share"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
     <ImageView
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_delete"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
     <ImageView
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_export"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

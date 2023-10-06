@@ -1,0 +1,9 @@
+<!--suppress ALL -->
+
+
+<svg id="visual"
+    viewBox="0 0 900 600"
+    width="900"
+    height="600"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"><path d="M0 157L225 157L450 109L675 67L900 85L900 0L675 0L450 0L225 0L0 0Z" fill="#87a7d9"></path><path d="M0 385L225 415L450 349L675 277L900 289L900 83L675 65L450 107L225 155L0 155Z" fill="#638ecd"></path><path d="M0 469L225 517L450 511L675 469L900 487L900 287L675 275L450 347L225 413L0 383Z" fill="#4875b5"></path><path d="M0 601L225 601L450 601L675 601L900 601L900 485L675 467L450 509L225 515L0 467Z" fill="#395e93"></path></svg>

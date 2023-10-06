@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="purple_200" tools:keep="@color/purple_200">#FFBB86FC</color>
+    <color name="purple_500" tools:keep="@color/purple_500">#FF6200EE</color>
+    <color name="purple_700" tools:keep="@color/purple_700">#FF3700B3</color>
+    <color name="teal_200" tools:keep="@color/teal_200">#FF03DAC5</color>
+    <color name="teal_700" tools:keep="@color/teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#4F81C7</color>
-    <color name="secondary_color">#64C4ED</color>
+    <color name="secondary_color" tools:keep="@color/secondary_color">#64C4ED</color>
+    <color name="backgroundColor">#F5F5F5</color>
     <color name="main_color">#FCFAFA</color>
     <color name="third_color">#F0D78C</color>
-    <color name="gray">#F3F3F3</color>
+    <color name="gray" tools:keep="@color/gray">#F3F3F3</color>
     <color name="red">#FF0000</color>
+    <color name="lt_gray" tools:keep="@color/lt_gray">#4FDFDFDF</color>
     <color name="secondary_grey">#C7C7C7</color>
+    <color name="gray_shimmer">#DDDDDD</color>
 
 
 </resources>

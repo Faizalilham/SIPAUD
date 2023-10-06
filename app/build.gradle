@@ -7,14 +7,14 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
 }
-
 android {
     compileSdk 33
 
     defaultConfig {
         applicationId "android.coding.ourapp"
-        minSdk 21
-        targetSdk 32
+        namespace 'android.coding.ourapp'
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -37,35 +37,42 @@ android {
 
     buildFeatures{
         viewBinding true
+        dataBinding true
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+    lintOptions {
+        // Enable checking dependencies
+        checkDependencies true
+    }
+
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.2.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-
     // Image
     implementation "com.github.bumptech.glide:glide:$glide_version"
     implementation "com.makeramen:roundedimageview:$roundedimage_version"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    // Dots Indicator
+    implementation  'io.ak1.pix:piximagepicker:1.6.3'
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
+    implementation 'com.caverock:androidsvg:1.4'
     implementation("com.tbuonomo:dotsindicator:4.3")
-
-
     implementation "androidx.activity:activity-ktx:$activity_ktx_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
 
-    // Hilt DI
+    //Hilt DI
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:$hiltcompiler_version"
@@ -73,16 +80,21 @@ dependencies {
     // DataStore, View model, live data
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
 //     Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-auth:22.0.0'
+
 
     //Lottie Animations
     implementation "com.airbnb.android:lottie:$lottie_version"
 
     //room
+
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
@@ -98,11 +110,30 @@ dependencies {
     //Testing
     testImplementation "io.mockk:mockk:$mock_version"
 
-    // Security
-    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
-    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+    // Similar React Select
+    implementation 'com.github.leoncydsilva:SearchableSpinner:1.0.1'
 
-    //FAB 
-    implementation "com.github.clans:fab:1.6.4"
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.clans:fab:1.6.4'
+
+
+    // Export PDF
+    implementation 'com.itextpdf:itext7-core:7.1.15'
+    implementation 'com.itextpdf:kernel:7.1.15'
+    implementation 'com.itextpdf:layout:7.1.15'
+
+
+    //Swipe refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Expand layout
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
+
+
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+    implementation 'com.caverock:androidsvg:1.4'
+
 
 }

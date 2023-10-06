@@ -1,14 +1,12 @@
 package android.coding.ourapp.presentation.ui.onboarding
 
+import android.coding.ourapp.databinding.FragmentOnBoardingBinding
+import android.coding.ourapp.presentation.ui.onboarding.adapter.ViewPagerAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.coding.ourapp.databinding.FragmentOnBoardingBinding
-import android.coding.ourapp.presentation.ui.onboarding.adapter.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayoutMediator
-
+import androidx.fragment.app.Fragment
 
 class OnBoardingFragment : Fragment() {
 
@@ -42,7 +40,8 @@ class OnBoardingFragment : Fragment() {
         )
 
         binding.viewPager.adapter = adapter
-        TabLayoutMediator(binding.pageIndicator, binding.viewPager) { _, _ -> }.attach()
+        binding.pageIndicator.attachTo(binding.viewPager)
+//        TabLayoutMediator(binding.pageIndicator, binding.viewPager) { _, _ -> }.attach()
     }
 
     override fun onDestroy() {

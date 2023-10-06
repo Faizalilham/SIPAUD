@@ -1,82 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:padding="@dimen/dp15"
-    tools:context=".presentation.ui.StudentsActivity">
+    tools:context=".presentation.ui.StudentsActivity"
+    tools:ignore="Overdraw">
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/AppTheme.TextTittle"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Si-PAUD"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_studnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/third_color"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/student_identity"
+        app:layout_constraintEnd_toStartOf="@+id/image_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_profile"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/avatar"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <LinearLayout
+        android:id="@+id/form_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_profile">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/image_back"
-            android:layout_width="50dp"
-            android:background="@drawable/background_rounded"
-            android:layout_height="50dp"
-            android:backgroundTint="@color/black"
-            android:padding="@dimen/dp10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
-                android:layout_marginStart="@dimen/dp10"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tittle"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/iSearch"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/AppTheme.TextTittle"
-            android:textStyle="bold"
-            android:text="@string/student_bio"
-            android:layout_marginEnd="@dimen/dp15"
-            android:textAlignment="center"
-            android:layout_marginTop="@dimen/dp10" />
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp5"
+            android:layout_weight="1"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_search">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_search"
+                android:fontFamily="@font/poppins"
+                android:hint="Cari Siswa"
+                android:imeOptions="actionSearch"
+                android:inputType="textEmailAddress"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_filter"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp15"
+            android:backgroundTint="@color/primary_color"
+            android:fontFamily="@font/poppins"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp15"
+            app:icon="@drawable/ic_filter" />
 
     </LinearLayout>
 
 
-    <TextView
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/loading_student"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/AppTheme.TextSubTittle"
-        android:text="@string/student_identity"
-        android:layout_marginStart="@dimen/dp15"
-        android:layout_marginTop="@dimen/dp25" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/form_search"
+        app:layout_constraintVertical_bias="0.0">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="@font/poppins"
-        android:padding="@dimen/dp15"
-        android:text="@string/add_student"
-        android:layout_marginStart="@dimen/dp10"
-        app:cornerRadius="@dimen/dp20"
-        app:icon="@drawable/fab_add"
-        android:layout_marginTop="@dimen/dp10"
-        android:textAllCaps="false"
-        android:layout_marginBottom="@dimen/dp10" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_students"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/list_student_shimmer" />
+
+                <include layout="@layout/list_student_shimmer" />
+
+                <include layout="@layout/list_student_shimmer" />
+                <include layout="@layout/list_student_shimmer" />
+                <include layout="@layout/list_student_shimmer" />
+                <include layout="@layout/list_student_shimmer" />
+                <include layout="@layout/list_student_shimmer" />
+                <include layout="@layout/list_student_shimmer" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/list_item_student"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/form_search"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_students"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_item_student" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ImageView
+        android:id="@+id/iv_not_result"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="1dp"
+        android:src="@drawable/not_result"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_empty"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="@string/not_found"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/sp20"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,8 @@
+<TextView
+    android:id="@+id/textview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:textSize="@dimen/sp20"
+    android:textColor="@color/black"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>

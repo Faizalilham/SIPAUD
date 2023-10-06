@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/background_top_rounded"
     android:layout_width="match_parent"
@@ -19,37 +20,28 @@
         />
 
     <RadioGroup
+        android:id="@+id/rgFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/rb_name_asc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/filter_alphabet"
-            style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/filter_news"
-            style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/filter_latest"
-            style="@style/AppTheme.TextSubTittle"
-            app:buttonTint="@color/primary_color"/>
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/filter_favorite"
+            android:text="A-Z"
             style="@style/AppTheme.TextSubTittle"
             app:buttonTint="@color/primary_color"
-            />
+            tools:ignore="HardcodedText" />
+
+        <RadioButton
+            android:id="@+id/rb_name_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Z-A"
+            style="@style/AppTheme.TextSubTittle"
+            app:buttonTint="@color/primary_color"
+            tools:ignore="HardcodedText" />
+
 
 
     </RadioGroup>

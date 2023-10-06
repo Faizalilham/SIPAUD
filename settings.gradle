@@ -10,7 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://raw.github.com/mt312/OneTouchSwipeMenu/master/repository' }
     }
 }
 rootProject.name = "OurApp"
