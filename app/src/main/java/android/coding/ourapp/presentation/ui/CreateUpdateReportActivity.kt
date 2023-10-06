@@ -70,6 +70,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private val reportViewModel by viewModels<ReportViewModel>()
     private val achievementViewModel by viewModels<AchievementViewModel>()
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +84,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idParent = intent.getStringExtra(ID_PARENT)
         idChild = intent.getStringExtra(ID_CHILD)
         listUri =  intent.getParcelableArrayListExtra("list_uri") ?: arrayListOf()
+
 
         if(listUri != null){
             Utils.showImageReport(true,null,listUri,binding,this)
@@ -110,16 +112,19 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             createReport()
             setupDropDown()
         }
+        getAchievement()
 
-        achievementViewModel.getAchievementKey().observe(this){
+
+
+    }
+
+    private fun getAchievement(){
+        achievementViewModel.myList.observe(this){
+            val listDatax = it.distinct()
             if(it != null && it.isNotEmpty()){
-                Log.d("DATA SAVE","$it")
-
-                showActivityAchievement(it)
+                showActivityAchievement(listDatax)
             }
         }
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -190,12 +195,14 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
 
     private fun showActivityAchievement(datas : List<String>){
+
         val listData = mutableListOf<Achievement>()
         val listDatas = mutableListOf<String>()
+
         if(idParent != null && idChild != null){
-            achievementViewModel.getAchievementKey().observe(this){
+            achievementViewModel.myList.observe(this){
                 if(it != null && it.isNotEmpty()){
-                    listDatas.addAll(it)
+                    listDatas.addAll(it.distinct())
                 }
             }
 
@@ -219,8 +226,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         adapterAchievementAdapter = AchievementAdapter(listData,object : AchievementAdapter.OnClick{
             override fun onChecked(name: List<String>,isMuncul : Boolean) {
 
+
                 if(isMuncul) listAchievementActivity.addAll(name) else listAchievementActivity.removeAll(name)
-               Log.d("TAG","$listAchievementActivity $name")
+
+               Log.d("TAGSS","$listAchievementActivity $name")
             }
         })
         binding.rvAchievementActivity.apply {
@@ -239,9 +248,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
                 if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
                     doCreateReport(binding.tvTittle.text.toString(),tittle,date,
-                        resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                         listImages)
 
                 }else{
@@ -261,6 +270,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         images : MutableList<String>
     ){
         if(idStudent != null){
+
             reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicatorAgama,indicatorMoral,indicatorPekerti, images)
             reportViewModel.message.observe(this){
                 when(it){
@@ -293,13 +303,19 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                 val date = tvDate.text.toString().trim()
                 val idChild =  firebaseDatabase.reference.push().key.toString()
+
+
+
                 listReport.add(
                     Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                        indicatorAgama =  resources.getStringArray(R.array.agama).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
-                        indicatorMoral =  resources.getStringArray(R.array.moral).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
-                        indicatorPekerti =  resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
+                        indicatorAgama =   Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        indicatorMoral =   Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        indicatorPekerti =   Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                         images = listImages
                     ))
+
+
+
                 doUpdateReport(
                     idParent = idParent,
                     listReport = listReport,
@@ -433,6 +449,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         intent.putExtra(EXTRA_ID_CHILD, idChild)
         intent.putExtra(EXTRA_ID_PARENT, idParent)
 
+
         binding.linearImage.setOnClickListener {
             listImageBitmap.clear()
             startActivity(intent)
@@ -449,10 +466,12 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         const val EXTRA_ID = "id_student"
         const val EXTRA_ID_CHILD = "id_child"
         const val EXTRA_ID_PARENT = "id_parent"
+        const val EXTRA_ID_ACHIEVEMENT = "list_data_achievement"
     }
 
     private fun back(){
         binding.imageBack.setOnClickListener {
+            startActivity(Intent(this,StudentsActivity::class.java))
             finish()
         }
     }

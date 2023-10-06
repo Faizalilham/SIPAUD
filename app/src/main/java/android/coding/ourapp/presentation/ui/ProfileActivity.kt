@@ -39,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
         bottomSheetLanguage()
         bottomSheetInformation()
         doReset()
+        moveToInstruction()
 
     }
 
@@ -51,7 +52,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun doReset(){
         binding.cardReset.setOnClickListener {
-            achievementViewModel.deleteAchievement()
+            achievementViewModel.deleteListFromSharedPreferences()
             Toast.makeText(this, "Indicator Penilaian tereset", Toast.LENGTH_SHORT).show()
         }
     }
@@ -66,6 +67,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.imageBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun moveToInstruction(){
+        binding.tvInstruction.setOnClickListener { startActivity(Intent(this,InstructionActivity::class.java)) }
     }
 
 

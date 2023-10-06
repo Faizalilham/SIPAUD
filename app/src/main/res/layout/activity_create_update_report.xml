@@ -134,7 +134,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_first"
                             android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                            android:layout_height="190dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"
@@ -146,7 +146,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_second"
                             android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                            android:layout_height="190dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"
@@ -158,7 +158,7 @@
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/image_third"
                             android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                            android:layout_height="190dp"
                             android:scaleType="centerCrop"
                             app:riv_corner_radius="20dip"
                             app:riv_border_width="2dip"

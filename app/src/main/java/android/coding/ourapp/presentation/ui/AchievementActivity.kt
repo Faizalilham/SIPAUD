@@ -123,15 +123,22 @@ class AchievementActivity : AppCompatActivity() {
        val id =  intent.getStringExtra(CreateUpdateReportActivity.EXTRA_ID)
         binding.btnSave.setOnClickListener {
             if(listAchievementActivity.isNotEmpty()){
-                achievementActivityViewModel.setAchievementKey(listAchievementActivity.toList())
+                Toast.makeText(this, "${Utils.removeNumbersFromList(listAchievementActivity.toList())}", Toast.LENGTH_SHORT).show()
+                achievementActivityViewModel.setAchievementKey(Utils.removeNumbersFromList(listAchievementActivity.toList()))
 
 
-                startActivity(Intent(this,CreateUpdateReportActivity::class.java).also{
-                    it.putExtra(CreateUpdateReportActivity.EXTRA_NAME, name)
-                    it.putExtra(CreateUpdateReportActivity.EXTRA_ID, id)
-                    finish()
-                })
-                Log.d("Hahai","$listAchievementActivity")
+                achievementActivityViewModel.myList.observe(this){
+
+                    if(it.isNotEmpty() && it != null){
+                        startActivity(Intent(this,CreateUpdateReportActivity::class.java).also{ intent ->
+                            intent.putExtra(CreateUpdateReportActivity.EXTRA_NAME, name)
+                            intent.putExtra(CreateUpdateReportActivity.EXTRA_ID, id)
+                            finish()
+                        })
+                    }
+                }
+
+
             }else{
                 Toast.makeText(this, "Minimal ada 1 pencapaian siswa yang akan direkam", Toast.LENGTH_SHORT).show()
             }

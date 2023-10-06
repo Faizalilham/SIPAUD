@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LifecycleOwner
@@ -72,7 +73,7 @@ class StudentAdapter(
                 tvGroup.text = student.group
 
                 btnAddReport.setOnClickListener {
-                    achievement.getAchievementKey().observe(lifecycleOwner){
+                    achievement.myList.observe(lifecycleOwner){
                         if(it.isEmpty()){
                             val intent = Intent(context, AchievementActivity::class.java)
                             intent.putExtra(EXTRA_NAME, student.nameStudent)
