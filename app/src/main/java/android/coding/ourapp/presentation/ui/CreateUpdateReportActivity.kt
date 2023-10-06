@@ -226,8 +226,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         adapterAchievementAdapter = AchievementAdapter(listData,object : AchievementAdapter.OnClick{
             override fun onChecked(name: List<String>,isMuncul : Boolean) {
 
+
                 if(isMuncul) listAchievementActivity.addAll(name) else listAchievementActivity.removeAll(name)
-               Log.d("TAG","$listAchievementActivity $name")
+
+               Log.d("TAGSS","$listAchievementActivity $name")
             }
         })
         binding.rvAchievementActivity.apply {
@@ -246,9 +248,9 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
 
                 if(tittle.isNotBlank() && date.isNotBlank() && listAchievementActivity.isNotEmpty()){
                     doCreateReport(binding.tvTittle.text.toString(),tittle,date,
-                        resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                         listImages)
 
                 }else{
@@ -268,6 +270,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         images : MutableList<String>
     ){
         if(idStudent != null){
+
             reportViewModel.createReport(idStudent!!,studentName,tittle,date, indicatorAgama,indicatorMoral,indicatorPekerti, images)
             reportViewModel.message.observe(this){
                 when(it){
@@ -300,13 +303,19 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
                 val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
                 val date = tvDate.text.toString().trim()
                 val idChild =  firebaseDatabase.reference.push().key.toString()
+
+
+
                 listReport.add(
                     Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                        indicatorAgama =  resources.getStringArray(R.array.agama).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
-                        indicatorMoral =  resources.getStringArray(R.array.moral).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
-                        indicatorPekerti =  resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.distinct().toSet()).toTypedArray().toMutableList(),
+                        indicatorAgama =   Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        indicatorMoral =   Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                        indicatorPekerti =   Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
                         images = listImages
                     ))
+
+
+
                 doUpdateReport(
                     idParent = idParent,
                     listReport = listReport,

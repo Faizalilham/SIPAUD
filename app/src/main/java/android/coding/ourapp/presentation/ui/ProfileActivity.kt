@@ -39,6 +39,7 @@ class ProfileActivity : AppCompatActivity() {
         bottomSheetLanguage()
         bottomSheetInformation()
         doReset()
+        moveToInstruction()
 
     }
 
@@ -66,6 +67,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.imageBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun moveToInstruction(){
+        binding.tvInstruction.setOnClickListener { startActivity(Intent(this,InstructionActivity::class.java)) }
     }
 
 

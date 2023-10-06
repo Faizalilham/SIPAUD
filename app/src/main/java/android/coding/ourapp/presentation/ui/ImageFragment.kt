@@ -32,7 +32,6 @@ class ImageFragment : AppCompatActivity() {
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
-    private lateinit var listDataAchievement : ArrayList<Achievement>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +51,6 @@ class ImageFragment : AppCompatActivity() {
 
         idParent = intent.getStringExtra(EXTRA_ID_PARENT)
         idChild = intent.getStringExtra(EXTRA_ID_CHILD)
-        listDataAchievement = intent.getParcelableArrayListExtra<Achievement>(CreateUpdateReportActivity.EXTRA_ID_ACHIEVEMENT)!!
-        Toast.makeText(this, "$listDataAchievement", Toast.LENGTH_SHORT).show()
 
 
     }
@@ -74,7 +71,6 @@ class ImageFragment : AppCompatActivity() {
                             intent.putExtra(EXTRA_ID, idStudent)
                             intent.putExtra(EXTRA_ID_PARENT, idParent)
                             intent.putExtra(EXTRA_ID_CHILD, idChild)
-                            intent.putParcelableArrayListExtra(CreateUpdateReportActivity.EXTRA_ID_ACHIEVEMENT, listDataAchievement)
                             finishAffinity()
                             finish()
                         })

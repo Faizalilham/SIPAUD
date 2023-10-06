@@ -35,7 +35,7 @@
     <string name="update_student">Ubah siswa</string>
     <string name="profile">Profil</string>
     <string name="student_bio" tools:ignore="UnusedResources">Biodata siswa</string>
-    <string name="student_identity">Daftar identitas siswa</string>
+    <string name="student_identity">Sistem informasi Assesment Perkembangan Nilai Agama Dan Budi Pekerti Anak Usia Dini</string>
     <string name="register">Daftar</string>
     <string name="register_message">Buat akun baru untuk masuk</string>
     <string name="have_account">Sudah punya akun?</string>
@@ -126,6 +126,29 @@
         <item>4. Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
         <item>5. Anak dapat mengingatkan teman untuk selalu berdoa</item>
         <item>6. Anak tidak dapat mengganggu teman yang sedang beribadah</item>
+    </string-array>
+
+    <string-array name="instruction">
+        <item>1. Install Aplikasi Si-PAUD melalui Play Store</item>
+        <item>2. Pada Onboarding Screen bacalah dengan teliti tentang pengenalan aplikasi</item>
+        <item>3. Klik daftar, bagi yang belum memilik akun</item>
+        <item>4. Lalu login dengan akun yang sudah di verifikasi</item>
+        <item>5. Klik untuk mengetahui profil lembaga</item>
+        <item>6. Klik untuk menambah nama peserta didik</item>
+        <item>7. Klik tambahkan jika data peserta didik yang di input sudah benar</item>
+        <item>8. Klik lalu isikan bulan penilaian</item>
+        <item>9. Klik lalu pilih nama peserta didik yang akan di nilai</item>
+        <item>10. Isikan hari dan tanggal saat melakukan penilaian</item>
+        <item>11. Pilih dua indikator dari aspek perkembangan nilai agama, nilai moral dan nilai budi pekerti (Indikator tidak berubah selama satu bulan)</item>
+        <item>12. Dinilai dengan mengobservasi dan pilih muncul atau tidak muncul dari setiap indikator </item>
+        <item>13. Ambil foto anak di awal penilaian setiap minggunya </item>
+        <item>14. Poin 10 sampai 13 dilakukan berulang ulang selama satu bulan dengan 20 kali penilaian (20 hari) pada setiap anak</item>
+        <item>15. Klik untuk melihat resume penilaian harian menjadi penilaian bulanan</item>
+        <item>16. Isikan narasi sesuai kesimpulan atau resume yang di peroleh (Misal BB, MB, BSH atau BSB)</item>
+        <item>17. Download hasil resume dan simpan atau print untuk dapat di informasikan perkembangan anak kepada orang tua, rekan guru maupun kepala sekolah</item>
+        <item>18. Lakukan pada bulan berikutnya dengan indikator yang berbeda dan cara yang sama</item>
+        <item>19. Selamat mencoba</item>
+
     </string-array>
 
     <string-array name="pekerti">
