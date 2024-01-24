@@ -81,6 +81,9 @@ class ReportMonthActivity : AppCompatActivity() {
                             report.month == currentMonth
                         }.toMutableList()
 
+                        val images = listReport.any { it.images.isNotEmpty() }
+
+
                         if (dataKu.isNotEmpty()) {
                             binding.apply {
                                 tvDetailNarasi.text = dataKu[0].summary
@@ -95,9 +98,14 @@ class ReportMonthActivity : AppCompatActivity() {
 
                             binding.btnAddReporttMonth.setOnClickListener {
                                 showLoading(true)
-                                lifecycleScope.launch(Dispatchers.Main) {
-                                    exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month ?: "")
+                                if(images){
+                                    lifecycleScope.launch(Dispatchers.Main) {
+                                        exportPdf(nameStudent!!,dataKu[0].summary,Utils.category(dataKu[0].totalIndicatorAgama),Utils.category(dataKu[0].totalIndicatorMoral),Utils.category(dataKu[0].totalIndicatorPekerti),datak,dataKu[0].month ?: "")
+                                        showLoading(false)
+                                    }
+                                }else{
                                     showLoading(false)
+                                    Toast.makeText(this, "Minimal ada satu gambar untuk membuat laporan bulanan", Toast.LENGTH_SHORT).show()
                                 }
                             }
                             setupRecycler(datak)

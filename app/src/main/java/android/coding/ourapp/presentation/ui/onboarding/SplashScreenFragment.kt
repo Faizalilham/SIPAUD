@@ -3,6 +3,7 @@ package android.coding.ourapp.presentation.ui.onboarding
 import android.annotation.SuppressLint
 import android.coding.ourapp.R
 import android.coding.ourapp.databinding.FragmentSplashScreenBinding
+import android.coding.ourapp.presentation.ui.DashboardActivity
 import android.coding.ourapp.presentation.ui.LoginActivity
 import android.coding.ourapp.presentation.ui.StudentsActivity
 import android.coding.ourapp.presentation.viewmodel.OnBoardingViewModel

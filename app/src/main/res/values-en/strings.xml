@@ -111,6 +111,7 @@
     <string name="showing_excellent_progress" tools:ignore="UnusedResources">Showing excellent progress</string>
     <string name="undefined" tools:ignore="UnusedResources">Undefined</string>
     <string name="monthly_detail">Monthly Detail</string>
+    <string name="text_amount_student">Student Amount</string>
 
 
 </resources>
