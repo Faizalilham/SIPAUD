@@ -205,9 +205,23 @@
 
 
         <TextView
+            android:id="@+id/wm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/wm"
+            style="@style/AppTheme.TextSubTittle"
+            android:layout_marginBottom="50dp"
+            android:gravity="bottom"
+            android:textAlignment="center"
+            tools:ignore="RtlCompat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_owner"
             style="@style/AppTheme.TextSubTittle"
             android:layout_marginBottom="@dimen/dp15"
             android:gravity="bottom"

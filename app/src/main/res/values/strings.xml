@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Si-PAUD</string>
+    <string name="email_owner">wmufliana@gmail.com</string>
     <string name="tittle">Sistem Informasi Assesment Perkembangan Nilai Agama dan Budi Pekerti Anak Usia Dini</string>
     <string name="card_tittle">Belajar Menghitung</string>
     <string name="card_description" tools:ignore="TypographyEllipsis">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
@@ -44,7 +45,7 @@
     <string name="welcome">Selamat datang</string>
     <string name="welcome_message">Ayo login dengan akun kamu</string>
     <string name="here">disini</string>
-    <string name="wm">SIAP - AUD © 2023</string>
+    <string name="wm">SIAP - AUD © 2024</string>
     <string name="hint_email">Masukkan email . . .</string>
     <string name="hint_password">Masukkan password . . .</string>
     <string name="hint_school">Masukkan nama sekolah . . .</string>
