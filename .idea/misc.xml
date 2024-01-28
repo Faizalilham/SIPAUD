@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
@@ -29,9 +28,10 @@
         <entry key="app/src/main/res/layout/activity_create_update_asesment.xml" value="0.1769815418023887" />
         <entry key="app/src/main/res/layout/activity_create_update_report.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_create_update_student.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_detail_report.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_instruction.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_list_item_report.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.14" />
@@ -41,7 +41,7 @@
         <entry key="app/src/main/res/layout/activity_report.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_report_month.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_students.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_students.xml" value="0.16" />
         <entry key="app/src/main/res/layout/alert_component.xml" value="0.17" />
         <entry key="app/src/main/res/layout/appbar_component.xml" value="0.13931623931623932" />
         <entry key="app/src/main/res/layout/back_button_component.xml" value="0.5" />
@@ -54,7 +54,7 @@
         <entry key="app/src/main/res/layout/fragment_on_boarding.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.11013513513513513" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.11013513513513513" />
-        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.22" />
         <entry key="app/src/main/res/layout/image_bottom_sheet.xml" value="0.14" />
         <entry key="app/src/main/res/layout/list_item_achievement.xml" value="0.17" />
         <entry key="app/src/main/res/layout/list_item_achievement_activity.xml" value="0.21" />
@@ -75,7 +75,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

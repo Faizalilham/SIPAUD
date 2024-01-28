@@ -9,6 +9,7 @@ import android.coding.ourapp.data.repository.student.StudentRepository
 import android.coding.ourapp.databinding.ActivityStudentsBinding
 import android.coding.ourapp.databinding.BottomSheetFilterBinding
 import android.coding.ourapp.helper.ViewModelFactory
+import android.coding.ourapp.presentation.ui.onboarding.SplashScreenFragmentDirections
 import android.coding.ourapp.presentation.viewmodel.AchievementViewModel
 import android.coding.ourapp.presentation.viewmodel.assessment.AssessmentViewModel
 import android.coding.ourapp.presentation.viewmodel.student.StudentViewModel
@@ -47,11 +48,10 @@ class StudentsActivity : AppCompatActivity() {
 
         initViewModel()
         getAllData()
-        moveToAddStudent()
-        moveToProfile()
         search()
         bottomSheet()
         binding.swipeRefreshLayout.setOnRefreshListener { getAllData() }
+        binding.imageProfile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
         setRecyclerView()
         binding.rvStudents.adapter = studentAdapter
     }
@@ -78,18 +78,6 @@ class StudentsActivity : AppCompatActivity() {
         binding.rvStudents.setHasFixedSize(true)
         binding.rvStudents.layoutManager = LinearLayoutManager(this)
         binding.rvStudents.adapter = studentAdapter
-    }
-
-    private fun moveToAddStudent() {
-        binding.btnAddStudnet.setOnClickListener {
-            startActivity(Intent(this, CreateUpdateStudentActivity::class.java))
-        }
-    }
-
-    private fun moveToProfile() {
-        binding.imageProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
     }
 
     private fun getAllData() {

@@ -31,3 +31,9 @@ data class Narrative(
     val totalIndicatorMoral : Int = 0,
     val totalIndicatorPekerti : Int = 0,
 )
+
+data class Chart(
+    val name : String,
+    val month : String,
+    val average : Double,
+)

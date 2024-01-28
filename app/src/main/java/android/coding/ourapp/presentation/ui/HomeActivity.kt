@@ -42,10 +42,6 @@ class HomeActivity : AppCompatActivity() {
 
         binding.swipeRefreshLayout.setOnRefreshListener { getAllAssessment() }
 
-        binding.imageProfile.setOnClickListener { startActivity(Intent(this, ProfileActivity::class.java)) }
-
-        binding.fabAddStudent.setOnClickListener {  startActivity(Intent(this, CreateUpdateReportActivity::class.java))}
-
     }
 
     private fun getAllAssessment() {
