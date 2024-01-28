@@ -99,55 +99,55 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-   <LinearLayout
-       android:id="@+id/form_search"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/appBarLayout2">
+    <LinearLayout
+        android:id="@+id/form_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subTittle">
 
-       <com.google.android.material.textfield.TextInputLayout
-           android:id="@+id/iSearch"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="@dimen/dp15"
-           android:layout_marginEnd="@dimen/dp5"
-           android:layout_marginStart="@dimen/dp5"
-           app:startIconDrawable="@drawable/ic_search"
-           app:endIconMode="clear_text"
-           android:layout_weight="1"
-           app:hintEnabled="false"
-           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/iSearch"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp5"
+            android:layout_weight="1"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_search">
 
-           <com.google.android.material.textfield.TextInputEditText
-               android:id="@+id/et_search"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="@string/hint_search"
-               android:inputType="textEmailAddress"
-               android:fontFamily="@font/poppins"
-               android:imeOptions="actionSearch"
-               android:background="@drawable/background_search"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_search"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/hint_search"
+                android:imeOptions="actionSearch"
+                android:inputType="textEmailAddress" />
 
-       </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-       <com.google.android.material.button.MaterialButton
-           android:id="@+id/btn_filter"
-           android:layout_width="60dp"
-           android:layout_height="70dp"
-           android:layout_marginTop="@dimen/dp15"
-           android:backgroundTint="@color/primary_color"
-           android:fontFamily="@font/poppins"
-           app:icon="@drawable/ic_filter"
-           app:cornerRadius="@dimen/dp15"
-           android:textAllCaps="false"
-           android:layout_marginStart="@dimen/dp5"
-           />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_filter"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp15"
+            android:backgroundTint="@color/primary_color"
+            android:fontFamily="@font/poppins"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/dp15"
+            app:icon="@drawable/ic_filter" />
 
 
-   </LinearLayout>
+    </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.DetailDayActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/image_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/background_rounded"
+                android:backgroundTint="@color/black"
+                android:padding="@dimen/dp8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tittle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/page_tittle"
+            style="@style/AppTheme.TextTittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detail Kegiatan"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout4"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTitleDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Tanggal :"
+        style="@style/AppTheme.TextSubTittle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailNameStudent" />
+
+    <TextView
+        android:id="@+id/tvDetailDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="28 - januari -2024"
+        style="@style/AppTheme.TextSubTittle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleDate" />
+
+    <TextView
+        android:id="@+id/tvTitleActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Capaian Kegiatan :"
+        style="@style/AppTheme.TextSubTittle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailDate" />
+
+    <TextView
+        android:id="@+id/tvDetailActivity"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Isi Kegiatan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleActivity" />
+
+    <TextView
+        android:id="@+id/tvTitleNameStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Nama Siswa :"
+        style="@style/AppTheme.TextSubTittle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+    <TextView
+        android:id="@+id/tvDetailNameStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Adung"
+
+        style="@style/AppTheme.TextSubTittle"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleNameStudent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleNameStudent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ekspor_pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:textStyle="bold"
+        style="@style/AppTheme.TextSubTittle"
+        android:textColor="@color/white"
+        android:text="Ekspor PDF"
+        app:icon="@drawable/ic_add"
+        android:padding="12dp"
+        app:cornerRadius="@dimen/dp15"
+        android:textAllCaps="false"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitlePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Dokumentasi:"
+        style="@style/AppTheme.TextSubTittle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailActivity" />
+
+    <ImageView
+        android:id="@+id/iv_documentasion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_achievement_black"
+        app:layout_constraintStart_toStartOf="@+id/tvTitlePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePhoto" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import android.coding.ourapp.adapter.ReportAdapter
 import android.coding.ourapp.data.Resource
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.databinding.ActivityDetailReportBinding
+import android.coding.ourapp.presentation.ui.DetailDayActivity.Companion.EXTRA_DATA
+import android.coding.ourapp.presentation.ui.DetailDayActivity.Companion.ID_STUDENTS
 import android.coding.ourapp.presentation.ui.ReportActivity.Companion.ID_STUDENT
 import android.coding.ourapp.presentation.ui.ReportActivity.Companion.NAME_STUDENT
 import android.coding.ourapp.presentation.viewmodel.report.ReportViewModel
@@ -144,7 +146,23 @@ class DetailReportActivity : AppCompatActivity() {
                         it.putExtra(ID_CHILD, id)
                         it.putExtra(NAME_STUDENT, nameStudent)
                         it.putExtra(MONTH, intent.getStringExtra(MONTH))
+                        Log.d("K student, ", "${idStudent}")
+                        Log.d("K parent, ", "${idParent}")
+                        Log.d("K child ", "${idChild}")
                     })
+            }
+
+            override fun onDetail(id: String) {
+                startActivity(Intent(this@DetailReportActivity, DetailDayActivity::class.java).also {
+                    it.putExtra(ID_PARENT, idParent)
+                    it.putExtra(ID_CHILD, id)
+                    it.putExtra(ID_STUDENTS, idStudent)
+                    it.putExtra(EXTRA_DATA, nameStudent)
+                    it.putExtra(MONTH, intent.getStringExtra(MONTH))
+                    Log.d("KUNYUK student, ", "${idStudent}")
+                    Log.d("KUNYUK2 parent, ", "${idParent}")
+                    Log.d("KUNYUK3 child ", "${id}")
+                })
             }
         })
         reportAdapter.updateData(data)

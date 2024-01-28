@@ -26,7 +26,8 @@
         android:theme="@style/Theme.OurApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.DashboardActivity"
+
+            android:name=".presentation.ui.DetailDayActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.InstructionActivity"

@@ -21,13 +21,21 @@
             android:contentDescription="@null"
             app:srcCompat="@drawable/ic_delete" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/btn_update"-->
-<!--            android:layout_width="65dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="#64C4ED"-->
-<!--            android:contentDescription="@null"-->
-<!--            app:srcCompat="@drawable/ic_update" />-->
+        <ImageButton
+            android:id="@+id/btn_update"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="#64C4ED"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_update" />
+        <ImageButton
+            android:id="@+id/btn_detail"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:background="#FFEB3B"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_achievement_black" />
+
 
     </LinearLayout>
 

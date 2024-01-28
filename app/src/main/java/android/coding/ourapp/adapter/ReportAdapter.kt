@@ -63,7 +63,9 @@ class ReportAdapter(
             }
         }
         viewHolder.btnDelete.setOnClickListener{ listener.onDelete(data[position].id)}
-//        viewHolder.btnUpdate.setOnClickListener{ listener.onUpdate(data[position].id)}
+
+        viewHolder.btnUpdate.setOnClickListener{ listener.onUpdate(data[position].id)}
+        viewHolder.btnDetail.setOnClickListener{ listener.onDetail(data[position].id)}
     }
 
     override fun getItemCount(): Int = data.size
@@ -71,6 +73,7 @@ class ReportAdapter(
     interface OnClick{
         fun onDelete(id : String)
         fun onUpdate(id : String)
+        fun onDetail(id : String)
     }
 }
 
@@ -81,7 +84,9 @@ class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView
     override val canRemoveOnSwipingFromRight: Boolean get() = true
 
     val btnDelete: ImageButton = binding.swipeLayout.btnDelete
-//    val btnUpdate: ImageButton = binding.swipeLayout.btnUpdate
+
+    val btnUpdate: ImageButton = binding.swipeLayout.btnUpdate
+    val btnDetail: ImageButton = binding.swipeLayout.btnDetail
 
 }
 
