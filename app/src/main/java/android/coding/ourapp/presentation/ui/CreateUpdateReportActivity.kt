@@ -85,6 +85,10 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         idChild = intent.getStringExtra(ID_CHILD)
         listUri =  intent.getParcelableArrayListExtra("list_uri") ?: arrayListOf()
 
+        Log.d("KU student, ", "${idStudent}")
+        Log.d("KU parent, ", "${idParent}")
+        Log.d("KU child ", "${idChild}")
+
 
         if(listUri != null){
             Utils.showImageReport(true,null,listUri,binding,this)
