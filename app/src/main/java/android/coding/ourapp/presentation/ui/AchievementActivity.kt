@@ -123,7 +123,7 @@ class AchievementActivity : AppCompatActivity() {
        val id =  intent.getStringExtra(CreateUpdateReportActivity.EXTRA_ID)
         binding.btnSave.setOnClickListener {
             if(listAchievementActivity.isNotEmpty()){
-                Toast.makeText(this, "${Utils.removeNumbersFromList(listAchievementActivity.toList())}", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "${Utils.removeNumbersFromList(listAchievementActivity.toList())}", Toast.LENGTH_SHORT).show()
                 achievementActivityViewModel.setAchievementKey(Utils.removeNumbersFromList(listAchievementActivity.toList()))
 
 

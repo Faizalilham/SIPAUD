@@ -63,6 +63,7 @@ class ReportAdapter(
             }
         }
         viewHolder.btnDelete.setOnClickListener{ listener.onDelete(data[position].id)}
+
         viewHolder.btnUpdate.setOnClickListener{ listener.onUpdate(data[position].id)}
         viewHolder.btnDetail.setOnClickListener{ listener.onDetail(data[position].id)}
     }
@@ -83,6 +84,7 @@ class RecyclerViewHolder(val binding : ListItemDailyReportBinding): RecyclerView
     override val canRemoveOnSwipingFromRight: Boolean get() = true
 
     val btnDelete: ImageButton = binding.swipeLayout.btnDelete
+
     val btnUpdate: ImageButton = binding.swipeLayout.btnUpdate
     val btnDetail: ImageButton = binding.swipeLayout.btnDetail
 

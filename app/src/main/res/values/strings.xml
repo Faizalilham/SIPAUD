@@ -1,5 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Si-PAUD</string>
+    <string name="email_owner">wmufliana@gmail.com</string>
     <string name="tittle">Sistem Informasi Assesment Perkembangan Nilai Agama dan Budi Pekerti Anak Usia Dini</string>
     <string name="card_tittle">Belajar Menghitung</string>
     <string name="card_description" tools:ignore="TypographyEllipsis">Kegiatan ini dilakukan pada tanggal 20 Mei 2023...</string>
@@ -44,7 +45,7 @@
     <string name="welcome">Selamat datang</string>
     <string name="welcome_message">Ayo login dengan akun kamu</string>
     <string name="here">disini</string>
-    <string name="wm">SIAP - AUD © 2023</string>
+    <string name="wm">SIAP - AUD © 2024</string>
     <string name="hint_email">Masukkan email . . .</string>
     <string name="hint_password">Masukkan password . . .</string>
     <string name="hint_school">Masukkan nama sekolah . . .</string>
@@ -56,8 +57,8 @@
     <string name="subtittle_first_onboarding">Tidak perlu lagi repot membawa catatan fisik Anda dapat dengan mudah mencatat kegiatan harian Anda hanya dengan beberapa ketukan jari.</string>
     <string name="tittle_second_onboarding">Laporan Perkembangan Anak Lebih Menarik</string>
     <string name="subtittle_second_onboarding">Buat laporan kegiatan harian yang menarik dan informatif dengan menyertakan deskripsi, gambar, dan informasi tambahan.</string>
-    <string name="tittle_third_onboarding">Bagikan Perjalanan Anda</string>
-    <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda untuk berbagi informasi perkembangan agama dan budi pekerti anak melalui media sosial atau langsung ke orang orang terdekat</string>
+    <string name="tittle_third_onboarding">Simpan laporan siswa</string>
+    <string name="subtittle_third_onboarding">Aplikasi kami memudahkan Anda menyimpan hasil laporan siswa selama satu bulan dalam bentuk pdf file</string>
     <string name="back">Kembali</string>
     <string name="warning_form">Semua kolom wajib diisi</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -103,6 +104,7 @@
     <string name="report_monthan">Laporan Bulanan</string>
     <string name="week_1_report_1">Minggu ke 1, Laporan ke 1</string>
     <string name="edit">Ubah</string>
+    <string name="text_amount_student">Jumlah siswa</string>
 
     <string-array name="week">
         <item>Minggu ke 1</item>

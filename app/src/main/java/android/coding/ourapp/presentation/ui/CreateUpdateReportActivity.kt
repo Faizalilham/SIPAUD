@@ -107,7 +107,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         if(idParent != null && idChild != null) {
             Log.d("CEK INTENT","\"$idParent $idChild $nameStudent $idStudent \"")
             updateReport()
-
+            getAchievement()
             binding.tittle.text = "Update Laporan"
             binding.btnSave.text = "Update Laporan"
         }else{
@@ -117,7 +117,6 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
             setupDropDown()
         }
         getAchievement()
-
 
 
     }
@@ -196,10 +195,7 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         dropDownMenu(report,R.layout.dropdown_item,binding.tvReport)
     }
 
-
-
     private fun showActivityAchievement(datas : List<String>){
-
         val listData = mutableListOf<Achievement>()
         val listDatas = mutableListOf<String>()
 
@@ -304,34 +300,36 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
     private fun updateReport(idParent : String, listReport : MutableList<Report>){
         binding.apply {
             btnSave.setOnClickListener {
-                val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
-                val date = tvDate.text.toString().trim()
-                val idChild =  firebaseDatabase.reference.push().key.toString()
+               if(idChild == null && idParent == null){
+                   val tittle = "${tvWeek.text.toString()}, ${tvReport.text.toString()}"
+                   val date = tvDate.text.toString().trim()
+                   val idChild =  firebaseDatabase.reference.push().key.toString()
 
 
 
-                listReport.add(
-                    Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
-                        indicatorAgama =   Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        indicatorMoral =   Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        indicatorPekerti =   Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                        images = listImages
-                    ))
+                   listReport.add(
+                       Report(id=idChild,reportName = tittle, reportDate = date, month = Utils.getMonthFromStringDate(date),
+                           indicatorAgama =   Utils.removeNumbersFromList(resources.getStringArray(R.array.agama).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                           indicatorMoral =   Utils.removeNumbersFromList(resources.getStringArray(R.array.moral).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                           indicatorPekerti =   Utils.removeNumbersFromList(resources.getStringArray(R.array.pekerti).toList()).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                           images = listImages
+                       ))
 
 
 
-                doUpdateReport(
-                    idParent = idParent,
-                    listReport = listReport,
-                    indicatorAgama = mutableListOf(),
-                    indicatorMoral = mutableListOf(),
-                    indicatorPekerti = mutableListOf(),
-                    images = mutableListOf(),
-                    date = "",
-                    idChild = "",
-                    tittle = "",
-                    listNarrative = mutableListOf()
-                )
+                   doUpdateReport(
+                       idParent = idParent,
+                       listReport = listReport,
+                       indicatorAgama = mutableListOf(),
+                       indicatorMoral = mutableListOf(),
+                       indicatorPekerti = mutableListOf(),
+                       images = mutableListOf(),
+                       date = "",
+                       idChild = "",
+                       tittle = "",
+                       listNarrative = mutableListOf()
+                   )
+               }
             }
         }
     }
@@ -374,22 +372,26 @@ class CreateUpdateReportActivity : AppCompatActivity(), AdapterView.OnItemClickL
         setupViewUpdate(idParent!!,idChild!!)
         binding.btnSave.setOnClickListener {
             val tittle = "${binding.tvWeek.text.toString()}, ${binding.tvReport.text.toString()}"
-            Log.d("CEK 3",tittle)
-            if(listAchievementActivity.isNotEmpty()){
+            val a = resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList()
+            val b = resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList()
+            val c = resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList()
+            Log.d("UHUY"," $listAchievementActivity $a $b $c")
+
+            if(listAchievementActivity.isNotEmpty() && a.isNotEmpty() && b.isNotEmpty() && c.isNotEmpty()){
                 doUpdateReport(
                     idParent!!,
                     idChild!!,
                     tittle,
                     binding.tvDate.text.toString(),
-                    resources.getStringArray(R.array.agama).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                    resources.getStringArray(R.array.moral).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
-                    resources.getStringArray(R.array.pekerti).intersect(listAchievementActivity.toSet()).toTypedArray().toMutableList(),
+                    a,
+                    b,
+                    c,
                     listImages,
                     mutableListOf(),
                     mutableListOf()
                 )
             }else{
-                Toast.makeText(this, "Minimal terdapat 1 capaian kegiatan untuk sisw", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Minimal terdapat 1 capaian kegiatan untuk siswa", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -5,7 +5,9 @@ import android.coding.ourapp.data.datasource.firebase.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import javax.inject.Inject
+
 
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
@@ -17,11 +19,12 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun login(email: String, password: String): Resource<FirebaseUser> {
         return try {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            if(result.user!!.isEmailVerified){
-                Resource.Success(result.user!!)
-            }else{
-                Resource.Failure(Exception("Email has not been verify, please check the email to verify your account"))
-            }
+            Resource.Success(result.user!!)
+//            if(result.user!!.isEmailVerified){
+//                Resource.Success(result.user!!)
+//            }else{
+//                Resource.Failure(Exception("Email has not been verify, please check the email to verify your account"))
+//            }
         } catch (e: Exception) {
             e.printStackTrace()
             Resource.Failure(e)
