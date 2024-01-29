@@ -14,6 +14,7 @@ import android.coding.ourapp.data.datasource.model.AssessmentRequest
 import android.coding.ourapp.data.datasource.model.Report
 import android.coding.ourapp.data.datasource.model.Student
 import android.coding.ourapp.databinding.ActivityCreateUpdateReportBinding
+import android.coding.ourapp.databinding.ActivityDetailDayBinding
 import android.coding.ourapp.databinding.ListItemMonthBinding
 import android.content.Context
 import android.content.Intent
@@ -109,8 +110,14 @@ object Utils {
                 data(selectedString)
             }
         }
+
+        val arrayList = ArrayList<String>()
+
+        arr.mapIndexedTo(arrayList) { index, element ->
+            "${index + 1}. $element"
+        }
         searchableSpinner.windowTopBackgroundColor = R.color.primary_color
-        searchableSpinner.setSpinnerListItems(arr)
+        searchableSpinner.setSpinnerListItems(arrayList)
         searchableSpinner.show()
     }
 
@@ -391,6 +398,58 @@ object Utils {
         }
     }
 
+    fun showImageReportDetail(isShow : Boolean, imageBitmap:ArrayList<Bitmap>?, imageUri:ArrayList<Uri>?, binding : ActivityDetailDayBinding, context : Context){
+        binding.apply {
+            if(isShow && imageUri != null){
+
+                linearImage.visibility = View.VISIBLE
+                if(imageUri.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                    Glide.with(context).load(imageUri[2]).into(imageThird)
+                }else if(imageUri.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                    Glide.with(context).load(imageUri[1]).into(imageSecond)
+                }else if(imageUri.size == 1){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.GONE
+                    imageThird.visibility = View.GONE
+                    Glide.with(context).load(imageUri[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
+                }
+            }else if(isShow && imageBitmap != null){
+                linearImage.visibility = View.VISIBLE
+                if(imageBitmap.size == 3){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    imageThird.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                    Glide.with(context).load(imageBitmap[2]).into(imageThird)
+                }else if(imageBitmap.size == 2){
+                    imageFirst.visibility = View.VISIBLE
+                    imageSecond.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                    Glide.with(context).load(imageBitmap[1]).into(imageSecond)
+                }else if(imageBitmap.size == 1){
+                    imageFirst.visibility = View.VISIBLE
+                    Glide.with(context).load(imageBitmap[0]).into(imageFirst)
+                }else{
+                    linearImage.visibility = View.GONE
+                }
+            }else{
+                binding.linearImage.visibility = View.GONE
+            }
+        }
+    }
+
     fun filter(data : ArrayList<AssessmentRequest>,typeFilter : Int):ArrayList<AssessmentRequest>{
         val resultFilter = arrayListOf<AssessmentRequest>()
         val dateFormat = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
@@ -416,7 +475,7 @@ object Utils {
         return resultFilter
     }
 
-    suspend fun exportToPdf(name : String, summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>, month : String,context: Context) {
+    suspend fun exportToPdf(nameReport : String,name : String, summary : String,categoryAgama : String,categoryMoral : String,categoryPekerti : String, reports: List<Report>, month : String,context: Context) {
         val directoryName = "Export Pdf"
         val directory = File(context.filesDir, directoryName)
         var size = 0
@@ -442,7 +501,7 @@ object Utils {
         val pdfDocument = PdfDocument(pdfWriter)
         val document = Document(pdfDocument)
 
-        setParagraph("LAPORAN BULANAN",TextAlignment.CENTER,document,10f,20f,22f,true)
+        setParagraph(nameReport,TextAlignment.CENTER,document,10f,20f,22f,true)
         val horizontalLine = LineSeparator(null)
         horizontalLine.setMarginTop(10f)
         horizontalLine.setMarginBottom(10f)

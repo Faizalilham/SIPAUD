@@ -22,8 +22,16 @@ class AchievementAdapter(
            tittle.text = data[position].name
            isMuncul.isChecked = data[position].isChecked
            isMuncul.setOnCheckedChangeListener { _, isChecked ->
+               if (isChecked) {
+                   isMuncul2.isChecked = false
+               }
                data[position].isChecked = isChecked
                listener.onChecked(listOf(data[position].name),data[position].isChecked )
+           }
+           isMuncul2.setOnCheckedChangeListener { _, isChecked ->
+               if (isChecked) {
+                   isMuncul.isChecked = false
+               }
            }
 
        }

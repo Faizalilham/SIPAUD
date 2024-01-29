@@ -46,7 +46,7 @@ class ReportRepositoryImpl @Inject constructor(
                     }
 
                     assessmentLiveData.value = Resource.Success(result)
-                    Log.d("datasKUE","${assessmentLiveData.value} ")
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -203,32 +203,32 @@ class ReportRepositoryImpl @Inject constructor(
 
     override fun deleteReport(idParent: String,idChild:String) : Resource<String> {
         return try {
-            firebaseDatabase.reference.child("report").child(idParent).child("reports")
-                .orderByChild("id").equalTo(idChild).limitToFirst(1)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            for (snapshot in snapshot.children) {
+                firebaseDatabase.reference.child("report").child(idParent).child("reports")
+                    .orderByChild("id").equalTo(idChild).limitToFirst(1)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                for (snapshot in snapshot.children) {
 
-                                snapshot.ref.removeValue()
-                                    .addOnSuccessListener {
-                                        println("Data berhasil dihapus")
-                                    }
-                                    .addOnFailureListener { e: Exception ->
-                                        println("Gagal menghapus data: ${e.message}")
-                                    }
+                                    snapshot.ref.removeValue()
+                                        .addOnSuccessListener {
+                                            println("Data berhasil dihapus")
+                                        }
+                                        .addOnFailureListener { e: Exception ->
+                                            println("Gagal menghapus data: ${e.message}")
+                                        }
 
-                                break
+                                    break
+                                }
                             }
                         }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.d("ERROR", "${error.toException()}")
-                    }
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.d("ERROR", "${error.toException()}")
+                        }
 
-                })
-            Resource.Success("Success delete data")
+                    })
+                Resource.Success("Success delete data")
         }catch (e : Exception){
             Log.d("DELETE REPORT","${e.message}")
             e.printStackTrace()

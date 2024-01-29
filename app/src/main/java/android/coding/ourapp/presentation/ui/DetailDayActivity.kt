@@ -15,10 +15,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 @Suppress("RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
     "RemoveToStringInStringTemplate", "RemoveToStringInStringTemplate",
@@ -71,13 +76,44 @@ class DetailDayActivity : AppCompatActivity() {
                         Log.d("DATA DETAIL UPDATE2","$dataDetailResult")
                         Log.d("DATA DETAIL UPDATE3","${it.result.reports}")
                         dataDetailResult.forEach { report ->
-                            val reportNames = report.reportName.split(",")
+                            val listAchievement = mutableListOf<String>()
+                            listAchievement.addAll(report.indicatorMoral)
+                            listAchievement.addAll(report.indicatorAgama)
+                            listAchievement.addAll(report.indicatorPekerti)
                             tvDetailDate.text = report.reportDate
-                            tvDetailActivity.text = report.indicatorAgama.toString()
+                            val formattedText = StringBuilder()
+                            for ((index, value) in listAchievement.withIndex()) {
+                                formattedText.append("${index + 1}. $value\n")
+                            }
 
+                            tvDetailActivity.text = formattedText.toString()
+
+                            listImages.addAll(report.images)
+                            for(i in listImages){
+                                listImageBitmap.add(Utils.convertStringToBitmap(i))
+                            }
+                            if(report.images.isEmpty()){
+                                tvTitlePhoto.text = "Dokumentasi : Tidak ada gambar pada catatan ini"
+                            }
+                            Utils.showImageReportDetail(true,listImageBitmap,null,this,this@DetailDayActivity)
+                            btnEksporPdf.setOnClickListener {
+                                showLoading(true)
+                                if(report.images.isNotEmpty()){
+                                    lifecycleScope.launch(Dispatchers.Main) {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                            exportPdf(nameStudent!!,etDesc.text.toString(),Utils.category(1),Utils.category(1),Utils.category(1),listOf(report),report.month ?: "")
+                                        }else{
+                                            Toast.makeText(this@DetailDayActivity, "Tidak mendukung untuk eksport pdf", Toast.LENGTH_SHORT).show()
+                                        }
+                                        showLoading(false)
+                                    }
+                                }else{
+                                    showLoading(false)
+                                    Toast.makeText(this@DetailDayActivity, "Minimal ada satu gambar untuk membuat laporan bulanan", Toast.LENGTH_SHORT).show()
+                                }
+                            }
 
                         }
-
                     }
                 }
                 is Resource.Loading -> {}
@@ -92,10 +128,27 @@ class DetailDayActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(isLoading: Boolean){
+        binding.apply {
+            if(isLoading )frameLoading.visibility = View.VISIBLE else frameLoading.visibility = View.GONE
+        }
+    }
+
     private fun getDetailDayActivity(){
         binding.tvDetailNameStudent.text = nameStudent
         binding.tvDetailDate.text = nameMonth
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    private suspend fun exportPdf(name : String, summary : String, categoryAgama : String, categoryMoral : String, categoryPekerti : String, reports: List<Report>, month : String,){
+        if(Utils.checkStoragePermission(this,this)){
+            val job = lifecycleScope.async(Dispatchers.Default) {
+                Utils.exportToPdf("LAPORAN HARIAN",name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)
+            }
+            job.await()
+            Toast.makeText(this@DetailDayActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun back() {

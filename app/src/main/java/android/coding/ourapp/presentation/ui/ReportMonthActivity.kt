@@ -176,7 +176,7 @@ class ReportMonthActivity : AppCompatActivity() {
     private suspend fun exportPdf(name : String, summary : String, categoryAgama : String, categoryMoral : String, categoryPekerti : String, reports: List<Report>, month : String,){
         if(Utils.checkStoragePermission(this,this)){
             val job = lifecycleScope.async(Dispatchers.Default) {
-                Utils.exportToPdf(name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)
+                Utils.exportToPdf("LAPORAN BULANAN",name,summary,categoryAgama,categoryMoral,categoryPekerti,reports,month, applicationContext)
             }
             job.await()
             Toast.makeText(this@ReportMonthActivity, "Sukses export pdf", Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -168,13 +169,119 @@
         app:layout_constraintStart_toStartOf="@+id/tvDetailActivity"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailActivity" />
 
-    <ImageView
-        android:id="@+id/iv_documentasion"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_achievement_black"
-        app:layout_constraintStart_toStartOf="@+id/tvTitlePhoto"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitlePhoto" />
+    <LinearLayout
+        android:id="@+id/linear_image"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_marginTop="@dimen/dp15"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvTitlePhoto"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="20dip"
+            app:riv_border_width="2dip"
+            android:visibility="gone"
+            android:layout_margin="@dimen/dp5"
+            app:riv_border_color="#333333"
+            android:layout_weight="1"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="20dip"
+            app:riv_border_width="2dip"
+            android:visibility="gone"
+            android:layout_margin="@dimen/dp5"
+            app:riv_border_color="#333333"
+            android:layout_weight="1"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image_third"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="20dip"
+            app:riv_border_width="2dip"
+            android:visibility="gone"
+            app:riv_border_color="#333333"
+            android:layout_margin="@dimen/dp5"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_naration"
+        style="@style/AppTheme.TextSubTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/assesment"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_image"/>
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp20"
+        android:background="@drawable/box_border"
+        android:hint="Masukkan Deskripsi Narasi . . ."
+        android:padding="10dp"
+        style="@style/AppTheme.TextSubTittle"
+        app:layout_constraintTop_toBottomOf="@id/tv_naration"/>
+
+    <FrameLayout
+        android:id="@+id/frameLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:id="@+id/loadingBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="#000000"
+                android:orientation="horizontal" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="150dp"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/lottie_loading"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:layout_marginBottom="50dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

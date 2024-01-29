@@ -63,12 +63,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     // Image
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    implementation "com.makeramen:roundedimageview:$roundedimage_version"
+    implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation  'io.ak1.pix:piximagepicker:1.6.3'
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
     implementation 'com.caverock:androidsvg:1.4'
     implementation("com.tbuonomo:dotsindicator:4.3")
+
     implementation "androidx.activity:activity-ktx:$activity_ktx_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
 

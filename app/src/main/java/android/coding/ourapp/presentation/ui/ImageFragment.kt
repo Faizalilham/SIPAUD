@@ -32,6 +32,7 @@ class ImageFragment : AppCompatActivity() {
     private var idStudent : String? = null
     private var idParent : String? = null
     private var idChild : String? = null
+    private var month : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,7 @@ class ImageFragment : AppCompatActivity() {
 
         idParent = intent.getStringExtra(EXTRA_ID_PARENT)
         idChild = intent.getStringExtra(EXTRA_ID_CHILD)
+        month = intent.getStringExtra(EXTRA_ID_MONTH)
 
 
     }
@@ -71,10 +73,10 @@ class ImageFragment : AppCompatActivity() {
                             intent.putExtra(EXTRA_ID, idStudent)
                             intent.putExtra(EXTRA_ID_PARENT, idParent)
                             intent.putExtra(EXTRA_ID_CHILD, idChild)
+                            intent.putExtra(EXTRA_ID_MONTH, month)
                             finishAffinity()
                             finish()
                         })
-
 
 
                     }else{
@@ -154,6 +156,7 @@ class ImageFragment : AppCompatActivity() {
         const val EXTRA_ID = "id_student"
         const val EXTRA_ID_CHILD = "id_child"
         const val EXTRA_ID_PARENT = "id_parent"
+        const val EXTRA_ID_MONTH = "month"
     }
 
 }

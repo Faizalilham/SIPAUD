@@ -122,12 +122,12 @@
     </string-array>
 
     <string-array name="agama">
-        <item>1. Anak patuh dalam melaksanakan ajaran agama yang dianutnya</item>
-        <item>2. Anak dapat melaksanakan ibadah tepat waktu</item>
-        <item>3. Anak dapat berdoa sebelum atau sesudah melaksanakan sesuatu</item>
-        <item>4. Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
-        <item>5. Anak dapat mengingatkan teman untuk selalu berdoa</item>
-        <item>6. Anak tidak dapat mengganggu teman yang sedang beribadah</item>
+        <item>Anak patuh dalam melaksanakan ajaran agama yang dianutnya</item>
+        <item>Anak dapat melaksanakan ibadah tepat waktu</item>
+        <item>Anak dapat berdoa sebelum atau sesudah melaksanakan sesuatu</item>
+        <item>Anak dapat mengajak teman berdoa saat melaksanakan kegiatan</item>
+        <item>Anak dapat mengingatkan teman untuk selalu berdoa</item>
+        <item>Anak tidak dapat mengganggu teman yang sedang beribadah</item>
     </string-array>
 
     <string-array name="instruction">
@@ -154,29 +154,29 @@
     </string-array>
 
     <string-array name="pekerti">
-        <item>1. Anak dengan kesadaran sendiri mampu mengucapkan maaf jika berbuat salah</item>
-        <item>2. Anak dengan kesadaran sendiri mampu mengucapkan minta tolong jika butuh bantuan</item>
-        <item>3. Anak dengan kesadaran sendiri mampu mengucapkan permisi jika melewati orang lain</item>
-        <item>4. Anak dengan kesadaran sendiri mampu gucapkan terima kasih jika menerima sesuatu</item>
-        <item>5. Anak dengan kesadaran sendiri mampu mendengarkan orang lain berbicara</item>
+        <item>Anak dengan kesadaran sendiri mampu mengucapkan maaf jika berbuat salah</item>
+        <item>Anak dengan kesadaran sendiri mampu mengucapkan minta tolong jika butuh bantuan</item>
+        <item>Anak dengan kesadaran sendiri mampu mengucapkan permisi jika melewati orang lain</item>
+        <item>Anak dengan kesadaran sendiri mampu gucapkan terima kasih jika menerima sesuatu</item>
+        <item>Anak dengan kesadaran sendiri mampu mendengarkan orang lain berbicara</item>
     </string-array>
 
 
     <string-array name="moral">
-        <item>1. Anak datang tepat waktu</item>
-        <item>2. Anak dapat duduk ditempat yang telah disediakan</item>
-        <item>3. Anak dapat menggunakan sesuatu secukupnya</item>
-        <item>4. Anak dapat sabar menunggu giliran saat antre</item>
-        <item>5. Anak dapat sabar menunggu giliran saat menerima tugas</item>
-        <item>6. Anak dapat makan sendiri</item>
-        <item>7. Anak dapat meletakkan barang sesuai dengan tempatnya</item>
-        <item>8. Anak dapat tunjuk tangan dulu sebelum menjawab pertanyaan atau berpendapat</item>
-        <item>9. Anak mampu mencuci tangan dengan sabun dan air mengalir</item>
-        <item>10. Anak mampu menggosok gigi minimal 2 kali sehari</item>
-        <item>11. Anak mau memotong kuku seminggu sekali</item>
-        <item>12. Anak mampu membuang sampah pada tempatnya</item>
-        <item>13. Anak mampu dengan rutin berolahraga pada pagi hari</item>
-        <item>14. Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
+        <item>Anak datang tepat waktu</item>
+        <item>Anak dapat duduk ditempat yang telah disediakan</item>
+        <item>Anak dapat menggunakan sesuatu secukupnya</item>
+        <item>Anak dapat sabar menunggu giliran saat antre</item>
+        <item>Anak dapat sabar menunggu giliran saat menerima tugas</item>
+        <item>Anak dapat makan sendiri</item>
+        <item>Anak dapat meletakkan barang sesuai dengan tempatnya</item>
+        <item>Anak dapat tunjuk tangan dulu sebelum menjawab pertanyaan atau berpendapat</item>
+        <item>Anak mampu mencuci tangan dengan sabun dan air mengalir</item>
+        <item>Anak mampu menggosok gigi minimal 2 kali sehari</item>
+        <item>Anak mau memotong kuku seminggu sekali</item>
+        <item>Anak mampu membuang sampah pada tempatnya</item>
+        <item>Anak mampu dengan rutin berolahraga pada pagi hari</item>
+        <item>Anak mampu merespon saat ada sampah di sekeliling untuk di buang di tempat sampah</item>
     </string-array>
 
     <string name="indicator_value" tools:ignore="UnusedResources">Indicator Penilaian</string>
